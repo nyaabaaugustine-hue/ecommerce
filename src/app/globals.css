@@ -11,9 +11,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     --primary: 222 47% 11%; /* Default Sovereign Navy */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 222 47% 11%; /* Dark Navy for High-Contrast */
-    --secondary-foreground: 210 40% 98%;
+    --primary-foreground: 210 20% 98%; /* Milky White */
+    --secondary: 222 47% 11%; 
+    --secondary-foreground: 210 20% 98%; /* Milky White */
     --muted: 210 20% 90%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 178 89% 49%; /* #0DEDE6 Aqua */
@@ -25,16 +25,17 @@
     --ring: 178 89% 49%;
     --radius: 0px;
     --burgundy: 0 100% 27%; /* #8B0000 High-Contrast Burgundy */
+    --milky-white: 210 20% 98%;
   }
 
-  /* Institutional Theme Variations with High Contrast */
-  [data-theme="sovereign"] { --primary: 222 47% 11%; }
-  [data-theme="deep"] { --primary: 215 80% 20%; }
-  [data-theme="royal"] { --primary: 210 90% 40%; }
-  [data-theme="midnight"] { --primary: 225 60% 5%; }
-  [data-theme="cobalt"] { --primary: 210 40% 30%; }
-  [data-theme="cold-white"] { --primary: 210 20% 60%; } /* Icy Silver-Gray */
-  [data-theme="crimson"] { --primary: 0 72% 35%; } /* Institutional Red */
+  /* Institutional Theme Registry - 7 Tiers */
+  [data-theme="sovereign"] { --primary: 222 47% 11%; --primary-foreground: var(--milky-white); }
+  [data-theme="deep"] { --primary: 215 80% 20%; --primary-foreground: var(--milky-white); }
+  [data-theme="royal"] { --primary: 210 90% 40%; --primary-foreground: var(--milky-white); }
+  [data-theme="midnight"] { --primary: 225 60% 5%; --primary-foreground: var(--milky-white); }
+  [data-theme="cobalt"] { --primary: 210 40% 30%; --primary-foreground: var(--milky-white); }
+  [data-theme="cold-white"] { --primary: 210 20% 60%; --primary-foreground: 222 47% 11%; } /* Silver-Gray */
+  [data-theme="crimson"] { --primary: 0 72% 35%; --primary-foreground: var(--milky-white); } /* Institutional Red */
 }
 
 @layer base {
@@ -45,15 +46,24 @@
     @apply bg-background text-foreground font-body antialiased;
   }
   
-  /* Global Image Contrast Boost */
+  /* Global Image Contrast Boost Protocol */
   img {
-    filter: contrast(1.12) brightness(1.05) saturate(1.05);
+    filter: contrast(1.15) brightness(1.02) saturate(1.05);
     transition: filter 0.5s ease-in-out;
+  }
+
+  /* Dark Background Contrast Protocol */
+  .bg-primary, .bg-secondary, .bg-burgundy {
+    @apply text-white/95; /* Ensuring Milky White foregrounds */
   }
 }
 
 .text-burgundy {
   color: hsl(var(--burgundy)) !important;
+}
+
+.text-milky {
+  color: hsl(var(--milky-white)) !important;
 }
 
 /* Custom Product Card Image Radius */
@@ -122,7 +132,7 @@
 
 .image-reveal:hover img {
   transform: scale(1.08);
-  filter: contrast(1.18) brightness(1.08) saturate(1.1);
+  filter: contrast(1.22) brightness(1.05) saturate(1.1);
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -67,7 +67,7 @@ export function Navbar() {
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
       {/* Activity Ticker */}
-      <div className="bg-primary text-white overflow-hidden py-2 border-b border-accent/20">
+      <div className="bg-primary text-primary-foreground overflow-hidden py-2 border-b border-accent/20">
         <div className="animate-marquee whitespace-nowrap flex gap-16 items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
             <span key={i} className="text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-4">
@@ -79,13 +79,13 @@ export function Navbar() {
       </div>
 
       {/* Utility Bar */}
-      <div className="bg-secondary text-white py-2.5 hidden lg:block border-b border-white/5">
+      <div className="bg-secondary text-secondary-foreground py-2.5 hidden lg:block border-b border-white/5">
         <div className="container mx-auto px-4 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em]">
           <div className="flex items-center gap-12">
-            <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-70">
+            <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-80">
               Institutional Partnership
             </span>
-            <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-70">
+            <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-80">
               <Phone className="h-3.5 w-3.5" /> Support Node: +233 24 000 0000
             </span>
           </div>
@@ -94,10 +94,10 @@ export function Navbar() {
              <div className="flex items-center gap-2 border-r border-white/10 pr-6">
                <Palette className="h-3.5 w-3.5 text-accent" />
                <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
-                 <SelectTrigger className="h-6 w-40 bg-transparent border-none text-[9px] font-black uppercase p-0 focus:ring-0">
+                 <SelectTrigger className="h-6 w-40 bg-transparent border-none text-[9px] font-black uppercase p-0 focus:ring-0 text-milky">
                     <SelectValue placeholder="Institutional Theme" />
                  </SelectTrigger>
-                 <SelectContent className="rounded-none bg-secondary text-white border-accent/20">
+                 <SelectContent className="rounded-none bg-secondary text-secondary-foreground border-accent/20">
                     <SelectItem value="sovereign">Sovereign Navy</SelectItem>
                     <SelectItem value="deep">Deep Atlantic</SelectItem>
                     <SelectItem value="royal">Royal Azure</SelectItem>
@@ -111,11 +111,11 @@ export function Navbar() {
 
              <DropdownMenu>
                <DropdownMenuTrigger asChild>
-                 <div className="flex items-center gap-3 cursor-pointer hover:text-accent transition-colors">
+                 <div className="flex items-center gap-3 cursor-pointer hover:text-accent transition-colors opacity-90">
                     <Globe className="h-3.5 w-3.5" /> {currency} <ChevronDown className="h-3.5 w-3.5" />
                   </div>
                </DropdownMenuTrigger>
-               <DropdownMenuContent className="rounded-none bg-secondary text-white border-accent/20">
+               <DropdownMenuContent className="rounded-none bg-secondary text-secondary-foreground border-accent/20">
                  {(['GHS', 'USD', 'EUR', 'GBP'] as CurrencyCode[]).map((code) => (
                    <DropdownMenuItem 
                     key={code} 
@@ -152,7 +152,7 @@ export function Navbar() {
                   <Link href="/listings/create" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Publish Listing</Link>
                   <div className="p-8 space-y-6">
                     {!user ? (
-                      <Button onClick={() => setShowAuth(true)} className="w-full bg-primary text-white font-black rounded-none h-14 text-xs uppercase tracking-widest shadow-xl">Secure Login</Button>
+                      <Button onClick={() => setShowAuth(true)} className="w-full bg-primary text-primary-foreground font-black rounded-none h-14 text-xs uppercase tracking-widest shadow-xl">SECURE LOGIN</Button>
                     ) : (
                       <Button onClick={logout} variant="outline" className="w-full border-destructive text-destructive font-black rounded-none h-14 text-xs uppercase tracking-widest hover:bg-destructive hover:text-white">Terminate Session</Button>
                     )}
@@ -253,7 +253,7 @@ export function Navbar() {
                 onClick={() => setShowAuth(true)}
                 className="hidden lg:flex items-center h-12 px-8 rounded-none border-2 border-primary/20 text-secondary font-black hover:bg-primary hover:text-white transition-all shadow-md group"
               >
-                <span className="text-sm uppercase tracking-widest">Secure Login</span>
+                <span className="text-sm uppercase tracking-widest">SECURE LOGIN</span>
               </Button>
             ) : (
               <div className="hidden lg:flex items-center gap-6">
