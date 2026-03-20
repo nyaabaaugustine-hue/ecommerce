@@ -9,8 +9,8 @@ import { CartSheet } from '@/components/cart-sheet';
 import { LiveActivityFeed } from '@/components/live-activity-feed';
 
 export const metadata: Metadata = {
-  title: 'SecureCommerce | GHS Marketplace',
-  description: 'The trusted cross-category marketplace aggregator with secure escrow protection.',
+  title: 'VaultCommerce | The Gold Standard',
+  description: 'The Gold Standard for secure cross-category trade in Ghana. Institutionally powered by multisig escrow protocols.',
   icons: {
     icon: [
       {
@@ -52,62 +52,71 @@ export default function RootLayout({
             <CartSheet />
             <LiveActivityFeed />
 
-            <footer className="bg-secondary text-white pt-12 md:pt-16 pb-12 border-t border-primary/20">
+            <footer className="bg-secondary text-white pt-16 pb-12 border-t border-primary/40">
               <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
-                  <div className="space-y-6">
-                     <div className="flex items-center gap-3 font-headline font-black text-xl md:text-2xl text-white">
-                        <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/30">
-                          <Image 
-                            src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-                            alt="SecureCommerce" 
-                            fill 
-                            className="object-cover"
-                          />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+                  <div className="lg:col-span-1 space-y-6">
+                     <div className="flex flex-col gap-2">
+                        <div className="flex items-center gap-3 font-headline font-black text-2xl text-white">
+                          <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/30">
+                            <Image 
+                              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
+                              alt="VaultCommerce" 
+                              fill 
+                              className="object-cover"
+                            />
+                          </div>
+                          <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
                         </div>
-                        <span className="tracking-tighter">Secure<span className="text-primary">Commerce</span></span>
+                        <p className="text-white/50 text-xs leading-relaxed max-w-xs font-medium">
+                          The Gold Standard for secure cross-category trade in Ghana. Institutionally powered by multisig escrow protocols.
+                        </p>
                      </div>
-                     <p className="text-white/50 text-xs md:text-sm leading-relaxed max-w-xs">
-                       The trusted standard for secure commerce in Ghana. Powered by reliable escrow systems.
-                     </p>
                      <div className="space-y-2">
-                        <p className="text-[9px] font-black uppercase tracking-widest">Customer Support</p>
-                        <p className="text-lg font-black text-primary">+233 24 000 0000</p>
+                        <p className="text-[9px] font-black uppercase tracking-widest text-primary">Protocol Support</p>
+                        <p className="text-lg font-black text-white">+233 24 000 0000</p>
                      </div>
                   </div>
                   
                   <div>
-                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Marketplace</h4>
-                    <ul className="space-y-3 md:space-y-4 text-white/50 text-[9px] md:text-xs font-bold uppercase tracking-widest">
-                      <li className="hover:text-primary transition-colors cursor-pointer">All Categories</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Best Sellers</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">New Arrivals</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Vendor List</li>
+                    <h4 className="font-black text-sm mb-6 uppercase tracking-widest text-primary">Marketplace Registry</h4>
+                    <ul className="space-y-4 text-white/50 text-[10px] font-bold uppercase tracking-widest">
+                      <li className="hover:text-primary transition-colors cursor-pointer">Global Inventory</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Elite Favorites</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Treasury Settlement</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Sovereign SLA</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Security</h4>
-                    <ul className="space-y-3 md:space-y-4 text-white/50 text-[9px] md:text-xs font-bold uppercase tracking-widest">
-                      <li className="hover:text-primary transition-colors cursor-pointer">Escrow Protection</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Buyer Guarantee</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Terms of Service</li>
+                    <h4 className="font-black text-sm mb-6 uppercase tracking-widest text-primary">Vendor Registry</h4>
+                    <ul className="space-y-4 text-white/50 text-[10px] font-bold uppercase tracking-widest">
+                      <li className="hover:text-primary transition-colors cursor-pointer">Fidelity Security</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Vault Protocols</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Institutional Layer</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Mediation Node</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Mobile App</h4>
-                    <p className="text-white/50 text-[10px] md:text-xs mb-4 md:mb-6 font-medium">Shop on the go with our mobile app. Available for iOS and Android.</p>
+                    <h4 className="font-black text-sm mb-6 uppercase tracking-widest text-primary">Anti-Fraud Engine</h4>
+                    <ul className="space-y-4 text-white/50 text-[10px] font-bold uppercase tracking-widest">
+                      <li className="hover:text-primary transition-colors cursor-pointer">Identity Registry</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-sm mb-6 uppercase tracking-widest text-primary">Mobile Registry</h4>
+                    <p className="text-white/50 text-[10px] mb-6 font-medium leading-relaxed">Manage your registry assets on the go. Available for sovereign users.</p>
                     <div className="flex flex-col gap-3">
-                      <Image src="https://placehold.co/200x60/0a1a2f/ffffff?text=App+Store" alt="App Store" width={160} height={48} className="rounded-xl cursor-pointer hover:brightness-125 transition-all shadow-2xl" unoptimized />
-                      <Image src="https://placehold.co/200x60/0a1a2f/ffffff?text=Google+Play" alt="Google Play" width={160} height={48} className="rounded-xl cursor-pointer hover:brightness-125 transition-all shadow-2xl" unoptimized />
+                      <Image src="https://placehold.co/200x60/0a1a2f/ffffff?text=App+Store" alt="App Store" width={160} height={48} className="rounded-none cursor-pointer hover:brightness-125 transition-all shadow-xl" unoptimized />
+                      <Image src="https://placehold.co/200x60/0a1a2f/ffffff?text=Google+Play" alt="Google Play" width={160} height={48} className="rounded-none cursor-pointer hover:brightness-125 transition-all shadow-xl" unoptimized />
                     </div>
                   </div>
                 </div>
                 
-                <div className="pt-8 border-t border-white/5 text-center text-white/30 text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em]" suppressHydrationWarning>
-                  © 2026 SecureCommerce. All rights reserved.
+                <div className="pt-8 border-t border-white/5 text-center text-white/30 text-[9px] font-black uppercase tracking-[0.4em]" suppressHydrationWarning>
+                  © 2026 VaultCommerce. All rights reserved by Cyber.
                 </div>
               </div>
             </footer>

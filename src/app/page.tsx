@@ -14,12 +14,22 @@ import {
   ShieldAlert,
   Store,
   Star,
-  Activity
+  Activity,
+  Plus,
+  Rocket
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { LISTINGS, VENDORS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription,
+  DialogTrigger 
+} from '@/components/ui/dialog';
 
 const HERO_SLIDES = [
   {
@@ -45,6 +55,7 @@ const HERO_SLIDES = [
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
+  const [showVendorModal, setShowVendorModal] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -122,7 +133,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="container mx-auto px-4 py-8 md:py-12">
+      <section className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b pb-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2 mb-1">
@@ -147,18 +158,82 @@ export default function HomePage() {
       </section>
 
       {/* Vendor Marquee */}
-      <section className="bg-white py-12 md:py-16 overflow-hidden border-y">
-        <div className="container mx-auto px-4 mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
+      <section className="bg-white py-12 overflow-hidden border-y">
+        <div className="container mx-auto px-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-1 block">Our Trusted Partners</span>
-            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase">OUR VENDORS</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase">THE ELITE VENDOR REGISTRY</h2>
           </div>
-          <Link href="/listings/create">
-            <Button variant="outline" className="border-2 border-primary text-secondary hover:bg-primary font-black rounded-none px-8 h-12 uppercase text-[10px] tracking-[0.2em] gap-2">
-              <Store className="h-4 w-4" />
-              Become a vendor now
-            </Button>
-          </Link>
+          
+          <Dialog open={showVendorModal} onOpenChange={setShowVendorModal}>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="border-2 border-primary text-secondary hover:bg-primary font-black rounded-none px-8 h-12 uppercase text-[10px] tracking-[0.2em] gap-2">
+                <Store className="h-4 w-4" />
+                Become a vendor now
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-primary">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="bg-secondary p-8 md:p-12 text-white space-y-8">
+                  <div className="space-y-4">
+                    <Badge className="bg-primary text-secondary font-black rounded-none uppercase text-[9px] tracking-widest">Join the Registry</Badge>
+                    <h3 className="text-3xl font-black tracking-tighter uppercase leading-none">Become a <span className="text-primary">Vault</span> Partner</h3>
+                    <p className="text-white/60 text-xs font-medium leading-relaxed">Join Ghana's most trusted institutional marketplace. Benefit from multi-sig security and GHS settlement speed.</p>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-primary border-b border-white/10 pb-2">Our Elite Partners</p>
+                    <div className="space-y-4">
+                       <div className="flex gap-4 items-center p-3 bg-white/5 border border-white/10">
+                          <div className="h-10 w-10 bg-white relative p-1 shrink-0">
+                            <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" fill className="object-contain" alt="Melcom" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-black uppercase">Melcom Digital Hub</p>
+                            <p className="text-[9px] text-white/40 uppercase">Electronics • 4.9 Rating</p>
+                          </div>
+                       </div>
+                       <div className="flex gap-4 items-center p-3 bg-white/5 border border-white/10">
+                          <div className="h-10 w-10 bg-white relative p-1 shrink-0">
+                            <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" fill className="object-contain" alt="PrimeRentals" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-black uppercase">PrimeRentals GH</p>
+                            <p className="text-[9px] text-white/40 uppercase">Real Estate • 4.8 Rating</p>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-8 md:p-12 bg-white flex flex-col justify-center space-y-6">
+                  <div className="space-y-4">
+                    <div className="grid gap-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-secondary">Business Name</label>
+                      <input className="w-full border-b-2 border-muted focus:border-primary outline-none py-2 text-sm font-bold" placeholder="e.g. Melcom Digital Hub" />
+                    </div>
+                    <div className="grid gap-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-secondary">Institutional Category</label>
+                      <select className="w-full border-b-2 border-muted focus:border-primary outline-none py-2 text-sm font-bold bg-transparent">
+                        <option>Electronics</option>
+                        <option>Real Estate</option>
+                        <option>Home & Living</option>
+                        <option>Professional Services</option>
+                      </select>
+                    </div>
+                    <div className="grid gap-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-secondary">Registry Description</label>
+                      <textarea className="w-full border-b-2 border-muted focus:border-primary outline-none py-2 text-sm font-bold resize-none h-20" placeholder="Describe your institutional offerings..." />
+                    </div>
+                  </div>
+                  
+                  <Button className="w-full h-14 bg-secondary text-white font-black uppercase tracking-widest text-[11px] rounded-none hover:bg-primary transition-all">
+                    Register as Vendor <Rocket className="h-4 w-4 ml-2" />
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
         
         <div className="relative">
@@ -221,9 +296,9 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button size="lg" className="bg-primary text-secondary hover:bg-white hover:text-secondary rounded-none px-12 h-14 md:h-16 font-black shadow-2xl transition-all text-sm uppercase tracking-widest border-2 border-primary">
-              Register Account <ChevronRight className="h-5 w-5 ml-2" />
+              Register My Vault <ChevronRight className="h-5 w-5 ml-2" />
             </Button>
-            <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-secondary rounded-none px-12 h-14 md:h-16 font-black transition-all text-sm uppercase tracking-widest shadow-xl">
+            <Button size="lg" className="bg-burgundy text-white hover:bg-burgundy/90 rounded-none px-12 h-14 md:h-16 font-black transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-burgundy">
               Learn How It Works
             </Button>
           </div>
