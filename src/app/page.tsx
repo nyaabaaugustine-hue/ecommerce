@@ -17,12 +17,15 @@ import {
   Store,
   Gavel,
   Zap,
-  TrendingUp
+  TrendingUp,
+  MessageSquare,
+  Plus
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { LISTINGS, VENDORS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 const HERO_SLIDES = [
   {
@@ -45,9 +48,40 @@ const HERO_SLIDES = [
   }
 ];
 
+const REVIEWS = [
+  {
+    id: 1,
+    name: "Yaw Mensah",
+    location: "East Legon",
+    comment: "The vault system gave me peace of mind for my MacBook purchase. Highly professional.",
+    rating: 5,
+    date: "2 days ago",
+    avatar: "https://picsum.photos/seed/yaw/40/40"
+  },
+  {
+    id: 2,
+    name: "Ama Serwaa",
+    location: "Kumasi",
+    comment: "Fast delivery and the item was exactly as described. Melcom is a great partner.",
+    rating: 5,
+    date: "1 week ago",
+    avatar: "https://picsum.photos/seed/ama/40/40"
+  },
+  {
+    id: 3,
+    name: "Kofi Owusu",
+    location: "Tema",
+    comment: "I was skeptical about escrow in Ghana, but VaultCommerce proved me wrong. Seamless.",
+    rating: 4,
+    date: "3 days ago",
+    avatar: "https://picsum.photos/seed/kofi/40/40"
+  }
+];
+
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -56,10 +90,17 @@ export default function HomePage() {
         setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
         setIsSliding(false);
       }, 800);
-    }, 6000); // Wait 6 seconds (including the 2s initial pause user requested + viewing time)
+    }, 6000);
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleAddReview = () => {
+    toast({
+      title: "Registry Open",
+      description: "Review submission is restricted to verified buyers. Please login.",
+    });
+  };
 
   const categories = [
     { name: 'Electronics', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png' },
@@ -84,7 +125,6 @@ export default function HomePage() {
       <section className="container mx-auto px-4 pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl min-h-[500px] border border-border">
-            {/* Animated Background Image */}
             <div className={cn(
               "absolute inset-0 transition-all duration-1000 ease-in-out transform",
               isSliding ? "scale-105 blur-sm opacity-50" : "scale-100 blur-0 opacity-100"
@@ -122,7 +162,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Slide Indicators */}
             <div className="absolute bottom-8 right-12 flex gap-3">
               {HERO_SLIDES.map((_, i) => (
                 <div 
@@ -155,7 +194,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product Marquee (Left to Right) */}
+      {/* Product Marquee */}
       <section className="bg-secondary py-20 overflow-hidden border-y border-primary/20">
         <div className="container mx-auto px-4 mb-12 flex justify-between items-end">
           <div className="space-y-2">
@@ -182,7 +221,71 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Vendor Marquee (Right to Left) */}
+      {/* Reviews Section */}
+      <section className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div className="space-y-3">
+            <Badge className="bg-[#4285F4] text-white rounded-none uppercase font-black tracking-widest px-3 py-1">Registry Feedback</Badge>
+            <h2 className="text-4xl font-black text-secondary tracking-tighter">SOVEREIGN TRUST REVIEWS</h2>
+            <p className="text-muted-foreground font-medium max-w-lg">Audited testimonials from verified buyers in the VaultCommerce ecosystem.</p>
+          </div>
+          <Button 
+            onClick={handleAddReview}
+            className="bg-secondary text-white hover:bg-primary hover:text-secondary h-14 px-8 font-black rounded-none shadow-xl transition-all gap-2"
+          >
+            <Plus className="h-5 w-5" />
+            Register My Feedback
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {REVIEWS.map((review, i) => (
+            <Card key={review.id} className="border-none shadow-lg bg-white rounded-none overflow-hidden group hover:-translate-y-2 transition-all duration-500">
+              <div className={cn(
+                "h-2 w-full",
+                i === 0 ? "bg-[#4285F4]" : i === 1 ? "bg-[#EA4335]" : "bg-[#FBBC05]"
+              )} />
+              <CardContent className="p-8 space-y-6">
+                <div className="flex justify-between items-start">
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star 
+                        key={star} 
+                        className={cn(
+                          "h-4 w-4 fill-current",
+                          star <= review.rating 
+                            ? (star === 1 ? "text-[#4285F4]" : star === 2 ? "text-[#EA4335]" : star === 3 ? "text-[#FBBC05]" : "text-[#34A853]")
+                            : "text-muted/30"
+                        )} 
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">{review.date}</span>
+                </div>
+                
+                <p className="text-secondary font-medium leading-relaxed italic">
+                  "{review.comment}"
+                </p>
+
+                <div className="flex items-center gap-4 pt-4">
+                  <div className="relative h-12 w-12 overflow-hidden border border-border">
+                    <Image src={review.avatar} alt={review.name} fill className="object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-secondary text-sm">{review.name}</h4>
+                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
+                      <ShieldCheck className="h-3 w-3 text-[#34A853]" />
+                      Verified {review.location} Buyer
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Vendor Marquee */}
       <section className="bg-white py-16 overflow-hidden border-b">
         <div className="container mx-auto px-4 mb-10 text-center">
           <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Verified Registry Nodes</span>
@@ -196,7 +299,7 @@ export default function HomePage() {
                 <Card className="border shadow-sm hover:border-primary transition-colors h-full bg-white group rounded-none">
                   <CardContent className="p-6 flex items-center gap-4">
                     <div className="h-12 w-12 bg-muted flex items-center justify-center shrink-0 border border-border group-hover:bg-primary/10 transition-colors rounded-none overflow-hidden relative">
-                      <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-cover" />
+                      <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-cover" unoptimized />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h4 className="font-bold text-sm text-secondary truncate">{vendor.name}</h4>
@@ -216,7 +319,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Become a Seller Advertisement */}
+      {/* Become a Seller */}
       <section className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-border border border-border">
           <div className="bg-secondary p-12 md:p-20 text-white space-y-8 flex flex-col justify-center">
@@ -317,6 +420,7 @@ export default function HomePage() {
                   width={80} 
                   height={80} 
                   className="object-contain group-hover:scale-110 transition-transform duration-500"
+                  unoptimized
                 />
               </div>
               <span className="text-xs font-bold text-center uppercase tracking-widest text-secondary/70">{cat.name}</span>
@@ -325,7 +429,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Brands Registry Section */}
+      {/* Brands Registry */}
       <section className="container mx-auto px-4 py-16 border-t">
         <div className="text-center mb-12">
            <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Institutional Integration</span>
