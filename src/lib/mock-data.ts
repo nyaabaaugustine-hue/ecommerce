@@ -128,7 +128,7 @@ export const LISTINGS: Listing[] = [
     category: 'Commercial Rentals',
     price: 45000,
     location: 'Ridge Financial District',
-    imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     rating: 4.9
   },
   {
@@ -138,7 +138,7 @@ export const LISTINGS: Listing[] = [
     category: 'Residential Sales',
     price: 2400000,
     location: 'East Legon, Accra',
-    imageUrl: 'https://images.unsplash.com/photo-1613490493576-7fde63bac817?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     rating: 5.0
   },
   {
@@ -148,7 +148,7 @@ export const LISTINGS: Listing[] = [
     category: 'Professional Services',
     price: 1500,
     location: 'Cantonments, Accra',
-    imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.9
   },
   {
@@ -158,7 +158,7 @@ export const LISTINGS: Listing[] = [
     category: 'Professional Services',
     price: 2500,
     location: 'Accra Central',
-    imageUrl: 'https://images.unsplash.com/photo-1454165833767-027eeea15c3e?q=80&w=2070&auto=format&fit=crop',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
     rating: 4.8
   },
 
