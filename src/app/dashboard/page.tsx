@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -35,7 +35,10 @@ import {
   ArrowUpRight,
   Banknote,
   Key,
-  BookOpen
+  BookOpen,
+  ArrowDownLeft,
+  FileText,
+  Zap
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
@@ -178,23 +181,26 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
-      {/* Demo Role Switcher */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-12 bg-white shadow-sm border p-4 rounded-none gap-4">
+      {/* Protocol Status Header */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-10 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
-           <Activity className="h-5 w-5 text-primary" />
-           <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Switch Roles (Demo)</span>
-           
+           <Zap className="h-4 w-4 text-primary animate-pulse" />
+           <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Sovereign Registry: Online</span>
+           <Badge variant="outline" className="border-primary/20 rounded-none text-[8px] px-2 py-0.5">V 1.2.4</Badge>
+        </div>
+
+        <div className="flex items-center gap-4">
            <Popover>
              <PopoverTrigger asChild>
                <Button variant="outline" size="sm" className="rounded-none h-8 font-bold text-[10px] uppercase tracking-widest gap-2">
-                 <Info className="h-3 w-3" />
-                 User Roles
+                 <Users className="h-3 w-3" />
+                 Demo Profiles
                </Button>
              </PopoverTrigger>
              <PopoverContent className="w-80 rounded-none p-6 shadow-xl border mt-2">
                <h3 className="font-bold text-secondary mb-4 flex items-center gap-2 text-sm">
                  <ShieldCheck className="h-4 w-4 text-primary" />
-                 Demo Accounts
+                 Institutional Nodes
                </h3>
                <div className="space-y-3">
                  {MOCK_USERS.map(userItem => (
@@ -211,92 +217,79 @@ export default function Dashboard() {
                         {currentRole === userItem.role && <CheckCircle className="h-3 w-3 text-primary" />}
                      </div>
                      <p className="font-bold text-xs text-secondary">{userItem.email}</p>
-                     <p className="text-[9px] text-muted-foreground font-medium mt-1 leading-tight">{roleNarratives[userItem.role]}</p>
                    </div>
                  ))}
                </div>
              </PopoverContent>
            </Popover>
-        </div>
-
-        <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-2 w-full md:w-auto">
-          {(['HIGH_ADMIN', 'VENDOR_ADMIN', 'VENDOR_STAFF', 'CUSTOMER'] as Role[]).map(role => (
-            <Button 
-              key={role} 
-              size="sm" 
-              variant={currentRole === role ? 'default' : 'outline'}
-              onClick={() => {
-                const targetUser = MOCK_USERS.find(u => u.role === role);
-                if (targetUser) login(targetUser.email);
-                toast({ title: `Role Synced: ${role}` });
-              }}
-              className={`rounded-none text-[8px] md:text-[9px] h-8 font-bold uppercase tracking-widest flex-1 sm:flex-none ${currentRole === role ? 'bg-secondary text-white' : ''}`}
-            >
-              {role.replace('_', ' ')}
-            </Button>
-          ))}
+           
+           <Button variant="ghost" size="sm" className="h-8 rounded-none text-[9px] font-bold uppercase tracking-widest text-muted-foreground hover:text-primary">
+             <Info className="h-3 w-3 mr-2" />
+             Help Center
+           </Button>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-12 gap-6">
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl md:text-4xl font-bold text-secondary tracking-tight">
-              {currentRole === 'HIGH_ADMIN' ? 'Admin Console' : 'Account Dashboard'}
+            <h1 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">
+              {currentRole === 'HIGH_ADMIN' ? 'Platform Command' : 'Account Console'}
             </h1>
-            <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-none">
+            <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-none px-3">
               {currentRole.replace('_', ' ')}
             </Badge>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-             <BookOpen className="h-4 w-4 text-primary" />
-             <p className="font-bold text-[10px] md:text-xs uppercase tracking-widest">
-               {roleNarratives[currentRole]}
-             </p>
-          </div>
+          <p className="font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
+             <ShieldCheck className="h-4 w-4 text-primary" />
+             {roleNarratives[currentRole]}
+          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-center gap-3 w-full lg:w-auto">
+        
+        <div className="grid grid-cols-2 sm:flex items-center gap-3 w-full lg:w-auto">
           {currentRole === 'VENDOR_ADMIN' && (
-             <Button className="w-full lg:w-auto bg-primary hover:bg-primary/90 rounded-none px-6 font-black h-11 text-secondary gap-2 text-xs">
+             <Button className="bg-primary hover:bg-primary/90 rounded-none px-6 font-black h-11 text-secondary gap-2 text-[10px] uppercase tracking-widest shadow-lg">
               <Banknote className="h-4 w-4" />
-              Withdraw Funds
+              Settle Funds
             </Button>
           )}
           {currentRole === 'HIGH_ADMIN' && (
             <Button 
               onClick={handleAuthorizeLocks}
-              className="w-full lg:w-auto bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-xs"
+              className="bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
             >
               <Key className="h-4 w-4" />
               Authorize Payouts
             </Button>
           )}
-          <Button variant="outline" className="w-full lg:w-auto rounded-none h-11 px-6 font-bold hover:bg-primary/5 text-xs">
+          <Button variant="outline" className="rounded-none h-11 px-6 font-bold text-[10px] uppercase tracking-widest hover:bg-primary/5">
             <Settings className="h-4 w-4 mr-2" />
-            Settings
+            Config
           </Button>
-          <Button className="w-full lg:w-auto bg-secondary hover:bg-secondary/90 rounded-none px-6 font-bold h-11 text-white text-xs" onClick={handleLogout}>
+          <Button className="bg-secondary hover:bg-secondary/90 rounded-none px-6 font-bold h-11 text-white text-[10px] uppercase tracking-widest" onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
             Logout
           </Button>
         </div>
       </div>
 
-      {/* Statistics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+      {/* Main Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
         {stats[currentRole].map((stat, i) => (
-          <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-none">
-            <CardContent className="p-4 md:p-6">
+          <Card key={i} className="border-none shadow-sm hover:shadow-md transition-all rounded-none bg-white border-l-4 border-l-primary">
+            <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-2 md:p-3 rounded-none bg-muted flex items-center justify-center">
-                  <stat.icon className={`h-4 w-4 md:h-6 md:w-6 ${stat.color}`} />
+                <div className="p-3 bg-muted rounded-none">
+                  <stat.icon className={`h-5 w-5 ${stat.color}`} />
                 </div>
-                <Badge variant="outline" className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest border-primary/20 rounded-none">Updated Live</Badge>
+                <div className="text-right">
+                  <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-1">Live Feed</p>
+                  <Activity className="h-3 w-3 text-green-500 ml-auto" />
+                </div>
               </div>
-              <p className="text-[9px] md:text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
-              <p className="text-xl md:text-3xl font-bold text-secondary mb-2">{stat.val}</p>
-              <p className="text-[9px] text-muted-foreground flex items-center gap-1 font-bold">
-                <Activity className="h-3 w-3 text-primary" />
+              <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em] mb-1">{stat.label}</p>
+              <p className="text-2xl md:text-3xl font-black text-secondary mb-2 tracking-tight">{stat.val}</p>
+              <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-tight">
                 {stat.sub}
               </p>
             </CardContent>
@@ -304,64 +297,71 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        {/* Left Column: Tools & Registry */}
+        <div className="lg:col-span-2 space-y-8">
           <Tabs defaultValue="active" className="w-full">
-            <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto flex">
-              <TabsTrigger value="active" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">
-                {currentRole.includes('ADMIN') ? 'Order Queue' : 'Active Orders'}
+            <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto">
+              <TabsTrigger value="active" className="rounded-none px-8 font-bold uppercase text-[9px] tracking-widest data-[state=active]:bg-secondary data-[state=active]:text-white">
+                Active Protocol
               </TabsTrigger>
-              <TabsTrigger value="history" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">Order History</TabsTrigger>
+              <TabsTrigger value="tools" className="rounded-none px-8 font-bold uppercase text-[9px] tracking-widest data-[state=active]:bg-secondary data-[state=active]:text-white">
+                Management Tools
+              </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="active" className="space-y-4 md:space-y-6 mt-6">
+            <TabsContent value="active" className="mt-6 space-y-6">
               {activeTransactions.map((tx) => (
-                <Card key={tx.id} className="border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden group">
-                  <div className="p-4 md:p-8">
-                    <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
-                      <div className="flex gap-4">
-                        <Avatar className="h-10 w-10 md:h-16 md:w-16 rounded-none border shadow-sm shrink-0">
-                          <AvatarImage src={tx.vendorLogo} alt={tx.item} />
-                          <AvatarFallback className="bg-muted font-bold">{tx.item.charAt(0)}</AvatarFallback>
-                        </Avatar>
+                <Card key={tx.id} className="border shadow-sm rounded-none group">
+                  <div className="p-6 md:p-8">
+                    <div className="flex flex-col sm:flex-row justify-between gap-6 mb-8">
+                      <div className="flex gap-6">
+                        <div className="relative h-16 w-16 bg-white border shrink-0">
+                          <Avatar className="h-full w-full rounded-none">
+                            <AvatarImage src={tx.vendorLogo} alt={tx.item} className="object-contain p-2" />
+                            <AvatarFallback className="bg-muted font-bold">{tx.item.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                        </div>
                         <div>
-                          <h4 className="font-bold text-secondary text-base md:text-xl tracking-tight mb-1">{tx.item}</h4>
-                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <span className="text-[8px] md:text-[9px] text-muted-foreground font-bold uppercase tracking-widest">{tx.id}</span>
-                            <div className="flex items-center gap-1 text-[8px] md:text-[9px] font-bold text-secondary uppercase tracking-widest">
-                              <Lock className="h-2.5 w-2.5 text-primary" />
-                              Secure Checkout
-                            </div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Badge className="bg-primary text-secondary text-[8px] font-black px-2 rounded-none">{tx.id}</Badge>
+                            <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">{tx.date}</span>
+                          </div>
+                          <h4 className="font-black text-secondary text-xl tracking-tighter uppercase mb-2">{tx.item}</h4>
+                          <div className="flex items-center gap-4">
+                             <div className="flex items-center gap-1.5 text-[9px] font-bold text-secondary uppercase tracking-widest">
+                               <User className="h-3 w-3 text-primary" />
+                               Buyer: {tx.buyer || 'Yaw Mensah'}
+                             </div>
+                             <div className="flex items-center gap-1.5 text-[9px] font-bold text-secondary uppercase tracking-widest">
+                               <Timer className="h-3 w-3 text-primary" />
+                               SLA: {tx.timer}
+                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2">
-                        <div className="text-lg md:text-2xl font-black text-secondary tracking-tight">GH₵{tx.amount.toLocaleString()}</div>
-                        <Badge variant={tx.status === 'Completed' ? 'default' : 'secondary'} className={`font-bold uppercase text-[8px] tracking-widest px-2 rounded-none ${tx.status === 'Completed' ? 'bg-green-500 text-white' : 'bg-primary text-secondary'}`}>
+                      <div className="text-right flex flex-col items-end gap-2">
+                        <div className="text-2xl font-black text-secondary tracking-tighter">GH₵{tx.amount.toLocaleString()}</div>
+                        <Badge className="bg-secondary text-white font-black uppercase text-[8px] tracking-widest px-3 py-1 rounded-none">
                           {tx.status}
                         </Badge>
                       </div>
                     </div>
                     
-                    <div className="space-y-2 mb-6">
-                      <div className="flex justify-between text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                        <span>Fulfillment Progress</span>
-                        <span className="text-secondary">{tx.progress}% Verified</span>
+                    <div className="space-y-3 mb-8">
+                      <div className="flex justify-between text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+                        <span>Fulfillment Cycle</span>
+                        <span className="text-secondary">{tx.progress}% Synchronized</span>
                       </div>
-                      <Progress value={tx.progress} className="h-1.5 md:h-2 rounded-none" />
+                      <Progress value={tx.progress} className="h-2 rounded-none" />
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-dashed border-border gap-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-dashed gap-4">
                       <div className="flex items-center gap-3">
-                         <div className="flex -space-x-2">
-                          {[1, 2, 3].map((i) => (
-                            <Avatar key={i} className="h-7 w-7 md:h-9 md:w-9 border-2 border-white shadow-sm rounded-none">
-                              <AvatarImage src={`https://picsum.photos/seed/${tx.id}-${i}/40/40`} />
-                              <AvatarFallback>U</AvatarFallback>
-                            </Avatar>
-                          ))}
-                        </div>
-                        <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-muted-foreground">Support Team Active</span>
+                         <div className="bg-muted p-2">
+                           <Activity className="h-4 w-4 text-primary" />
+                         </div>
+                         <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Mediation Node Active</p>
                       </div>
                       
                       {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
@@ -370,50 +370,49 @@ export default function Dashboard() {
                           if(open) setSelectedTxId(tx.id);
                         }}>
                           <DialogTrigger asChild>
-                            <Button className="w-full sm:w-auto bg-secondary text-white hover:bg-secondary/90 font-bold rounded-none px-6 h-11 text-[10px] md:text-xs uppercase tracking-widest">
-                              Confirm & Release Funds
+                            <Button className="bg-secondary text-white hover:bg-primary hover:text-secondary font-black rounded-none px-8 h-12 text-[10px] uppercase tracking-[0.2em] shadow-xl">
+                              Audit & Release Funds
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="sm:max-w-md rounded-none p-6 md:p-8">
+                          <DialogContent className="sm:max-w-md rounded-none border-t-4 border-t-primary p-8">
                             <DialogHeader>
-                              <div className="h-12 w-12 bg-primary/10 rounded-none flex items-center justify-center mx-auto mb-4">
-                                <ShieldAlert className="h-6 w-6 text-primary" />
+                              <div className="h-14 w-14 bg-secondary flex items-center justify-center mx-auto mb-6">
+                                <ShieldCheck className="h-8 w-8 text-primary" />
                               </div>
-                              <DialogTitle className="text-xl font-black text-secondary text-center">
-                                Order Delivery Confirmation
+                              <DialogTitle className="text-2xl font-black text-secondary text-center uppercase tracking-tighter">
+                                Fidelity Audit Protocol
                               </DialogTitle>
-                              <DialogDescription className="text-center text-xs font-medium">
-                                Certify item quality to release GH₵{tx.amount.toLocaleString()} from escrow to the vendor.
+                              <DialogDescription className="text-center text-[10px] font-bold uppercase tracking-widest mt-2">
+                                Verify asset quality to disburse GH₵{tx.amount.toLocaleString()} from treasury.
                               </DialogDescription>
                             </DialogHeader>
-                            <div className="space-y-3 py-4 md:py-6">
+                            <div className="space-y-3 py-8">
                               {[
-                                { id: 'condition', label: 'Item is in good condition', checked: checklist.condition },
-                                { id: 'matches', label: 'Item matches description', checked: checklist.matches },
-                                { id: 'functionality', label: 'All features working correctly', checked: checklist.functionality },
+                                { id: 'condition', label: 'Item Integrity Verified', checked: checklist.condition },
+                                { id: 'matches', label: 'Description Synchronized', checked: checklist.matches },
+                                { id: 'functionality', label: 'Operational Standards Met', checked: checklist.functionality },
                               ].map((item) => (
-                                <div key={item.id} className="flex items-center space-x-3 p-3 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all">
+                                <div key={item.id} className="flex items-center space-x-4 p-4 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all cursor-pointer" onClick={() => setChecklist(prev => ({...prev, [item.id]: !prev[item.id as keyof typeof prev]}))}>
                                   <Checkbox 
                                     id={item.id} 
                                     checked={item.checked} 
-                                    onCheckedChange={(checked) => setChecklist(prev => ({...prev, [item.id]: !!checked}))}
                                   />
-                                  <label htmlFor={item.id} className="text-[11px] md:text-sm font-bold text-secondary cursor-pointer flex-1">
+                                  <label htmlFor={item.id} className="text-[10px] font-black uppercase tracking-widest text-secondary cursor-pointer flex-1">
                                     {item.label}
                                   </label>
                                 </div>
                               ))}
                             </div>
                             <DialogFooter>
-                              <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-12 text-sm uppercase">
-                                CONFIRM & RELEASE
+                              <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-14 text-xs uppercase tracking-widest shadow-2xl">
+                                AUTHORIZE SETTLEMENT
                               </Button>
                             </DialogFooter>
                           </DialogContent>
                         </Dialog>
                       ) : (
-                        <Button size="sm" variant="ghost" className="w-full sm:w-auto text-[9px] md:text-[10px] font-bold text-secondary hover:bg-primary/5 rounded-none uppercase tracking-widest h-10">
-                          Order Details <ChevronRight className="h-4 w-4 ml-1" />
+                        <Button variant="outline" className="rounded-none h-11 px-6 font-black text-[10px] uppercase tracking-widest">
+                          Protocol History <ChevronRight className="h-4 w-4 ml-2" />
                         </Button>
                       )}
                     </div>
@@ -421,60 +420,138 @@ export default function Dashboard() {
                 </Card>
               ))}
             </TabsContent>
+
+            <TabsContent value="tools" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-secondary rounded-none">
+                      <FileText className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Fidelity Reports</h5>
+                      <p className="text-[10px] text-muted-foreground uppercase">Export transaction audit trails.</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Download PDF</Button>
+                </Card>
+                <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-secondary rounded-none">
+                      <MessageSquare className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Protocol Support</h5>
+                      <p className="text-[10px] text-muted-foreground uppercase">Connect with mediation node.</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Open Session</Button>
+                </Card>
+                <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-secondary rounded-none">
+                      <ArrowRightLeft className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h5 className="font-black text-secondary text-xs uppercase tracking-widest">GHS Settlements</h5>
+                      <p className="text-[10px] text-muted-foreground uppercase">Manage bank node connections.</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Manage Accounts</Button>
+                </Card>
+                <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-secondary rounded-none">
+                      <ShieldAlert className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Dispute Center</h5>
+                      <p className="text-[10px] text-muted-foreground uppercase">Report protocol anomalies.</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">File Report</Button>
+                </Card>
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
 
-        <div className="space-y-6 md:space-y-8">
-          <Card className="border shadow-lg bg-secondary text-white rounded-none overflow-hidden relative">
-            <div className="absolute top-0 right-0 p-4">
-              <ShieldCheck className="h-10 w-10 md:h-12 md:w-12 text-primary opacity-20" />
+        {/* Right Column: Secure Balance & Trust */}
+        <div className="space-y-8">
+          <Card className="border-none shadow-2xl bg-secondary text-white rounded-none overflow-hidden relative border-t-4 border-t-primary">
+            <div className="absolute top-0 right-0 p-6">
+              <ShieldCheck className="h-16 w-16 text-primary opacity-10" />
             </div>
-            <CardHeader className="p-6 md:p-8">
-              <CardTitle className="flex items-center gap-3 text-xl md:text-2xl font-bold tracking-tight text-white">
-                <Wallet className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                Secure Balance
+            <CardHeader className="p-8">
+              <CardTitle className="flex items-center gap-3 text-xl font-black tracking-tight uppercase">
+                <Wallet className="h-6 w-6 text-primary" />
+                Sovereign Balance
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6 md:p-8 pt-0 space-y-6 md:space-y-8">
+            <CardContent className="p-8 pt-0 space-y-10">
               <div className="space-y-1">
-                <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/50">
-                  {currentRole.includes('ADMIN') ? 'Total Platform Liquidity' : 'Funds in Escrow'}
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white/50">
+                  {currentRole.includes('ADMIN') ? 'Global Platform Treasury' : 'Funds Restricted in Escrow'}
                 </span>
-                <div className="text-3xl md:text-5xl font-black tracking-tighter text-white">
+                <div className="text-4xl md:text-5xl font-black tracking-tighter text-white">
                   {currentRole.includes('ADMIN') ? 'GH₵273.6K' : 'GH₵8,500'}
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-white/5 p-3 rounded-none border border-white/10">
-                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Success Rate</span>
-                  <div className="font-bold text-base md:text-xl text-white">99.4%</div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/5 p-4 rounded-none border border-white/10">
+                  <span className="text-[8px] font-black uppercase tracking-widest block mb-1 text-white/40">Reliability</span>
+                  <div className="font-black text-xl text-primary uppercase">Elite</div>
                 </div>
-                <div className="bg-white/5 p-3 rounded-none border border-white/10">
-                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Reliability</span>
-                  <div className="font-bold text-base md:text-xl text-primary">A+</div>
+                <div className="bg-white/5 p-4 rounded-none border border-white/10">
+                  <span className="text-[8px] font-black uppercase tracking-widest block mb-1 text-white/40">Auth Level</span>
+                  <div className="font-black text-xl text-white uppercase">Sovereign</div>
                 </div>
               </div>
               
-              <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 text-xs uppercase tracking-widest gap-2">
-                <ArrowUpRight className="h-4 w-4" />
-                {currentRole === 'HIGH_ADMIN' ? 'Manage Treasury' : 'Withdraw Funds'}
+              <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-14 text-[10px] uppercase tracking-[0.2em] shadow-xl">
+                <ArrowUpRight className="h-4 w-4 mr-2" />
+                {currentRole === 'HIGH_ADMIN' ? 'Manage Master Treasury' : 'Initiate Withdrawal'}
               </Button>
             </CardContent>
           </Card>
 
-          <div className="p-6 bg-muted/50 rounded-none border-2 border-border border-dashed relative group">
-            <div className="flex gap-4 relative z-10">
-              <ShieldAlert className="h-8 w-8 text-secondary shrink-0" />
+          <Card className="rounded-none border shadow-lg overflow-hidden">
+            <CardHeader className="bg-muted/50 border-b p-6">
+              <CardTitle className="text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                <Activity className="h-4 w-4 text-primary" />
+                Fidelity Registry
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              {[
+                { label: 'Escrow Locks Active', val: '142', icon: Lock },
+                { label: 'Funds Authorized Today', val: 'GH₵12.4K', icon: Zap },
+                { label: 'Trust Rating (Global)', val: '4.98', icon: Star },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center justify-between border-b border-dashed pb-4 last:border-0 last:pb-0">
+                  <div className="flex items-center gap-3">
+                    <item.icon className="h-4 w-4 text-primary" />
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase">{item.label}</span>
+                  </div>
+                  <span className="font-black text-secondary text-sm">{item.val}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <div className="bg-primary/5 p-8 rounded-none border-2 border-primary/20 border-dashed relative">
+             <div className="flex gap-4 relative z-10">
+              <ShieldAlert className="h-10 w-10 text-secondary shrink-0" />
               <div>
-                <h5 className="font-bold text-secondary text-sm md:text-base mb-2 tracking-tight uppercase">Buyer Protection</h5>
-                <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed font-medium">
+                <h5 className="font-black text-secondary text-sm mb-2 uppercase tracking-widest">Protocol Safety Node</h5>
+                <p className="text-[10px] text-muted-foreground leading-relaxed font-bold uppercase tracking-tight">
                   {currentRole === 'CUSTOMER' 
-                    ? "Your funds are held securely in escrow. They only move to the vendor once you confirm delivery."
-                    : "Admin oversight ensures all GHS settlements are verified. Every transaction is protected via our security protocol."
+                    ? "Your funds are restricted in our vault. They only move to the vendor once you certify the fidelity audit."
+                    : "High Admin oversight ensures all GHS settlements are verified. Every protocol step is cryptographically logged."
                   }
                 </p>
-                <Button variant="link" className="p-0 h-auto text-[9px] font-black text-primary uppercase tracking-widest mt-4">Read Safety Guide</Button>
+                <Button variant="link" className="p-0 h-auto text-[9px] font-black text-primary uppercase tracking-[0.2em] mt-6">View Safety Manual</Button>
               </div>
             </div>
           </div>
