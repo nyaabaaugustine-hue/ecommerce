@@ -74,7 +74,7 @@ export const VENDORS: Vendor[] = [
 ];
 
 export const LISTINGS: Listing[] = [
-  // Vendor 1: Melcom Digital Hub (4+ Items)
+  // Vendor 1: Melcom Digital Hub (4 Items)
   {
     id: '1',
     title: 'Quantum Precision MacBook Pro M3 Max',
@@ -120,7 +120,7 @@ export const LISTINGS: Listing[] = [
     rating: 4.8
   },
 
-  // Vendor 2: PrimeRentals GH (4+ Items)
+  // Vendor 2: PrimeRentals GH (4 Items)
   {
     id: '7',
     title: 'Apex Ridge Commercial Executive Suite',
@@ -162,7 +162,7 @@ export const LISTINGS: Listing[] = [
     rating: 4.8
   },
 
-  // Vendor 3: HomeLiving Furniture (4+ Items)
+  // Vendor 3: HomeLiving Furniture (4 Items)
   {
     id: '3',
     title: 'Elite Heritage L-Shaped Sectional Sofa',
