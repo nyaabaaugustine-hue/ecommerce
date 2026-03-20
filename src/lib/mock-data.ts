@@ -90,7 +90,7 @@ export const LISTINGS: Listing[] = [
     id: '1',
     title: 'MacBook Pro M3 Max - Space Black',
     vendorId: 'v1',
-    category: 'Electronics',
+    category: 'Computing & Laptops',
     price: 8450,
     oldPrice: 10200,
     location: 'Accra Mall, Ghana',
@@ -102,7 +102,7 @@ export const LISTINGS: Listing[] = [
     id: '2',
     title: 'LG Inverter Double Door Refrigerator',
     vendorId: 'v1',
-    category: 'Appliances',
+    category: 'Institutional Appliances',
     price: 12500,
     oldPrice: 14000,
     location: 'Melcom Plus, Kaneshie',
@@ -114,7 +114,7 @@ export const LISTINGS: Listing[] = [
     id: '3',
     title: 'Modern L-Shaped Sectional Sofa - Royal Velvet',
     vendorId: 'v3',
-    category: 'Home & Living',
+    category: 'Heritage Furniture',
     price: 6800,
     location: 'Spintex Road, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
@@ -124,13 +124,73 @@ export const LISTINGS: Listing[] = [
     id: '4',
     title: 'Premium Grocery Care Package - Makola Select',
     vendorId: 'v4',
-    category: 'Supermarket',
+    category: 'Supermarket Registry',
     price: 450,
     oldPrice: 550,
     location: 'Tema, Ghana',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.7,
     discount: '18% OFF'
+  },
+  {
+    id: '5',
+    title: 'iPhone 15 Pro Max - Natural Titanium',
+    vendorId: 'v1',
+    category: 'Mobile Ecosystem',
+    price: 9200,
+    location: 'Airport Residential',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
+    rating: 4.9
+  },
+  {
+    id: '6',
+    title: 'High-End Smart 4K OLED TV - 65"',
+    vendorId: 'v1',
+    category: 'Sovereign Audio/Visual',
+    price: 15400,
+    location: 'Osu, Accra',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
+    rating: 4.8
+  },
+  {
+    id: '7',
+    title: 'Executive Office Space - Ridge Financial District',
+    vendorId: 'v2',
+    category: 'Commercial Rentals',
+    price: 45000,
+    location: 'Ridge, Accra',
+    imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop',
+    rating: 4.9
+  },
+  {
+    id: '8',
+    title: 'Luxury 4-Bedroom Villa - East Legon',
+    vendorId: 'v2',
+    category: 'Residential Sales',
+    price: 2400000,
+    location: 'East Legon, Accra',
+    imageUrl: 'https://images.unsplash.com/photo-1613490493576-7fde63bac817?q=80&w=2070&auto=format&fit=crop',
+    rating: 5.0
+  },
+  {
+    id: '9',
+    title: 'Corporate Legal Advisory - Gold Tier',
+    vendorId: 'v2',
+    category: 'Professional Services',
+    price: 1500,
+    location: 'Cantonments, Accra',
+    imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop',
+    rating: 4.9
+  },
+  {
+    id: '10',
+    title: 'Royal Orchid Beauty Set - Heritage Edition',
+    vendorId: 'v3',
+    category: 'Beauty & Personal',
+    price: 850,
+    location: 'Labone, Accra',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
+    rating: 4.7
   }
 ];
 

@@ -28,25 +28,24 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 
 const SECTORS = [
   {
     title: "Electronics & Tech",
     icon: Cpu,
     items: [
-      { name: "Computing & Laptops", href: "/listings?category=Electronics", icon: Monitor },
-      { name: "Mobile Ecosystem", href: "/listings?category=Electronics", icon: Smartphone },
-      { name: "Sovereign Audio/Visual", href: "/listings?category=Electronics", icon: Tv },
-      { name: "Institutional Appliances", href: "/listings?category=Appliances", icon: Refrigerator },
+      { name: "Computing & Laptops", href: "/listings?category=Computing %26 Laptops", icon: Monitor },
+      { name: "Mobile Ecosystem", href: "/listings?category=Mobile Ecosystem", icon: Smartphone },
+      { name: "Sovereign Audio/Visual", href: "/listings?category=Sovereign Audio/Visual", icon: Tv },
+      { name: "Institutional Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator },
     ]
   },
   {
     title: "Real Estate & Assets",
     icon: Home,
     items: [
-      { name: "Commercial Rentals", href: "/listings?category=Real Estate", icon: Building2 },
-      { name: "Residential Sales", href: "/listings?category=Real Estate", icon: Key },
+      { name: "Commercial Rentals", href: "/listings?category=Commercial Rentals", icon: Building2 },
+      { name: "Residential Sales", href: "/listings?category=Residential Sales", icon: Key },
       { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase },
     ]
   },
@@ -54,9 +53,9 @@ const SECTORS = [
     title: "Lifestyle & Living",
     icon: ShoppingBag,
     items: [
-      { name: "Heritage Furniture", href: "/listings?category=Furniture", icon: Armchair },
-      { name: "Supermarket Registry", href: "/listings?category=Supermarket", icon: Utensils },
-      { name: "Beauty & Personal", href: "/listings?category=Beauty", icon: Sparkles },
+      { name: "Heritage Furniture", href: "/listings?category=Heritage Furniture", icon: Armchair },
+      { name: "Supermarket Registry", href: "/listings?category=Supermarket Registry", icon: Utensils },
+      { name: "Beauty & Personal", href: "/listings?category=Beauty %26 Personal", icon: Sparkles },
     ]
   }
 ];
