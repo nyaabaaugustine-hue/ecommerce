@@ -57,7 +57,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased bg-background min-h-screen flex flex-col text-secondary" suppressHydrationWarning>
+      <body className="font-body antialiased bg-background min-h-screen flex flex-col text-secondary m-0 p-0" suppressHydrationWarning>
         <AuthProvider>
           <CurrencyProvider>
             <CartProvider>
@@ -135,7 +135,7 @@ export default function RootLayout({
                   </div>
                   
                   <div className="pt-8 border-t border-white/5 text-center text-white/30 text-[9px] font-black uppercase tracking-[0.4em]" suppressHydrationWarning>
-                    © 2026 VaultCommerce. All rights reserved by Cyber.
+                    © 2026 VaultCommerce. All rights reserved by <a href="https://cybertechgh.netlify.app" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Cyber.</a>
                   </div>
                 </div>
               </footer>
