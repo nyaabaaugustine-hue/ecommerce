@@ -11,9 +11,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
+import { Separator } from '@/components/ui/separator';
 import { useAuth, useCart } from '@/components/providers';
 import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
+import { MegaMenu } from '@/components/mega-menu';
 
 const TICKER_ITEMS = [
   "LIVE VAULT ACTIVITY: GH₵8,450.00 SECURED IN ACCRA",
@@ -67,8 +69,8 @@ export function Navbar() {
       </div>
 
       {/* Main Bar */}
-      <div className="bg-white/95 backdrop-blur-xl border-b py-4 shadow-sm">
-        <div className="container mx-auto px-4 flex items-center justify-between gap-8">
+      <div className="bg-white/95 backdrop-blur-xl border-b py-0 shadow-sm">
+        <div className="container mx-auto px-4 flex items-center justify-between gap-8 h-20">
           <Link href="/" className="flex items-center gap-3 font-headline font-black text-2xl text-secondary shrink-0 group">
             <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
               <Image 
@@ -84,7 +86,13 @@ export function Navbar() {
             </div>
           </Link>
 
-          <div className="flex-1 max-w-2xl hidden md:flex items-center relative">
+          {/* Navigation Elements */}
+          <div className="hidden lg:flex items-center h-full gap-2">
+            <MegaMenu />
+            <Separator orientation="vertical" className="h-8 mx-2" />
+          </div>
+
+          <div className="flex-1 max-w-xl hidden md:flex items-center relative">
             <div className="relative w-full flex">
               <input 
                 type="text" 
