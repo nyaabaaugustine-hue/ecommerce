@@ -259,7 +259,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative">
-          <div className="animate-marquee gap-8 py-8 [animation-duration:60s]">
+          <div className="animate-marquee gap-8 py-8 [animation-duration:120s]">
             {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((review, i) => (
               <div key={`${review.id}-${i}`} className="w-[400px] shrink-0">
                 <Card className="border-none shadow-2xl bg-white/5 backdrop-blur-md rounded-none overflow-hidden group hover:bg-white/10 transition-all duration-500">
@@ -462,7 +462,7 @@ export default function HomePage() {
            <h2 className="text-2xl font-black text-secondary tracking-tighter">GLOBAL PARTNER REGISTRY</h2>
         </div>
         <div className="relative overflow-hidden w-full h-24">
-          <div className="animate-marquee-reverse gap-20 py-4 flex items-center [animation-duration:40s]">
+          <div className="animate-marquee-reverse gap-20 py-4 flex items-center [animation-duration:80s]">
             {[...partners, ...partners, ...partners].map((partner, i) => (
               <div key={`${partner.name}-${i}`} className="relative h-12 w-48 overflow-hidden flex items-center justify-center shrink-0 grayscale hover:grayscale-0 transition-all duration-700 opacity-50 hover:opacity-100">
                   <Image 

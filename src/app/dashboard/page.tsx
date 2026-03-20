@@ -127,6 +127,13 @@ export default function Dashboard() {
     });
   };
 
+  const handleAuthorizeLocks = () => {
+    toast({
+      title: "Global Treasury Lock Authorized",
+      description: "Institutional funds for pending trades have been secured via Sovereign Multisig Node.",
+    });
+  };
+
   const handleLogout = () => {
     toast({ title: "Session Terminated", description: "Returning to marketplace." });
     logout();
@@ -247,7 +254,10 @@ export default function Dashboard() {
             </Button>
           )}
           {currentRole === 'HIGH_ADMIN' && (
-            <Button className="bg-primary text-secondary rounded-none px-8 font-black h-12 gap-2 shadow-lg">
+            <Button 
+              onClick={handleAuthorizeLocks}
+              className="bg-primary text-secondary rounded-none px-8 font-black h-12 gap-2 shadow-lg"
+            >
               <Key className="h-5 w-5" />
               Authorize Pending Locks
             </Button>
