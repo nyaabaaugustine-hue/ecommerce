@@ -9,15 +9,18 @@ import {
   ChevronRight, 
   ArrowRight, 
   Star, 
-  ChevronLeft,
   Lock,
   ShieldAlert,
   Fingerprint,
-  Crown
+  Crown,
+  Store,
+  Gavel,
+  Zap,
+  TrendingUp
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { LISTINGS } from '@/lib/mock-data';
+import { LISTINGS, VENDORS } from '@/lib/mock-data';
 
 export default function HomePage() {
   const categories = [
@@ -80,8 +83,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Slow-Moving Marquee Section */}
-      <section className="bg-secondary py-20 overflow-hidden">
+      {/* Product Marquee (Left to Right) */}
+      <section className="bg-secondary py-20 overflow-hidden border-y border-primary/20">
         <div className="container mx-auto px-4 mb-12 flex justify-between items-end">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold text-white tracking-tight">Institutional High-Movers</h2>
@@ -96,16 +99,102 @@ export default function HomePage() {
         
         <div className="relative">
           <div className="animate-marquee gap-8">
-            {/* Double the listings to ensure seamless loop */}
             {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
-              <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
+              <div key={`${listing.id}-${idx}`} className="w-[320px] shrink-0">
                 <ListingCard {...listing} provider={listing.vendorId} />
               </div>
             ))}
           </div>
-          {/* Gradient Overlays for smooth edges */}
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-secondary to-transparent z-10" />
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-secondary to-transparent z-10" />
+        </div>
+      </section>
+
+      {/* Vendor Marquee (Right to Left) */}
+      <section className="bg-white py-16 overflow-hidden border-b">
+        <div className="container mx-auto px-4 mb-10 text-center">
+          <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Verified Registry Nodes</span>
+          <h2 className="text-2xl font-black text-secondary tracking-tighter">OUR SOVEREIGN PARTNERS</h2>
+        </div>
+        
+        <div className="relative">
+          <div className="animate-marquee-reverse gap-8 py-4">
+            {[...VENDORS, ...VENDORS].map((vendor, idx) => (
+              <div key={`${vendor.id}-${idx}`} className="w-[280px] shrink-0">
+                <Card className="border shadow-sm hover:border-primary transition-colors h-full bg-white group rounded-none">
+                  <CardContent className="p-6 flex items-center gap-4">
+                    <div className="h-12 w-12 bg-muted flex items-center justify-center shrink-0 border border-border group-hover:bg-primary/10 transition-colors rounded-none overflow-hidden relative">
+                      <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-sm text-secondary truncate">{vendor.name}</h4>
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest truncate">{vendor.category}</p>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="h-3 w-3 fill-primary text-primary" />
+                      <span className="text-[10px] font-bold text-secondary">{vendor.rating}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+        </div>
+      </section>
+
+      {/* Become a Seller Advertisement */}
+      <section className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-border border border-border">
+          <div className="bg-secondary p-12 md:p-20 text-white space-y-8 flex flex-col justify-center">
+            <div className="space-y-4">
+              <Badge className="bg-primary text-secondary font-black rounded-none">SELL ON VAULT</Badge>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-none">
+                MONETIZE YOUR <br /> <span className="text-primary">INVENTORY</span>
+              </h2>
+              <p className="text-white/60 text-lg font-medium leading-relaxed max-w-md">
+                Join 500+ verified retailers in Accra. Secure your payouts via our **Multisig Escrow Protocol** and access high-fidelity buyers instantly.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4">
+              <div className="space-y-2">
+                <Zap className="h-6 w-6 text-primary" />
+                <h4 className="font-bold">Instant GHS Payouts</h4>
+                <p className="text-xs text-white/50 leading-relaxed">Funds are cleared via Paystack the moment satisfaction is confirmed.</p>
+              </div>
+              <div className="space-y-2">
+                <Gavel className="h-6 w-6 text-primary" />
+                <h4 className="font-bold">Sovereign Protection</h4>
+                <p className="text-xs text-white/50 leading-relaxed">Our legal layer protects you from chargebacks and fraudulent claims.</p>
+              </div>
+            </div>
+
+            <div className="pt-8">
+              <Button size="lg" className="bg-white text-secondary hover:bg-primary hover:text-secondary px-12 h-16 font-black rounded-none shadow-2xl transition-all">
+                Open Your Vault Shop <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+          <div className="relative min-h-[400px] bg-muted overflow-hidden image-reveal">
+            <Image 
+              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
+              alt="Become a Seller" 
+              fill 
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-secondary/20" />
+            <div className="absolute bottom-12 left-12 right-12 bg-white/10 backdrop-blur-md p-8 border border-white/20">
+               <div className="flex items-center gap-6">
+                 <TrendingUp className="h-10 w-10 text-primary" />
+                 <div>
+                   <p className="text-white font-black text-2xl tracking-tighter">GH₵4.2M+</p>
+                   <p className="text-white/60 text-[10px] font-black uppercase tracking-widest">Monthly GHS Settlement Volume</p>
+                 </div>
+               </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -118,7 +207,7 @@ export default function HomePage() {
             { icon: Crown, title: 'Elite Concierge', sub: 'Priority GHS Support', color: 'text-primary' },
             { icon: ShieldCheck, title: 'Escrow Shield', sub: 'Sovereign Guarantee', color: 'text-secondary' },
           ].map((feat, i) => (
-            <Card key={i} className="border-border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden group">
+            <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden group bg-white">
               <CardContent className="p-6 flex items-center gap-4">
                 <div className="h-12 w-12 rounded-none bg-muted flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
                   <feat.icon className={`h-6 w-6 ${feat.color}`} />
