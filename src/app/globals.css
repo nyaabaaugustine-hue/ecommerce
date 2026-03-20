@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -100,7 +101,7 @@
   }
   50% { 
     text-shadow: 0 0 10px hsl(var(--accent)), 0 0 15px hsl(var(--accent));
-    filter: drop-shadow(0 0 8px hsl(var(--accent)));
+    filter: drop_shadow(0 0 8px hsl(var(--accent)));
   }
 }
 

@@ -21,7 +21,8 @@ import {
   ExternalLink,
   PlusCircle,
   FileText,
-  AlertTriangle
+  AlertTriangle,
+  Monitor
 } from "lucide-react";
 
 import {
@@ -82,18 +83,18 @@ const NAV_MAIN = [
     url: "/admin/settings",
     icon: Settings,
     items: [
+      { title: "Global Settings", url: "/admin/settings" },
       { title: "Escrow Fees", url: "/admin/settings/escrow" },
-      { title: "Global Themes", url: "/admin/settings/themes" },
-      { title: "Email Nodes", url: "/admin/settings/email" },
+      { title: "Registry Themes", url: "/admin/settings/themes" },
     ],
   },
 ];
 
 const NAV_SECONDARY = [
+  { title: "Content Node", url: "/admin/settings?tab=content", icon: Monitor },
   { title: "Audit Trails", url: "/admin/audit", icon: History },
   { title: "Security Logs", url: "/admin/security", icon: Lock },
   { title: "Dispute Center", url: "/admin/disputes", icon: AlertTriangle },
-  { title: "System Database", url: "/admin/db", icon: Database },
 ];
 
 export function AdminSidebar() {
@@ -129,11 +130,11 @@ export function AdminSidebar() {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton 
                 tooltip={item.title} 
-                className={pathname === item.url ? "bg-primary text-secondary" : "hover:bg-primary/10 text-white/70 hover:text-white"}
+                className={pathname.startsWith(item.url) ? "bg-primary text-secondary" : "hover:bg-primary/10 text-white/70 hover:text-white"}
                 asChild
               >
                 <Link href={item.url} className="flex items-center gap-3">
-                  <item.icon className={`h-4 w-4 ${pathname === item.url ? 'text-secondary' : 'text-primary'}`} />
+                  <item.icon className={`h-4 w-4 ${pathname.startsWith(item.url) ? 'text-secondary' : 'text-primary'}`} />
                   <span className="font-black text-[10px] uppercase tracking-widest">{item.title}</span>
                 </Link>
               </SidebarMenuButton>
