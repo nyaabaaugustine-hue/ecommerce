@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -13,11 +12,6 @@ import {
   Star, 
   Lock,
   ShieldAlert,
-  Fingerprint,
-  Crown,
-  Gavel,
-  Zap,
-  TrendingUp,
   Plus
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -65,33 +59,6 @@ const REVIEWS = [
     rating: 5,
     date: "1 week ago",
     avatar: "https://picsum.photos/seed/ama/40/40"
-  },
-  {
-    id: 3,
-    name: "Kofi Owusu",
-    location: "Tema",
-    comment: "I was skeptical about escrow in Ghana, but VaultCommerce proved me wrong. Seamless.",
-    rating: 4,
-    date: "3 days ago",
-    avatar: "https://picsum.photos/seed/kofi/40/40"
-  },
-  {
-    id: 4,
-    name: "Afia Mansa",
-    location: "Airport Residential",
-    comment: "Security first. I love that my GH₵ only goes to the vendor once I'm happy.",
-    rating: 5,
-    date: "1 day ago",
-    avatar: "https://picsum.photos/seed/afia/40/40"
-  },
-  {
-    id: 5,
-    name: "Kwame Boateng",
-    location: "Osu",
-    comment: "The best marketplace for authentic brands in Accra. No more fake items.",
-    rating: 5,
-    date: "4 days ago",
-    avatar: "https://picsum.photos/seed/kwame/40/40"
   }
 ];
 
@@ -119,27 +86,8 @@ export default function HomePage() {
     });
   };
 
-  const categories = [
-    { name: 'Electronics', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png' },
-    { name: 'Appliances', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png' },
-    { name: 'Supermarket', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png' },
-    { name: 'Furniture', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg' },
-    { name: 'Beauty', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg' },
-    { name: 'Cameras', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png' },
-  ];
-
-  const partners = [
-    { name: 'Partner 1', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003514/thh_ayplwg.png' },
-    { name: 'Partner 2', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/jjtj_yw3wpz.jpg' },
-    { name: 'Partner 3', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/wghwegg_zaqfyj.jpg' },
-    { name: 'Partner 4', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/tn_wcqrvc.png' },
-    { name: 'Partner 5', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/wrfwf_onzwgf.png' },
-    { name: 'Partner 6', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/erherh_gk3hxz.jpg' },
-    { name: 'Partner 7', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/hrh_rucdbr.png' },
-  ];
-
   return (
-    <div className="flex flex-col gap-12 md:gap-24 pb-32 bg-subtle-pattern min-h-screen">
+    <div className="flex flex-col gap-12 md:gap-24 bg-subtle-pattern min-h-screen">
       {/* Hero Slider Section */}
       <section className="container mx-auto px-4 pt-6 md:pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -179,18 +127,6 @@ export default function HomePage() {
                   </Link>
                 </div>
               </div>
-            </div>
-
-            <div className="absolute bottom-4 md:bottom-8 right-6 md:right-12 flex gap-3">
-              {HERO_SLIDES.map((_, i) => (
-                <div 
-                  key={i} 
-                  className={cn(
-                    "h-1 transition-all duration-500",
-                    currentSlide === i ? "w-8 md:w-12 bg-primary" : "w-4 md:w-6 bg-white/30"
-                  )} 
-                />
-              ))}
             </div>
           </div>
           
@@ -235,150 +171,85 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product Marquee - Moving Inventory */}
-      <section className="bg-secondary py-12 md:py-20 overflow-hidden border-y border-primary/20">
-        <div className="container mx-auto px-4 mb-8 md:mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Institutional High-Movers</h2>
-            <p className="text-white/50 text-xs md:text-sm uppercase tracking-widest font-bold">Protocol-Synchronized Inventory</p>
-          </div>
+      {/* Vendor Marquee - Big Background Images */}
+      <section className="bg-white py-20 md:py-32 overflow-hidden border-y">
+        <div className="container mx-auto px-4 mb-16 text-center">
+          <span className="text-primary font-black uppercase tracking-[0.4em] text-xs mb-4 block">Sovereign Partner Network</span>
+          <h2 className="text-3xl md:text-5xl font-black text-secondary tracking-tighter uppercase">THE ELITE VENDOR REGISTRY</h2>
         </div>
         
         <div className="relative">
-          <div className="animate-marquee gap-4 md:gap-8">
-            {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
-              <div key={`${listing.id}-${idx}`} className="w-[280px] md:w-[320px] shrink-0">
-                <ListingCard {...listing} vendorId={listing.vendorId} />
-              </div>
-            ))}
-          </div>
-          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-secondary to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-secondary to-transparent z-10" />
-        </div>
-      </section>
-
-      {/* Reviews Section - Black Background + Slow Marquee */}
-      <section className="bg-black py-16 md:py-24 overflow-hidden border-y border-white/5">
-        <div className="container mx-auto px-4 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8">
-          <div className="space-y-3">
-            <Badge className="bg-[#4285F4] text-white rounded-none uppercase font-black tracking-widest px-3 py-1">Registry Feedback</Badge>
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase">SOVEREIGN TRUST REVIEWS</h2>
-          </div>
-          <Button 
-            onClick={handleAddReview}
-            className="w-full md:w-auto bg-primary text-secondary hover:bg-white h-12 md:h-14 px-8 font-black rounded-none shadow-xl transition-all gap-2"
-          >
-            <Plus className="h-5 w-5" />
-            Register My Feedback
-          </Button>
-        </div>
-
-        <div className="relative">
-          <div className="animate-marquee gap-4 md:gap-8 py-4 md:py-8 [animation-duration:120s]">
-            {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((review, i) => (
-              <div key={`${review.id}-${i}`} className="w-[300px] md:w-[400px] shrink-0">
-                <Card className="border-none shadow-2xl bg-white/5 backdrop-blur-md rounded-none overflow-hidden group hover:bg-white/10 transition-all duration-500">
-                  <div className={cn(
-                    "h-1.5 w-full",
-                    i % 3 === 0 ? "bg-[#4285F4]" : i % 3 === 1 ? "bg-[#EA4335]" : "bg-[#FBBC05]"
-                  )} />
-                  <CardContent className="p-6 md:p-8 space-y-4 md:space-y-6">
-                    <div className="flex justify-between items-start">
-                      <div className="flex gap-1">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star 
-                            key={star} 
-                            className={cn(
-                              "h-3 w-3 md:h-4 md:w-4 fill-current",
-                              star <= review.rating 
-                                ? (star === 1 ? "text-[#4285F4]" : star === 2 ? "text-[#EA4335]" : star === 3 ? "text-[#FBBC05]" : "text-[#34A853]")
-                                : "text-white/10"
-                            )} 
-                          />
-                        ))}
-                      </div>
-                      <span className="text-[9px] md:text-[10px] font-black text-white/30 uppercase tracking-widest">{review.date}</span>
-                    </div>
-                    
-                    <p className="text-white font-medium leading-relaxed italic text-xs md:text-sm">
-                      "{review.comment}"
-                    </p>
-
-                    <div className="flex items-center gap-4 pt-4 border-t border-white/10">
-                      <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden border border-white/10">
-                        <Image src={review.avatar} alt={review.name} fill className="object-cover" />
+          <div className="animate-marquee-reverse gap-8 py-4 [animation-duration:120s]">
+            {[...VENDORS, ...VENDORS].map((vendor, idx) => (
+              <div key={`${vendor.id}-${idx}`} className="w-[400px] md:w-[600px] shrink-0">
+                <Card className="border shadow-2xl hover:border-primary transition-all duration-500 h-[300px] md:h-[400px] bg-secondary group rounded-none relative overflow-hidden">
+                  <Image src={vendor.bgUrl} alt={vendor.name} fill className="object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent p-10 flex flex-col justify-end">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="h-14 w-14 md:h-20 md:w-20 bg-white p-3 rounded-none shadow-xl relative shrink-0">
+                        <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-2" unoptimized />
                       </div>
                       <div>
-                        <h4 className="font-black text-white text-xs md:text-sm">{review.name}</h4>
-                        <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] text-white/40 font-bold uppercase tracking-widest">
-                          <ShieldCheck className="h-3 w-3 text-[#34A853]" />
-                          Verified {review.location} Buyer
+                        <h4 className="font-black text-xl md:text-3xl text-white tracking-tight">{vendor.name}</h4>
+                        <div className="flex items-center gap-2">
+                           <Badge className="bg-primary text-secondary font-black rounded-none text-[10px] uppercase">{vendor.category}</Badge>
+                           <div className="flex items-center gap-1">
+                             <Star className="h-3 w-3 fill-primary text-primary" />
+                             <span className="text-xs font-black text-white">{vendor.rating}</span>
+                           </div>
                         </div>
                       </div>
                     </div>
-                  </CardContent>
+                    <p className="text-white/60 text-sm font-medium line-clamp-2 max-w-md">
+                      {vendor.description}
+                    </p>
+                  </div>
                 </Card>
               </div>
             ))}
           </div>
-          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-black to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-black to-transparent z-10" />
+          <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-white to-transparent z-10" />
         </div>
       </section>
 
-      {/* Vendor Marquee */}
-      <section className="bg-white py-12 md:py-16 overflow-hidden border-b">
-        <div className="container mx-auto px-4 mb-8 md:mb-10 text-center">
-          <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Verified Registry Nodes</span>
-          <h2 className="text-xl md:text-2xl font-black text-secondary tracking-tighter">OUR SOVEREIGN PARTNERS</h2>
+      {/* CTA Section - FULL WIDTH */}
+      <section className="w-full bg-secondary py-24 md:py-32 relative overflow-hidden border-y border-primary/20">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary via-secondary/95 to-secondary" />
+        
+        <div className="container mx-auto px-4 relative z-10 text-center space-y-8 md:space-y-12">
+          <div className="flex justify-center mb-4">
+            <ShieldAlert className="h-16 w-16 text-primary animate-pulse" />
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
+              SECURE YOUR <br /><span className="text-primary underline decoration-primary/20 underline-offset-8">NEXT TRADE</span>
+            </h2>
+            <p className="text-white/50 font-bold uppercase tracking-[0.3em] text-xs md:text-sm max-w-2xl mx-auto">
+              Institutional Escrow Protocols Active in the GHS Sovereignty.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
+            <Button size="lg" className="bg-primary text-secondary hover:bg-white rounded-none px-12 h-16 font-black shadow-2xl transition-all text-base uppercase tracking-widest">
+              Register My Vault <ChevronRight className="h-6 w-6 ml-2" />
+            </Button>
+            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/5 rounded-none px-12 h-16 font-black transition-all text-base uppercase tracking-widest">
+              Security Protocol Manual
+            </Button>
+          </div>
         </div>
         
-        <div className="relative">
-          <div className="animate-marquee-reverse gap-4 md:gap-8 py-4 [animation-duration:80s]">
-            {[...VENDORS, ...VENDORS].map((vendor, idx) => (
-              <div key={`${vendor.id}-${idx}`} className="w-[240px] md:w-[280px] shrink-0">
-                <Card className="border shadow-sm hover:border-primary transition-colors h-full bg-white group rounded-none">
-                  <CardContent className="p-4 md:p-6 flex items-center gap-4">
-                    <div className="h-10 w-10 md:h-12 md:w-12 bg-muted flex items-center justify-center shrink-0 border border-border group-hover:bg-primary/10 transition-colors rounded-none overflow-hidden relative">
-                      <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-cover" unoptimized />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-xs md:text-sm text-secondary truncate">{vendor.name}</h4>
-                      <p className="text-[9px] md:text-[10px] font-black text-muted-foreground uppercase tracking-widest truncate">{vendor.category}</p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="h-3 w-3 fill-primary text-primary" />
-                      <span className="text-[10px] font-bold text-secondary">{vendor.rating}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
-          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10" />
+        {/* Animated Background Icons */}
+        <div className="absolute top-1/2 left-10 -translate-y-1/2 opacity-5 pointer-events-none">
+          <Lock className="h-64 w-64 text-white" />
+        </div>
+        <div className="absolute top-1/2 right-10 -translate-y-1/2 opacity-5 pointer-events-none">
+          <ShieldCheck className="h-64 w-64 text-white" />
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="container mx-auto px-4">
-        <div className="bg-secondary rounded-none p-10 md:p-16 relative overflow-hidden text-center text-white shadow-xl">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-          <div className="relative z-10 max-w-3xl mx-auto space-y-6 md:space-y-8">
-            <div className="flex justify-center mb-4">
-              <ShieldAlert className="h-10 w-10 md:h-12 md:w-12 text-primary animate-bounce" />
-            </div>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-              SECURE YOUR <span className="text-primary">NEXT TRADE</span>
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-              <Button size="lg" className="bg-primary text-secondary hover:bg-white rounded-none px-10 h-14 font-bold shadow-lg transition-all">
-                Register My Vault <ChevronRight className="h-5 w-5 ml-2" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      
+      <div className="pb-24" />
     </div>
   );
 }

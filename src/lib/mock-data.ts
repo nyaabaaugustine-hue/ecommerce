@@ -18,6 +18,7 @@ export interface Vendor {
   color: string;
   icon: string;
   logoUrl: string;
+  bgUrl: string;
   description: string;
 }
 
@@ -45,6 +46,7 @@ export const VENDORS: Vendor[] = [
     color: 'bg-primary',
     icon: 'M',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+    bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg',
     description: "Ghana's largest electronics and appliance department, powered by Melcom."
   },
   {
@@ -57,6 +59,7 @@ export const VENDORS: Vendor[] = [
     color: 'bg-accent',
     icon: 'P',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+    bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     description: 'Curating the finest residential and commercial properties across East Legon.'
   },
   {
@@ -69,6 +72,7 @@ export const VENDORS: Vendor[] = [
     color: 'bg-secondary',
     icon: 'H',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
+    bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     description: 'Premium furniture and interior decor with secure delivery across Ghana.'
   }
 ];
