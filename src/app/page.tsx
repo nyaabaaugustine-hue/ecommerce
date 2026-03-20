@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -29,6 +30,7 @@ import {
   DialogDescription,
   DialogTrigger 
 } from '@/components/ui/dialog';
+import { PromotionPopup } from '@/components/promotion-popup';
 
 const HERO_SLIDES = [
   {
@@ -70,6 +72,9 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col bg-white min-h-screen">
+      {/* AliExpress Style Promotion Popup */}
+      <PromotionPopup />
+
       {/* Hero Slider Section */}
       <section className="container mx-auto px-4 py-4 md:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -200,7 +205,7 @@ export default function HomePage() {
                           </div>
                           <div>
                             <p className="text-xs font-black uppercase">PrimeRentals GH</p>
-                            <p className="text-[9px] text-white/40 uppercase">Real Estate • 4.8 Rating</p>
+                            <p className="text-[9px] text-white/40 uppercase">Trusted Agency • 4.8 Rating</p>
                           </div>
                        </div>
                     </div>
