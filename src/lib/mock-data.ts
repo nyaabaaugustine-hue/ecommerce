@@ -1,4 +1,3 @@
-
 export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
 
 export interface User {
@@ -75,7 +74,7 @@ export const VENDORS: Vendor[] = [
 ];
 
 export const LISTINGS: Listing[] = [
-  // Vendor 1: Melcom Digital Hub (4 Items)
+  // Vendor 1: Melcom Digital Hub (4+ Items)
   {
     id: '1',
     title: 'Quantum Precision MacBook Pro M3 Max',
@@ -121,7 +120,7 @@ export const LISTINGS: Listing[] = [
     rating: 4.8
   },
 
-  // Vendor 2: PrimeRentals GH (4 Items)
+  // Vendor 2: PrimeRentals GH (4+ Items)
   {
     id: '7',
     title: 'Apex Ridge Commercial Executive Suite',
@@ -163,7 +162,7 @@ export const LISTINGS: Listing[] = [
     rating: 4.8
   },
 
-  // Vendor 3: HomeLiving Furniture (4 Items)
+  // Vendor 3: HomeLiving Furniture (4+ Items)
   {
     id: '3',
     title: 'Elite Heritage L-Shaped Sectional Sofa',
@@ -195,9 +194,9 @@ export const LISTINGS: Listing[] = [
     rating: 4.7
   },
   {
-    id: '4',
+    id: '13',
     title: 'Makola Select Premium Grocery Registry',
-    vendorId: 'v1',
+    vendorId: 'v3',
     category: 'Supermarket Registry',
     price: 450,
     oldPrice: 550,

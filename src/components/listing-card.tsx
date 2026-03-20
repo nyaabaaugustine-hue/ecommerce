@@ -58,8 +58,8 @@ export function ListingCard(props: ListingProps) {
         <EscrowBadge className="bg-white/95 scale-75 origin-left shadow-sm py-1 px-3" />
       </div>
 
-      {/* Image Section with Reveal Animation */}
-      <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block image-reveal bg-muted">
+      {/* Image Section with Reveal Animation and 7% Radius */}
+      <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block image-reveal bg-muted product-card-image-wrap">
         <Image 
           src={imageUrl} 
           alt={title} 

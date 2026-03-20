@@ -36,6 +36,12 @@
   }
 }
 
+/* Custom Product Card Image Radius */
+.product-card-image-wrap {
+  border-radius: 7% !important;
+  overflow: hidden;
+}
+
 .bg-subtle-pattern {
   background-color: #ffffff;
   background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
@@ -72,7 +78,7 @@
 .animate-marquee-reverse {
   display: flex;
   width: max-content;
-  animation: marquee-reverse 50s linear infinite;
+  animation: marquee-reverse 80s linear infinite;
 }
 
 .animate-marquee:hover, .animate-marquee-reverse:hover {
