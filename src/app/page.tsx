@@ -213,18 +213,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product Marquee */}
+      {/* Featured Registry Section - 12 INNOVATIVE PRODUCTS */}
+      <section className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+          <div className="space-y-3">
+            <Badge className="bg-secondary text-primary rounded-none uppercase font-black tracking-widest px-3 py-1">Sovereign Selection</Badge>
+            <h2 className="text-3xl md:text-5xl font-black text-secondary tracking-tighter uppercase">FEATURED INSTITUTIONAL REGISTRY</h2>
+            <p className="text-muted-foreground font-medium max-w-lg text-sm md:text-base">Authentic inventory across all sectors, restricted via VaultCommerce protocols.</p>
+          </div>
+          <Link href="/listings">
+            <Button className="bg-primary text-secondary hover:bg-secondary hover:text-white h-12 md:h-14 px-8 font-black rounded-none shadow-xl transition-all gap-2">
+              Browse Global Vault <ArrowRight className="h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {LISTINGS.slice(0, 12).map((listing) => (
+            <ListingCard key={listing.id} {...listing} vendorId={listing.vendorId} />
+          ))}
+        </div>
+      </section>
+
+      {/* Product Marquee - Moving Inventory */}
       <section className="bg-secondary py-12 md:py-20 overflow-hidden border-y border-primary/20">
         <div className="container mx-auto px-4 mb-8 md:mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
           <div className="space-y-2">
             <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Institutional High-Movers</h2>
             <p className="text-white/50 text-xs md:text-sm uppercase tracking-widest font-bold">Protocol-Synchronized Inventory</p>
           </div>
-          <Link href="/listings" className="w-full sm:w-auto">
-            <Button variant="outline" className="w-full text-primary border-primary hover:bg-primary hover:text-secondary font-bold rounded-none h-12">
-              View Global Registry
-            </Button>
-          </Link>
         </div>
         
         <div className="relative">
@@ -246,7 +263,6 @@ export default function HomePage() {
           <div className="space-y-3">
             <Badge className="bg-[#4285F4] text-white rounded-none uppercase font-black tracking-widest px-3 py-1">Registry Feedback</Badge>
             <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase">SOVEREIGN TRUST REVIEWS</h2>
-            <p className="text-white/50 font-medium max-w-lg text-sm md:text-base">Audited testimonials from verified buyers in the VaultCommerce ecosystem.</p>
           </div>
           <Button 
             onClick={handleAddReview}
@@ -318,7 +334,7 @@ export default function HomePage() {
         </div>
         
         <div className="relative">
-          <div className="animate-marquee-reverse gap-4 md:gap-8 py-4">
+          <div className="animate-marquee-reverse gap-4 md:gap-8 py-4 [animation-duration:80s]">
             {[...VENDORS, ...VENDORS].map((vendor, idx) => (
               <div key={`${vendor.id}-${idx}`} className="w-[240px] md:w-[280px] shrink-0">
                 <Card className="border shadow-sm hover:border-primary transition-colors h-full bg-white group rounded-none">
@@ -344,141 +360,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Become a Seller */}
-      <section className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 bg-border border border-border">
-          <div className="bg-secondary p-8 md:p-20 text-white space-y-6 md:space-y-8 flex flex-col justify-center">
-            <div className="space-y-4">
-              <Badge className="bg-primary text-secondary font-black rounded-none">SELL ON VAULT</Badge>
-              <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-tight md:leading-none">
-                MONETIZE YOUR <br className="hidden md:block" /> <span className="text-primary">INVENTORY</span>
-              </h2>
-              <p className="text-white/60 text-base md:text-lg font-medium leading-relaxed max-w-md">
-                Join 500+ verified retailers in Accra. Secure your payouts via our **Multisig Escrow Protocol** and access high-fidelity buyers instantly.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 pt-4">
-              <div className="space-y-2">
-                <Zap className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                <h4 className="font-bold text-sm md:text-base">Instant GHS Payouts</h4>
-                <p className="text-[10px] md:text-xs text-white/50 leading-relaxed">Funds are cleared via Paystack the moment satisfaction is confirmed.</p>
-              </div>
-              <div className="space-y-2">
-                <Gavel className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                <h4 className="font-bold text-sm md:text-base">Sovereign Protection</h4>
-                <p className="text-[10px] md:text-xs text-white/50 leading-relaxed">Our legal layer protects you from chargebacks and fraudulent claims.</p>
-              </div>
-            </div>
-
-            <div className="pt-6 md:pt-8">
-              <Button size="lg" className="w-full md:w-auto bg-white text-secondary hover:bg-primary hover:text-secondary px-10 md:px-12 h-14 md:h-16 font-black rounded-none shadow-2xl transition-all">
-                Open Your Vault Shop <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-          <div className="relative min-h-[300px] md:min-h-[400px] bg-muted overflow-hidden image-reveal">
-            <Image 
-              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
-              alt="Become a Seller" 
-              fill 
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-secondary/20" />
-            <div className="absolute bottom-6 md:bottom-12 left-6 md:left-12 right-6 md:right-12 bg-white/10 backdrop-blur-md p-6 md:p-8 border border-white/20">
-               <div className="flex items-center gap-4 md:gap-6">
-                 <TrendingUp className="h-8 w-8 md:h-10 md:w-10 text-primary" />
-                 <div>
-                   <p className="text-white font-black text-xl md:text-2xl tracking-tighter">GH₵4.2M+</p>
-                   <p className="text-white/60 text-[9px] md:text-[10px] font-black uppercase tracking-widest">Monthly GHS Settlement Volume</p>
-                 </div>
-               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Grid */}
-      <section className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {[
-            { icon: Lock, title: 'Heritage Vault', sub: 'Institutionally Secured', color: 'text-primary' },
-            { icon: Fingerprint, title: 'Verified Identity', sub: 'Protocol-Driven Audit', color: 'text-secondary' },
-            { icon: Crown, title: 'Elite Concierge', sub: 'Priority GHS Support', color: 'text-primary' },
-            { icon: ShieldCheck, title: 'Escrow Shield', sub: 'Sovereign Guarantee', color: 'text-secondary' },
-          ].map((feat, i) => (
-            <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden group bg-white">
-              <CardContent className="p-4 md:p-6 flex items-center gap-4">
-                <div className="h-10 w-10 md:h-12 md:w-12 rounded-none bg-muted flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
-                  <feat.icon className={`h-5 w-5 md:h-6 md:w-6 ${feat.color}`} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-base md:text-lg text-secondary">{feat.title}</h4>
-                  <p className="text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-widest">{feat.sub}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-3xl font-bold text-secondary tracking-tight">Market Sectors</h2>
-            <p className="text-muted-foreground text-sm md:text-base">Browse by professional category</p>
-          </div>
-          <Link href="/listings" className="w-full sm:w-auto">
-            <Button variant="ghost" className="w-full sm:w-auto text-primary font-bold gap-2 rounded-none justify-start sm:justify-center">
-              Explore All <ChevronRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-          {categories.map((cat) => (
-            <Link key={cat.name} href={`/listings?category=${cat.name}`} className="group flex flex-col items-center gap-3 md:gap-4 transition-all">
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-none bg-white flex items-center justify-center overflow-hidden border border-border shadow-sm group-hover:border-primary transition-all p-3 md:p-4 relative">
-                <Image 
-                  src={cat.icon} 
-                  alt={cat.name} 
-                  width={80} 
-                  height={80} 
-                  className="object-contain group-hover:scale-110 transition-transform duration-500"
-                  unoptimized
-                />
-              </div>
-              <span className="text-[9px] md:text-xs font-bold text-center uppercase tracking-widest text-secondary/70">{cat.name}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Brands Registry */}
-      <section className="container mx-auto px-4 py-12 md:py-16 border-t">
-        <div className="text-center mb-10 md:mb-12">
-           <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Institutional Integration</span>
-           <h2 className="text-xl md:text-2xl font-black text-secondary tracking-tighter">GLOBAL PARTNER REGISTRY</h2>
-        </div>
-        <div className="relative overflow-hidden w-full h-20 md:h-24">
-          <div className="animate-marquee-reverse gap-12 md:gap-20 py-4 flex items-center [animation-duration:80s]">
-            {[...partners, ...partners, ...partners].map((partner, i) => (
-              <div key={`${partner.name}-${i}`} className="relative h-10 w-32 md:h-12 md:w-48 overflow-hidden flex items-center justify-center shrink-0 grayscale hover:grayscale-0 transition-all duration-700 opacity-50 hover:opacity-100">
-                  <Image 
-                    src={partner.logo} 
-                    alt={partner.name} 
-                    fill 
-                    className="object-contain"
-                    unoptimized
-                  />
-              </div>
-            ))}
-          </div>
-          <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-background to-transparent z-10" />
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="container mx-auto px-4">
         <div className="bg-secondary rounded-none p-10 md:p-16 relative overflow-hidden text-center text-white shadow-xl">
@@ -490,9 +371,6 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
               SECURE YOUR <span className="text-primary">NEXT TRADE</span>
             </h2>
-            <p className="text-base md:text-lg text-white/70 max-w-xl mx-auto">
-              Join the institutional-grade trade economy. From appliances to real estate, VaultCommerce ensures your capital is restricted until sovereign satisfaction is reached.
-            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <Button size="lg" className="bg-primary text-secondary hover:bg-white rounded-none px-10 h-14 font-bold shadow-lg transition-all">
                 Register My Vault <ChevronRight className="h-5 w-5 ml-2" />

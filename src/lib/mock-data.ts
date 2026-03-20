@@ -1,3 +1,4 @@
+
 export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
 
 export interface User {
