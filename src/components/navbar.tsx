@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles } from 'lucide-react';
+import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles, Palette } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
@@ -11,8 +11,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue 
+} from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { useAuth, useCart, useCurrency, type CurrencyCode } from '@/components/providers';
+import { useAuth, useCart, useCurrency, useTheme, type CurrencyCode, type PrimaryTheme } from '@/components/providers';
 import { useState, useEffect, useRef } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
@@ -34,6 +41,7 @@ export function Navbar() {
   const { user, logout } = useAuth();
   const { items } = useCart();
   const { currency, setCurrency } = useCurrency();
+  const { theme, setTheme } = useTheme();
   const [showAuth, setShowAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -82,6 +90,22 @@ export function Navbar() {
             </span>
           </div>
           <div className="flex items-center gap-8">
+             {/* Theme Switcher */}
+             <div className="flex items-center gap-2 border-r border-white/10 pr-6">
+               <Palette className="h-3.5 w-3.5 text-accent" />
+               <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
+                 <SelectTrigger className="h-6 w-32 bg-transparent border-none text-[9px] font-black uppercase p-0 focus:ring-0">
+                    <SelectValue placeholder="Theme" />
+                 </SelectTrigger>
+                 <SelectContent className="rounded-none bg-secondary text-white border-accent/20">
+                    <SelectItem value="sovereign">Sovereign Navy</SelectItem>
+                    <SelectItem value="deep">Deep Blue</SelectItem>
+                    <SelectItem value="royal">Royal Blue</SelectItem>
+                    <SelectItem value="cobalt">Cobalt Blue</SelectItem>
+                 </SelectContent>
+               </Select>
+             </div>
+
              <DropdownMenu>
                <DropdownMenuTrigger asChild>
                  <div className="flex items-center gap-3 cursor-pointer hover:text-accent transition-colors">
@@ -205,7 +229,7 @@ export function Navbar() {
                           <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">{suggestion.category}</p>
                         </div>
                         <div className="text-right">
-                           <p className="text-[10px] font-black text-primary uppercase">GH₵{suggestion.price.toLocaleString()}</p>
+                           <p className="text-[10px] font-black text-burgundy uppercase">GH₵{suggestion.price.toLocaleString()}</p>
                         </div>
                       </Link>
                     ))

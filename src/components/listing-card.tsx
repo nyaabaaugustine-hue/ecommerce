@@ -97,7 +97,7 @@ export function ListingCard(props: ListingProps) {
         </div>
         
         <div className="mt-auto pt-4 flex items-baseline gap-3">
-          <span className="text-xl font-black text-primary tracking-tighter">{formatPrice(price)}</span>
+          <span className="text-xl font-black text-burgundy tracking-tighter">{formatPrice(price)}</span>
           {oldPrice && (
             <span className="text-[11px] text-muted-foreground line-through font-bold">{formatPrice(oldPrice)}</span>
           )}

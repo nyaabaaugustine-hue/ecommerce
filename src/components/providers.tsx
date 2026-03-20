@@ -3,6 +3,45 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, MOCK_USERS, Listing } from '@/lib/mock-data';
 
+// --- Theme Context ---
+export type PrimaryTheme = 'sovereign' | 'deep' | 'royal' | 'cobalt';
+
+interface ThemeContextType {
+  theme: PrimaryTheme;
+  setTheme: (theme: PrimaryTheme) => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setThemeState] = useState<PrimaryTheme>('sovereign');
+
+  const setTheme = (newTheme: PrimaryTheme) => {
+    setThemeState(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('vault_theme', newTheme);
+  };
+
+  useEffect(() => {
+    const stored = localStorage.getItem('vault_theme') as PrimaryTheme;
+    if (stored) {
+      setTheme(stored);
+    }
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error("useTheme must be used within ThemeProvider");
+  return context;
+};
+
 // --- Auth Context ---
 interface AuthContextType {
   user: User | null;
@@ -140,3 +179,17 @@ export const useCart = () => {
   if (!context) throw new Error("useCart must be used within CartProvider");
   return context;
 };
+
+export function AuthProviderWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <CurrencyProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </CurrencyProvider>
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -137,7 +136,7 @@ export default function ListingDetails() {
                   </div>
                 </div>
               </div>
-              <div className="text-2xl md:text-3xl font-black text-primary">{formatPrice(listing.price)}</div>
+              <div className="text-2xl md:text-3xl font-black text-burgundy">{formatPrice(listing.price)}</div>
             </div>
 
             <Separator />
@@ -228,7 +227,7 @@ export default function ListingDetails() {
             <CardContent className="p-6 md:p-8 space-y-4 md:space-y-6">
               <div className="flex justify-between items-center py-2">
                 <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Item Price</span>
-                <span className="font-black text-secondary text-sm md:text-base">{formatPrice(listing.price)}</span>
+                <span className="font-black text-burgundy text-sm md:text-base">{formatPrice(listing.price)}</span>
               </div>
               <div className="flex justify-between items-center py-2">
                 <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Escrow Fee (2%)</span>
@@ -237,7 +236,7 @@ export default function ListingDetails() {
               <Separator />
               <div className="flex justify-between items-center py-4 text-lg md:text-xl font-headline">
                 <span className="font-black text-secondary tracking-tight">Total Deposit</span>
-                <span className="font-black text-primary">{formatPrice(listing.price * 1.02)}</span>
+                <span className="font-black text-burgundy">{formatPrice(listing.price * 1.02)}</span>
               </div>
 
               <div className="flex items-center gap-2 mb-4 p-3 bg-muted/50 border border-dashed border-primary/20">

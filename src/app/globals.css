@@ -10,7 +10,7 @@
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 210 75% 35%; /* #16599C Deep Blue */
+    --primary: 222 47% 11%; /* Default Sovereign Navy */
     --primary-foreground: 210 40% 98%;
     --secondary: 222 47% 11%; /* Dark Navy for High-Contrast */
     --secondary-foreground: 210 40% 98%;
@@ -24,9 +24,14 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 178 89% 49%;
     --radius: 0px;
-    --burgundy: 345 75% 35%;
-    --burgundy-light: 345 75% 98%;
+    --burgundy: 345 75% 35%; /* #8B0000 High-Contrast Burgundy */
   }
+
+  /* Theme Variations */
+  [data-theme="sovereign"] { --primary: 222 47% 11%; }
+  [data-theme="deep"] { --primary: 210 75% 35%; }
+  [data-theme="royal"] { --primary: 225 60% 45%; }
+  [data-theme="cobalt"] { --primary: 215 80% 30%; }
 }
 
 @layer base {
@@ -36,6 +41,10 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
+}
+
+.text-burgundy {
+  color: hsl(var(--burgundy));
 }
 
 /* Custom Product Card Image Radius */

@@ -1,9 +1,8 @@
-
 "use client";
 
 import { useState } from 'react';
 import { ShoppingBag, X, Trash2, ShieldCheck, ArrowRight, Loader2, Lock, Key, CheckCircle2 } from 'lucide-react';
-import { useCart } from '@/components/providers';
+import { useCart, useCurrency } from '@/components/providers';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Image from 'next/image';
@@ -15,6 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 
 export function CartSheet() {
   const { items, removeItem, total, clearCart } = useCart();
+  const { formatPrice } = useCurrency();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -58,7 +58,7 @@ export function CartSheet() {
             <div className="bg-secondary text-white p-4 md:p-5 rounded-none shadow-2xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all group border border-primary/20">
                <ShoppingBag className="h-6 w-6 md:h-8 md:w-8 text-primary" />
                <span className="text-[9px] font-black mt-2 tracking-widest uppercase">Cart: {items.length}</span>
-               <span className="text-[9px] font-black bg-primary text-secondary px-3 py-0.5 rounded-none mt-2">GH₵{total.toLocaleString()}</span>
+               <span className="text-[9px] font-black bg-primary text-secondary px-3 py-0.5 rounded-none mt-2">{formatPrice(total)}</span>
             </div>
           </div>
         </SheetTrigger>
@@ -92,7 +92,7 @@ export function CartSheet() {
                       <p className="text-[9px] text-primary font-bold uppercase tracking-widest">{item.category}</p>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="font-black text-secondary text-xs">GH₵{item.price.toLocaleString()}</span>
+                      <span className="font-black text-burgundy text-xs">{formatPrice(item.price)}</span>
                       <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)} className="h-7 w-7 rounded-none hover:bg-red-50 hover:text-red-500">
                         <Trash2 className="h-3.5 w-3.5" />
                       </Button>
@@ -108,11 +108,11 @@ export function CartSheet() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-[10px] font-black text-muted-foreground uppercase tracking-widest">
                   <span>Subtotal Registry</span>
-                  <span>GH₵{total.toLocaleString()}</span>
+                  <span className="text-burgundy">{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-black text-secondary uppercase tracking-widest">Total Secure Deposit</span>
-                  <span className="text-xl font-black text-primary tracking-tighter">GH₵{total.toLocaleString()}</span>
+                  <span className="text-xl font-black text-burgundy tracking-tighter">{formatPrice(total)}</span>
                 </div>
               </div>
               
@@ -177,7 +177,7 @@ export function CartSheet() {
           <DialogHeader>
              <DialogTitle className="text-2xl font-black text-secondary tracking-tighter uppercase text-center">Protocol Locked!</DialogTitle>
              <DialogDescription className="text-[10px] font-black text-muted-foreground uppercase tracking-widest text-center mt-2">
-                GH₵{total.toLocaleString()} successfully restricted in Escrow.
+                {formatPrice(total)} successfully restricted in Escrow.
              </DialogDescription>
           </DialogHeader>
           <div className="text-center space-y-6 pt-4">
