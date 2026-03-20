@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { AuthProvider, CartProvider } from '@/components/providers';
 import { CartSheet } from '@/components/cart-sheet';
+import { LiveActivityFeed } from '@/components/live-activity-feed';
 
 export const metadata: Metadata = {
   title: 'VaultCommerce | Sovereign GHS Marketplace',
@@ -38,13 +39,14 @@ export default function RootLayout({
             </main>
             
             <CartSheet />
+            <LiveActivityFeed />
 
             <footer className="bg-secondary text-white pt-24 pb-12 border-t border-primary/20">
               <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
                   <div className="space-y-8">
                      <div className="flex items-center gap-4 font-headline font-black text-3xl text-white">
-                        <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-primary/30">
+                        <div className="relative h-12 w-12 overflow-hidden rounded-none border border-primary/30">
                           <Image 
                             src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
                             alt="VaultCommerce" 

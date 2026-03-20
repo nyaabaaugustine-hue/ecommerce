@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -21,8 +22,45 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { LISTINGS, VENDORS } from '@/lib/mock-data';
+import { cn } from '@/lib/utils';
+
+const HERO_SLIDES = [
+  {
+    image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg",
+    badge: "Verified Escrow Protocol",
+    title: <>ACCRA'S <span className="text-primary">GOLD</span> <br /> STANDARD</>,
+    desc: "The ultimate high-trust retail aggregator. Secure your GHS in our sovereign vault and shop with total institutional confidence."
+  },
+  {
+    image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png",
+    badge: "Elite Inventory Layer",
+    title: <>PREMIUM <span className="text-primary">VAULT</span> <br /> ELECTRONICS</>,
+    desc: "Access authentic gadgets from verified Ghanaian partners. Every trade is restricted via the Vault Treasury until confirmed."
+  },
+  {
+    image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg",
+    badge: "Sovereign Asset Registry",
+    title: <>HERITAGE <span className="text-primary">HOME</span> <br /> LIVING</>,
+    desc: "Curating elite furniture with institutional-grade protection. Secure your lifestyle assets with VaultCommerce Escrow."
+  }
+];
 
 export default function HomePage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isSliding, setIsSliding] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsSliding(true);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+        setIsSliding(false);
+      }, 800);
+    }, 6000); // Wait 6 seconds (including the 2s initial pause user requested + viewing time)
+
+    return () => clearInterval(timer);
+  }, []);
+
   const categories = [
     { name: 'Electronics', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png' },
     { name: 'Appliances', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png' },
@@ -32,27 +70,47 @@ export default function HomePage() {
     { name: 'Cameras', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png' },
   ];
 
+  const partners = [
+    { name: 'Melcom', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg' },
+    { name: 'Paystack', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773997887/vbb_kuy4qi.png' },
+    { name: 'MTN MoMo', logo: 'https://picsum.photos/seed/mtn/100/100' },
+    { name: 'Standard Chartered', logo: 'https://picsum.photos/seed/stanchart/100/100' },
+    { name: 'Ecobank', logo: 'https://picsum.photos/seed/ecobank/100/100' },
+  ];
+
   return (
     <div className="flex flex-col gap-24 pb-32 bg-subtle-pattern min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Slider Section */}
       <section className="container mx-auto px-4 pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl min-h-[500px] border border-border image-reveal">
-            <Image 
-              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
-              alt="Premium Accra Retail" 
-              fill 
-              className="object-cover"
-              priority
-            />
+          <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl min-h-[500px] border border-border">
+            {/* Animated Background Image */}
+            <div className={cn(
+              "absolute inset-0 transition-all duration-1000 ease-in-out transform",
+              isSliding ? "scale-105 blur-sm opacity-50" : "scale-100 blur-0 opacity-100"
+            )}>
+              <Image 
+                src={HERO_SLIDES[currentSlide].image} 
+                alt="Vault Hero" 
+                fill 
+                className="object-cover"
+                priority
+              />
+            </div>
+            
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 to-transparent flex items-center">
-              <div className="pl-12 space-y-6 max-w-xl animate-in fade-in slide-in-from-left-8 duration-1000">
-                <Badge className="bg-primary text-secondary font-bold uppercase text-[10px] tracking-widest px-4 py-1 rounded-none">Verified Escrow Protocol</Badge>
+              <div className={cn(
+                "pl-12 space-y-6 max-w-xl transition-all duration-700 delay-300",
+                isSliding ? "opacity-0 translate-x-12" : "opacity-100 translate-x-0"
+              )}>
+                <Badge className="bg-primary text-secondary font-bold uppercase text-[10px] tracking-widest px-4 py-1 rounded-none">
+                  {HERO_SLIDES[currentSlide].badge}
+                </Badge>
                 <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight">
-                  ACCRA'S <span className="text-primary">GOLD</span> <br /> STANDARD
+                  {HERO_SLIDES[currentSlide].title}
                 </h2>
                 <p className="text-white/80 text-lg hidden md:block font-medium">
-                  The ultimate high-trust retail aggregator. Secure your GHS in our sovereign vault and shop with total institutional confidence.
+                  {HERO_SLIDES[currentSlide].desc}
                 </p>
                 <div className="flex gap-4">
                   <Link href="/listings">
@@ -63,7 +121,21 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-8 right-12 flex gap-3">
+              {HERO_SLIDES.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={cn(
+                    "h-1 transition-all duration-500",
+                    currentSlide === i ? "w-12 bg-primary" : "w-6 bg-white/30"
+                  )} 
+                />
+              ))}
+            </div>
           </div>
+          
           <div className="lg:col-span-4 flex flex-col gap-8">
             <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border image-reveal">
               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover" />
@@ -250,6 +322,27 @@ export default function HomePage() {
               <span className="text-xs font-bold text-center uppercase tracking-widest text-secondary/70">{cat.name}</span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Brands Registry Section */}
+      <section className="container mx-auto px-4 py-16 border-t">
+        <div className="text-center mb-12">
+           <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Institutional Integration</span>
+           <h2 className="text-2xl font-black text-secondary tracking-tighter">GLOBAL PARTNER REGISTRY</h2>
+        </div>
+        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+           {partners.map((partner) => (
+             <div key={partner.name} className="relative h-12 w-32 md:h-16 md:w-48 overflow-hidden flex items-center justify-center">
+                <Image 
+                  src={partner.logo} 
+                  alt={partner.name} 
+                  fill 
+                  className="object-contain"
+                  unoptimized
+                />
+             </div>
+           ))}
         </div>
       </section>
 
