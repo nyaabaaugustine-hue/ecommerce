@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "electronics",
+      "description": "Modern laptop and gadgets",
+      "imageUrl": "https://picsum.photos/seed/elec/800/600",
+      "imageHint": "laptop electronics"
+    },
+    {
+      "id": "real-estate",
+      "description": "Cozy modern apartment",
+      "imageUrl": "https://picsum.photos/seed/home/800/600",
+      "imageHint": "modern house"
+    },
+    {
+      "id": "education",
+      "description": "Books and learning materials",
+      "imageUrl": "https://picsum.photos/seed/edu/800/600",
+      "imageHint": "books education"
+    },
+    {
+      "id": "services",
+      "description": "Professional consulting",
+      "imageUrl": "https://picsum.photos/seed/service/800/600",
+      "imageHint": "professional services"
+    },
+    {
+      "id": "legal",
+      "description": "Legal gavel and documents",
+      "imageUrl": "https://picsum.photos/seed/legal/800/600",
+      "imageHint": "legal gavel"
+    },
+    {
+      "id": "hero-bg",
+      "description": "Secure transaction network",
+      "imageUrl": "https://picsum.photos/seed/trust/1920/1080",
+      "imageHint": "abstract security"
+    }
+  ]
 }
