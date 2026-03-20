@@ -174,7 +174,7 @@ export default function HomePage() {
                 Become a vendor now
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-primary">
+            <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-primary shadow-2xl">
               <DialogHeader className="sr-only">
                 <DialogTitle>Become a Vault Partner</DialogTitle>
                 <DialogDescription>Register your business to join Ghana's most trusted institutional marketplace.</DialogDescription>

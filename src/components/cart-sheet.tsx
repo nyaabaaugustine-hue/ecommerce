@@ -146,7 +146,11 @@ export function CartSheet() {
 
       {/* Checkout Processing Overlay */}
       <Dialog open={isCheckingOut}>
-        <DialogContent className="sm:max-w-md border-none bg-secondary text-white text-center p-10 rounded-none">
+        <DialogContent className="sm:max-w-md border-none bg-secondary text-white text-center p-10 rounded-none shadow-2xl">
+          <DialogHeader className="sr-only">
+             <DialogTitle>Escrow Authorization</DialogTitle>
+             <DialogDescription>Securing funds in the sovereign vault node.</DialogDescription>
+          </DialogHeader>
           <div className="flex flex-col items-center gap-8 py-4">
             <div className="relative">
               <div className="h-24 w-24 rounded-none border-4 border-primary/20 flex items-center justify-center">
@@ -155,7 +159,7 @@ export function CartSheet() {
               <div className="absolute inset-0 h-24 w-24 rounded-none border-4 border-primary border-t-transparent animate-spin" />
             </div>
             <div className="space-y-4 w-full">
-              <DialogTitle className="text-xl font-black text-white tracking-tighter uppercase">Escrow Authorization</DialogTitle>
+              <h3 className="text-xl font-black text-white tracking-tighter uppercase">Escrow Authorization</h3>
               <div className="space-y-2">
                 <p className="text-primary/80 text-[10px] font-black uppercase tracking-widest animate-pulse">
                   {["Connecting Node...", "Syncing Treasury...", "Authorizing Vault...", "Securing Protocol..."][checkoutStep]}
@@ -169,16 +173,16 @@ export function CartSheet() {
 
       {/* Success Modal */}
       <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
-        <DialogContent className="sm:max-w-md rounded-none p-10 border-t-4 border-t-primary">
-          <div className="text-center space-y-6">
+        <DialogContent className="sm:max-w-md rounded-none p-10 border-t-4 border-t-primary shadow-2xl">
+          <DialogHeader>
+             <DialogTitle className="text-2xl font-black text-secondary tracking-tighter uppercase text-center">Protocol Locked!</DialogTitle>
+             <DialogDescription className="text-[10px] font-black text-muted-foreground uppercase tracking-widest text-center mt-2">
+                GH₵{total.toLocaleString()} successfully restricted in Escrow.
+             </DialogDescription>
+          </DialogHeader>
+          <div className="text-center space-y-6 pt-4">
             <div className="h-16 w-16 bg-primary/10 rounded-none flex items-center justify-center mx-auto">
               <Key className="h-8 w-8 text-primary" />
-            </div>
-            <div className="space-y-2">
-              <DialogTitle className="text-2xl font-black text-secondary tracking-tighter uppercase">Protocol Locked!</DialogTitle>
-              <DialogDescription className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">
-                GH₵{total.toLocaleString()} successfully restricted in Escrow.
-              </DialogDescription>
             </div>
             
             <div className="bg-muted p-6 rounded-none border border-dashed">
