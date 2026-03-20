@@ -50,7 +50,14 @@ export default function RootLayout({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
               <div className="space-y-6">
                  <div className="flex items-center gap-2 font-headline font-bold text-2xl text-primary">
-                    <ShoppingBag className="h-8 w-8" />
+                    <div className="relative h-8 w-8 overflow-hidden rounded-lg">
+                      <Image 
+                        src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
+                        alt="VaultCommerce" 
+                        fill 
+                        className="object-cover"
+                      />
+                    </div>
                     <span>VaultCommerce</span>
                  </div>
                  <p className="text-white/60 text-sm leading-relaxed">
