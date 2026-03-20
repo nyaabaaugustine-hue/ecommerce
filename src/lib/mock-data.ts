@@ -1,3 +1,4 @@
+
 import { PlaceHolderImages } from './placeholder-images';
 
 export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
@@ -90,7 +91,7 @@ export const VENDORS: Vendor[] = [
 export const LISTINGS: Listing[] = [
   {
     id: '1',
-    title: 'Samsung 65" UHD Smart TV - Melcom Edition',
+    title: 'MacBook Pro M3 Max - Space Black',
     vendorId: 'v1',
     category: 'Electronics',
     price: 8450,
@@ -133,36 +134,6 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.7,
     discount: '18% OFF'
-  },
-  {
-    id: '5',
-    title: 'High-Performance Blender & Food Processor',
-    vendorId: 'v1',
-    category: 'Appliances',
-    price: 1200,
-    location: 'Kumasi, Ghana',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/183297_wlhtmo.png',
-    rating: 4.6
-  },
-  {
-    id: '6',
-    title: 'Sony Alpha ZV-E10 Mirrorless Camera',
-    vendorId: 'v1',
-    category: 'Electronics',
-    price: 18500,
-    location: 'Airport Residential, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
-    rating: 4.9
-  },
-  {
-    id: '7',
-    title: 'Korean Advanced Skincare Hydration Set',
-    vendorId: 'v4',
-    category: 'Beauty',
-    price: 950,
-    location: 'East Legon, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
-    rating: 4.8
   }
 ];
 
