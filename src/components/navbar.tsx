@@ -1,10 +1,9 @@
-
 "use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Heart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu } from 'lucide-react';
+import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
@@ -104,13 +103,15 @@ export function Navbar() {
               <div className="relative h-7 w-7 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
                 <Image 
                   src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-                  alt="SecureCommerce Logo" 
+                  alt="VaultCommerce Logo" 
                   fill 
                   className="object-cover"
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="tracking-tighter">Secure<span className="text-primary">Commerce</span></span>
+                <span className="tracking-tighter uppercase">
+                  <span className="text-primary animate-v-glow">V</span>ault<span className="text-primary">Commerce</span>
+                </span>
                 <span className="text-[6px] md:text-[8px] font-black text-secondary/40 tracking-[0.2em] md:tracking-[0.3em] uppercase mt-0.5 md:mt-1">Escrow Protected</span>
               </div>
             </Link>

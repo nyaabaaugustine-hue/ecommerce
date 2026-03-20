@@ -82,7 +82,9 @@ export default function RootLayout({
                               className="object-cover"
                             />
                           </div>
-                          <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
+                          <span className="tracking-tighter uppercase">
+                            <span className="text-primary animate-v-glow">V</span>ault<span className="text-primary">Commerce</span>
+                          </span>
                         </div>
                         <p className="text-white/50 text-xs leading-relaxed max-w-xs font-medium">
                           The Gold Standard for secure cross-category trade in Ghana. Institutionally powered by multisig escrow protocols.

@@ -61,6 +61,17 @@
   100% { transform: translateX(0); }
 }
 
+@keyframes v-glow {
+  0%, 100% { 
+    text-shadow: 0 0 2px hsl(var(--primary)), 0 0 5px hsl(var(--primary));
+    filter: drop-shadow(0 0 2px hsl(var(--primary)));
+  }
+  50% { 
+    text-shadow: 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary));
+    filter: drop-shadow(0 0 8px hsl(var(--primary)));
+  }
+}
+
 .animate-marquee {
   display: flex;
   width: max-content;
@@ -71,6 +82,11 @@
   display: flex;
   width: max-content;
   animation: marquee-reverse 80s linear infinite;
+}
+
+.animate-v-glow {
+  animation: v-glow 2s ease-in-out infinite;
+  display: inline-block;
 }
 
 .animate-marquee:hover, .animate-marquee-reverse:hover {
