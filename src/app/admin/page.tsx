@@ -1,8 +1,10 @@
 
 "use client";
 
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { 
   Users, 
   ShoppingBag, 
@@ -15,7 +17,11 @@ import {
   Zap,
   Lock,
   Globe,
-  Activity
+  Activity,
+  Edit3,
+  Layout,
+  Settings as SettingsIcon,
+  ChevronRight
 } from "lucide-react";
 import { 
   ChartConfig, 
@@ -125,80 +131,105 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-none border shadow-sm bg-white">
-          <CardHeader>
-            <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
-              <ShieldAlert className="h-4 w-4 text-burgundy" />
-              Active Protocol Alerts
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {[
-              { id: 'ALT-881', type: 'SLA Warning', text: 'Melcom Digital Hub SLA @ 42h (Order 8815)', time: '14m ago', status: 'warning' },
-              { id: 'ALT-882', type: 'High Volume', text: 'Transaction GH₵45k authorized for Cantonments Villa', time: '1h ago', status: 'info' },
-              { id: 'ALT-883', type: 'Dispute Node', text: 'User @ YawMensah initiated mediation for "MacBook M3"', time: '2h ago', status: 'danger' },
-            ].map((alert, i) => (
-              <div key={i} className="flex gap-4 p-4 bg-muted/30 border border-transparent hover:border-primary/20 transition-all cursor-pointer">
-                <div className={`h-2 w-2 rounded-full mt-1 shrink-0 ${alert.status === 'danger' ? 'bg-burgundy animate-pulse' : alert.status === 'warning' ? 'bg-orange-500' : 'bg-primary'}`} />
-                <div>
-                  <div className="flex justify-between items-center mb-1">
+        <div className="space-y-8">
+          <Card className="rounded-none border shadow-sm bg-secondary text-white overflow-hidden relative">
+            <div className="absolute top-0 right-0 p-8">
+              <Layout className="h-20 w-20 text-primary opacity-5" />
+            </div>
+            <CardHeader className="relative z-10">
+              <CardTitle className="text-xs font-black uppercase tracking-[0.3em] text-primary">Quick Authorization</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6 relative z-10">
+               <div>
+                  <p className="text-lg font-black tracking-tighter mb-1 uppercase">Homepage Management</p>
+                  <p className="text-[8px] font-bold uppercase tracking-widest opacity-60">Authorize edits to the primary registry gateway.</p>
+               </div>
+               <Link href="/admin/pages/home">
+                 <Button className="w-full bg-primary text-secondary hover:bg-white hover:text-secondary font-black rounded-none h-12 uppercase text-[10px] tracking-widest gap-2 shadow-xl">
+                    <Edit3 className="h-4 w-4" />
+                    Manage Homepage Node
+                 </Button>
+               </Link>
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-none border shadow-sm bg-white">
+            <CardHeader>
+              <CardTitle className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                <ShieldAlert className="h-4 w-4 text-burgundy" />
+                Protocol Alerts
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {[
+                { type: 'SLA Warning', text: 'Order 8815 @ 42h', status: 'warning' },
+                { type: 'High Volume', text: 'GH₵45k authorized', status: 'info' },
+              ].map((alert, i) => (
+                <div key={i} className="flex gap-4 p-3 bg-muted/30 border border-transparent">
+                  <div className={`h-2 w-2 rounded-full mt-1 shrink-0 ${alert.status === 'warning' ? 'bg-orange-500' : 'bg-primary'}`} />
+                  <div>
                     <p className="text-[8px] font-black uppercase text-primary tracking-widest">{alert.type}</p>
-                    <span className="text-[8px] text-muted-foreground uppercase font-bold">{alert.time}</span>
+                    <p className="text-[9px] font-bold text-secondary uppercase leading-snug">{alert.text}</p>
                   </div>
-                  <p className="text-[10px] font-bold text-secondary uppercase leading-snug">{alert.text}</p>
                 </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-         <Card className="rounded-none border shadow-sm bg-secondary text-white overflow-hidden relative">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+         <Card className="rounded-none border shadow-sm bg-white border-t-4 border-t-primary">
+            <CardHeader>
+              <CardTitle className="text-xs font-black uppercase tracking-widest flex items-center gap-2">
+                <SettingsIcon className="h-4 w-4 text-primary" />
+                System Protocol
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+               <p className="text-[10px] text-muted-foreground font-bold uppercase leading-relaxed">Modify global parameters, escrow fees, and institutional branding metadata.</p>
+               <Link href="/admin/settings">
+                 <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 group">
+                    Enter Protocol Settings
+                    <ChevronRight className="h-3 w-3 ml-2 group-hover:translate-x-1 transition-transform" />
+                 </Button>
+               </Link>
+            </CardContent>
+         </Card>
+
+         <Card className="rounded-none border shadow-sm bg-white border-t-4 border-t-primary">
+            <CardHeader>
+              <CardTitle className="text-xs font-black uppercase tracking-widest flex items-center gap-2">
+                <Layout className="h-4 w-4 text-primary" />
+                Registry Pages
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+               <p className="text-[10px] text-muted-foreground font-bold uppercase leading-relaxed">Manage content nodes across all sovereign registry pages including About and Services.</p>
+               <Link href="/admin/pages">
+                 <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 group">
+                    Open Page Registry
+                    <ChevronRight className="h-3 w-3 ml-2 group-hover:translate-x-1 transition-transform" />
+                 </Button>
+               </Link>
+            </CardContent>
+         </Card>
+
+         <Card className="rounded-none border shadow-sm bg-secondary text-white overflow-hidden relative border-t-4 border-t-primary">
             <div className="absolute top-0 right-0 p-8">
               <Globe className="h-20 w-20 text-primary opacity-5" />
             </div>
             <CardHeader className="relative z-10">
-              <CardTitle className="text-xs font-black uppercase tracking-[0.3em] text-primary">Regional Protocol Node</CardTitle>
+              <CardTitle className="text-xs font-black uppercase tracking-[0.3em] text-primary">Node Status</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6 relative z-10">
+            <CardContent className="space-y-4 relative z-10">
                <div>
-                  <p className="text-3xl font-black tracking-tighter mb-1">ACCRA-GHS-01</p>
-                  <p className="text-[9px] font-bold uppercase tracking-widest opacity-60">Primary settlement liquidity pool active</p>
+                  <p className="text-2xl font-black tracking-tighter mb-1">ACCRA-GHS-01</p>
+                  <p className="text-[8px] font-bold uppercase tracking-widest opacity-60">Primary settlement liquidity active</p>
                </div>
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/5 p-4 border border-white/10">
-                    <p className="text-[8px] font-black uppercase tracking-widest opacity-40 mb-1">Total Locked</p>
-                    <p className="font-black text-xl text-milky">GH₵1.8M</p>
-                  </div>
-                  <div className="bg-white/5 p-4 border border-white/10">
-                    <p className="text-[8px] font-black uppercase tracking-widest opacity-40 mb-1">Authorization</p>
-                    <p className="font-black text-xl text-primary">Sovereign</p>
-                  </div>
-               </div>
-            </CardContent>
-         </Card>
-
-         <Card className="rounded-none border shadow-sm bg-white">
-            <CardHeader>
-              <CardTitle className="text-sm font-black uppercase tracking-widest">Recent Node Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-               <div className="space-y-4">
-                 {[1, 2, 3, 4].map((n) => (
-                   <div key={n} className="flex items-center justify-between border-b pb-3 last:border-0 last:pb-0">
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 bg-muted flex items-center justify-center">
-                           <Zap className="h-4 w-4 text-primary" />
-                        </div>
-                        <div>
-                           <p className="text-[10px] font-black text-secondary uppercase tracking-tight">Registry Update Node {n}</p>
-                           <p className="text-[8px] text-muted-foreground uppercase font-bold">Protocol sync success</p>
-                        </div>
-                      </div>
-                      <Badge variant="outline" className="rounded-none text-[7px] font-black px-2 uppercase border-primary/20 text-primary bg-primary/5">SYNCED</Badge>
-                   </div>
-                 ))}
+               <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-[8px] font-black uppercase tracking-widest">Authorized Session Active</span>
                </div>
             </CardContent>
          </Card>
