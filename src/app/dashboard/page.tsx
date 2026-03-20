@@ -435,8 +435,11 @@ export default function Dashboard() {
           </Card>
 
           <div className="p-8 bg-muted/50 rounded-none border-2 border-border border-dashed relative group">
-            <div className="flex gap-4">
-              <ShieldCheck className="h-10 w-10 text-primary shrink-0" />
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+              <ShieldCheck className="h-20 w-20 text-secondary" />
+            </div>
+            <div className="flex gap-4 relative z-10">
+              <ShieldAlert className="h-10 w-10 text-secondary shrink-0" />
               <div>
                 <h5 className="font-bold text-secondary text-lg mb-2 tracking-tight">Active Audit Node</h5>
                 <p className="text-sm text-muted-foreground leading-relaxed">

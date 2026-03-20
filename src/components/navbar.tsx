@@ -15,6 +15,17 @@ import { useAuth, useCart } from '@/components/providers';
 import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 
+const TICKER_ITEMS = [
+  "LIVE VAULT ACTIVITY: GH₵4,200.00 SECURED IN ACCRA",
+  "SETTLEMENT VERIFIED: YAW MENSAH @ MELCOM DIGITAL",
+  "PROTOCOL UPDATE: MULTISIG ESCROW V1.2 ENGAGED",
+  "HIGH DEMAND: 18 USERS VIEWING SAMSUNG 65\" QLED",
+  "SOVEREIGN GUARANTEE: 100% GHS PROTECTION ACTIVE",
+  "NEW VENDOR JOINED: PRIME RENTALS GH",
+  "TREASURY SYNC: 99.4% SUCCESSFUL SETTLEMENT RATE",
+  "LIVE AUDIT: 24 ACTIVE VAULTS IN EAST LEGON"
+];
+
 export function Navbar() {
   const { user, logout } = useAuth();
   const { items } = useCart();
@@ -24,6 +35,18 @@ export function Navbar() {
     <header className="w-full flex flex-col sticky top-0 z-50">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
+      {/* Busy Activity Ticker */}
+      <div className="bg-primary text-secondary overflow-hidden py-1.5 border-b border-secondary/10">
+        <div className="animate-marquee whitespace-nowrap flex gap-12 items-center">
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+            <span key={i} className="text-[9px] font-black uppercase tracking-[0.2em] flex items-center gap-3">
+              <span className="h-1.5 w-1.5 bg-secondary animate-pulse" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Utility Bar */}
       <div className="bg-secondary text-white py-2 hidden sm:block border-b border-primary/10">
         <div className="container mx-auto px-4 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em]">
