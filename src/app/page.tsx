@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -197,7 +196,7 @@ export default function HomePage() {
             priority
           />
         </div>
-        <div className="absolute inset-0 bg-secondary/85 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-secondary/80 backdrop-blur-[2px]" />
         
         <div className="container mx-auto px-4 relative z-10 text-center space-y-8 md:space-y-12">
           <div className="flex justify-center mb-4">
@@ -212,10 +211,10 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-            <Button size="lg" className="bg-primary text-secondary hover:bg-white rounded-none px-12 h-16 font-black shadow-2xl transition-all text-base uppercase tracking-widest">
+            <Button size="lg" className="bg-primary text-secondary hover:bg-white hover:text-secondary rounded-none px-12 h-16 font-black shadow-2xl transition-all text-base uppercase tracking-widest border-2 border-primary">
               Register My Vault <ChevronRight className="h-6 w-6 ml-2" />
             </Button>
-            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/5 rounded-none px-12 h-16 font-black transition-all text-base uppercase tracking-widest">
+            <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-secondary rounded-none px-12 h-16 font-black transition-all text-base uppercase tracking-widest shadow-xl">
               Security Protocol Manual
             </Button>
           </div>

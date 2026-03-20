@@ -71,7 +71,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Jun 2020',
     color: 'bg-secondary',
     icon: 'H',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     description: 'Premium furniture and interior decor with secure delivery across Ghana.'
   }
