@@ -226,6 +226,7 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
+      {/* Header Nodes */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-10 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
            <Zap className="h-4 w-4 text-primary animate-pulse" />
@@ -351,7 +352,6 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Analytics Node */}
       <Card className="mb-12 rounded-none border shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>

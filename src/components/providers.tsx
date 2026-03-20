@@ -1,7 +1,9 @@
+
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, MOCK_USERS, Listing } from '@/lib/mock-data';
+import { INITIAL_CONTENT } from '@/lib/initial-content';
 
 // --- Theme Context ---
 export type PrimaryTheme = 'sovereign' | 'deep' | 'royal' | 'midnight' | 'cobalt' | 'cold-white' | 'crimson';
@@ -39,6 +41,72 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) throw new Error("useTheme must be used within ThemeProvider");
+  return context;
+};
+
+// --- Content CMS Context ---
+interface ContentContextType {
+  content: typeof INITIAL_CONTENT;
+  updatePage: (slug: string, section: string, data: any) => void;
+  updateSettings: (data: Partial<typeof INITIAL_CONTENT.settings>) => void;
+  resetToDefault: () => void;
+}
+
+const ContentContext = createContext<ContentContextType | undefined>(undefined);
+
+export function ContentProvider({ children }: { children: React.ReactNode }) {
+  const [content, setContent] = useState(INITIAL_CONTENT);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('vault_content');
+    if (stored) {
+      try {
+        setContent(JSON.parse(stored));
+      } catch (e) {
+        console.error("Failed to load content registry", e);
+      }
+    }
+  }, []);
+
+  const saveContent = (newContent: typeof INITIAL_CONTENT) => {
+    setContent(newContent);
+    localStorage.setItem('vault_content', JSON.stringify(newContent));
+  };
+
+  const updatePage = (slug: string, section: string, data: any) => {
+    const newContent = { ...content };
+    if (newContent.pages[slug as keyof typeof content.pages]) {
+      const page = newContent.pages[slug as keyof typeof content.pages];
+      (page.sections as any)[section] = {
+        ...(page.sections as any)[section],
+        ...data
+      };
+      saveContent(newContent);
+    }
+  };
+
+  const updateSettings = (data: Partial<typeof INITIAL_CONTENT.settings>) => {
+    const newContent = {
+      ...content,
+      settings: { ...content.settings, ...data }
+    };
+    saveContent(newContent);
+  };
+
+  const resetToDefault = () => {
+    saveContent(INITIAL_CONTENT);
+  };
+
+  return (
+    <ContentContext.Provider value={{ content, updatePage, updateSettings, resetToDefault }}>
+      {children}
+    </ContentContext.Provider>
+  );
+}
+
+export const useContent = () => {
+  const context = useContext(ContentContext);
+  if (!context) throw new Error("useContent must be used within ContentProvider");
   return context;
 };
 
@@ -183,13 +251,15 @@ export const useCart = () => {
 export function AuthProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <CurrencyProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
-        </CurrencyProvider>
-      </AuthProvider>
+      <ContentProvider>
+        <AuthProvider>
+          <CurrencyProvider>
+            <CartProvider>
+              {children}
+            </CartProvider>
+          </CurrencyProvider>
+        </AuthProvider>
+      </ContentProvider>
     </ThemeProvider>
   );
 }
