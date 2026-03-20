@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { AuthProvider, CartProvider, CurrencyProvider } from '@/components/providers';
 import { CartSheet } from '@/components/cart-sheet';
 import { LiveActivityFeed } from '@/components/live-activity-feed';
+import { WhatsAppButton } from '@/components/whatsapp-button';
 
 export const metadata: Metadata = {
   title: 'VaultCommerce | The Gold Standard',
@@ -66,6 +67,7 @@ export default function RootLayout({
                 {children}
               </main>
               
+              <WhatsAppButton />
               <CartSheet />
               <LiveActivityFeed />
 
