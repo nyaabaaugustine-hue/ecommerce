@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ShieldCheck, ShoppingBag, User, Zap, X, Megaphone } from 'lucide-react';
+import { ShieldCheck, ShoppingBag, User, Zap, X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const ACTIVITIES = [
   { 
@@ -44,6 +45,7 @@ const ACTIVITIES = [
 ];
 
 export function LiveActivityFeed() {
+  const pathname = usePathname();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [hasDismissedAd, setHasDismissedAd] = useState(false);
@@ -58,11 +60,13 @@ export function LiveActivityFeed() {
 
     // Initial delay then repeat every 10 seconds
     const initialDelay = setTimeout(() => {
-      setIsVisible(true);
+      if (!pathname?.startsWith('/dashboard')) {
+        setIsVisible(true);
+      }
     }, 2000);
 
     const interval = setInterval(() => {
-      if (!hasDismissedAd) {
+      if (!hasDismissedAd && !pathname?.startsWith('/dashboard')) {
         setIsVisible(true);
         setCurrentIndex((prev) => (prev + 1) % ACTIVITIES.length);
       }
@@ -72,7 +76,7 @@ export function LiveActivityFeed() {
       clearTimeout(initialDelay);
       clearInterval(interval);
     };
-  }, [hasDismissedAd]);
+  }, [hasDismissedAd, pathname]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -82,7 +86,8 @@ export function LiveActivityFeed() {
 
   const activity = ACTIVITIES[currentIndex];
 
-  if (hasDismissedAd) return null;
+  // Hide the feed if dismissed, on a dashboard page, or manually hidden
+  if (hasDismissedAd || pathname?.startsWith('/dashboard')) return null;
 
   return (
     <div className="fixed bottom-8 left-8 z-[60] w-full max-w-[340px] pointer-events-none">
@@ -116,7 +121,7 @@ export function LiveActivityFeed() {
             <div className="space-y-1 flex-1 pr-4">
               <div className="flex items-center gap-2 mb-1">
                 <Badge className="bg-primary text-secondary text-[7px] font-black uppercase tracking-widest px-1.5 h-3.5 rounded-none border-none">
-                  AD ALERT
+                  REGISTRY SYNC
                 </Badge>
                 <span className="text-[8px] text-white/40 font-bold uppercase">{activity.time}</span>
               </div>
