@@ -130,11 +130,13 @@ export default function HomePage() {
   ];
 
   const partners = [
-    { name: 'Melcom', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg' },
-    { name: 'Paystack', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773997887/vbb_kuy4qi.png' },
-    { name: 'MTN MoMo', logo: 'https://picsum.photos/seed/mtn/100/100' },
-    { name: 'Standard Chartered', logo: 'https://picsum.photos/seed/stanchart/100/100' },
-    { name: 'Ecobank', logo: 'https://picsum.photos/seed/ecobank/100/100' },
+    { name: 'Partner 1', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003514/thh_ayplwg.png' },
+    { name: 'Partner 2', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/jjtj_yw3wpz.jpg' },
+    { name: 'Partner 3', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/wghwegg_zaqfyj.jpg' },
+    { name: 'Partner 4', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/tn_wcqrvc.png' },
+    { name: 'Partner 5', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/wrfwf_onzwgf.png' },
+    { name: 'Partner 6', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/erherh_gk3hxz.jpg' },
+    { name: 'Partner 7', logo: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774003513/hrh_rucdbr.png' },
   ];
 
   return (
@@ -459,18 +461,22 @@ export default function HomePage() {
            <span className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2 block">Institutional Integration</span>
            <h2 className="text-2xl font-black text-secondary tracking-tighter">GLOBAL PARTNER REGISTRY</h2>
         </div>
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-           {partners.map((partner) => (
-             <div key={partner.name} className="relative h-12 w-32 md:h-16 md:w-48 overflow-hidden flex items-center justify-center">
-                <Image 
-                  src={partner.logo} 
-                  alt={partner.name} 
-                  fill 
-                  className="object-contain"
-                  unoptimized
-                />
-             </div>
-           ))}
+        <div className="relative overflow-hidden w-full h-24">
+          <div className="animate-marquee-reverse gap-20 py-4 flex items-center [animation-duration:40s]">
+            {[...partners, ...partners, ...partners].map((partner, i) => (
+              <div key={`${partner.name}-${i}`} className="relative h-12 w-48 overflow-hidden flex items-center justify-center shrink-0 grayscale hover:grayscale-0 transition-all duration-700 opacity-50 hover:opacity-100">
+                  <Image 
+                    src={partner.logo} 
+                    alt={partner.name} 
+                    fill 
+                    className="object-contain"
+                    unoptimized
+                  />
+              </div>
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-background to-transparent z-10" />
         </div>
       </section>
 
