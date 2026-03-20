@@ -90,18 +90,19 @@ export function Navbar() {
             </span>
           </div>
           <div className="flex items-center gap-8">
-             {/* Theme Switcher */}
+             {/* Theme Switcher - 5 Options */}
              <div className="flex items-center gap-2 border-r border-white/10 pr-6">
                <Palette className="h-3.5 w-3.5 text-accent" />
                <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
-                 <SelectTrigger className="h-6 w-32 bg-transparent border-none text-[9px] font-black uppercase p-0 focus:ring-0">
-                    <SelectValue placeholder="Theme" />
+                 <SelectTrigger className="h-6 w-40 bg-transparent border-none text-[9px] font-black uppercase p-0 focus:ring-0">
+                    <SelectValue placeholder="Institutional Theme" />
                  </SelectTrigger>
                  <SelectContent className="rounded-none bg-secondary text-white border-accent/20">
                     <SelectItem value="sovereign">Sovereign Navy</SelectItem>
-                    <SelectItem value="deep">Deep Blue</SelectItem>
-                    <SelectItem value="royal">Royal Blue</SelectItem>
-                    <SelectItem value="cobalt">Cobalt Blue</SelectItem>
+                    <SelectItem value="deep">Deep Atlantic</SelectItem>
+                    <SelectItem value="royal">Royal Azure</SelectItem>
+                    <SelectItem value="midnight">Midnight Vault</SelectItem>
+                    <SelectItem value="cobalt">Steel Cobalt</SelectItem>
                  </SelectContent>
                </Select>
              </div>

@@ -24,14 +24,15 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 178 89% 49%;
     --radius: 0px;
-    --burgundy: 345 75% 35%; /* #8B0000 High-Contrast Burgundy */
+    --burgundy: 0 100% 27%; /* #8B0000 High-Contrast Burgundy */
   }
 
-  /* Theme Variations */
+  /* Theme Variations - High Contrast Blues */
   [data-theme="sovereign"] { --primary: 222 47% 11%; }
-  [data-theme="deep"] { --primary: 210 75% 35%; }
-  [data-theme="royal"] { --primary: 225 60% 45%; }
-  [data-theme="cobalt"] { --primary: 215 80% 30%; }
+  [data-theme="deep"] { --primary: 215 80% 20%; }
+  [data-theme="royal"] { --primary: 210 90% 40%; }
+  [data-theme="midnight"] { --primary: 225 60% 5%; }
+  [data-theme="cobalt"] { --primary: 210 40% 30%; }
 }
 
 @layer base {
@@ -44,7 +45,7 @@
 }
 
 .text-burgundy {
-  color: hsl(var(--burgundy));
+  color: hsl(var(--burgundy)) !important;
 }
 
 /* Custom Product Card Image Radius */

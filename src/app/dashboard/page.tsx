@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -342,7 +341,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                       <div className="text-right flex flex-col items-end gap-2">
-                        <div className="text-2xl font-black text-secondary tracking-tighter">GH₵{tx.amount.toLocaleString()}</div>
+                        <div className="text-2xl font-black text-burgundy tracking-tighter">GH₵{tx.amount.toLocaleString()}</div>
                         <Badge className="bg-secondary text-white font-black uppercase text-[8px] tracking-widest px-3 py-1 rounded-none">
                           {tx.status}
                         </Badge>
@@ -384,7 +383,7 @@ export default function Dashboard() {
                                 Fidelity Audit Protocol
                               </DialogTitle>
                               <DialogDescription className="text-center text-[10px] font-bold uppercase tracking-widest mt-2">
-                                Verify asset quality to disburse GH₵{tx.amount.toLocaleString()} from treasury.
+                                Verify asset quality to disburse <span className="text-burgundy">GH₵{tx.amount.toLocaleString()}</span> from treasury.
                               </DialogDescription>
                             </DialogHeader>
                             <div className="space-y-3 py-8">
@@ -459,7 +458,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Manage Accounts</Button>
-                </Card>
+                </div>
                 <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="p-3 bg-secondary rounded-none">
