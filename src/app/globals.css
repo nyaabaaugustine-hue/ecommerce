@@ -32,8 +32,18 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground font-body antialiased;
   }
+}
+
+.bg-mesh-gradient {
+  background: radial-gradient(at 0% 0%, hsla(199, 89%, 48%, 0.1) 0, transparent 50%),
+              radial-gradient(at 50% 0%, hsla(262, 83%, 58%, 0.08) 0, transparent 50%),
+              radial-gradient(at 100% 0%, hsla(345, 80%, 25%, 0.05) 0, transparent 50%);
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
 }
 
 .vault-lock-animation {
@@ -45,22 +55,10 @@
   50% { transform: scale(1.05); opacity: 0.8; }
 }
 
-.category-hover-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.bg-mesh-gradient {
-  background: radial-gradient(at 0% 0%, hsla(199, 89%, 48%, 0.15) 0, transparent 50%),
-              radial-gradient(at 50% 0%, hsla(262, 83%, 58%, 0.1) 0, transparent 50%),
-              radial-gradient(at 100% 0%, hsla(345, 80%, 25%, 0.05) 0, transparent 50%);
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 2s infinite;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
