@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -41,27 +42,6 @@ const HERO_SLIDES = [
   }
 ];
 
-const REVIEWS = [
-  {
-    id: 1,
-    name: "Yaw Mensah",
-    location: "East Legon",
-    comment: "The vault system gave me peace of mind for my MacBook purchase. Highly professional.",
-    rating: 5,
-    date: "2 days ago",
-    avatar: "https://picsum.photos/seed/yaw/40/40"
-  },
-  {
-    id: 2,
-    name: "Ama Serwaa",
-    location: "Kumasi",
-    comment: "Fast delivery and the item was exactly as described. Melcom is a great partner.",
-    rating: 5,
-    date: "1 week ago",
-    avatar: "https://picsum.photos/seed/ama/40/40"
-  }
-];
-
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
@@ -78,13 +58,6 @@ export default function HomePage() {
 
     return () => clearInterval(timer);
   }, []);
-
-  const handleAddReview = () => {
-    toast({
-      title: "Registry Open",
-      description: "Review submission is restricted to verified buyers. Please login.",
-    });
-  };
 
   return (
     <div className="flex flex-col gap-12 md:gap-24 bg-subtle-pattern min-h-screen">
@@ -181,7 +154,7 @@ export default function HomePage() {
         <div className="relative">
           <div className="animate-marquee-reverse gap-8 py-4 [animation-duration:120s]">
             {[...VENDORS, ...VENDORS].map((vendor, idx) => (
-              <div key={`${vendor.id}-${idx}`} className="w-[400px] md:w-[600px] shrink-0">
+              <div key={`${vendor.id}-${idx}`} className="w-[400px] md:w-[600px] shrink-0 px-4">
                 <Card className="border shadow-2xl hover:border-primary transition-all duration-500 h-[300px] md:h-[400px] bg-secondary group rounded-none relative overflow-hidden">
                   <Image src={vendor.bgUrl} alt={vendor.name} fill className="object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent p-10 flex flex-col justify-end">
@@ -213,10 +186,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section - FULL WIDTH */}
-      <section className="w-full bg-secondary py-24 md:py-32 relative overflow-hidden border-y border-primary/20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary via-secondary/95 to-secondary" />
+      {/* CTA Section - FULL WIDTH CLOUD IMAGE */}
+      <section className="w-full py-24 md:py-32 relative overflow-hidden border-y border-primary/20">
+        <div className="absolute inset-0">
+          <Image 
+            src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
+            alt="Sovereign Background" 
+            fill 
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-secondary/85 backdrop-blur-[2px]" />
         
         <div className="container mx-auto px-4 relative z-10 text-center space-y-8 md:space-y-12">
           <div className="flex justify-center mb-4">
