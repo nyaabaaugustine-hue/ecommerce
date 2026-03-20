@@ -20,7 +20,8 @@ import {
   ShieldAlert,
   ArrowRight,
   Timer,
-  ShoppingCart
+  ShoppingCart,
+  Key
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { LISTINGS } from '@/lib/mock-data';
@@ -52,7 +53,7 @@ export default function ListingDetails() {
     setIsLocking(true);
     const steps = [
       "Connecting to Paystack Secure Layer...",
-      "Encrypting Transaction Payload...",
+      "Syncing with High Admin Protocol...",
       "Authorizing GHS Vault Deposit...",
       "Locking Funds in Escrow..."
     ];
@@ -139,7 +140,7 @@ export default function ListingDetails() {
                 The Vault Protocol
               </h3>
               <p className="text-muted-foreground leading-relaxed font-medium">
-                This transaction is protected by the **VaultCommerce Escrow System**. Once you deposit funds, they are restricted in our secure Paystack vault. The vendor has 48 hours to initiate delivery. If they fail, your GH₵ is automatically returned to your wallet. Funds are only released to the vendor when YOU confirm satisfaction.
+                This transaction is protected by the **VaultCommerce Escrow System**. Once you deposit funds, they are restricted in our secure Paystack vault via a **High Admin Protocol Lock**. The vendor has 48 hours to initiate delivery. If they fail, your GH₵ is automatically returned to your wallet.
               </p>
             </div>
 
@@ -148,9 +149,9 @@ export default function ListingDetails() {
                <div className="flex gap-6 relative z-10">
                 <ShieldCheck className="h-12 w-12 text-primary shrink-0" />
                 <div>
-                  <h4 className="font-black text-xl mb-1 tracking-tight">Paystack-GHS Security Layer</h4>
+                  <h4 className="font-black text-xl mb-1 tracking-tight">Institutional Authorization</h4>
                   <p className="text-sm text-white/70 leading-relaxed font-medium">
-                    VaultCommerce acts as the neutral mediator. We hold the keys to the vault. Your money never touches the vendor's hands until the job is done right.
+                    VaultCommerce acts as the neutral mediator. Every lock is cryptographically verified by our High Admin node. Your money is secured at the highest level of Ghanaian retail banking standards.
                   </p>
                 </div>
               </div>
@@ -222,7 +223,7 @@ export default function ListingDetails() {
               <div className="bg-muted/50 p-4 rounded-none flex items-start gap-3 border border-dashed border-primary/20">
                 <Timer className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <p className="text-[10px] text-muted-foreground leading-tight font-black uppercase">
-                  SLA Active: 48h Auto-Refund triggers if delivery is not initiated.
+                  SLA Active: 48h Auto-Refund triggers if delivery is not initiated by the vendor.
                 </p>
               </div>
             </CardContent>
@@ -246,7 +247,7 @@ export default function ListingDetails() {
               <DialogTitle className="text-2xl font-black text-white tracking-tighter">Vault Lockdown Initiated</DialogTitle>
               <div className="space-y-2">
                 <p className="text-primary/80 text-[10px] font-black uppercase tracking-widest animate-pulse">
-                  {["Connecting to Paystack...", "Encrypting GHS Payload...", "Syncing Treasury...", "Securing Vault..."][lockStep]}
+                  {["Connecting to Paystack...", "Syncing High Admin Protocol...", "Syncing Treasury...", "Securing Vault..."][lockStep]}
                 </p>
                 <Progress value={(lockStep + 1) * 25} className="h-2 bg-white/10" />
               </div>
@@ -260,12 +261,12 @@ export default function ListingDetails() {
         <DialogContent className="sm:max-w-md rounded-none p-10">
           <div className="text-center space-y-6">
             <div className="h-20 w-20 bg-primary/10 rounded-none flex items-center justify-center mx-auto">
-              <CheckCircle2 className="h-10 w-10 text-primary" />
+              <Key className="h-10 w-10 text-primary" />
             </div>
             <div className="space-y-2">
-              <DialogTitle className="text-2xl font-black text-secondary tracking-tight">Funds Secured!</DialogTitle>
+              <DialogTitle className="text-2xl font-black text-secondary tracking-tight">Protocol Lock Success!</DialogTitle>
               <DialogDescription className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
-                GH₵{(listing.price * 1.02).toLocaleString()} locked in Vault Treasury.
+                GH₵{(listing.price * 1.02).toLocaleString()} restricted via High Admin Node.
               </DialogDescription>
             </div>
             

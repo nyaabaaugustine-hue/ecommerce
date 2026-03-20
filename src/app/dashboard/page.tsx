@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -33,12 +33,14 @@ import {
   TrendingUp,
   Cpu,
   ArrowUpRight,
-  Banknote
+  Banknote,
+  Key
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
 import { Role, VENDORS, MOCK_USERS } from '@/lib/mock-data';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/components/providers';
 import {
   Dialog,
   DialogContent,
@@ -57,7 +59,9 @@ import {
 export default function Dashboard() {
   const { toast } = useToast();
   const router = useRouter();
-  const [currentRole, setCurrentRole] = useState<Role>('CUSTOMER');
+  const { user, login, logout } = useAuth();
+  const currentRole = user?.role || 'CUSTOMER';
+  
   const [isVerifying, setIsVerifying] = useState(false);
   const [selectedTxId, setSelectedTxId] = useState<string | null>(null);
   const [checklist, setChecklist] = useState({
@@ -119,38 +123,39 @@ export default function Dashboard() {
 
     toast({
       title: "Multisig release successful!",
-      description: `GHS Funds for ${selectedTxId} have been disbursed to the vendor.`,
+      description: `GHS Funds for ${selectedTxId} have been disbursed to the vendor via High Admin oversight.`,
     });
   };
 
   const handleLogout = () => {
     toast({ title: "Session Terminated", description: "Returning to marketplace." });
+    logout();
     router.push('/');
   };
 
   const stats = {
     HIGH_ADMIN: [
       { label: 'Ecosystem GMV', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross Settlement Volume' },
-      { label: 'Active Disputes', val: '2', icon: AlertCircle, color: 'text-destructive', sub: 'Priority Mediation Required' },
-      { label: 'Verified Nodes', val: '124', icon: Users, color: 'text-secondary', sub: 'Audited Institutional Partners' },
+      { label: 'Pending Locks', val: '5', icon: Key, color: 'text-primary', sub: 'Awaiting Protocol Authorization' },
+      { label: 'Verified Nodes', val: '124', icon: Users, color: 'text-primary', sub: 'Audited Institutional Partners' },
       { label: 'Treasury Vault', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Total Escrow Liquidity' },
     ],
     VENDOR_ADMIN: [
       { label: 'Total Revenue', val: 'GH₵186,750', icon: TrendingUp, color: 'text-primary', sub: 'Settled to date' },
-      { label: 'Active Escrows', val: '12', icon: Shield, color: 'text-secondary', sub: 'Capital in restriction' },
-      { label: 'Trust Rating', val: '4.9/5', icon: CheckCircle, color: 'text-accent', sub: 'Fidelity Score' },
-      { label: 'Net Payout Ready', val: 'GH₵42,100', icon: Wallet, color: 'text-accent', sub: 'Available for settlement' },
+      { label: 'Active Escrows', val: '12', icon: Shield, color: 'text-primary', sub: 'Capital in restriction' },
+      { label: 'Trust Rating', val: '4.9/5', icon: CheckCircle, color: 'text-primary', sub: 'Fidelity Score' },
+      { label: 'Net Payout Ready', val: 'GH₵42,100', icon: Wallet, color: 'text-primary', sub: 'Available for settlement' },
     ],
     VENDOR_STAFF: [
       { label: 'Assigned Tasks', val: '14', icon: ClipboardCheck, color: 'text-primary', sub: 'Pending Processing' },
-      { label: 'In Transit', val: '22', icon: Truck, color: 'text-secondary', sub: 'Active Deliveries' },
+      { label: 'In Transit', val: '22', icon: Truck, color: 'text-primary', sub: 'Active Deliveries' },
       { label: 'Registry Alerts', val: '4', icon: MessageSquare, color: 'text-primary', sub: 'Protocol Queries' },
-      { label: 'Success Rate', val: '98%', icon: CheckCircle, color: 'text-accent', sub: 'SLA Compliance' },
+      { label: 'Success Rate', val: '98%', icon: CheckCircle, color: 'text-primary', sub: 'SLA Compliance' },
     ],
     CUSTOMER: [
       { label: 'Secured GHS', val: 'GH₵8,500', icon: Lock, color: 'text-primary', sub: 'Restricted in Vault' },
-      { label: 'Market Volume', val: 'GH₵124,735', icon: CreditCard, color: 'text-secondary', sub: 'Lifetime Expenditure' },
-      { label: 'Fidelity Points', val: '1,240', icon: Cpu, color: 'text-accent', sub: 'Audit Rewards' },
+      { label: 'Market Volume', val: 'GH₵124,735', icon: CreditCard, color: 'text-primary', sub: 'Lifetime Expenditure' },
+      { label: 'Fidelity Points', val: '1,240', icon: Cpu, color: 'text-primary', sub: 'Audit Rewards' },
       { label: 'Active Vaults', val: '2', icon: Clock, color: 'text-primary', sub: 'Awaiting Satisfaction' },
     ]
   };
@@ -176,16 +181,23 @@ export default function Dashboard() {
                  Demo User Registry
                </h3>
                <div className="space-y-3">
-                 {MOCK_USERS.map(user => (
-                   <div key={user.id} className="p-3 bg-muted/50 rounded-none border border-muted hover:border-primary/20 transition-all cursor-pointer" onClick={() => setCurrentRole(user.role)}>
-                     <p className="text-[8px] font-bold uppercase text-primary tracking-widest">{user.role.replace('_', ' ')}</p>
-                     <p className="font-bold text-xs text-secondary">{user.email}</p>
+                 {MOCK_USERS.map(userItem => (
+                   <div 
+                    key={userItem.id} 
+                    className={`p-3 rounded-none border transition-all cursor-pointer ${currentRole === userItem.role ? 'bg-primary/10 border-primary' : 'bg-muted/50 border-muted hover:border-primary/20'}`} 
+                    onClick={() => {
+                      login(userItem.email);
+                      toast({ title: "Role Authenticated", description: `Acting as ${userItem.role}` });
+                    }}
+                  >
+                     <p className="text-[8px] font-bold uppercase text-primary tracking-widest">{userItem.role.replace('_', ' ')}</p>
+                     <p className="font-bold text-xs text-secondary">{userItem.email}</p>
                    </div>
                  ))}
                </div>
                <div className="mt-6 pt-6 border-t border-dashed">
                   <p className="text-[10px] font-bold text-muted-foreground uppercase leading-relaxed">
-                    Start as **Customer** to confirm a vault release, then switch to **Vendor Admin** to see the GHS settle in their payout wallet.
+                    Logic: Only **High Admin** can lock global funds (automated for demo). Switch to **Customer** to initiate, then **High Admin** to audit.
                   </p>
                </div>
              </PopoverContent>
@@ -199,7 +211,8 @@ export default function Dashboard() {
               size="sm" 
               variant={currentRole === role ? 'default' : 'outline'}
               onClick={() => {
-                setCurrentRole(role);
+                const targetUser = MOCK_USERS.find(u => u.role === role);
+                if (targetUser) login(targetUser.email);
                 toast({ title: `Role Synced: ${role}`, description: "Optimizing viewport for role-specific protocols." });
               }}
               className={`rounded-none text-[9px] h-8 font-bold uppercase tracking-widest ${currentRole === role ? 'bg-secondary text-white' : ''}`}
@@ -222,7 +235,7 @@ export default function Dashboard() {
           </div>
           <p className="text-muted-foreground font-medium">
             {currentRole === 'HIGH_ADMIN' 
-              ? 'Institutional oversight of GHS liquidity and multisig protocol integrity.' 
+              ? 'Institutional oversight of GHS liquidity and multisig protocol integrity. Authorization of global locks.' 
               : `Managing your restricted assets and fidelity-driven settlements.`}
           </p>
         </div>
@@ -231,6 +244,12 @@ export default function Dashboard() {
              <Button className="bg-primary hover:bg-primary/90 rounded-none px-8 font-black h-12 text-secondary gap-2">
               <Banknote className="h-5 w-5" />
               Settle GHS to Bank
+            </Button>
+          )}
+          {currentRole === 'HIGH_ADMIN' && (
+            <Button className="bg-primary text-secondary rounded-none px-8 font-black h-12 gap-2 shadow-lg">
+              <Key className="h-5 w-5" />
+              Authorize Pending Locks
             </Button>
           )}
           <Button variant="outline" className="rounded-none h-12 px-6 font-bold hover:bg-primary/5">
@@ -357,7 +376,7 @@ export default function Dashboard() {
                             </DialogHeader>
                             <div className="space-y-4 py-6">
                               {[
-                                { id: 'condition', label: 'Item satisfies physical physical audit', checked: checklist.condition },
+                                { id: 'condition', label: 'Item satisfies physical audit', checked: checklist.condition },
                                 { id: 'matches', label: 'Serial number authenticity verified', checked: checklist.matches },
                                 { id: 'functionality', label: 'Core functions fully operational', checked: checklist.functionality },
                               ].map((item) => (
@@ -406,7 +425,7 @@ export default function Dashboard() {
                    </div>
                    <div className="space-y-2">
                     <h3 className="text-2xl font-bold text-secondary tracking-tight">Institutional Archive</h3>
-                    <p className="text-muted-foreground max-w-sm mx-auto text-sm">Secure record of all vault-protected trade settlements. Cryptographically signed.</p>
+                    <p className="text-muted-foreground max-w-sm mx-auto text-sm">Secure record of all vault-protected trade settlements. Cryptographically signed by High Admin node.</p>
                    </div>
                    <Button variant="outline" className="rounded-none px-8 h-12 font-bold uppercase tracking-widest text-[10px]">Generate Archive Certificate</Button>
                  </CardContent>
@@ -449,7 +468,7 @@ export default function Dashboard() {
               
               <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-14 text-sm gap-2">
                 <ArrowUpRight className="h-4 w-4" />
-                Liquidity Management
+                {currentRole === 'HIGH_ADMIN' ? 'Manage Global Treasury' : 'Liquidity Management'}
               </Button>
             </CardContent>
           </Card>
@@ -463,7 +482,7 @@ export default function Dashboard() {
               <div>
                 <h5 className="font-bold text-secondary text-lg mb-2 tracking-tight">Active Audit Node</h5>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every trade is restricted via the **Sovereign Vault Protocol**. Capital release is contingent on institutional satisfaction audits.
+                  Every trade is restricted via the **Sovereign Vault Protocol**. Only **High Admin** can authorize global treasury locks for capital release.
                 </p>
                 <Button variant="link" className="p-0 h-auto text-[10px] font-black text-primary uppercase tracking-widest mt-4">Security Manual v1.2</Button>
               </div>
@@ -480,6 +499,7 @@ export default function Dashboard() {
             <CardContent className="p-6 pt-0 space-y-4">
                {[
                  { msg: 'Vault Release GH₵8,450', role: 'CUSTOMER', time: '2m' },
+                 { msg: 'Protocol Lock Authorized', role: 'HIGH_ADMIN', time: '5m' },
                  { msg: 'Fulfillment Assigned', role: 'VENDOR_ADMIN', time: '14m' },
                  { msg: 'Registry Sync Success', role: 'SYSTEM', time: '1h' },
                ].map((log, i) => (
