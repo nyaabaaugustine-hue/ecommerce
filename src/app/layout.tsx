@@ -23,7 +23,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased bg-[#f8f8f8] min-h-screen flex flex-col text-[#333]">
+      <body className="font-body antialiased bg-[#f8f8f8] min-h-screen flex flex-col text-[#333]" suppressHydrationWarning>
         <Navbar />
         <main className="flex-1">
           {children}
@@ -34,7 +34,7 @@ export default function RootLayout({
           <div className="bg-primary text-white p-3 rounded-xl shadow-2xl flex flex-col items-center cursor-pointer hover:scale-105 transition-transform group">
              <ShoppingBag className="h-6 w-6" />
              <span className="text-[10px] font-black mt-1">0 Items</span>
-             <span className="text-[10px] font-bold bg-white text-primary px-2 rounded-full mt-1 group-hover:bg-secondary group-hover:text-primary transition-colors">$0.00</span>
+             <span className="text-[10px] font-bold bg-white text-primary px-2 rounded-full mt-1 group-hover:bg-secondary group-hover:text-primary transition-colors">GH₵0.00</span>
           </div>
           <Button variant="outline" size="icon" className="rounded-full bg-white shadow-lg border-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
             <ChevronUp className="h-5 w-5" />
@@ -90,7 +90,7 @@ export default function RootLayout({
               </div>
             </div>
             
-            <div className="pt-8 border-t border-white/10 text-center text-white/40 text-xs">
+            <div className="pt-8 border-t border-white/10 text-center text-white/40 text-xs" suppressHydrationWarning>
               © {new Date().getFullYear()} VaultCommerce. All rights reserved by VaultSoft.
             </div>
           </div>
