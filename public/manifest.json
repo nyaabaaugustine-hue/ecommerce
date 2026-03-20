@@ -1,10 +1,10 @@
 {
-  "name": "VaultCommerce | The Gold Standard",
+  "name": "VaultCommerce",
   "short_name": "Vault",
-  "description": "Secure cross-category trade in Ghana powered by multisig escrow protocols.",
+  "description": "The Gold Standard for secure trade in Ghana.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a1a2f",
+  "background_color": "#ffffff",
   "theme_color": "#0a1a2f",
   "icons": [
     {
