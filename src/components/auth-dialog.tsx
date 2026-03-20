@@ -6,13 +6,17 @@ import { MOCK_USERS } from '@/lib/mock-data';
 import { useAuth } from '@/components/providers';
 import { ShieldCheck, User as UserIcon, Store, Shield, Key } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useRouter } from 'next/navigation';
 
 export function AuthDialog({ open, onOpenChange }: { open: boolean, onOpenChange: (open: boolean) => void }) {
   const { login } = useAuth();
+  const router = useRouter();
 
   const handleLogin = (email: string) => {
     login(email);
     onOpenChange(false);
+    // Institutional Redirect: Immediately route the authorized node to their dashboard
+    router.push('/dashboard');
   };
 
   return (
@@ -31,10 +35,9 @@ export function AuthDialog({ open, onOpenChange }: { open: boolean, onOpenChange
         </DialogHeader>
         <div className="grid gap-3 py-6">
           {MOCK_USERS.map((user) => (
-            <Button
+            <button
               key={user.id}
-              variant="outline"
-              className="h-auto flex flex-col items-stretch p-4 gap-3 hover:border-primary transition-all text-left bg-muted/20 border-border/50 group rounded-none"
+              className="flex flex-col items-stretch p-4 gap-3 hover:border-primary transition-all text-left bg-muted/20 border border-border/50 group rounded-none outline-none focus:ring-2 focus:ring-primary/20"
               onClick={() => handleLogin(user.email)}
             >
               <div className="flex items-center gap-4">
@@ -56,7 +59,7 @@ export function AuthDialog({ open, onOpenChange }: { open: boolean, onOpenChange
                  </div>
                  <Badge className="bg-primary/10 text-primary border-none text-[7px] font-black px-2 py-0.5 rounded-none uppercase">Authorized Node</Badge>
               </div>
-            </Button>
+            </button>
           ))}
         </div>
         <div className="bg-muted p-4 border border-dashed text-center">
