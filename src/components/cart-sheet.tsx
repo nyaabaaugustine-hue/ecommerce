@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -21,7 +22,7 @@ export function CartSheet() {
         <div className="fixed right-10 bottom-10 z-40 flex flex-col gap-5">
           <div className="bg-secondary text-white p-5 rounded-none shadow-xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all group border border-primary/20">
              <ShoppingBag className="h-8 w-8 text-primary" />
-             <span className="text-[10px] font-black mt-2 tracking-widest uppercase">Vault: {items.length}</span>
+             <span className="text-[10px] font-black mt-2 tracking-widest uppercase">Cart: {items.length}</span>
              <span className="text-[10px] font-black bg-primary text-secondary px-3 py-0.5 rounded-none mt-2 transition-colors">GH₵{total.toLocaleString()}</span>
           </div>
         </div>
@@ -30,7 +31,7 @@ export function CartSheet() {
         <SheetHeader>
           <SheetTitle className="text-2xl font-black text-secondary flex items-center gap-2">
             <ShoppingBag className="h-6 w-6 text-primary" />
-            Your Secure Vault
+            Your Secure Cart
           </SheetTitle>
         </SheetHeader>
 
@@ -40,7 +41,7 @@ export function CartSheet() {
               <div className="bg-muted p-8 rounded-none">
                 <ShoppingBag className="h-12 w-12 text-muted-foreground" />
               </div>
-              <p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">The vault is empty</p>
+              <p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">Your cart is empty</p>
             </div>
           ) : (
             items.map((item) => (
@@ -74,21 +75,21 @@ export function CartSheet() {
                 <span>GH₵{total.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center text-xl font-black text-secondary">
-                <span>Total Secure Hold</span>
+                <span>Total Amount</span>
                 <span className="text-primary">GH₵{total.toLocaleString()}</span>
               </div>
             </div>
             <div className="bg-primary/5 p-4 rounded-none border border-primary/20 flex gap-3">
               <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
               <p className="text-[10px] text-secondary/70 font-bold uppercase tracking-tight leading-tight">
-                Funds will be restricted via Vault Escrow Protocol v1.2 upon checkout.
+                Funds will be protected via Secure Escrow during checkout.
               </p>
             </div>
             <Button 
               className="w-full h-14 bg-secondary text-white font-black rounded-none text-lg hover:bg-secondary/90 transition-all shadow-xl"
               onClick={() => {
                 setOpen(false);
-                router.push('/listings'); // In real app, go to checkout
+                router.push('/listings');
               }}
             >
               Secure Checkout <ArrowRight className="h-5 w-5 ml-2" />

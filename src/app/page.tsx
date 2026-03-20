@@ -26,19 +26,19 @@ const HERO_SLIDES = [
     image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg",
     badge: "Verified Escrow Protocol",
     title: <>ACCRA'S <span className="text-primary">GOLD</span> <br /> STANDARD</>,
-    desc: "The ultimate high-trust retail aggregator. Secure your GHS in our sovereign vault and shop with total institutional confidence."
+    desc: "The ultimate high-trust retail aggregator. Secure your funds in our escrow system and shop with total confidence."
   },
   {
     image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png",
-    badge: "Elite Inventory Layer",
-    title: <>PREMIUM <span className="text-primary">VAULT</span> <br /> ELECTRONICS</>,
-    desc: "Access authentic gadgets from verified Ghanaian partners. Every trade is restricted via the Vault Treasury until confirmed."
+    badge: "Premium Electronics",
+    title: <>PREMIUM <span className="text-primary">SECURE</span> <br /> ELECTRONICS</>,
+    desc: "Access authentic gadgets from verified Ghanaian partners. Every purchase is protected via our treasury until confirmed."
   },
   {
     image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg",
-    badge: "Sovereign Asset Registry",
+    badge: "Premium Assets",
     title: <>HERITAGE <span className="text-primary">HOME</span> <br /> LIVING</>,
-    desc: "Curating elite furniture with institutional-grade protection. Secure your lifestyle assets with VaultCommerce Escrow."
+    desc: "Curating elite furniture with high-grade protection. Secure your lifestyle assets with SecureCommerce Escrow."
   }
 ];
 
@@ -70,7 +70,7 @@ export default function HomePage() {
             )}>
               <Image 
                 src={HERO_SLIDES[currentSlide].image} 
-                alt="Vault Hero" 
+                alt="Hero" 
                 fill 
                 className="object-cover"
                 priority
@@ -94,7 +94,7 @@ export default function HomePage() {
                 <div className="flex gap-4">
                   <Link href="/listings" className="w-full sm:w-auto">
                     <Button size="lg" className="w-full rounded-none px-8 bg-primary text-secondary hover:bg-white transition-all font-black h-12 md:h-14 text-xs uppercase tracking-widest">
-                      Explore the Vault <ArrowRight className="ml-2 h-5 w-5" />
+                      Shop Now <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
                 </div>
@@ -104,16 +104,16 @@ export default function HomePage() {
           
           <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
             <Link href="/listings" className="relative h-full rounded-none overflow-hidden shadow-lg group block border border-border image-reveal min-h-[190px]">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover" />
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Sale" fill className="object-cover" />
               <div className="absolute inset-0 bg-primary/90 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all">
-                <Badge className="bg-secondary text-primary w-fit mb-2 font-black px-3 rounded-none text-[10px] tracking-widest">50% LEGACY REBATE</Badge>
+                <Badge className="bg-secondary text-primary w-fit mb-2 font-black px-3 rounded-none text-[10px] tracking-widest">50% DISCOUNT</Badge>
                 <h3 className="text-secondary font-black text-lg uppercase tracking-tight">Akwaaba Sale</h3>
               </div>
             </Link>
             <Link href="/listings" className="relative h-full rounded-none overflow-hidden shadow-lg group block border border-border image-reveal min-h-[190px]">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover" />
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Market deals" fill className="object-cover" />
               <div className="absolute inset-0 bg-secondary/90 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all">
-                <Badge className="bg-primary text-secondary w-fit mb-2 font-black px-3 rounded-none text-[10px] tracking-widest">SOVEREIGN TRUST</Badge>
+                <Badge className="bg-primary text-secondary w-fit mb-2 font-black px-3 rounded-none text-[10px] tracking-widest">TRUSTED DEALS</Badge>
                 <h3 className="text-white font-black text-lg uppercase tracking-tight">Makola Select</h3>
               </div>
             </Link>
@@ -121,20 +121,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Registry Section - 12 INNOVATIVE PRODUCTS */}
+      {/* Featured Products Section */}
       <section className="container mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b pb-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2 mb-1">
                <Activity className="h-4 w-4 text-primary" />
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Live Institutional Feed</span>
+               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Live Activity Feed</span>
             </div>
-            <h2 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">FEATURED REGISTRY</h2>
-            <p className="text-muted-foreground font-medium max-w-lg text-[10px] md:text-xs uppercase tracking-widest">Sovereign inventory restricted via Vault Escrow Protocols.</p>
+            <h2 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">FEATURED PRODUCTS</h2>
+            <p className="text-muted-foreground font-medium max-w-lg text-[10px] md:text-xs uppercase tracking-widest">Premium items protected via Secure Escrow Protocols.</p>
           </div>
           <Link href="/listings">
             <Button variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white h-11 md:h-12 px-8 font-black rounded-none transition-all gap-2 text-[10px] uppercase tracking-[0.2em]">
-              Global Inventory <ChevronRight className="h-4 w-4" />
+              All Products <ChevronRight className="h-4 w-4" />
             </Button>
           </Link>
         </div>
@@ -146,12 +146,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Vendor Marquee - Slow Scrolling Cards */}
+      {/* Vendor Marquee */}
       <section className="bg-white py-12 md:py-16 overflow-hidden border-y">
         <div className="container mx-auto px-4 mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-1 block">Elite Partner Network</span>
-            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase">THE VENDOR REGISTRY</h2>
+            <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-1 block">Our Trusted Partners</span>
+            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase">OUR VENDORS</h2>
           </div>
           <Link href="/listings/create">
             <Button variant="outline" className="border-2 border-primary text-secondary hover:bg-primary font-black rounded-none px-8 h-12 uppercase text-[10px] tracking-[0.2em] gap-2">
@@ -199,7 +199,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <Image 
             src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
-            alt="Sovereign Background" 
+            alt="Background" 
             fill 
             className="object-cover"
             priority
@@ -213,18 +213,18 @@ export default function HomePage() {
           </div>
           <div className="space-y-4">
             <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
-              SECURE YOUR <br /><span className="text-primary underline decoration-primary/30 underline-offset-[12px]">NEXT TRADE</span>
+              SECURE YOUR <br /><span className="text-primary underline decoration-primary/30 underline-offset-[12px]">NEXT PURCHASE</span>
             </h2>
             <p className="text-white/50 font-black uppercase tracking-[0.4em] text-[10px] md:text-xs max-w-2xl mx-auto">
-              Vault Escrow Protocols Active in the GHS Sovereignty.
+              Escrow Protection Active for all GHS Transactions.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button size="lg" className="bg-primary text-secondary hover:bg-white hover:text-secondary rounded-none px-12 h-14 md:h-16 font-black shadow-2xl transition-all text-sm uppercase tracking-widest border-2 border-primary">
-              Register My Vault <ChevronRight className="h-5 w-5 ml-2" />
+              Register Account <ChevronRight className="h-5 w-5 ml-2" />
             </Button>
             <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-secondary rounded-none px-12 h-14 md:h-16 font-black transition-all text-sm uppercase tracking-widest shadow-xl">
-              Security Protocol Manual
+              Learn How It Works
             </Button>
           </div>
         </div>

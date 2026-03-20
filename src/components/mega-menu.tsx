@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -34,28 +35,28 @@ const SECTORS = [
     title: "Electronics & Tech",
     icon: Cpu,
     items: [
-      { name: "Computing & Laptops", href: "/listings?category=Computing %26 Laptops", icon: Monitor },
-      { name: "Mobile Ecosystem", href: "/listings?category=Mobile Ecosystem", icon: Smartphone },
-      { name: "Sovereign Audio/Visual", href: "/listings?category=Sovereign Audio/Visual", icon: Tv },
-      { name: "Institutional Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator },
+      { name: "Laptops & Computers", href: "/listings?category=Computing %26 Laptops", icon: Monitor },
+      { name: "Phones & Tablets", href: "/listings?category=Mobile Ecosystem", icon: Smartphone },
+      { name: "Audio & Video", href: "/listings?category=Sovereign Audio/Visual", icon: Tv },
+      { name: "Home Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator },
     ]
   },
   {
-    title: "Real Estate & Assets",
+    title: "Property & Real Estate",
     icon: Home,
     items: [
-      { name: "Commercial Rentals", href: "/listings?category=Commercial Rentals", icon: Building2 },
-      { name: "Residential Sales", href: "/listings?category=Residential Sales", icon: Key },
+      { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2 },
+      { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key },
       { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase },
     ]
   },
   {
-    title: "Lifestyle & Living",
+    title: "Lifestyle & Home",
     icon: ShoppingBag,
     items: [
-      { name: "Heritage Furniture", href: "/listings?category=Heritage Furniture", icon: Armchair },
-      { name: "Supermarket Registry", href: "/listings?category=Supermarket Registry", icon: Utensils },
-      { name: "Beauty & Personal", href: "/listings?category=Beauty %26 Personal", icon: Sparkles },
+      { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair },
+      { name: "Groceries & Kitchen", href: "/listings?category=Supermarket Registry", icon: Utensils },
+      { name: "Beauty & Health", href: "/listings?category=Beauty %26 Personal", icon: Sparkles },
     ]
   }
 ];
@@ -65,13 +66,13 @@ export function MegaMenu() {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="ghost" className="h-full px-6 flex flex-col items-center rounded-none hover:bg-primary/5 group transition-all">
-          <span className="text-[9px] uppercase tracking-[0.2em] opacity-50 font-black group-hover:text-primary transition-colors">Global Inventory</span>
-          <span className="font-black text-secondary group-hover:text-primary transition-colors">Browse Registry</span>
+          <span className="text-[9px] uppercase tracking-[0.2em] opacity-50 font-black group-hover:text-primary transition-colors">All Categories</span>
+          <span className="font-black text-secondary group-hover:text-primary transition-colors">Shop Categories</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[100vw] max-w-7xl mx-auto p-0 border-x-0 border-t-4 border-t-primary shadow-2xl rounded-none bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-4">
-          {/* Main Sectors */}
+          {/* Main Categories */}
           {SECTORS.map((sector, idx) => (
             <div key={idx} className="p-10 border-r last:border-r-0">
               <div className="flex items-center gap-3 mb-8">
@@ -97,13 +98,13 @@ export function MegaMenu() {
             </div>
           ))}
 
-          {/* Institutional Spotlight */}
+          {/* Featured Spotlight */}
           <div className="bg-secondary p-10 text-white flex flex-col justify-between">
             <div>
-              <Badge className="bg-primary text-secondary font-black rounded-none mb-4 uppercase text-[9px] tracking-widest">Sovereign Spotlight</Badge>
-              <h3 className="text-2xl font-black tracking-tighter mb-4 leading-tight">THE ELITE <br /> VENDOR REGISTRY</h3>
+              <Badge className="bg-primary text-secondary font-black rounded-none mb-4 uppercase text-[9px] tracking-widest">Featured Vendor</Badge>
+              <h3 className="text-2xl font-black tracking-tighter mb-4 leading-tight">THE BEST <br /> SHOPPING DEALS</h3>
               <p className="text-white/50 text-xs font-medium leading-relaxed mb-8">
-                Access authentic inventory from verified Ghanaian institutional nodes.
+                Shop from verified partners with 100% security guarantee.
               </p>
               
               <div className="space-y-4">
@@ -113,7 +114,7 @@ export function MegaMenu() {
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest">Melcom Digital</p>
-                    <p className="text-[8px] text-white/40 uppercase">Verified Node v1.2</p>
+                    <p className="text-[8px] text-white/40 uppercase">Verified Partner</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-3 bg-white/5 border border-white/10 hover:border-primary/50 transition-all cursor-pointer">
@@ -122,7 +123,7 @@ export function MegaMenu() {
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest">PrimeRentals GH</p>
-                    <p className="text-[8px] text-white/40 uppercase">Asset Registry Verified</p>
+                    <p className="text-[8px] text-white/40 uppercase">Trusted Agency</p>
                   </div>
                 </div>
               </div>
@@ -130,26 +131,26 @@ export function MegaMenu() {
 
             <Link href="/listings" className="mt-8">
               <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 uppercase text-[10px] tracking-widest gap-2">
-                View Global SLA <ArrowRight className="h-4 w-4" />
+                Browse All <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
         </div>
 
-        {/* Bottom Ticker/Trust Bar */}
+        {/* Bottom Trust Bar */}
         <div className="bg-muted py-4 px-10 flex justify-between items-center border-t">
           <div className="flex gap-10">
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 bg-primary rounded-none" />
-              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-widest">99.4% Settlement Rate</span>
+              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-widest">99.4% Delivery Rate</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 bg-primary rounded-none" />
-              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-widest">GHS Sovereign Vault Active</span>
+              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-widest">Escrow Protection Active</span>
             </div>
           </div>
           <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
-            Vault Protocol v1.2.4 Licensed Registry
+            Verified Marketplace
           </p>
         </div>
       </PopoverContent>

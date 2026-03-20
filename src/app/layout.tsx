@@ -9,8 +9,8 @@ import { CartSheet } from '@/components/cart-sheet';
 import { LiveActivityFeed } from '@/components/live-activity-feed';
 
 export const metadata: Metadata = {
-  title: 'VaultCommerce | Sovereign GHS Marketplace',
-  description: 'The institution-grade cross-category marketplace aggregator with high-trust escrow protocols.',
+  title: 'SecureCommerce | GHS Marketplace',
+  description: 'The trusted cross-category marketplace aggregator with secure escrow protection.',
   icons: {
     icon: [
       {
@@ -60,47 +60,45 @@ export default function RootLayout({
                         <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/30">
                           <Image 
                             src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-                            alt="VaultCommerce" 
+                            alt="SecureCommerce" 
                             fill 
                             className="object-cover"
                           />
                         </div>
-                        <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
+                        <span className="tracking-tighter">Secure<span className="text-primary">Commerce</span></span>
                      </div>
                      <p className="text-white/50 text-xs md:text-sm leading-relaxed max-w-xs">
-                       The Gold Standard for secure cross-category trade in Ghana. Institutionally powered by multisig escrow protocols.
+                       The trusted standard for secure commerce in Ghana. Powered by reliable escrow systems.
                      </p>
                      <div className="space-y-2">
-                        <p className="text-[9px] font-black uppercase tracking-widest">Protocol Support</p>
+                        <p className="text-[9px] font-black uppercase tracking-widest">Customer Support</p>
                         <p className="text-lg font-black text-primary">+233 24 000 0000</p>
                      </div>
                   </div>
                   
                   <div>
-                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Marketplace Registry</h4>
+                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Marketplace</h4>
                     <ul className="space-y-3 md:space-y-4 text-white/50 text-[9px] md:text-xs font-bold uppercase tracking-widest">
-                      <li className="hover:text-primary transition-colors cursor-pointer">Global Inventory</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Elite Favorites</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Treasury Settlement</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Sovereign SLA</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Vendor Registry</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">All Categories</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Best Sellers</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">New Arrivals</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Vendor List</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Fidelity Security</h4>
+                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Security</h4>
                     <ul className="space-y-3 md:space-y-4 text-white/50 text-[9px] md:text-xs font-bold uppercase tracking-widest">
-                      <li className="hover:text-primary transition-colors cursor-pointer">Vault Protocols</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Institutional Layer</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Mediation Node</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Identity Registry</li>
-                      <li className="hover:text-primary transition-colors cursor-pointer">Anti-Fraud Engine</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Escrow Protection</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Buyer Guarantee</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
+                      <li className="hover:text-primary transition-colors cursor-pointer">Terms of Service</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Mobile Registry</h4>
-                    <p className="text-white/50 text-[10px] md:text-xs mb-4 md:mb-6 font-medium">Manage your registry assets on the go. Available for sovereign users.</p>
+                    <h4 className="font-black text-base md:text-lg mb-4 md:mb-6 tracking-tighter">Mobile App</h4>
+                    <p className="text-white/50 text-[10px] md:text-xs mb-4 md:mb-6 font-medium">Shop on the go with our mobile app. Available for iOS and Android.</p>
                     <div className="flex flex-col gap-3">
                       <Image src="https://placehold.co/200x60/0a1a2f/ffffff?text=App+Store" alt="App Store" width={160} height={48} className="rounded-xl cursor-pointer hover:brightness-125 transition-all shadow-2xl" unoptimized />
                       <Image src="https://placehold.co/200x60/0a1a2f/ffffff?text=Google+Play" alt="Google Play" width={160} height={48} className="rounded-xl cursor-pointer hover:brightness-125 transition-all shadow-2xl" unoptimized />
@@ -109,7 +107,7 @@ export default function RootLayout({
                 </div>
                 
                 <div className="pt-8 border-t border-white/5 text-center text-white/30 text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em]" suppressHydrationWarning>
-                  © 2026 VaultCommerce. All rights reserved by <a href="https://cybergh.netlify.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">Cyber</a>.
+                  © 2026 SecureCommerce. All rights reserved.
                 </div>
               </div>
             </footer>

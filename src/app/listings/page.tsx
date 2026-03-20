@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, Suspense } from 'react';
@@ -25,15 +26,15 @@ function ListingsContent() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
         <div>
           <h1 className="text-4xl font-headline font-bold text-secondary tracking-tighter mb-2">
-            {categoryParam ? categoryParam : 'The Global Registry'}
+            {categoryParam ? categoryParam : 'All Products'}
           </h1>
-          <p className="text-muted-foreground font-medium">Secure interactions across every business vertical.</p>
+          <p className="text-muted-foreground font-medium">Safe and secure shopping across every category.</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-96">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input 
-              placeholder="Search products, services, properties..." 
+              placeholder="Search products, services..." 
               className="pl-12 rounded-none h-12 border-primary/20 focus:border-primary"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -41,7 +42,7 @@ function ListingsContent() {
           </div>
           <Button variant="outline" className="rounded-none h-12 px-6 gap-2 border-primary/20 font-bold uppercase text-[10px] tracking-widest">
             <SlidersHorizontal className="h-4 w-4" />
-            Registry Filters
+            Filters
           </Button>
         </div>
       </div>
@@ -54,7 +55,7 @@ function ListingsContent() {
       
       {filteredListings.length === 0 && (
         <div className="py-24 text-center border-2 border-dashed border-muted">
-          <p className="text-xl text-muted-foreground font-bold uppercase tracking-widest">No listings found in this registry sector.</p>
+          <p className="text-xl text-muted-foreground font-bold uppercase tracking-widest">No products found.</p>
           <Button 
             variant="link" 
             onClick={() => window.history.pushState({}, '', '/listings')} 
@@ -67,7 +68,7 @@ function ListingsContent() {
 
       <div className="mt-20 text-center">
         <Button variant="outline" size="lg" className="rounded-none px-16 border-primary/20 hover:border-primary h-14 font-black text-secondary text-[10px] uppercase tracking-[0.2em]">
-          Load More Registry Assets
+          Load More Products
         </Button>
       </div>
     </div>
@@ -76,7 +77,7 @@ function ListingsContent() {
 
 export default function ListingsPage() {
   return (
-    <Suspense fallback={<div className="container mx-auto px-4 py-24 text-center font-black uppercase tracking-widest">Synchronizing Registry...</div>}>
+    <Suspense fallback={<div className="container mx-auto px-4 py-24 text-center font-black uppercase tracking-widest">Loading Marketplace...</div>}>
       <ListingsContent />
     </Suspense>
   );

@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -19,14 +20,14 @@ import { MegaMenu } from '@/components/mega-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 const TICKER_ITEMS = [
-  "LIVE VAULT ACTIVITY: GH₵8,450.00 SECURED IN ACCRA",
-  "SETTLEMENT VERIFIED: YAW MENSAH @ MELCOM DIGITAL",
-  "PROTOCOL UPDATE: MULTISIG ESCROW V1.2 ENGAGED",
+  "LIVE ACTIVITY: GH₵8,450.00 SECURED IN ACCRA",
+  "PURCHASE VERIFIED: YAW MENSAH @ MELCOM DIGITAL",
+  "SECURITY UPDATE: ESCROW PROTECTION ACTIVE",
   "HIGH DEMAND: 24 USERS VIEWING SAMSUNG 65\" QLED",
-  "SOVEREIGN GUARANTEE: 100% GHS PROTECTION ACTIVE",
+  "BUYER GUARANTEE: 100% PROTECTION ACTIVE",
   "NEW VENDOR JOINED: PRIME RENTALS GH",
-  "TREASURY SYNC: 99.4% SUCCESSFUL SETTLEMENT RATE",
-  "LIVE AUDIT: 12 ACTIVE VAULTS IN EAST LEGON"
+  "TRANSACTION UPDATE: 99.4% SUCCESS RATE",
+  "LIVE UPDATES: 12 NEW ORDERS IN EAST LEGON"
 ];
 
 export function Navbar() {
@@ -38,7 +39,7 @@ export function Navbar() {
     <header className="w-full flex flex-col sticky top-0 z-50">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      {/* High-Velocity Activity Ticker */}
+      {/* Activity Ticker */}
       <div className="bg-primary text-secondary overflow-hidden py-1.5 border-b border-secondary/10">
         <div className="animate-marquee whitespace-nowrap flex gap-12 items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
@@ -55,7 +56,7 @@ export function Navbar() {
         <div className="container mx-auto px-4 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em]">
           <div className="flex items-center gap-10">
             <span className="flex items-center gap-2 hover:text-primary cursor-pointer transition-colors opacity-80">
-              Institutional Partnership
+              Partner with Us
             </span>
             <span className="flex items-center gap-2 hover:text-primary cursor-pointer transition-colors opacity-80">
               <Phone className="h-3 w-3" /> Support: +233 24 000 0000
@@ -82,15 +83,15 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent side="left" className="w-[280px] md:w-[300px] rounded-none p-0">
                 <SheetHeader className="p-6 border-b text-left">
-                  <SheetTitle className="text-xl font-black text-secondary uppercase tracking-tight">Registry Menu</SheetTitle>
+                  <SheetTitle className="text-xl font-black text-secondary uppercase tracking-tight">Menu</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col py-4">
-                  <Link href="/listings" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Global Registry</Link>
+                  <Link href="/listings" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Shop All</Link>
                   <Link href="/dashboard" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Dashboard</Link>
-                  <Link href="/listings/create" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Sell on Vault</Link>
+                  <Link href="/listings/create" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Sell Online</Link>
                   <div className="p-6 space-y-4">
                     {!user ? (
-                      <Button onClick={() => setShowAuth(true)} className="w-full bg-secondary text-white font-black rounded-none h-12 text-xs uppercase">Vault Entry</Button>
+                      <Button onClick={() => setShowAuth(true)} className="w-full bg-secondary text-white font-black rounded-none h-12 text-xs uppercase">Login</Button>
                     ) : (
                       <Button onClick={logout} variant="outline" className="w-full border-destructive text-destructive font-black rounded-none h-12 text-xs uppercase">Sign Out</Button>
                     )}
@@ -103,19 +104,19 @@ export function Navbar() {
               <div className="relative h-7 w-7 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
                 <Image 
                   src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-                  alt="VaultCommerce Logo" 
+                  alt="SecureCommerce Logo" 
                   fill 
                   className="object-cover"
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
-                <span className="text-[6px] md:text-[8px] font-black text-secondary/40 tracking-[0.2em] md:tracking-[0.3em] uppercase mt-0.5 md:mt-1">Sovereign Escrow</span>
+                <span className="tracking-tighter">Secure<span className="text-primary">Commerce</span></span>
+                <span className="text-[6px] md:text-[8px] font-black text-secondary/40 tracking-[0.2em] md:tracking-[0.3em] uppercase mt-0.5 md:mt-1">Escrow Protected</span>
               </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation Elements */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center h-full gap-2">
             <MegaMenu />
             <Separator orientation="vertical" className="h-8 mx-2" />
@@ -125,7 +126,7 @@ export function Navbar() {
             <div className="relative w-full flex">
               <input 
                 type="text" 
-                placeholder="Search the Global Vault Registry..." 
+                placeholder="Search products, services, properties..." 
                 className="w-full border border-border rounded-none py-2.5 md:py-3 pl-6 pr-4 text-[11px] md:text-sm font-medium focus:border-primary focus:outline-none transition-all bg-muted/20"
               />
               <Button className="rounded-none h-auto px-6 md:px-8 bg-secondary hover:bg-primary hover:text-secondary transition-all">
@@ -141,13 +142,13 @@ export function Navbar() {
                 onClick={() => setShowAuth(true)}
                 className="hidden lg:flex flex-col items-center h-auto py-2 px-6 rounded-none border-primary/20 text-secondary font-black hover:bg-primary/5"
               >
-                <span className="text-[9px] uppercase tracking-widest opacity-50">Identity Registry</span>
-                <span>Vault Entry</span>
+                <span className="text-[9px] uppercase tracking-widest opacity-50">Account</span>
+                <span>Secure Login</span>
               </Button>
             ) : (
               <div className="hidden lg:flex items-center gap-4">
                 <div className="flex flex-col text-right">
-                  <span className="text-[9px] text-primary uppercase font-black tracking-widest">Logged in as</span>
+                  <span className="text-[9px] text-primary uppercase font-black tracking-widest">Welcome</span>
                   <Link href="/dashboard" className="text-sm font-black text-secondary hover:text-primary transition-colors">{user.name}</Link>
                 </div>
                 <Button variant="ghost" size="icon" onClick={logout} className="rounded-none hover:text-destructive">

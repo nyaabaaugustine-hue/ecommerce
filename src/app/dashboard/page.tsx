@@ -75,7 +75,7 @@ export default function Dashboard() {
   
   const [activeTransactions, setActiveTransactions] = useState([
     {
-      id: 'TX-GH-8821',
+      id: 'ORDER-8821',
       item: 'MacBook Pro M3 Max',
       role: 'Seller',
       amount: 8450,
@@ -88,7 +88,7 @@ export default function Dashboard() {
       timer: '32h 15m'
     },
     {
-      id: 'TX-GH-8815',
+      id: 'ORDER-8815',
       item: 'Samsung 65" QLED TV',
       role: 'Buyer',
       amount: 8500,
@@ -111,7 +111,7 @@ export default function Dashboard() {
       toast({
         variant: "destructive",
         title: "Audit Incomplete",
-        description: "All fidelity points must be certified to trigger the multisig release.",
+        description: "All checks must be certified to release funds.",
       });
       return;
     }
@@ -125,15 +125,15 @@ export default function Dashboard() {
     setChecklist({ condition: false, matches: false, functionality: false });
 
     toast({
-      title: "Multisig release successful!",
-      description: `GHS Funds for ${selectedTxId} have been disbursed via High Admin oversight.`,
+      title: "Funds released successfully!",
+      description: `GHS Funds for ${selectedTxId} have been disbursed to the vendor.`,
     });
   };
 
   const handleAuthorizeLocks = () => {
     toast({
-      title: "Global Treasury Lock Authorized",
-      description: "Institutional funds for pending trades have been secured via Sovereign Multisig Node.",
+      title: "Escrow Locks Authorized",
+      description: "Transaction funds have been secured via the platform protocol.",
     });
   };
 
@@ -145,57 +145,57 @@ export default function Dashboard() {
 
   const stats = {
     HIGH_ADMIN: [
-      { label: 'Ecosystem GMV', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross Settlement Volume' },
-      { label: 'Pending Locks', val: '5', icon: Key, color: 'text-primary', sub: 'Awaiting Protocol Authorization' },
-      { label: 'Verified Nodes', val: '124', icon: Users, color: 'text-primary', sub: 'Audited Institutional Partners' },
-      { label: 'Treasury Vault', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Total Escrow Liquidity' },
+      { label: 'Platform GMV', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross Sales Volume' },
+      { label: 'Pending Payouts', val: '5', icon: Key, color: 'text-primary', sub: 'Awaiting Authorization' },
+      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-primary', sub: 'Trusted Institutional Vendors' },
+      { label: 'Escrow Balance', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Total Secure Liquidity' },
     ],
     VENDOR_ADMIN: [
       { label: 'Total Revenue', val: 'GH₵186,750', icon: TrendingUp, color: 'text-primary', sub: 'Settled to date' },
-      { label: 'Active Escrows', val: '12', icon: Shield, color: 'text-primary', sub: 'Capital in restriction' },
-      { label: 'Trust Rating', val: '4.9/5', icon: CheckCircle, color: 'text-primary', sub: 'Fidelity Score' },
-      { label: 'Net Payout Ready', val: 'GH₵42,100', icon: Wallet, color: 'text-primary', sub: 'Available for settlement' },
+      { label: 'Active Escrows', val: '12', icon: Shield, color: 'text-primary', sub: 'Funds pending release' },
+      { label: 'Trust Rating', val: '4.9/5', icon: CheckCircle, color: 'text-primary', sub: 'Customer Score' },
+      { label: 'Ready for Payout', val: 'GH₵42,100', icon: Wallet, color: 'text-primary', sub: 'Available for settlement' },
     ],
     VENDOR_STAFF: [
-      { label: 'Assigned Tasks', val: '14', icon: ClipboardCheck, color: 'text-primary', sub: 'Pending Processing' },
+      { label: 'Active Orders', val: '14', icon: ClipboardCheck, color: 'text-primary', sub: 'Pending Processing' },
       { label: 'In Transit', val: '22', icon: Truck, color: 'text-primary', sub: 'Active Deliveries' },
-      { label: 'Registry Alerts', val: '4', icon: MessageSquare, color: 'text-primary', sub: 'Protocol Queries' },
-      { label: 'Success Rate', val: '98%', icon: CheckCircle, color: 'text-primary', sub: 'SLA Compliance' },
+      { label: 'Support Tickets', val: '4', icon: MessageSquare, color: 'text-primary', sub: 'Customer Queries' },
+      { label: 'On-Time Rate', val: '98%', icon: CheckCircle, color: 'text-primary', sub: 'SLA Compliance' },
     ],
     CUSTOMER: [
-      { label: 'Secured GHS', val: 'GH₵8,500', icon: Lock, color: 'text-primary', sub: 'Restricted in Vault' },
-      { label: 'Market Volume', val: 'GH₵124,735', icon: CreditCard, color: 'text-primary', sub: 'Lifetime Expenditure' },
-      { label: 'Fidelity Points', val: '1,240', icon: Cpu, color: 'text-primary', sub: 'Audit Rewards' },
-      { label: 'Active Vaults', val: '2', icon: Clock, color: 'text-primary', sub: 'Awaiting Satisfaction' },
+      { label: 'Secure Funds', val: 'GH₵8,500', icon: Lock, color: 'text-primary', sub: 'Pending in Escrow' },
+      { label: 'Total Spent', val: 'GH₵124,735', icon: CreditCard, color: 'text-primary', sub: 'Lifetime Expenditure' },
+      { label: 'Reward Points', val: '1,240', icon: Cpu, color: 'text-primary', sub: 'Loyalty Rewards' },
+      { label: 'Active Orders', val: '2', icon: Clock, color: 'text-primary', sub: 'Awaiting Fulfillment' },
     ]
   };
 
   const roleNarratives = {
-    HIGH_ADMIN: "You oversee the multisig integrity. Your primary duty is to authorize the 'Global Treasury Locks' that secure GHS liquidity during trades.",
-    VENDOR_ADMIN: "You monitor 'Capital in Restriction'. Funds only move to your 'Net Payout Ready' balance once the Customer certifies the Fidelity Audit.",
-    VENDOR_STAFF: "You manage the physical SLA. Your role is to fulfill tasks and move items through the registry to ensure timely customer satisfaction.",
-    CUSTOMER: "You are the final authority. Your GHS is held in the Sovereign Vault; you only release it once your 3-point Fidelity Audit is complete."
+    HIGH_ADMIN: "You manage the platform integrity. Your primary duty is to authorize payouts and secure transaction liquidity.",
+    VENDOR_ADMIN: "You monitor sales and revenue. Funds move to your 'Ready for Payout' balance once customers confirm delivery.",
+    VENDOR_STAFF: "You manage fulfillment and shipping. Your role is to process orders and ensure timely delivery.",
+    CUSTOMER: "You are the final authority. Your funds are held securely; you only release them once your delivery audit is complete."
   };
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
-      {/* Sovereign Role Switcher (Demo Registry) */}
+      {/* Demo Role Switcher */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-12 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
            <Activity className="h-5 w-5 text-primary" />
-           <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Demo Control Center</span>
+           <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Switch Roles (Demo)</span>
            
            <Popover>
              <PopoverTrigger asChild>
                <Button variant="outline" size="sm" className="rounded-none h-8 font-bold text-[10px] uppercase tracking-widest gap-2">
                  <Info className="h-3 w-3" />
-                 Role Registry
+                 User Roles
                </Button>
              </PopoverTrigger>
              <PopoverContent className="w-80 rounded-none p-6 shadow-xl border mt-2">
                <h3 className="font-bold text-secondary mb-4 flex items-center gap-2 text-sm">
                  <ShieldCheck className="h-4 w-4 text-primary" />
-                 Protocol Credentials
+                 Demo Accounts
                </h3>
                <div className="space-y-3">
                  {MOCK_USERS.map(userItem => (
@@ -204,7 +204,7 @@ export default function Dashboard() {
                     className={`p-3 rounded-none border transition-all cursor-pointer ${currentRole === userItem.role ? 'bg-primary/10 border-primary' : 'bg-muted/50 border-muted hover:border-primary/20'}`} 
                     onClick={() => {
                       login(userItem.email);
-                      toast({ title: "Identity Certified", description: `Acting as ${userItem.role}` });
+                      toast({ title: "Account Switched", description: `Logged in as ${userItem.role}` });
                     }}
                   >
                      <div className="flex justify-between items-start mb-1">
@@ -243,7 +243,7 @@ export default function Dashboard() {
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl md:text-4xl font-bold text-secondary tracking-tight">
-              {currentRole === 'HIGH_ADMIN' ? 'Sovereign Console' : 'Registry Dashboard'}
+              {currentRole === 'HIGH_ADMIN' ? 'Admin Console' : 'Account Dashboard'}
             </h1>
             <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-none">
               {currentRole.replace('_', ' ')}
@@ -260,7 +260,7 @@ export default function Dashboard() {
           {currentRole === 'VENDOR_ADMIN' && (
              <Button className="w-full lg:w-auto bg-primary hover:bg-primary/90 rounded-none px-6 font-black h-11 text-secondary gap-2 text-xs">
               <Banknote className="h-4 w-4" />
-              Settle GHS to Bank
+              Withdraw Funds
             </Button>
           )}
           {currentRole === 'HIGH_ADMIN' && (
@@ -269,21 +269,21 @@ export default function Dashboard() {
               className="w-full lg:w-auto bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-xs"
             >
               <Key className="h-4 w-4" />
-              Authorize Global Treasury Locks
+              Authorize Payouts
             </Button>
           )}
           <Button variant="outline" className="w-full lg:w-auto rounded-none h-11 px-6 font-bold hover:bg-primary/5 text-xs">
             <Settings className="h-4 w-4 mr-2" />
-            Registry Config
+            Settings
           </Button>
           <Button className="w-full lg:w-auto bg-secondary hover:bg-secondary/90 rounded-none px-6 font-bold h-11 text-white text-xs" onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
+            Logout
           </Button>
         </div>
       </div>
 
-      {/* Statistics Grid */}
+      {/* Statistics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
         {stats[currentRole].map((stat, i) => (
           <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-none">
@@ -292,7 +292,7 @@ export default function Dashboard() {
                 <div className="p-2 md:p-3 rounded-none bg-muted flex items-center justify-center">
                   <stat.icon className={`h-4 w-4 md:h-6 md:w-6 ${stat.color}`} />
                 </div>
-                <Badge variant="outline" className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest border-primary/20 rounded-none">Registry Audit</Badge>
+                <Badge variant="outline" className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest border-primary/20 rounded-none">Updated Live</Badge>
               </div>
               <p className="text-[9px] md:text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
               <p className="text-xl md:text-3xl font-bold text-secondary mb-2">{stat.val}</p>
@@ -310,9 +310,9 @@ export default function Dashboard() {
           <Tabs defaultValue="active" className="w-full">
             <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto flex">
               <TabsTrigger value="active" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">
-                {currentRole.includes('ADMIN') ? 'Escrow Pipeline' : 'My Active Vaults'}
+                {currentRole.includes('ADMIN') ? 'Order Queue' : 'Active Orders'}
               </TabsTrigger>
-              <TabsTrigger value="history" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">Audit Archive</TabsTrigger>
+              <TabsTrigger value="history" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">Order History</TabsTrigger>
             </TabsList>
 
             <TabsContent value="active" className="space-y-4 md:space-y-6 mt-6">
@@ -331,7 +331,7 @@ export default function Dashboard() {
                             <span className="text-[8px] md:text-[9px] text-muted-foreground font-bold uppercase tracking-widest">{tx.id}</span>
                             <div className="flex items-center gap-1 text-[8px] md:text-[9px] font-bold text-secondary uppercase tracking-widest">
                               <Lock className="h-2.5 w-2.5 text-primary" />
-                              Protocol v1.2
+                              Secure Checkout
                             </div>
                           </div>
                         </div>
@@ -346,7 +346,7 @@ export default function Dashboard() {
                     
                     <div className="space-y-2 mb-6">
                       <div className="flex justify-between text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                        <span>Fidelity Verification Progress</span>
+                        <span>Fulfillment Progress</span>
                         <span className="text-secondary">{tx.progress}% Verified</span>
                       </div>
                       <Progress value={tx.progress} className="h-1.5 md:h-2 rounded-none" />
@@ -362,7 +362,7 @@ export default function Dashboard() {
                             </Avatar>
                           ))}
                         </div>
-                        <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-muted-foreground">Multisig Nodes Active</span>
+                        <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-muted-foreground">Support Team Active</span>
                       </div>
                       
                       {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
@@ -372,7 +372,7 @@ export default function Dashboard() {
                         }}>
                           <DialogTrigger asChild>
                             <Button className="w-full sm:w-auto bg-secondary text-white hover:bg-secondary/90 font-bold rounded-none px-6 h-11 text-[10px] md:text-xs uppercase tracking-widest">
-                              Audit & Release Funds
+                              Confirm & Release Funds
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-md rounded-none p-6 md:p-8">
@@ -381,17 +381,17 @@ export default function Dashboard() {
                                 <ShieldAlert className="h-6 w-6 text-primary" />
                               </div>
                               <DialogTitle className="text-xl font-black text-secondary text-center">
-                                Fidelity Protocol Audit
+                                Order Delivery Confirmation
                               </DialogTitle>
                               <DialogDescription className="text-center text-xs font-medium">
-                                Certify item integrity to authorize the multisig release of GH₵{tx.amount.toLocaleString()} from the Sovereign Vault to the vendor.
+                                Certify item quality to release GH₵{tx.amount.toLocaleString()} from escrow to the vendor.
                               </DialogDescription>
                             </DialogHeader>
                             <div className="space-y-3 py-4 md:py-6">
                               {[
-                                { id: 'condition', label: 'Item satisfies physical audit', checked: checklist.condition },
-                                { id: 'matches', label: 'Serial number authenticity verified', checked: checklist.matches },
-                                { id: 'functionality', label: 'Core functions fully operational', checked: checklist.functionality },
+                                { id: 'condition', label: 'Item is in good condition', checked: checklist.condition },
+                                { id: 'matches', label: 'Item matches description', checked: checklist.matches },
+                                { id: 'functionality', label: 'All features working correctly', checked: checklist.functionality },
                               ].map((item) => (
                                 <div key={item.id} className="flex items-center space-x-3 p-3 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all">
                                   <Checkbox 
@@ -407,14 +407,14 @@ export default function Dashboard() {
                             </div>
                             <DialogFooter>
                               <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-12 text-sm uppercase">
-                                AUTHORIZE GHS RELEASE
+                                CONFIRM & RELEASE
                               </Button>
                             </DialogFooter>
                           </DialogContent>
                         </Dialog>
                       ) : (
                         <Button size="sm" variant="ghost" className="w-full sm:w-auto text-[9px] md:text-[10px] font-bold text-secondary hover:bg-primary/5 rounded-none uppercase tracking-widest h-10">
-                          Registry Timeline <ChevronRight className="h-4 w-4 ml-1" />
+                          Order Details <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                       )}
                     </div>
@@ -433,13 +433,13 @@ export default function Dashboard() {
             <CardHeader className="p-6 md:p-8">
               <CardTitle className="flex items-center gap-3 text-xl md:text-2xl font-bold tracking-tight text-white">
                 <Wallet className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                Vault Liquidity
+                Secure Balance
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6 md:p-8 pt-0 space-y-6 md:space-y-8">
               <div className="space-y-1">
                 <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/50">
-                  {currentRole.includes('ADMIN') ? 'Global Protocol Liquidity' : 'Restricted Vault Assets'}
+                  {currentRole.includes('ADMIN') ? 'Total Platform Liquidity' : 'Funds in Escrow'}
                 </span>
                 <div className="text-3xl md:text-5xl font-black tracking-tighter text-white">
                   {currentRole.includes('ADMIN') ? 'GH₵273.6K' : 'GH₵8,500'}
@@ -452,14 +452,14 @@ export default function Dashboard() {
                   <div className="font-bold text-base md:text-xl text-white">99.4%</div>
                 </div>
                 <div className="bg-white/5 p-3 rounded-none border border-white/10">
-                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">SLA Rating</span>
+                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Reliability</span>
                   <div className="font-bold text-base md:text-xl text-primary">A+</div>
                 </div>
               </div>
               
               <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 text-xs uppercase tracking-widest gap-2">
                 <ArrowUpRight className="h-4 w-4" />
-                {currentRole === 'HIGH_ADMIN' ? 'Manage Treasury' : 'Manage Liquidity'}
+                {currentRole === 'HIGH_ADMIN' ? 'Manage Treasury' : 'Withdraw Funds'}
               </Button>
             </CardContent>
           </Card>
@@ -468,14 +468,14 @@ export default function Dashboard() {
             <div className="flex gap-4 relative z-10">
               <ShieldAlert className="h-8 w-8 text-secondary shrink-0" />
               <div>
-                <h5 className="font-bold text-secondary text-sm md:text-base mb-2 tracking-tight uppercase">Protocol Oversight</h5>
+                <h5 className="font-bold text-secondary text-sm md:text-base mb-2 tracking-tight uppercase">Buyer Protection</h5>
                 <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed font-medium">
                   {currentRole === 'CUSTOMER' 
-                    ? "Every trade is secured by the Sovereign Vault. Your funds only move to the vendor once you certifiy delivery via the Fidelity Audit."
-                    : "The High Admin node provides oversight for all GHS settlements. Every transaction is cryptographically locked via the Sovereign Protocol."
+                    ? "Your funds are held securely in escrow. They only move to the vendor once you confirm delivery."
+                    : "Admin oversight ensures all GHS settlements are verified. Every transaction is protected via our security protocol."
                   }
                 </p>
-                <Button variant="link" className="p-0 h-auto text-[9px] font-black text-primary uppercase tracking-widest mt-4">Security Manual v1.2</Button>
+                <Button variant="link" className="p-0 h-auto text-[9px] font-black text-primary uppercase tracking-widest mt-4">Read Safety Guide</Button>
               </div>
             </div>
           </div>
@@ -484,4 +484,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
