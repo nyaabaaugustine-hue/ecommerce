@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -34,16 +35,20 @@ import {
   Users,
   BarChart3,
   PackageCheck,
-  ClipboardCheck
+  ClipboardCheck,
+  LogOut
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
 import { Role, VENDORS } from '@/lib/mock-data';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
   const { toast } = useToast();
+  const router = useRouter();
   const [currentRole, setCurrentRole] = useState<Role>('CUSTOMER');
   const [isVerifying, setIsVerifying] = useState(false);
+  const [selectedTxId, setSelectedTxId] = useState<string | null>(null);
   const [checklist, setChecklist] = useState({
     condition: false,
     authenticity: false,
@@ -78,7 +83,9 @@ export default function Dashboard() {
     }
   ]);
 
-  const handleVerificationComplete = (id: string) => {
+  const handleVerificationComplete = () => {
+    if (!selectedTxId) return;
+    
     const isComplete = Object.values(checklist).every(v => v);
     if (!isComplete) {
       toast({
@@ -90,14 +97,32 @@ export default function Dashboard() {
     }
 
     setActiveTransactions(prev => prev.map(tx => 
-      tx.id === id ? { ...tx, status: 'Completed', progress: 100, action: 'Funds Released' } : tx
+      tx.id === selectedTxId ? { ...tx, status: 'Completed', progress: 100, action: 'Funds Released' } : tx
     ));
     
     setIsVerifying(false);
+    setSelectedTxId(null);
+    setChecklist({ condition: false, authenticity: false, functionality: false, matches: false });
+
     toast({
       title: "Satisfaction Verified!",
-      description: `GHS Funds for ${id} have been authorized for release by Admin.`,
+      description: `GHS Funds for ${selectedTxId} have been authorized for release.`,
     });
+  };
+
+  const handleManualRelease = (id: string) => {
+    toast({
+      title: "Manual Release Initiated",
+      description: `Admin has authorized fund release for ${id} following protocol.`,
+    });
+    setActiveTransactions(prev => prev.map(tx => 
+      tx.id === id ? { ...tx, status: 'Completed', progress: 100, action: 'Settled' } : tx
+    ));
+  };
+
+  const handleLogout = () => {
+    toast({ title: "Signed Out", description: "Returning to marketplace." });
+    router.push('/');
   };
 
   const stats = {
@@ -124,19 +149,27 @@ export default function Dashboard() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       {/* Role Switcher for Demo */}
-      <div className="flex justify-end mb-6 gap-2">
-        <span className="text-xs font-bold text-muted-foreground mr-2 self-center">DEMO ROLE:</span>
-        {(['ADMIN', 'VENDOR', 'CUSTOMER'] as Role[]).map(role => (
-          <Button 
-            key={role} 
-            size="sm" 
-            variant={currentRole === role ? 'default' : 'outline'}
-            onClick={() => setCurrentRole(role)}
-            className="rounded-full text-[10px] h-7"
-          >
-            {role}
-          </Button>
-        ))}
+      <div className="flex justify-between items-center mb-8 bg-muted/30 p-4 rounded-2xl border">
+        <div className="flex items-center gap-2">
+           <Shield className="h-5 w-5 text-primary" />
+           <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Demo Command</span>
+        </div>
+        <div className="flex gap-2">
+          {(['ADMIN', 'VENDOR', 'CUSTOMER'] as Role[]).map(role => (
+            <Button 
+              key={role} 
+              size="sm" 
+              variant={currentRole === role ? 'default' : 'outline'}
+              onClick={() => {
+                setCurrentRole(role);
+                toast({ title: `Role Switched: ${role}`, description: "Interface updated for protocol testing." });
+              }}
+              className="rounded-full text-[10px] h-7"
+            >
+              {role}
+            </Button>
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 gap-6">
@@ -151,27 +184,28 @@ export default function Dashboard() {
           </div>
           <p className="text-muted-foreground">
             {currentRole === 'ADMIN' 
-              ? 'Managing GHS fund releases based on buyer satisfaction.' 
+              ? 'Managing GHS fund releases based on buyer satisfaction protocol.' 
               : 'Securely interact with your GHS trades and vault protection.'}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Button variant="outline" className="rounded-full shadow-sm">
+          <Button variant="outline" className="rounded-full shadow-sm hover:bg-muted" onClick={() => toast({ title: "Settings", description: "Security settings loaded." })}>
             <Settings className="h-4 w-4 mr-2" />
             Account Settings
           </Button>
-          <Button className="bg-primary hover:bg-primary/90 rounded-full shadow-lg px-8">
-            {currentRole === 'CUSTOMER' ? 'Track My Vaults' : 'Settlement Queue'}
+          <Button className="bg-primary hover:bg-primary/90 rounded-full shadow-lg px-8" onClick={handleLogout}>
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign Out
           </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {stats[currentRole].map((stat, i) => (
-          <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow">
+          <Card key={i} className="border-none shadow-sm hover:shadow-md transition-all cursor-pointer group">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className={`p-2 rounded-xl bg-muted`}>
+                <div className={`p-2 rounded-xl bg-muted group-hover:bg-primary/10 transition-colors`}>
                   <stat.icon className={`h-6 w-6 ${stat.color}`} />
                 </div>
                 <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">GHS Vault</Badge>
@@ -249,9 +283,16 @@ export default function Dashboard() {
                         ))}
                       </div>
                       {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
-                        <Dialog open={isVerifying} onOpenChange={setIsVerifying}>
+                        <Dialog open={isVerifying && selectedTxId === tx.id} onOpenChange={(open) => {
+                          setIsVerifying(open);
+                          if(open) setSelectedTxId(tx.id);
+                        }}>
                           <DialogTrigger asChild>
-                            <Button size="sm" className="bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-full px-6">
+                            <Button 
+                              onClick={() => setSelectedTxId(tx.id)}
+                              size="sm" 
+                              className="bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-full px-6"
+                            >
                               Verify Satisfaction
                             </Button>
                           </DialogTrigger>
@@ -272,7 +313,7 @@ export default function Dashboard() {
                                   checked={checklist.condition} 
                                   onCheckedChange={(checked) => setChecklist(prev => ({...prev, condition: !!checked}))}
                                 />
-                                <label htmlFor="condition" className="text-sm font-medium leading-none">
+                                <label htmlFor="condition" className="text-sm font-medium leading-none cursor-pointer">
                                   Product arrived in good physical condition.
                                 </label>
                               </div>
@@ -282,7 +323,7 @@ export default function Dashboard() {
                                   checked={checklist.matches} 
                                   onCheckedChange={(checked) => setChecklist(prev => ({...prev, matches: !!checked}))}
                                 />
-                                <label htmlFor="matches" className="text-sm font-medium leading-none">
+                                <label htmlFor="matches" className="text-sm font-medium leading-none cursor-pointer">
                                   Matches the description and photos provided.
                                 </label>
                               </div>
@@ -292,7 +333,7 @@ export default function Dashboard() {
                                   checked={checklist.authenticity} 
                                   onCheckedChange={(checked) => setChecklist(prev => ({...prev, authenticity: !!checked}))}
                                 />
-                                <label htmlFor="authenticity" className="text-sm font-medium leading-none">
+                                <label htmlFor="authenticity" className="text-sm font-medium leading-none cursor-pointer">
                                   Authenticity is verified (if applicable).
                                 </label>
                               </div>
@@ -302,7 +343,7 @@ export default function Dashboard() {
                                   checked={checklist.functionality} 
                                   onCheckedChange={(checked) => setChecklist(prev => ({...prev, functionality: !!checked}))}
                                 />
-                                <label htmlFor="functionality" className="text-sm font-medium leading-none">
+                                <label htmlFor="functionality" className="text-sm font-medium leading-none cursor-pointer">
                                   Functions as expected and fully operational.
                                 </label>
                               </div>
@@ -310,8 +351,8 @@ export default function Dashboard() {
                             <DialogFooter>
                               <Button 
                                 type="button" 
-                                onClick={() => handleVerificationComplete(tx.id)}
-                                className="w-full bg-primary font-bold rounded-xl"
+                                onClick={handleVerificationComplete}
+                                className="w-full bg-primary font-bold rounded-xl h-12"
                               >
                                 Finalize & Release GHS Funds
                               </Button>
@@ -319,11 +360,20 @@ export default function Dashboard() {
                           </DialogContent>
                         </Dialog>
                       ) : currentRole === 'ADMIN' && tx.status === 'Verification Pending' ? (
-                        <Button size="sm" className="bg-green-600 text-white hover:bg-green-700 font-bold rounded-full px-6">
+                        <Button 
+                          onClick={() => handleManualRelease(tx.id)}
+                          size="sm" 
+                          className="bg-green-600 text-white hover:bg-green-700 font-bold rounded-full px-6"
+                        >
                           Manual Release
                         </Button>
                       ) : (
-                        <Button size="sm" variant="ghost" className="text-xs font-bold text-primary">
+                        <Button 
+                          onClick={() => toast({ title: "Timeline View", description: "Audit trail and messaging history loaded." })}
+                          size="sm" 
+                          variant="ghost" 
+                          className="text-xs font-bold text-primary hover:bg-primary/5"
+                        >
                           View Timeline <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                       )}
@@ -343,6 +393,9 @@ export default function Dashboard() {
                    <p className="text-muted-foreground max-w-sm mx-auto">
                      All completed interactions are archived here. Funds were released only after 100% satisfaction confirmation.
                    </p>
+                   <Button variant="outline" className="rounded-full px-8 mt-4" onClick={() => toast({ title: "Archived Logs", description: "Historical data is available in the audit dashboard." })}>
+                     Download Audit Log
+                   </Button>
                  </CardContent>
                </Card>
             </TabsContent>
@@ -350,7 +403,8 @@ export default function Dashboard() {
         </div>
 
         <div className="space-y-8">
-          <Card className="border-none shadow-xl bg-primary text-white overflow-hidden relative">
+          <Card className="border-none shadow-xl bg-primary text-white overflow-hidden relative group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5 text-secondary" />
@@ -364,15 +418,18 @@ export default function Dashboard() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
+                <div className="bg-white/10 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
                   <span className="text-[10px] font-bold uppercase block mb-1">Inflow</span>
                   <div className="font-bold text-lg">+GH₵36,750</div>
                 </div>
-                <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
+                <div className="bg-white/10 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
                   <span className="text-[10px] font-bold uppercase block mb-1">Escrow Fee</span>
                   <div className="font-bold text-lg">1.5%</div>
                 </div>
               </div>
+              <Button className="w-full bg-white text-primary hover:bg-secondary font-bold rounded-xl h-12" onClick={() => toast({ title: "Settlement Queue", description: "Reviewing eligible vault releases." })}>
+                Manage Settlement
+              </Button>
             </CardContent>
           </Card>
 
@@ -387,6 +444,26 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+
+          <Card className="border-none shadow-sm overflow-hidden">
+             <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-bold flex items-center gap-2">
+                   <TrendingUp className="h-4 w-4 text-green-500" />
+                   Market Activity
+                </CardTitle>
+             </CardHeader>
+             <CardContent className="space-y-4">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="flex items-center justify-between text-xs py-2 border-b last:border-0">
+                    <div className="flex items-center gap-2">
+                       <div className="h-2 w-2 rounded-full bg-green-500" />
+                       <span className="font-medium">New Deposit for TX-{8800 + i}</span>
+                    </div>
+                    <span className="text-muted-foreground">{i * 2}m ago</span>
+                  </div>
+                ))}
+             </CardContent>
+          </Card>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EscrowBadge } from '@/components/escrow-badge';
@@ -24,6 +25,14 @@ interface ListingProps {
 }
 
 export function ListingCard({ id, title, category, price, oldPrice, location, imageUrl, rating, provider, discount }: ListingProps) {
+  const router = useRouter();
+
+  const handleBuyNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push(`/listings/${id}`);
+  };
+
   return (
     <Card className="group overflow-hidden bg-white border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 relative flex flex-col h-full">
       {/* Top Badges */}
@@ -82,7 +91,11 @@ export function ListingCard({ id, title, category, price, oldPrice, location, im
       </CardContent>
 
       <CardFooter className="px-4 py-3 bg-muted/20 border-t mt-auto">
-        <Button size="sm" className="w-full bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-full font-bold text-xs shadow-sm shadow-primary/5 h-9">
+        <Button 
+          onClick={handleBuyNow}
+          size="sm" 
+          className="w-full bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-full font-bold text-xs shadow-sm shadow-primary/5 h-9"
+        >
           <ShoppingCart className="h-3.5 w-3.5 mr-2" />
           Buy Now
         </Button>

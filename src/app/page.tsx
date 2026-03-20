@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -21,8 +22,12 @@ import {
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 export default function HomePage() {
+  const { toast } = useToast();
+  const [loadingMore, setLoadingMore] = useState(false);
+
   const categories = [
     { name: 'Beauty', icon: 'https://picsum.photos/seed/beauty/100/100', color: 'bg-pink-100' },
     { name: 'Sports', icon: 'https://picsum.photos/seed/sport/100/100', color: 'bg-blue-100' },
@@ -83,12 +88,16 @@ export default function HomePage() {
     }
   ];
 
-  const topShops = [
-    { name: 'Razin Shop GH', rating: 5.0, items: 127, color: 'bg-rose-500', icon: 'R' },
-    { name: 'Easy Life Rentals', rating: 5.0, items: 14, color: 'bg-indigo-500', icon: 'E' },
-    { name: 'Echo Mart Accra', rating: 5.0, items: 8, color: 'bg-emerald-500', icon: 'E' },
-    { name: 'Style Haven GH', rating: 5.0, items: 11, color: 'bg-amber-500', icon: 'S' },
-  ];
+  const handleLoadMore = () => {
+    setLoadingMore(true);
+    setTimeout(() => {
+      setLoadingMore(false);
+      toast({
+        title: "More Items Loaded",
+        description: "Displaying latest marketplace updates for you.",
+      });
+    }, 1500);
+  };
 
   return (
     <div className="flex flex-col gap-12 pb-24 bg-[#f8f8f8]">
@@ -112,25 +121,27 @@ export default function HomePage() {
                 <p className="text-white/80 text-lg hidden md:block">
                   Get up to 50% off on premium brands. Secured by Vault Escrow Ghana.
                 </p>
-                <Button size="lg" className="rounded-full px-10 bg-primary hover:bg-primary/90">Shop Now</Button>
+                <Link href="/listings">
+                  <Button size="lg" className="rounded-full px-10 bg-primary hover:bg-primary/90 mt-4">Shop Now</Button>
+                </Link>
               </div>
             </div>
           </div>
           <div className="hidden lg:flex flex-col gap-6">
-            <div className="flex-1 relative rounded-2xl overflow-hidden shadow-md group">
+            <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-md group block">
               <Image src="https://picsum.photos/seed/sale/400/300" alt="Super Sale" fill className="object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/20 p-6 flex flex-col justify-center">
                 <span className="text-primary font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">UP TO 50% OFF</span>
                 <h3 className="text-white font-bold text-xl mt-2">Akwaaba Sale</h3>
               </div>
-            </div>
-            <div className="flex-1 relative rounded-2xl overflow-hidden shadow-md group">
+            </Link>
+            <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-md group block">
               <Image src="https://picsum.photos/seed/veggie/400/300" alt="Fresh Food" fill className="object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/20 p-6 flex flex-col justify-center">
                 <span className="text-emerald-500 font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">FRESH ORGANIC</span>
                 <h3 className="text-white font-bold text-xl mt-2">Makola Market Deals</h3>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -163,7 +174,9 @@ export default function HomePage() {
       <section className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">Categories</h2>
-          <Button variant="link" className="text-primary font-bold gap-1">View All <ChevronRight className="h-4 w-4" /></Button>
+          <Link href="/listings">
+            <Button variant="link" className="text-primary font-bold gap-1">View All <ChevronRight className="h-4 w-4" /></Button>
+          </Link>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
           {categories.map((cat) => (
@@ -188,8 +201,8 @@ export default function HomePage() {
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">Popular in Ghana</h2>
           <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="rounded-full"><ChevronLeft className="h-4 w-4" /></Button>
-            <Button variant="outline" size="icon" className="rounded-full"><ChevronRight className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" className="rounded-full shadow-sm"><ChevronLeft className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" className="rounded-full shadow-sm"><ChevronRight className="h-4 w-4" /></Button>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -211,8 +224,14 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <Button variant="outline" size="lg" className="rounded-full px-12 border-primary text-primary hover:bg-primary hover:text-white font-bold">
-            Load More Products
+          <Button 
+            onClick={handleLoadMore}
+            disabled={loadingMore}
+            variant="outline" 
+            size="lg" 
+            className="rounded-full px-12 border-primary text-primary hover:bg-primary hover:text-white font-bold transition-all"
+          >
+            {loadingMore ? 'Syncing Vault...' : 'Load More Products'}
           </Button>
         </div>
       </section>
