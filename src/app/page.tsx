@@ -75,6 +75,24 @@ const REVIEWS = [
     rating: 4,
     date: "3 days ago",
     avatar: "https://picsum.photos/seed/kofi/40/40"
+  },
+  {
+    id: 4,
+    name: "Afia Mansa",
+    location: "Airport Residential",
+    comment: "Security first. I love that my GH₵ only goes to the vendor once I'm happy.",
+    rating: 5,
+    date: "1 day ago",
+    avatar: "https://picsum.photos/seed/afia/40/40"
+  },
+  {
+    id: 5,
+    name: "Kwame Boateng",
+    location: "Osu",
+    comment: "The best marketplace for authentic brands in Accra. No more fake items.",
+    rating: 5,
+    date: "4 days ago",
+    avatar: "https://picsum.photos/seed/kwame/40/40"
   }
 ];
 
@@ -221,67 +239,73 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      {/* Reviews Section - Black Background + Slow Marquee */}
+      <section className="bg-black py-24 overflow-hidden border-y border-white/5">
+        <div className="container mx-auto px-4 mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="space-y-3">
             <Badge className="bg-[#4285F4] text-white rounded-none uppercase font-black tracking-widest px-3 py-1">Registry Feedback</Badge>
-            <h2 className="text-4xl font-black text-secondary tracking-tighter">SOVEREIGN TRUST REVIEWS</h2>
-            <p className="text-muted-foreground font-medium max-w-lg">Audited testimonials from verified buyers in the VaultCommerce ecosystem.</p>
+            <h2 className="text-4xl font-black text-white tracking-tighter uppercase">SOVEREIGN TRUST REVIEWS</h2>
+            <p className="text-white/50 font-medium max-w-lg">Audited testimonials from verified buyers in the VaultCommerce ecosystem.</p>
           </div>
           <Button 
             onClick={handleAddReview}
-            className="bg-secondary text-white hover:bg-primary hover:text-secondary h-14 px-8 font-black rounded-none shadow-xl transition-all gap-2"
+            className="bg-primary text-secondary hover:bg-white h-14 px-8 font-black rounded-none shadow-xl transition-all gap-2"
           >
             <Plus className="h-5 w-5" />
             Register My Feedback
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {REVIEWS.map((review, i) => (
-            <Card key={review.id} className="border-none shadow-lg bg-white rounded-none overflow-hidden group hover:-translate-y-2 transition-all duration-500">
-              <div className={cn(
-                "h-2 w-full",
-                i === 0 ? "bg-[#4285F4]" : i === 1 ? "bg-[#EA4335]" : "bg-[#FBBC05]"
-              )} />
-              <CardContent className="p-8 space-y-6">
-                <div className="flex justify-between items-start">
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star 
-                        key={star} 
-                        className={cn(
-                          "h-4 w-4 fill-current",
-                          star <= review.rating 
-                            ? (star === 1 ? "text-[#4285F4]" : star === 2 ? "text-[#EA4335]" : star === 3 ? "text-[#FBBC05]" : "text-[#34A853]")
-                            : "text-muted/30"
-                        )} 
-                      />
-                    ))}
-                  </div>
-                  <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">{review.date}</span>
-                </div>
-                
-                <p className="text-secondary font-medium leading-relaxed italic">
-                  "{review.comment}"
-                </p>
-
-                <div className="flex items-center gap-4 pt-4">
-                  <div className="relative h-12 w-12 overflow-hidden border border-border">
-                    <Image src={review.avatar} alt={review.name} fill className="object-cover" />
-                  </div>
-                  <div>
-                    <h4 className="font-black text-secondary text-sm">{review.name}</h4>
-                    <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
-                      <ShieldCheck className="h-3 w-3 text-[#34A853]" />
-                      Verified {review.location} Buyer
+        <div className="relative">
+          <div className="animate-marquee gap-8 py-8 [animation-duration:60s]">
+            {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((review, i) => (
+              <div key={`${review.id}-${i}`} className="w-[400px] shrink-0">
+                <Card className="border-none shadow-2xl bg-white/5 backdrop-blur-md rounded-none overflow-hidden group hover:bg-white/10 transition-all duration-500">
+                  <div className={cn(
+                    "h-1.5 w-full",
+                    i % 3 === 0 ? "bg-[#4285F4]" : i % 3 === 1 ? "bg-[#EA4335]" : "bg-[#FBBC05]"
+                  )} />
+                  <CardContent className="p-8 space-y-6">
+                    <div className="flex justify-between items-start">
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star 
+                            key={star} 
+                            className={cn(
+                              "h-4 w-4 fill-current",
+                              star <= review.rating 
+                                ? (star === 1 ? "text-[#4285F4]" : star === 2 ? "text-[#EA4335]" : star === 3 ? "text-[#FBBC05]" : "text-[#34A853]")
+                                : "text-white/10"
+                            )} 
+                          />
+                        ))}
+                      </div>
+                      <span className="text-[10px] font-black text-white/30 uppercase tracking-widest">{review.date}</span>
                     </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                    
+                    <p className="text-white font-medium leading-relaxed italic text-sm">
+                      "{review.comment}"
+                    </p>
+
+                    <div className="flex items-center gap-4 pt-4 border-t border-white/10">
+                      <div className="relative h-12 w-12 overflow-hidden border border-white/10">
+                        <Image src={review.avatar} alt={review.name} fill className="object-cover" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-white text-sm">{review.name}</h4>
+                        <div className="flex items-center gap-1.5 text-[10px] text-white/40 font-bold uppercase tracking-widest">
+                          <ShieldCheck className="h-3 w-3 text-[#34A853]" />
+                          Verified {review.location} Buyer
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
         </div>
       </section>
 
