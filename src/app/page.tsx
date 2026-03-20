@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -70,7 +69,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col bg-subtle-pattern min-h-screen">
+    <div className="flex flex-col bg-white min-h-screen">
       {/* Hero Slider Section */}
       <section className="container mx-auto px-4 py-4 md:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -132,28 +131,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b pb-6">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 mb-1">
-               <Activity className="h-4 w-4 text-primary" />
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Live Activity Feed</span>
+      {/* Featured Products Section - Light Burgundy Background */}
+      <section className="bg-[hsl(var(--burgundy-light))] py-12 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b border-burgundy/10 pb-6">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 mb-1">
+                 <Activity className="h-4 w-4 text-primary" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Live Activity Feed</span>
+              </div>
+              <h2 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">FEATURED PRODUCTS</h2>
+              <p className="text-muted-foreground font-medium max-w-lg text-[10px] md:text-xs uppercase tracking-widest">Premium items protected via Secure Escrow Protocols.</p>
             </div>
-            <h2 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">FEATURED PRODUCTS</h2>
-            <p className="text-muted-foreground font-medium max-w-lg text-[10px] md:text-xs uppercase tracking-widest">Premium items protected via Secure Escrow Protocols.</p>
+            <Link href="/listings">
+              <Button variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white h-11 md:h-12 px-8 font-black rounded-none transition-all gap-2 text-[10px] uppercase tracking-[0.2em]">
+                All Products <ChevronRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
-          <Link href="/listings">
-            <Button variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white h-11 md:h-12 px-8 font-black rounded-none transition-all gap-2 text-[10px] uppercase tracking-[0.2em]">
-              All Products <ChevronRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {LISTINGS.slice(0, 12).map((listing) => (
-            <ListingCard key={listing.id} {...listing} vendorId={listing.vendorId} />
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {LISTINGS.slice(0, 12).map((listing) => (
+              <ListingCard key={listing.id} {...listing} vendorId={listing.vendorId} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -162,7 +163,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-1 block">Our Trusted Partners</span>
-            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase">THE ELITE VENDOR REGISTRY</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase text-center md:text-left">THE ELITE VENDOR REGISTRY</h2>
           </div>
           
           <Dialog open={showVendorModal} onOpenChange={setShowVendorModal}>
@@ -311,8 +312,6 @@ export default function HomePage() {
           <ShieldCheck className="h-64 w-64 text-white" />
         </div>
       </section>
-      
-      <div className="pb-12 md:pb-20" />
     </div>
   );
 }

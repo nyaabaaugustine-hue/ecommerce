@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,6 +25,7 @@
     --ring: 45 100% 42%;
     --radius: 0px;
     --burgundy: 345 75% 35%;
+    --burgundy-light: 345 75% 98%;
   }
 }
 

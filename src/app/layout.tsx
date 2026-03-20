@@ -1,5 +1,4 @@
-
-import type {Metadata} from 'next';
+import type {Metadata, Viewport} from 'next';
 import './globals.css';
 import { Navbar } from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
@@ -11,6 +10,15 @@ import { LiveActivityFeed } from '@/components/live-activity-feed';
 export const metadata: Metadata = {
   title: 'VaultCommerce | The Gold Standard',
   description: 'The Gold Standard for secure cross-category trade in Ghana. Institutionally powered by multisig escrow protocols.',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'VaultCommerce',
+  },
+  formatDetection: {
+    telephone: false,
+  },
   icons: {
     icon: [
       {
@@ -25,6 +33,14 @@ export const metadata: Metadata = {
       }
     ],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0a1a2f',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
