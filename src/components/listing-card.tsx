@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -6,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EscrowBadge } from '@/components/escrow-badge';
-import { Star, Eye, ShoppingCart, Heart, Plus } from 'lucide-react';
+import { Star, Eye, ShoppingCart, Heart, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/components/providers';
 import { useToast } from '@/hooks/use-toast';
@@ -22,10 +23,11 @@ interface ListingProps {
   rating: number;
   vendorId: string;
   discount?: string;
+  salesCount: number;
 }
 
 export function ListingCard(props: ListingProps) {
-  const { id, title, category, price, oldPrice, location, imageUrl, rating, discount } = props;
+  const { id, title, category, price, oldPrice, location, imageUrl, rating, discount, salesCount } = props;
   const router = useRouter();
   const { addItem } = useCart();
   const { toast } = useToast();
@@ -41,8 +43,8 @@ export function ListingCard(props: ListingProps) {
     e.stopPropagation();
     addItem(props);
     toast({
-      title: "Vault Updated",
-      description: "Item added to your secure selection.",
+      title: "Secure Selection Updated",
+      description: "Item added to your cart for escrow protection.",
     });
   };
 
@@ -58,7 +60,7 @@ export function ListingCard(props: ListingProps) {
         <EscrowBadge className="bg-white/95 scale-75 origin-left shadow-sm py-1 px-3" />
       </div>
 
-      {/* Image Section with Reveal Animation and 7% Radius */}
+      {/* Image Section with Reveal Animation */}
       <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block image-reveal bg-muted product-card-image-wrap">
         <Image 
           src={imageUrl} 
@@ -83,6 +85,13 @@ export function ListingCard(props: ListingProps) {
         <Link href={`/listings/${id}`} className="block hover:text-primary transition-colors">
           <h3 className="font-bold text-sm line-clamp-2 leading-tight min-h-[2.5rem] text-secondary">{title}</h3>
         </Link>
+        
+        <div className="flex items-center gap-1.5 mt-1">
+          <div className="bg-secondary/5 border border-secondary/10 px-2 py-0.5 flex items-center gap-1.5">
+            <Users className="h-3 w-3 text-primary" />
+            <span className="text-[8px] font-black text-secondary uppercase tracking-widest">{salesCount} secured this item</span>
+          </div>
+        </div>
         
         <div className="mt-auto pt-3 flex items-baseline gap-2">
           <span className="text-lg font-black text-secondary tracking-tight">GH₵{price.toLocaleString()}</span>

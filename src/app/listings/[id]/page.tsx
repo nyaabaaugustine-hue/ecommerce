@@ -22,7 +22,9 @@ import {
   ArrowRight,
   Timer,
   ShoppingCart,
-  Key
+  Key,
+  Users,
+  Activity
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { LISTINGS } from '@/lib/mock-data';
@@ -53,8 +55,8 @@ export default function ListingDetails() {
 
     setIsLocking(true);
     const steps = [
-      "Connecting to Paystack Secure Layer...",
-      "Syncing with High Admin Protocol...",
+      "Connecting to Secure Payment Layer...",
+      "Syncing with Escrow Node...",
       "Authorizing GHS Vault Deposit...",
       "Locking Funds in Escrow..."
     ];
@@ -75,7 +77,7 @@ export default function ListingDetails() {
   const handleAddToCart = () => {
     addItem(listing);
     toast({
-      title: "Added to Vault",
+      title: "Added to Cart",
       description: `${listing.title} is now in your secure selection.`,
     });
   };
@@ -108,7 +110,7 @@ export default function ListingDetails() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <h1 className="text-2xl md:text-4xl font-headline font-black text-secondary tracking-tighter mb-2">{listing.title}</h1>
-                <div className="flex items-center gap-4 text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <MapPin className="h-4 w-4 text-primary" />
                     <span className="text-[10px] md:text-sm font-bold uppercase tracking-widest">{listing.location}</span>
@@ -116,6 +118,10 @@ export default function ListingDetails() {
                   <div className="flex items-center gap-1">
                     <Star className="h-4 w-4 fill-primary text-primary" />
                     <span className="text-[10px] md:text-sm font-black text-secondary">{listing.rating}</span>
+                  </div>
+                  <div className="bg-secondary/10 px-3 py-1 flex items-center gap-2 border border-secondary/20">
+                    <Users className="h-3.5 w-3.5 text-primary" />
+                    <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{listing.salesCount} verified buyers secured this</span>
                   </div>
                 </div>
               </div>
@@ -138,10 +144,10 @@ export default function ListingDetails() {
             <div className="space-y-4">
               <h3 className="text-xl font-black text-secondary flex items-center gap-2 tracking-tight">
                 <Lock className="h-5 w-5 text-primary" />
-                The Vault Protocol
+                The Secure Protocol
               </h3>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">
-                This transaction is protected by the **VaultCommerce Escrow System**. Once you deposit funds, they are restricted in our secure Paystack vault via a **High Admin Protocol Lock**. The vendor has 48 hours to initiate delivery. If they fail, your GH₵ is automatically returned to your wallet.
+                This transaction is protected by the **Escrow Security System**. Once you deposit funds, they are restricted in our secure GHS vault until you certify delivery. The vendor has 48 hours to initiate shipping. If they fail, your GHS is automatically returned to your wallet.
               </p>
             </div>
 
@@ -150,9 +156,9 @@ export default function ListingDetails() {
                <div className="flex flex-col sm:flex-row gap-4 md:gap-6 relative z-10">
                 <ShieldCheck className="h-10 w-10 md:h-12 md:w-12 text-primary shrink-0" />
                 <div>
-                  <h4 className="font-black text-lg md:text-xl mb-1 tracking-tight">Institutional Authorization</h4>
+                  <h4 className="font-black text-lg md:text-xl mb-1 tracking-tight">Institutional Trust</h4>
                   <p className="text-xs md:text-sm text-white/70 leading-relaxed font-medium">
-                    VaultCommerce acts as the neutral mediator. Every lock is cryptographically verified by our High Admin node. Your money is secured at the highest level of Ghanaian retail banking standards.
+                    VaultCommerce acts as the neutral mediator. Every transaction is cryptographically verified by our high-fidelity node. Your money is secured at the highest level of Ghanaian retail standards.
                   </p>
                 </div>
               </div>
@@ -164,11 +170,14 @@ export default function ListingDetails() {
         <div className="space-y-6">
           <Card className="border-none shadow-xl sticky top-24 overflow-hidden rounded-none border border-border">
             <div className="bg-secondary p-6 md:p-8 text-white">
-              <h3 className="font-black text-xl md:text-2xl mb-1 flex items-center gap-2 tracking-tight">
-                <ShieldAlert className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                Secure Vault
-              </h3>
-              <p className="text-[9px] opacity-70 font-black uppercase tracking-[0.2em]">Escrow Session Active</p>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="font-black text-xl md:text-2xl flex items-center gap-2 tracking-tight">
+                  <ShieldAlert className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+                  Secure Transaction
+                </h3>
+                <Badge className="bg-primary text-secondary animate-pulse rounded-none text-[8px]">HIGH DEMAND</Badge>
+              </div>
+              <p className="text-[9px] opacity-70 font-black uppercase tracking-[0.2em]">Active Escrow Session</p>
             </div>
             <CardContent className="p-6 md:p-8 space-y-4 md:space-y-6">
               <div className="flex justify-between items-center py-2">
@@ -176,13 +185,18 @@ export default function ListingDetails() {
                 <span className="font-black text-secondary text-sm md:text-base">GH₵{listing.price.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center py-2">
-                <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Vault Fee (2%)</span>
+                <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Escrow Fee (2%)</span>
                 <span className="font-black text-primary text-sm md:text-base">GH₵{(listing.price * 0.02).toFixed(2)}</span>
               </div>
               <Separator />
               <div className="flex justify-between items-center py-4 text-lg md:text-xl font-headline">
-                <span className="font-black text-secondary tracking-tight">Total Hold</span>
+                <span className="font-black text-secondary tracking-tight">Total Deposit</span>
                 <span className="font-black text-primary">GH₵{(listing.price * 1.02).toLocaleString()}</span>
+              </div>
+
+              <div className="flex items-center gap-2 mb-4 p-3 bg-muted/50 border border-dashed border-primary/20">
+                <Activity className="h-4 w-4 text-primary" />
+                <span className="text-[9px] font-black text-secondary uppercase tracking-tight">Verified by {listing.salesCount} happy customers in Ghana</span>
               </div>
               
               <div className="grid gap-3">
@@ -191,7 +205,7 @@ export default function ListingDetails() {
                   size="lg" 
                   className="w-full bg-secondary text-white hover:bg-secondary/90 font-black h-14 md:h-16 rounded-none shadow-lg transition-all text-sm md:text-base"
                 >
-                  Deposit to Escrow Vault
+                  Deposit to Escrow
                 </Button>
                 <Button 
                   variant="outline"
@@ -200,20 +214,20 @@ export default function ListingDetails() {
                   className="w-full border-primary/20 text-secondary hover:bg-primary/5 font-black h-14 md:h-16 rounded-none transition-all gap-2 text-sm md:text-base"
                 >
                   <ShoppingCart className="h-5 w-5 text-primary" />
-                  Add to Vault Selection
+                  Add to Secure Cart
                 </Button>
               </div>
               
               {!user && (
                 <p className="text-[9px] md:text-[10px] text-center font-black text-primary uppercase tracking-widest animate-pulse">
-                  Verification Required to Secure Funds
+                  Login Required to Authorize Deposit
                 </p>
               )}
               
               <div className="flex items-center justify-center gap-2 pt-2 md:pt-4">
                 <Image 
                   src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773997887/vbb_kuy4qi.png" 
-                  alt="Paystack Secure Checkout" 
+                  alt="Secure Checkout" 
                   width={140} 
                   height={50} 
                   className="h-8 md:h-10 object-contain grayscale hover:grayscale-0 transition-all opacity-50 hover:opacity-100"
@@ -224,7 +238,7 @@ export default function ListingDetails() {
               <div className="bg-muted/50 p-4 rounded-none flex items-start gap-3 border border-dashed border-primary/20">
                 <Timer className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0 mt-0.5" />
                 <p className="text-[9px] text-muted-foreground leading-tight font-black uppercase">
-                  SLA Active: 48h Auto-Refund triggers if delivery is not initiated by the vendor.
+                  48h Auto-Refund triggers if delivery is not initiated by the vendor.
                 </p>
               </div>
             </CardContent>
@@ -245,10 +259,10 @@ export default function ListingDetails() {
               <div className="absolute inset-0 h-24 w-24 md:h-32 md:w-32 rounded-none border-4 border-primary border-t-transparent animate-spin" />
             </div>
             <div className="space-y-4 w-full">
-              <DialogTitle className="text-xl md:text-2xl font-black text-white tracking-tighter">Vault Lockdown Initiated</DialogTitle>
+              <DialogTitle className="text-xl md:text-2xl font-black text-white tracking-tighter">Escrow Authorization</DialogTitle>
               <div className="space-y-2">
                 <p className="text-primary/80 text-[9px] md:text-[10px] font-black uppercase tracking-widest animate-pulse">
-                  {["Connecting to Paystack...", "Syncing High Admin Protocol...", "Syncing Treasury...", "Securing Vault..."][lockStep]}
+                  {["Connecting...", "Syncing Node...", "Syncing Treasury...", "Securing Deposit..."][lockStep]}
                 </p>
                 <Progress value={(lockStep + 1) * 25} className="h-2 bg-white/10" />
               </div>
@@ -265,9 +279,9 @@ export default function ListingDetails() {
               <Key className="h-8 w-8 md:h-10 md:w-10 text-primary" />
             </div>
             <div className="space-y-2">
-              <DialogTitle className="text-xl md:text-2xl font-black text-secondary tracking-tight">Protocol Lock Success!</DialogTitle>
+              <DialogTitle className="text-xl md:text-2xl font-black text-secondary tracking-tight">Deposit Success!</DialogTitle>
               <DialogDescription className="text-[10px] md:text-sm font-bold text-muted-foreground uppercase tracking-widest">
-                GH₵{(listing.price * 1.02).toLocaleString()} restricted via High Admin Node.
+                GH₵{(listing.price * 1.02).toLocaleString()} restricted in Escrow.
               </DialogDescription>
             </div>
             
@@ -282,11 +296,11 @@ export default function ListingDetails() {
             </Card>
 
             <Button onClick={handleRedirectToDashboard} className="w-full h-12 md:h-14 bg-secondary text-white rounded-none font-black gap-2 text-base md:text-lg hover:bg-secondary/90 shadow-xl">
-              Manage in My Vault <ArrowRight className="h-5 w-5" />
+              Manage in Account <ArrowRight className="h-5 w-5" />
             </Button>
             
             <p className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
-              Notification SMS sent to {user?.email}
+              Notification SMS sent to your verified node
             </p>
           </div>
         </DialogContent>

@@ -34,6 +34,7 @@ export interface Listing {
   imageUrl: string;
   rating: number;
   discount?: string;
+  salesCount: number;
 }
 
 export const VENDORS: Vendor[] = [
@@ -90,7 +91,8 @@ export const LISTINGS: Listing[] = [
     location: 'Accra Mall, Ghana',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
     rating: 4.9,
-    discount: '17% OFF'
+    discount: '17% OFF',
+    salesCount: 124
   },
   {
     id: '2',
@@ -102,7 +104,8 @@ export const LISTINGS: Listing[] = [
     location: 'Melcom Plus, Kaneshie',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png',
     rating: 4.8,
-    discount: '10% OFF'
+    discount: '10% OFF',
+    salesCount: 86
   },
   {
     id: '5',
@@ -112,7 +115,8 @@ export const LISTINGS: Listing[] = [
     price: 9200,
     location: 'Airport Residential',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
-    rating: 4.9
+    rating: 4.9,
+    salesCount: 412
   },
   {
     id: '6',
@@ -122,7 +126,8 @@ export const LISTINGS: Listing[] = [
     price: 15400,
     location: 'Osu, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
-    rating: 4.8
+    rating: 4.8,
+    salesCount: 32
   },
 
   // Vendor 2: PrimeRentals GH (4 Items)
@@ -134,7 +139,8 @@ export const LISTINGS: Listing[] = [
     price: 45000,
     location: 'Ridge Financial District',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
-    rating: 4.9
+    rating: 4.9,
+    salesCount: 12
   },
   {
     id: '8',
@@ -144,7 +150,8 @@ export const LISTINGS: Listing[] = [
     price: 2400000,
     location: 'East Legon, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
-    rating: 5.0
+    rating: 5.0,
+    salesCount: 5
   },
   {
     id: '9',
@@ -154,7 +161,8 @@ export const LISTINGS: Listing[] = [
     price: 1500,
     location: 'Cantonments, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
-    rating: 4.9
+    rating: 4.9,
+    salesCount: 245
   },
   {
     id: '11',
@@ -164,7 +172,8 @@ export const LISTINGS: Listing[] = [
     price: 2500,
     location: 'Accra Central',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
-    rating: 4.8
+    rating: 4.8,
+    salesCount: 178
   },
 
   // Vendor 3: HomeLiving Furniture (4 Items)
@@ -176,7 +185,8 @@ export const LISTINGS: Listing[] = [
     price: 6800,
     location: 'Spintex Road, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
-    rating: 5.0
+    rating: 5.0,
+    salesCount: 45
   },
   {
     id: '12',
@@ -186,7 +196,8 @@ export const LISTINGS: Listing[] = [
     price: 12000,
     location: 'Spintex',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
-    rating: 4.9
+    rating: 4.9,
+    salesCount: 18
   },
   {
     id: '10',
@@ -196,7 +207,8 @@ export const LISTINGS: Listing[] = [
     price: 850,
     location: 'Labone, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
-    rating: 4.7
+    rating: 4.7,
+    salesCount: 320
   },
   {
     id: '13',
@@ -208,7 +220,8 @@ export const LISTINGS: Listing[] = [
     location: 'Tema, Ghana',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.7,
-    discount: '18% OFF'
+    discount: '18% OFF',
+    salesCount: 540
   }
 ];
 
