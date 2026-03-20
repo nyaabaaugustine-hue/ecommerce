@@ -84,8 +84,8 @@ export default function RootLayout({
                 <h4 className="font-bold text-lg mb-6">Download Our App</h4>
                 <p className="text-white/60 text-xs mb-6">Get 10% off your first purchase on our app!</p>
                 <div className="flex flex-col gap-4">
-                  <Image src="https://placehold.co/160x48/000000/ffffff?text=App+Store" alt="App Store" width={160} height={48} className="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" />
-                  <Image src="https://placehold.co/160x48/000000/ffffff?text=Google+Play" alt="Google Play" width={160} height={48} className="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" />
+                  <Image src="https://placehold.co/160x48/000000/ffffff?text=App+Store" alt="App Store" width={160} height={48} className="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" unoptimized />
+                  <Image src="https://placehold.co/160x48/000000/ffffff?text=Google+Play" alt="Google Play" width={160} height={48} className="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" unoptimized />
                 </div>
               </div>
             </div>
