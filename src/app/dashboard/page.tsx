@@ -15,6 +15,8 @@ import {
   CreditCard, 
   AlertCircle,
   Users,
+  User,
+  Star,
   BarChart3,
   PackageCheck,
   ClipboardCheck,
@@ -33,6 +35,7 @@ import {
   TrendingUp,
   Cpu,
   ArrowUpRight,
+  ArrowRightLeft,
   Banknote,
   Key,
   BookOpen,
@@ -181,7 +184,6 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
-      {/* Protocol Status Header */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-10 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
            <Zap className="h-4 w-4 text-primary animate-pulse" />
@@ -273,7 +275,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Main Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
         {stats[currentRole].map((stat, i) => (
           <Card key={i} className="border-none shadow-sm hover:shadow-md transition-all rounded-none bg-white border-l-4 border-l-primary">
@@ -298,7 +299,6 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-        {/* Left Column: Tools & Registry */}
         <div className="lg:col-span-2 space-y-8">
           <Tabs defaultValue="active" className="w-full">
             <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto">
@@ -476,7 +476,6 @@ export default function Dashboard() {
           </Tabs>
         </div>
 
-        {/* Right Column: Secure Balance & Trust */}
         <div className="space-y-8">
           <Card className="border-none shadow-2xl bg-secondary text-white rounded-none overflow-hidden relative border-t-4 border-t-primary">
             <div className="absolute top-0 right-0 p-6">
