@@ -1,4 +1,3 @@
-
 import { PlaceHolderImages } from './placeholder-images';
 
 export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
@@ -47,7 +46,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Jan 2022',
     color: 'bg-primary',
     icon: 'M',
-    logoUrl: 'https://picsum.photos/seed/melcom-logo/100/100',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     description: "Ghana's largest electronics and appliance department, powered by Melcom."
   },
   {
@@ -71,7 +70,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Jun 2020',
     color: 'bg-secondary',
     icon: 'H',
-    logoUrl: 'https://picsum.photos/seed/homeliving/100/100',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     description: 'Premium furniture and interior decor with secure delivery across Ghana.'
   },
   {
@@ -83,7 +82,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Sep 2022',
     color: 'bg-destructive',
     icon: 'S',
-    logoUrl: 'https://picsum.photos/seed/superstore/100/100',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     description: 'Fresh daily essentials and imported household goods.'
   }
 ];
