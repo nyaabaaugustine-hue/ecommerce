@@ -1,7 +1,7 @@
-
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Shield, Search, User, ShoppingCart, Heart, LayoutGrid, Phone, ChevronDown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -34,8 +34,15 @@ export function Navbar() {
       {/* Main Bar */}
       <div className="bg-white border-b py-4 shadow-sm">
         <div className="container mx-auto px-4 flex items-center justify-between gap-4 md:gap-8">
-          <Link href="/" className="flex items-center gap-2 font-headline font-bold text-2xl text-primary shrink-0">
-            <Shield className="h-8 w-8 fill-primary/10" />
+          <Link href="/" className="flex items-center gap-3 font-headline font-bold text-2xl text-primary shrink-0">
+            <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-primary/20 shadow-sm">
+              <Image 
+                src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
+                alt="VaultCommerce Logo" 
+                fill 
+                className="object-cover"
+              />
+            </div>
             <span className="tracking-tighter">Vault<span className="text-foreground">Commerce</span></span>
           </Link>
 
