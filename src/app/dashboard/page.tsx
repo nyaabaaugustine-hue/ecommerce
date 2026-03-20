@@ -18,13 +18,19 @@ import {
   AlertCircle,
   TrendingUp,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  Settings,
+  Users,
+  BarChart3
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
+import { MOCK_USERS, Role } from '@/lib/mock-data';
 
 export default function Dashboard() {
   const { toast } = useToast();
+  const [currentRole, setCurrentRole] = useState<Role>('VENDOR');
+  
   const [activeTransactions, setActiveTransactions] = useState([
     {
       id: 'TX-8821',
@@ -47,17 +53,6 @@ export default function Dashboard() {
       date: 'Oct 22, 2023',
       seller: 'PrimeRentals',
       action: 'Confirm Delivery'
-    },
-    {
-      id: 'TX-8790',
-      item: 'Advanced React Mentorship',
-      role: 'Seller',
-      amount: 150,
-      status: 'Completed',
-      progress: 100,
-      date: 'Oct 20, 2023',
-      buyer: 'Alice Smith',
-      action: 'Funds Released'
     }
   ]);
 
@@ -67,49 +62,87 @@ export default function Dashboard() {
     ));
     toast({
       title: "Confirmation Successful!",
-      description: `Proof of Delivery confirmed for ${id}. Funds are being split via Paystack API.`,
+      description: `Transaction ${id} finalized. Funds disbursed.`,
     });
+  };
+
+  const stats = {
+    ADMIN: [
+      { label: 'Platform Revenue', val: '$45,849.00', icon: BarChart3, color: 'text-primary', sub: 'Gross merchandise value' },
+      { label: 'Active Disputes', val: '2', icon: AlertCircle, color: 'text-red-500', sub: 'Awaiting mediation' },
+      { label: 'Verified Vendors', val: '124', icon: Users, color: 'text-blue-500', sub: '+12 this month' },
+      { label: 'Escrow Volume', val: '$280K', icon: Shield, color: 'text-secondary', sub: 'Total funds in vault' },
+    ],
+    VENDOR: [
+      { label: 'Available Payout', val: '$12,450.00', icon: Wallet, color: 'text-primary', sub: 'Ready for withdrawal' },
+      { label: 'Sales Velocity', val: '+24%', icon: TrendingUp, color: 'text-green-500', sub: 'Compared to last month' },
+      { label: 'Active Vaults', val: '8', icon: Shield, color: 'text-secondary', sub: 'In-progress escrows' },
+      { label: 'Trust Score', val: '4.95', icon: CheckCircle, color: 'text-indigo-500', sub: 'Top 5% of marketplace' },
+    ],
+    CUSTOMER: [
+      { label: 'Secured Funds', val: '$4,849.00', icon: Shield, color: 'text-secondary', sub: 'Held in escrow' },
+      { label: 'Total Purchases', val: '15', icon: CreditCard, color: 'text-primary', sub: 'Completed transactions' },
+      { label: 'Reward Points', val: '1,240', icon: Wallet, color: 'text-amber-500', sub: 'Redeemable on next buy' },
+      { label: 'Active Orders', val: '3', icon: Clock, color: 'text-blue-500', sub: 'Currently in transit' },
+    ]
   };
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
+      {/* Role Switcher for Demo */}
+      <div className="flex justify-end mb-6 gap-2">
+        <span className="text-xs font-bold text-muted-foreground mr-2 self-center">DEMO ROLE:</span>
+        {(['ADMIN', 'VENDOR', 'CUSTOMER'] as Role[]).map(role => (
+          <Button 
+            key={role} 
+            size="sm" 
+            variant={currentRole === role ? 'default' : 'outline'}
+            onClick={() => setCurrentRole(role)}
+            className="rounded-full text-[10px] h-7"
+          >
+            {role}
+          </Button>
+        ))}
+      </div>
+
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-4xl font-headline font-bold text-primary">Command Center</h1>
+            <h1 className="text-4xl font-headline font-bold text-primary">
+              {currentRole === 'ADMIN' ? 'Platform Control' : 'Command Center'}
+            </h1>
             <Badge variant="secondary" className="bg-secondary/10 text-primary border-secondary/20 font-bold px-3">
-              Verified Merchant
+              {currentRole === 'ADMIN' ? 'Root Access' : currentRole === 'VENDOR' ? 'Verified Merchant' : 'Preferred Buyer'}
             </Badge>
           </div>
-          <p className="text-muted-foreground">Monitor your escrow pipeline and financial settlements.</p>
+          <p className="text-muted-foreground">
+            {currentRole === 'ADMIN' 
+              ? 'Oversee global marketplace health and financial split logic.' 
+              : 'Monitor your escrow pipeline and financial settlements.'}
+          </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <Button variant="outline" className="rounded-full shadow-sm">
-            <TrendingUp className="h-4 w-4 mr-2 text-green-500" />
-            Performance Reports
+            <Settings className="h-4 w-4 mr-2" />
+            Account Settings
           </Button>
           <Button className="bg-primary hover:bg-primary/90 rounded-full shadow-lg px-8">
-            Withdraw Funds
+            {currentRole === 'CUSTOMER' ? 'Track Shipments' : 'Withdraw Funds'}
           </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        {[
-          { label: 'Active Escrow', val: '$4,849.00', icon: Shield, color: 'text-secondary', sub: 'Across 2 transactions' },
-          { label: 'Net Earnings', val: '$12,450.00', icon: Wallet, color: 'text-primary', sub: 'After platform fees' },
-          { label: 'Platform Trust', val: '4.95', icon: CheckCircle, color: 'text-green-500', sub: 'Top 5% of providers' },
-          { label: 'Treasury Split', val: '2.5%', icon: ArrowRightLeft, color: 'text-blue-500', sub: 'Current commission rate' },
-        ].map((stat, i) => (
+        {stats[currentRole].map((stat, i) => (
           <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className={`p-2 rounded-xl bg-muted`}>
                   <stat.icon className={`h-6 w-6 ${stat.color}`} />
                 </div>
-                <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">Stats</Badge>
+                <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">Live</Badge>
               </div>
-              <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
               <p className="text-3xl font-headline font-bold text-primary mb-2">{stat.val}</p>
               <p className="text-xs text-muted-foreground flex items-center gap-1">
                 <Clock className="h-3 w-3" />
@@ -125,9 +158,11 @@ export default function Dashboard() {
           <Tabs defaultValue="active" className="w-full">
             <div className="flex items-center justify-between mb-6">
               <TabsList className="bg-muted/50 p-1 border rounded-full">
-                <TabsTrigger value="active" className="rounded-full px-6 data-[state=active]:bg-white">Active Vaults</TabsTrigger>
-                <TabsTrigger value="payouts" className="rounded-full px-6 data-[state=active]:bg-white">Payout History</TabsTrigger>
-                <TabsTrigger value="notifications" className="rounded-full px-6 data-[state=active]:bg-white">Alerts</TabsTrigger>
+                <TabsTrigger value="active" className="rounded-full px-6 data-[state=active]:bg-white">
+                  {currentRole === 'ADMIN' ? 'Global Vaults' : 'Active Trades'}
+                </TabsTrigger>
+                <TabsTrigger value="payouts" className="rounded-full px-6 data-[state=active]:bg-white">Financials</TabsTrigger>
+                <TabsTrigger value="logs" className="rounded-full px-6 data-[state=active]:bg-white">Activity</TabsTrigger>
               </TabsList>
               <Button variant="ghost" size="sm" className="text-xs text-muted-foreground">View All</Button>
             </div>
@@ -147,7 +182,7 @@ export default function Dashboard() {
                             <span className="text-xs text-muted-foreground font-mono">{tx.id}</span>
                             <div className="flex items-center gap-1 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                               <Shield className="h-3 w-3" />
-                              {tx.role}
+                              {currentRole === 'ADMIN' ? 'Overseen' : tx.role}
                             </div>
                             <span className="text-xs text-muted-foreground">{tx.date}</span>
                           </div>
@@ -167,9 +202,6 @@ export default function Dashboard() {
                         <span>{tx.progress}%</span>
                       </div>
                       <Progress value={tx.progress} className="h-2 bg-muted" />
-                      <p className="text-[11px] text-muted-foreground italic">
-                        {tx.status === 'Completed' ? 'Funds have been disbursed to the respective stakeholders.' : 'Platform is awaiting verification from the buyer to release held funds.'}
-                      </p>
                     </div>
 
                     <div className="flex items-center justify-between pt-4 border-t">
@@ -179,18 +211,14 @@ export default function Dashboard() {
                             U{i}
                           </div>
                         ))}
-                        <div className="h-8 w-8 rounded-full border-2 border-white bg-primary flex items-center justify-center text-[10px] text-white font-bold">
-                          VC
-                        </div>
                       </div>
-                      {tx.action === 'Confirm Delivery' ? (
+                      {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
                         <Button size="sm" onClick={() => handleConfirm(tx.id)} className="bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-full px-6">
-                          Verify Completion
+                          Verify Delivery
                         </Button>
                       ) : (
-                        <Button size="sm" variant="ghost" disabled className="text-xs font-bold group-hover:text-primary transition-colors">
-                          {tx.action}
-                          <ChevronRight className="h-4 w-4 ml-1" />
+                        <Button size="sm" variant="ghost" className="text-xs font-bold text-primary">
+                          Details <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                       )}
                     </div>
@@ -205,9 +233,10 @@ export default function Dashboard() {
                    <div className="bg-muted h-16 w-16 rounded-full flex items-center justify-center mx-auto">
                      <Clock className="h-8 w-8 text-muted-foreground" />
                    </div>
-                   <h3 className="text-xl font-bold text-primary">Settlement Logic Active</h3>
-                   <p className="text-muted-foreground max-w-sm mx-auto">VaultCommerce processes payouts every 24 hours for all verified transactions. Your next payout of <span className="text-primary font-bold">$1,240</span> is scheduled for tomorrow.</p>
-                   <Button variant="outline" className="rounded-full">Download Statements</Button>
+                   <h3 className="text-xl font-bold text-primary">Settlement Intelligence</h3>
+                   <p className="text-muted-foreground max-w-sm mx-auto">
+                     Automatic split logic is processing. Next settlement scheduled in 14 hours.
+                   </p>
                  </CardContent>
                </Card>
             </TabsContent>
@@ -216,60 +245,52 @@ export default function Dashboard() {
 
         <div className="space-y-8">
           <Card className="border-none shadow-xl bg-primary text-white overflow-hidden relative">
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-secondary rounded-full blur-2xl opacity-20" />
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5 text-secondary" />
-                Wallet Overview
+                Financial Overview
               </CardTitle>
-              <CardDescription className="text-white/60">Real-time split analytics.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-1">
-                <span className="text-xs font-bold uppercase tracking-widest text-white/50">Total Available</span>
-                <div className="text-4xl font-headline font-bold">$8,245.50</div>
+                <span className="text-xs font-bold uppercase tracking-widest text-white/50">Total Assets</span>
+                <div className="text-4xl font-headline font-bold">$18,245.50</div>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
-                  <div className="flex items-center gap-2 mb-2">
-                    <ArrowDownLeft className="h-4 w-4 text-secondary" />
-                    <span className="text-[10px] font-bold uppercase tracking-tighter">Inflow</span>
-                  </div>
-                  <div className="font-bold text-lg">+$1,450</div>
+                  <span className="text-[10px] font-bold uppercase block mb-1">Inflow</span>
+                  <div className="font-bold text-lg">+$2,450</div>
                 </div>
                 <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
-                  <div className="flex items-center gap-2 mb-2">
-                    <ArrowUpRight className="h-4 w-4 text-red-400" />
-                    <span className="text-[10px] font-bold uppercase tracking-tighter">Treasury Fee</span>
-                  </div>
-                  <div className="font-bold text-lg">-$36.25</div>
+                  <span className="text-[10px] font-bold uppercase block mb-1">Fees</span>
+                  <div className="font-bold text-lg">-$86.25</div>
                 </div>
               </div>
-
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="text-white/60 italic">Processing via Paystack API</span>
-                <ExternalLink className="h-3 w-3 text-secondary" />
-              </div>
             </CardContent>
           </Card>
 
-          <Card className="border-none shadow-sm">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-secondary" />
-                Dispute Management
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                No active disputes found. Our escrow logic ensures 99.8% of transactions are completed without intervention.
-              </p>
-              <Button variant="outline" className="w-full rounded-full text-xs font-bold h-10">
-                Contact Mediator
-              </Button>
-            </CardContent>
-          </Card>
+          {currentRole === 'ADMIN' && (
+             <Card className="border-none shadow-sm bg-secondary/5">
+                <CardHeader>
+                  <CardTitle className="text-base">System Health</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between text-xs">
+                    <span>Paystack API</span>
+                    <span className="text-green-500 font-bold">Operational</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span>Escrow Locks</span>
+                    <span className="text-green-500 font-bold">Active</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span>Dispute Res.</span>
+                    <span className="text-amber-500 font-bold">2 Pending</span>
+                  </div>
+                </CardContent>
+             </Card>
+          )}
 
           <div className="p-6 bg-secondary/5 rounded-3xl border border-secondary/20 border-dashed">
             <div className="flex gap-4">
@@ -277,7 +298,7 @@ export default function Dashboard() {
               <div>
                 <h5 className="font-bold text-primary text-sm mb-1">Vault Protection</h5>
                 <p className="text-[11px] text-muted-foreground leading-tight">
-                  Your funds are secured in a tiered escrow structure. Releasing funds to providers is legally binding and irreversible.
+                  Your funds are secured in a tiered escrow structure. Releasing funds is legally binding.
                 </p>
               </div>
             </div>
