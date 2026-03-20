@@ -64,11 +64,12 @@ export default function Dashboard() {
   
   const [isVerifying, setIsVerifying] = useState(false);
   const [selectedTxId, setSelectedTxId] = useState<string | null>(null);
+  
+  // FIXED: State keys now match the UI checkboxes exactly to prevent logic mismatch
   const [checklist, setChecklist] = useState({
     condition: false,
-    authenticity: false,
-    functionality: false,
-    matches: false
+    matches: false,
+    functionality: false
   });
   
   const [activeTransactions, setActiveTransactions] = useState([
@@ -103,12 +104,13 @@ export default function Dashboard() {
   const handleVerificationComplete = () => {
     if (!selectedTxId) return;
     
+    // Check if every item in our synchronized checklist is true
     const isComplete = Object.values(checklist).every(v => v);
     if (!isComplete) {
       toast({
         variant: "destructive",
         title: "Audit Incomplete",
-        description: "All satisfaction points must be verified to authorize release.",
+        description: "All fidelity points must be certified to trigger the multisig release.",
       });
       return;
     }
@@ -119,11 +121,11 @@ export default function Dashboard() {
     
     setIsVerifying(false);
     setSelectedTxId(null);
-    setChecklist({ condition: false, authenticity: false, functionality: false, matches: false });
+    setChecklist({ condition: false, matches: false, functionality: false });
 
     toast({
       title: "Multisig release successful!",
-      description: `GHS Funds for ${selectedTxId} have been disbursed to the vendor via High Admin oversight.`,
+      description: `GHS Funds for ${selectedTxId} have been disbursed via High Admin oversight.`,
     });
   };
 
