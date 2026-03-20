@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils';
 
 export function EscrowBadge({ className }: { className?: string }) {
   return (
-    <Badge variant="secondary" className={cn("gap-1.5 py-1.5 px-4 bg-primary text-white border-none font-bold shadow-lg shadow-primary/10", className)}>
-      <Lock className="h-3.5 w-3.5 text-secondary" />
-      Secure GHS Vault
+    <Badge variant="secondary" className={cn("gap-2.5 py-2.5 px-6 bg-secondary text-white border-none font-black shadow-2xl shadow-secondary/20 rounded-full", className)}>
+      <Lock className="h-4 w-4 text-primary" />
+      <span className="text-[10px] tracking-[0.2em] uppercase">Sovereign Vault</span>
     </Badge>
   );
 }
