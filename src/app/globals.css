@@ -52,9 +52,13 @@
     transition: filter 0.5s ease-in-out;
   }
 
-  /* Dark Background Contrast Protocol */
-  .bg-primary, .bg-secondary, .bg-burgundy {
+  /* Dark Background Contrast Protocol: Forces Milky White on dark bg components */
+  .bg-primary, .bg-secondary, .bg-burgundy, .bg-midnight {
     @apply text-white/95; /* Ensuring Milky White foregrounds */
+  }
+  
+  .bg-primary *, .bg-secondary *, .bg-burgundy * {
+    @apply text-milky;
   }
 }
 

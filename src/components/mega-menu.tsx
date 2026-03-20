@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -123,7 +122,7 @@ export function MegaMenu() {
                 <Badge className="bg-primary text-secondary font-black rounded-none uppercase text-[8px] tracking-[0.3em] px-3 py-1 border-none">
                   Institutional Partner
                 </Badge>
-                <h3 className="text-2xl md:text-3xl font-black tracking-tighter leading-none uppercase">
+                <h3 className="text-2xl md:text-3xl font-black tracking-tighter leading-none uppercase text-milky">
                   THE <span className="text-primary">GOLD</span> <br /> STANDARD
                 </h3>
                 <p className="text-white/40 text-[10px] font-medium leading-relaxed uppercase tracking-widest">
@@ -145,7 +144,7 @@ export function MegaMenu() {
                       />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors">Melcom Digital</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">Melcom Digital</p>
                       <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9 Rating</p>
                     </div>
                   </div>
@@ -155,7 +154,7 @@ export function MegaMenu() {
                       <ShieldCheck className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors">PrimeRentals GH</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">PrimeRentals GH</p>
                       <p className="text-[8px] text-white/30 uppercase tracking-tighter">Sovereign Agency • Certified</p>
                     </div>
                   </div>

@@ -580,7 +580,7 @@ export default function Dashboard() {
               <ShieldCheck className="h-16 w-16 text-primary opacity-10" />
             </div>
             <CardHeader className="p-8">
-              <CardTitle className="flex items-center gap-3 text-xl font-black tracking-tight uppercase">
+              <CardTitle className="flex items-center gap-3 text-xl font-black tracking-tight uppercase text-milky">
                 <Wallet className="h-6 w-6 text-primary" />
                 Sovereign Balance
               </CardTitle>
