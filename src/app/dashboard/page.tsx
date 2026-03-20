@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -43,7 +44,8 @@ import {
   FileText,
   Zap,
   Fingerprint,
-  LineChart
+  LineChart,
+  Terminal
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
@@ -298,13 +300,22 @@ export default function Dashboard() {
             </Button>
           )}
           {currentRole === 'HIGH_ADMIN' && (
-            <Button 
-              onClick={handleAuthorizeLocks}
-              className="bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
-            >
-              <Key className="h-4 w-4" />
-              Authorize Payouts
-            </Button>
+            <>
+              <Button 
+                onClick={() => router.push('/admin')}
+                className="bg-secondary text-white hover:bg-secondary/90 rounded-none px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
+              >
+                <Terminal className="h-4 w-4 text-primary" />
+                Admin Console
+              </Button>
+              <Button 
+                onClick={handleAuthorizeLocks}
+                className="bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
+              >
+                <Key className="h-4 w-4" />
+                Authorize Payouts
+              </Button>
+            </>
           )}
           <Button variant="outline" className="rounded-none h-11 px-6 font-bold text-[10px] uppercase tracking-widest hover:bg-primary/5">
             <Settings className="h-4 w-4 mr-2" />
@@ -544,7 +555,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Open Session</Button>
-                </Card>
+                </div>
                 <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="p-3 bg-secondary rounded-none">
