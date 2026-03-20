@@ -71,6 +71,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Line, LineChart as ReLineChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { cn } from "@/lib/utils";
 
 const chartData = [
   { month: "Jan", volume: 1200 },
