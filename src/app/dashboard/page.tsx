@@ -555,7 +555,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Open Session</Button>
-                </div>
+                </Card>
                 <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="p-3 bg-secondary rounded-none">
