@@ -1,9 +1,10 @@
+
 "use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Heart, Phone, ChevronDown, ShieldCheck, Globe, LogOut } from 'lucide-react';
+import { Search, User, ShoppingCart, Heart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
@@ -16,6 +17,7 @@ import { useAuth, useCart } from '@/components/providers';
 import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 const TICKER_ITEMS = [
   "LIVE VAULT ACTIVITY: GH₵8,450.00 SECURED IN ACCRA",
@@ -70,23 +72,51 @@ export function Navbar() {
 
       {/* Main Bar */}
       <div className="bg-white/95 backdrop-blur-xl border-b py-0 shadow-sm">
-        <div className="container mx-auto px-4 flex items-center justify-between gap-8 h-20">
-          <Link href="/" className="flex items-center gap-3 font-headline font-black text-2xl text-secondary shrink-0 group">
-            <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
-              <Image 
-                src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-                alt="VaultCommerce Logo" 
-                fill 
-                className="object-cover"
-              />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
-              <span className="text-[8px] font-black text-secondary/40 tracking-[0.3em] uppercase mt-1">Sovereign Escrow</span>
-            </div>
-          </Link>
+        <div className="container mx-auto px-4 flex items-center justify-between gap-4 md:gap-8 h-20">
+          <div className="flex items-center gap-4">
+            {/* Mobile Menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="lg:hidden rounded-none h-10 w-10">
+                  <Menu className="h-6 w-6 text-secondary" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] rounded-none p-0">
+                <SheetHeader className="p-6 border-b text-left">
+                  <SheetTitle className="text-xl font-black text-secondary uppercase tracking-tight">Registry Menu</SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col py-6">
+                  <Link href="/listings" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-sm uppercase tracking-widest">Global Registry</Link>
+                  <Link href="/dashboard" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-sm uppercase tracking-widest">Dashboard</Link>
+                  <Link href="/listings/create" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-sm uppercase tracking-widest">Sell on Vault</Link>
+                  <div className="mt-auto p-6 space-y-4">
+                    {!user ? (
+                      <Button onClick={() => setShowAuth(true)} className="w-full bg-secondary text-white font-black rounded-none h-12">Vault Entry</Button>
+                    ) : (
+                      <Button onClick={logout} variant="outline" className="w-full border-destructive text-destructive font-black rounded-none h-12">Sign Out</Button>
+                    )}
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
 
-          {/* Navigation Elements */}
+            <Link href="/" className="flex items-center gap-3 font-headline font-black text-xl md:text-2xl text-secondary shrink-0 group">
+              <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
+                <Image 
+                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
+                  alt="VaultCommerce Logo" 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
+                <span className="text-[7px] md:text-[8px] font-black text-secondary/40 tracking-[0.3em] uppercase mt-0.5 md:mt-1">Sovereign Escrow</span>
+              </div>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation Elements */}
           <div className="hidden lg:flex items-center h-full gap-2">
             <MegaMenu />
             <Separator orientation="vertical" className="h-8 mx-2" />
@@ -105,7 +135,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex items-center gap-2 md:gap-4 shrink-0">
             {!user ? (
               <Button 
                 variant="outline" 
@@ -127,8 +157,11 @@ export function Navbar() {
               </div>
             )}
             
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5">
+            <div className="flex items-center gap-1 md:gap-2">
+              <Button variant="ghost" size="icon" className="md:hidden rounded-none h-10 w-10">
+                <Search className="h-5 w-5 text-secondary" />
+              </Button>
+              <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5 hidden sm:flex">
                 <Heart className="h-6 w-6 text-secondary group-hover:text-primary transition-colors" />
               </Button>
               <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5">
@@ -143,7 +176,7 @@ export function Navbar() {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-none border-border md:hidden h-10 w-10">
+                <Button variant="outline" size="icon" className="rounded-none border-border lg:hidden h-10 w-10">
                   <User className="h-5 w-5 text-primary" />
                 </Button>
               </DropdownMenuTrigger>
@@ -155,7 +188,7 @@ export function Navbar() {
                 ) : (
                   <>
                     <DropdownMenuItem asChild className="rounded-none p-3 font-black text-secondary">
-                      <Link href="/dashboard">Dashboard</Link>
+                      <Link href="/dashboard" className="w-full">Dashboard</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={logout} className="rounded-none p-3 font-black text-destructive">
                       Logout
