@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -30,7 +29,7 @@ import { useToast } from '@/hooks/use-toast';
 import { LISTINGS } from '@/lib/mock-data';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Progress } from '@/components/ui/progress';
-import { useAuth, useCart } from '@/components/providers';
+import { useAuth, useCart, useCurrency } from '@/components/providers';
 import { AuthDialog } from '@/components/auth-dialog';
 
 export default function ListingDetails() {
@@ -38,6 +37,7 @@ export default function ListingDetails() {
   const { toast } = useToast();
   const { user } = useAuth();
   const { addItem } = useCart();
+  const { formatPrice } = useCurrency();
   const router = useRouter();
   
   const [isLocking, setIsLocking] = useState(false);
@@ -57,7 +57,7 @@ export default function ListingDetails() {
     const steps = [
       "Connecting to Secure Payment Layer...",
       "Syncing with Escrow Node...",
-      "Authorizing GHS Vault Deposit...",
+      "Authorizing Treasury Deposit...",
       "Locking Funds in Escrow..."
     ];
 
@@ -125,7 +125,7 @@ export default function ListingDetails() {
                   </div>
                 </div>
               </div>
-              <div className="text-2xl md:text-3xl font-black text-primary">GH₵{listing.price.toLocaleString()}</div>
+              <div className="text-2xl md:text-3xl font-black text-primary">{formatPrice(listing.price)}</div>
             </div>
 
             <Separator />
@@ -147,7 +147,7 @@ export default function ListingDetails() {
                 The Secure Protocol
               </h3>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">
-                This transaction is protected by the **Escrow Security System**. Once you deposit funds, they are restricted in our secure GHS vault until you certify delivery. The vendor has 48 hours to initiate shipping. If they fail, your GHS is automatically returned to your wallet.
+                This transaction is protected by the **Escrow Security System**. Once you deposit funds, they are restricted in our secure treasury until you certify delivery. The vendor has 48 hours to initiate shipping. If they fail, your funds are automatically returned to your wallet.
               </p>
             </div>
 
@@ -182,21 +182,21 @@ export default function ListingDetails() {
             <CardContent className="p-6 md:p-8 space-y-4 md:space-y-6">
               <div className="flex justify-between items-center py-2">
                 <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Item Price</span>
-                <span className="font-black text-secondary text-sm md:text-base">GH₵{listing.price.toLocaleString()}</span>
+                <span className="font-black text-secondary text-sm md:text-base">{formatPrice(listing.price)}</span>
               </div>
               <div className="flex justify-between items-center py-2">
                 <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Escrow Fee (2%)</span>
-                <span className="font-black text-primary text-sm md:text-base">GH₵{(listing.price * 0.02).toFixed(2)}</span>
+                <span className="font-black text-primary text-sm md:text-base">{formatPrice(listing.price * 0.02)}</span>
               </div>
               <Separator />
               <div className="flex justify-between items-center py-4 text-lg md:text-xl font-headline">
                 <span className="font-black text-secondary tracking-tight">Total Deposit</span>
-                <span className="font-black text-primary">GH₵{(listing.price * 1.02).toLocaleString()}</span>
+                <span className="font-black text-primary">{formatPrice(listing.price * 1.02)}</span>
               </div>
 
               <div className="flex items-center gap-2 mb-4 p-3 bg-muted/50 border border-dashed border-primary/20">
                 <Activity className="h-4 w-4 text-primary" />
-                <span className="text-[9px] font-black text-secondary uppercase tracking-tight">Verified by {listing.salesCount} happy customers in Ghana</span>
+                <span className="text-[9px] font-black text-secondary uppercase tracking-tight">Verified by {listing.salesCount} happy customers</span>
               </div>
               
               <div className="grid gap-3">
@@ -281,7 +281,7 @@ export default function ListingDetails() {
             <div className="space-y-2">
               <DialogTitle className="text-xl md:text-2xl font-black text-secondary tracking-tight">Deposit Success!</DialogTitle>
               <DialogDescription className="text-[10px] md:text-sm font-bold text-muted-foreground uppercase tracking-widest">
-                GH₵{(listing.price * 1.02).toLocaleString()} restricted in Escrow.
+                {formatPrice(listing.price * 1.02)} restricted in Escrow.
               </DialogDescription>
             </div>
             

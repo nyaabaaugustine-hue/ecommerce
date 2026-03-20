@@ -52,6 +52,46 @@ export const useAuth = () => {
   return context;
 };
 
+// --- Currency Context ---
+export type CurrencyCode = 'GHS' | 'USD' | 'EUR' | 'GBP';
+
+interface CurrencyContextType {
+  currency: CurrencyCode;
+  setCurrency: (code: CurrencyCode) => void;
+  formatPrice: (priceGHS: number) => string;
+}
+
+const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
+
+const RATES: Record<CurrencyCode, { rate: number; symbol: string }> = {
+  GHS: { rate: 1, symbol: 'GH₵' },
+  USD: { rate: 0.082, symbol: '$' },
+  EUR: { rate: 0.076, symbol: '€' },
+  GBP: { rate: 0.064, symbol: '£' },
+};
+
+export function CurrencyProvider({ children }: { children: React.ReactNode }) {
+  const [currency, setCurrency] = useState<CurrencyCode>('GHS');
+
+  const formatPrice = (priceGHS: number) => {
+    const { rate, symbol } = RATES[currency];
+    const converted = priceGHS * rate;
+    return `${symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: currency === 'GHS' ? 0 : 2, maximumFractionDigits: 2 })}`;
+  };
+
+  return (
+    <CurrencyContext.Provider value={{ currency, setCurrency, formatPrice }}>
+      {children}
+    </CurrencyContext.Provider>
+  );
+}
+
+export const useCurrency = () => {
+  const context = useContext(CurrencyContext);
+  if (!context) throw new Error("useCurrency must be used within CurrencyProvider");
+  return context;
+};
+
 // --- Cart Context ---
 interface CartItem extends Listing {
   quantity: number;

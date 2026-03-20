@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -9,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { EscrowBadge } from '@/components/escrow-badge';
 import { Star, Eye, ShoppingCart, Heart, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/components/providers';
+import { useCart, useCurrency } from '@/components/providers';
 import { useToast } from '@/hooks/use-toast';
 
 interface ListingProps {
@@ -30,6 +29,7 @@ export function ListingCard(props: ListingProps) {
   const { id, title, category, price, oldPrice, location, imageUrl, rating, discount, salesCount } = props;
   const router = useRouter();
   const { addItem } = useCart();
+  const { formatPrice } = useCurrency();
   const { toast } = useToast();
 
   const handleBuyNow = (e: React.MouseEvent) => {
@@ -94,9 +94,9 @@ export function ListingCard(props: ListingProps) {
         </div>
         
         <div className="mt-auto pt-3 flex items-baseline gap-2">
-          <span className="text-lg font-black text-secondary tracking-tight">GH₵{price.toLocaleString()}</span>
+          <span className="text-lg font-black text-secondary tracking-tight">{formatPrice(price)}</span>
           {oldPrice && (
-            <span className="text-[10px] text-muted-foreground line-through font-bold">GH₵{oldPrice.toLocaleString()}</span>
+            <span className="text-[10px] text-muted-foreground line-through font-bold">{formatPrice(oldPrice)}</span>
           )}
         </div>
       </CardContent>

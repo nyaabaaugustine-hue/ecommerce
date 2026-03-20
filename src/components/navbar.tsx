@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
-import { useAuth, useCart } from '@/components/providers';
+import { useAuth, useCart, useCurrency, type CurrencyCode } from '@/components/providers';
 import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
@@ -23,7 +23,7 @@ const TICKER_ITEMS = [
   "PURCHASE VERIFIED: YAW MENSAH @ MELCOM DIGITAL",
   "SECURITY UPDATE: ESCROW PROTECTION ACTIVE",
   "HIGH DEMAND: 24 USERS VIEWING SAMSUNG 65\" QLED",
-  "BUYER GUARANTEE: 100% PROTECTION ACTIVE",
+  "BUYER GUARANTE: 100% PROTECTION ACTIVE",
   "NEW VENDOR JOINED: PRIME RENTALS GH",
   "TRANSACTION UPDATE: 99.4% SUCCESS RATE",
   "LIVE UPDATES: 12 NEW ORDERS IN EAST LEGON"
@@ -32,6 +32,7 @@ const TICKER_ITEMS = [
 export function Navbar() {
   const { user, logout } = useAuth();
   const { items } = useCart();
+  const { currency, setCurrency } = useCurrency();
   const [showAuth, setShowAuth] = useState(false);
 
   return (
@@ -62,9 +63,24 @@ export function Navbar() {
             </span>
           </div>
           <div className="flex items-center gap-6">
-             <div className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
-              <Globe className="h-3 w-3" /> GHS GH₵ <ChevronDown className="h-3 w-3" />
-            </div>
+             <DropdownMenu>
+               <DropdownMenuTrigger asChild>
+                 <div className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+                    <Globe className="h-3 w-3" /> {currency} <ChevronDown className="h-3 w-3" />
+                  </div>
+               </DropdownMenuTrigger>
+               <DropdownMenuContent className="rounded-none bg-secondary text-white border-primary/20">
+                 {(['GHS', 'USD', 'EUR', 'GBP'] as CurrencyCode[]).map((code) => (
+                   <DropdownMenuItem 
+                    key={code} 
+                    onClick={() => setCurrency(code)}
+                    className="rounded-none hover:bg-primary hover:text-secondary font-black text-[10px] uppercase cursor-pointer"
+                   >
+                     {code}
+                   </DropdownMenuItem>
+                 ))}
+               </DropdownMenuContent>
+             </DropdownMenu>
           </div>
         </div>
       </div>
