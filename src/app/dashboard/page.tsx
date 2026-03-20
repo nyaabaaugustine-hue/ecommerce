@@ -1,79 +1,45 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Checkbox } from '@/components/ui/checkbox';
 import { 
   Shield, 
   Clock, 
   CheckCircle, 
   Wallet, 
   CreditCard, 
-  AlertCircle,
-  Users,
-  User,
-  Star,
-  BarChart3,
-  PackageCheck,
-  ClipboardCheck,
-  LogOut,
-  Truck,
-  MessageSquare,
-  Activity,
-  Timer,
-  ShieldAlert,
-  Lock,
-  ShieldCheck,
-  ChevronRight,
-  Settings,
-  Info,
-  History,
-  TrendingUp,
-  Cpu,
-  ArrowUpRight,
-  ArrowRightLeft,
-  Banknote,
-  Key,
-  BookOpen,
-  ArrowDownLeft,
-  FileText,
-  Zap,
-  Fingerprint,
-  LineChart,
+  Users, 
+  BarChart3, 
+  ClipboardCheck, 
+  LogOut, 
+  Truck, 
+  MessageSquare, 
+  Activity, 
+  Lock, 
+  ChevronRight, 
+  TrendingUp, 
+  Cpu, 
+  ArrowRightLeft, 
+  Key, 
+  FileText, 
+  LineChart, 
   Terminal
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
-import { Role, VENDORS, MOCK_USERS } from '@/lib/mock-data';
-import { useRouter } from 'next/navigation';
+import { VENDORS } from '@/lib/mock-data';
 import { useAuth } from '@/components/providers';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Line, LineChart as ReLineChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-import { cn } from "@/lib/utils";
+import { Line, LineChart as ReLineChart, XAxis, YAxis, CartesianGrid } from "recharts";
 
 const chartData = [
   { month: "Jan", volume: 1200 },
@@ -92,23 +58,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function Dashboard() {
-  const { toast } = useToast();
   const router = useRouter();
-  const { user, login, logout } = useAuth();
+  const { user, logout } = useAuth();
   const currentRole = user?.role || 'CUSTOMER';
   
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [biometricScanning, setBiometricScanning] = useState(false);
-  const [selectedTxId, setSelectedTxId] = useState<string | null>(null);
-  
-  const [checklist, setChecklist] = useState({
-    condition: false,
-    matches: false,
-    functionality: false,
-    biometric: false
-  });
-  
-  const [activeTransactions, setActiveTransactions] = useState([
+  const [activeTransactions] = useState([
     {
       id: 'ORDER-8821',
       item: 'MacBook Pro M3 Max',
@@ -136,46 +90,6 @@ export default function Dashboard() {
       timer: '12h 04m'
     }
   ]);
-
-  const handleBiometricScan = () => {
-    setBiometricScanning(true);
-    setTimeout(() => {
-      setBiometricScanning(false);
-      setChecklist(prev => ({ ...prev, biometric: true }));
-      toast({
-        title: "Biometric Identity Synced",
-        description: "Node authorization successful.",
-      });
-    }, 2000);
-  };
-
-  const handleVerificationComplete = () => {
-    if (!selectedTxId) return;
-    
-    const isComplete = checklist.condition && checklist.matches && checklist.functionality && checklist.biometric;
-    
-    if (!isComplete) {
-      toast({
-        variant: "destructive",
-        title: "Audit Incomplete",
-        description: "All checks including biometric sync must be certified to release funds.",
-      });
-      return;
-    }
-
-    setActiveTransactions(prev => prev.map(tx => 
-      tx.id === selectedTxId ? { ...tx, status: 'Completed', progress: 100, action: 'Funds Released', timer: 'Released' } : tx
-    ));
-    
-    setIsVerifying(false);
-    setSelectedTxId(null);
-    setChecklist({ condition: false, matches: false, functionality: false, biometric: false });
-
-    toast({
-      title: "Funds released successfully!",
-      description: `GHS Funds for ${selectedTxId} have been disbursed to the vendor.`,
-    });
-  };
 
   const stats = {
     HIGH_ADMIN: [
@@ -316,45 +230,12 @@ export default function Dashboard() {
                      <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Mediation Node Active</p>
                   </div>
                   
-                  {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
-                    <Dialog open={isVerifying && selectedTxId === tx.id} onOpenChange={(open) => { setIsVerifying(open); if(open) setSelectedTxId(tx.id); }}>
-                      <DialogTrigger asChild>
-                        <Button className="bg-secondary text-white hover:bg-primary hover:text-secondary font-black rounded-none px-8 h-12 text-[10px] uppercase tracking-[0.2em] shadow-xl">Audit & Release Funds</Button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-md rounded-none border-t-4 border-t-primary p-8 shadow-2xl">
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl font-black text-secondary text-center uppercase tracking-tighter">Fidelity Audit Protocol</DialogTitle>
-                          <DialogDescription className="text-center text-[10px] font-bold uppercase tracking-widest mt-2">Verify asset quality to disburse <span className="text-burgundy">GH₵{tx.amount.toLocaleString()}</span> from treasury.</DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-3 py-8">
-                          {[
-                            { id: 'condition', label: 'Item Integrity Verified', checked: checklist.condition },
-                            { id: 'matches', label: 'Description Synchronized', checked: checklist.matches },
-                            { id: 'functionality', label: 'Operational Standards Met', checked: checklist.functionality },
-                          ].map((item) => (
-                            <div key={item.id} className="flex items-center space-x-4 p-4 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all cursor-pointer" onClick={() => setChecklist(prev => ({...prev, [item.id as keyof typeof prev] : !prev[item.id as keyof typeof prev]}))}>
-                              <Checkbox id={item.id} checked={item.checked} />
-                              <label htmlFor={item.id} className="text-[10px] font-black uppercase tracking-widest text-secondary cursor-pointer flex-1">{item.label}</label>
-                            </div>
-                          ))}
-                          <div className="pt-6">
-                            <Button 
-                              variant="outline" 
-                              className={cn("w-full rounded-none h-16 gap-3 font-black text-[10px] uppercase tracking-widest border-2", checklist.biometric ? "border-green-500 text-green-600 bg-green-50" : "border-primary/20 hover:border-primary")}
-                              onClick={handleBiometricScan}
-                              disabled={biometricScanning}
-                            >
-                              {biometricScanning ? <Zap className="h-5 w-5 animate-spin" /> : checklist.biometric ? <ShieldCheck className="h-5 w-5" /> : <Fingerprint className="h-5 w-5" />}
-                              {biometricScanning ? "Authorizing Identity..." : checklist.biometric ? "Sovereign Identity Synced" : "Authorize via Biometric Node"}
-                            </Button>
-                          </div>
-                        </div>
-                        <DialogFooter><Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-14 text-xs uppercase tracking-widest shadow-2xl">AUTHORIZE SETTLEMENT</Button></DialogFooter>
-                      </DialogContent>
-                    </Dialog>
-                  ) : (
-                    <Button variant="outline" className="rounded-none h-11 px-6 font-black text-[10px] uppercase tracking-widest">Protocol History <ChevronRight className="h-4 w-4 ml-2" /></Button>
-                  )}
+                  <Button 
+                    onClick={() => router.push(`/orders/${tx.id}`)}
+                    className="w-full sm:w-auto bg-secondary text-white hover:bg-primary hover:text-secondary font-black rounded-none px-8 h-12 text-[10px] uppercase tracking-[0.2em] shadow-xl"
+                  >
+                    Manage Lifecycle Node
+                  </Button>
                 </div>
               </div>
             </Card>

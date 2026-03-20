@@ -11,17 +11,16 @@ import {
   ShieldAlert, 
   BarChart3, 
   TrendingUp, 
-  ArrowUpRight, 
-  ArrowDownRight,
   ShieldCheck,
-  Zap,
   Lock,
   Globe,
   Activity,
   Edit3,
   Layout,
   Settings as SettingsIcon,
-  ChevronRight
+  ChevronRight,
+  Database,
+  FileText
 } from "lucide-react";
 import { 
   ChartConfig, 
@@ -29,8 +28,8 @@ import {
   ChartTooltip, 
   ChartTooltipContent 
 } from "@/components/ui/chart";
-import { Line, LineChart as ReLineChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts";
-import { LISTINGS, VENDORS, MOCK_USERS } from "@/lib/mock-data";
+import { Line, LineChart as ReLineChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { VENDORS } from "@/lib/mock-data";
 
 const chartData = [
   { month: "Jan", volume: 450000 },
@@ -57,7 +56,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto pb-20">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-black text-secondary uppercase tracking-tighter">Sovereign Control</h1>
@@ -70,6 +69,44 @@ export default function AdminDashboard() {
               <span className="text-[9px] font-black text-secondary uppercase tracking-widest">Real-time Feed Active</span>
            </div>
         </div>
+      </div>
+
+      {/* PRIMARY COMMAND NODES - HOMEPAGE MANAGER */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Card className="rounded-none border-4 border-primary shadow-2xl bg-secondary text-white overflow-hidden relative group">
+          <div className="absolute top-0 right-0 p-12">
+            <Layout className="h-32 w-32 text-primary opacity-5 group-hover:opacity-10 transition-opacity" />
+          </div>
+          <CardContent className="p-10 space-y-8 relative z-10">
+             <div className="space-y-2">
+                <Badge className="bg-primary text-secondary rounded-none font-black text-[8px] uppercase tracking-[0.3em]">Institutional SCMS</Badge>
+                <h2 className="text-3xl font-black uppercase tracking-tighter text-milky">Homepage Registry Manager</h2>
+                <p className="text-xs font-medium text-white/50 uppercase tracking-widest max-w-md leading-relaxed">Authorize real-time modifications to text, imagery, and institutional headlines on the primary marketplace gateway.</p>
+             </div>
+             <Link href="/admin/pages/home" className="block">
+               <Button className="w-full sm:w-auto bg-primary text-secondary hover:bg-white hover:text-secondary font-black rounded-none h-16 px-12 uppercase text-[11px] tracking-[0.3em] gap-3 shadow-2xl">
+                  <Edit3 className="h-5 w-5" />
+                  Enter Homepage Node
+               </Button>
+             </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-none border-4 border-primary/20 shadow-2xl bg-white overflow-hidden relative group">
+          <CardContent className="p-10 space-y-8 relative z-10">
+             <div className="space-y-2">
+                <Badge variant="outline" className="border-primary/20 text-primary rounded-none font-black text-[8px] uppercase tracking-[0.3em]">Global Protocols</Badge>
+                <h2 className="text-3xl font-black uppercase tracking-tighter text-secondary">Platform Master Settings</h2>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest max-w-md leading-relaxed">Configure institutional branding, support metadata, and global financial parameters including escrow fees.</p>
+             </div>
+             <Link href="/admin/settings" className="block">
+               <Button variant="outline" className="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-white font-black rounded-none h-16 px-12 uppercase text-[11px] tracking-[0.3em] gap-3 shadow-xl">
+                  <SettingsIcon className="h-5 w-5" />
+                  Manage Global Protocols
+               </Button>
+             </Link>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -132,27 +169,6 @@ export default function AdminDashboard() {
         </Card>
 
         <div className="space-y-8">
-          <Card className="rounded-none border shadow-sm bg-secondary text-white overflow-hidden relative">
-            <div className="absolute top-0 right-0 p-8">
-              <Layout className="h-20 w-20 text-primary opacity-5" />
-            </div>
-            <CardHeader className="relative z-10">
-              <CardTitle className="text-xs font-black uppercase tracking-[0.3em] text-primary">Quick Authorization</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6 relative z-10">
-               <div>
-                  <p className="text-lg font-black tracking-tighter mb-1 uppercase">Homepage Management</p>
-                  <p className="text-[8px] font-bold uppercase tracking-widest opacity-60">Authorize edits to the primary registry gateway.</p>
-               </div>
-               <Link href="/admin/pages/home">
-                 <Button className="w-full bg-primary text-secondary hover:bg-white hover:text-secondary font-black rounded-none h-12 uppercase text-[10px] tracking-widest gap-2 shadow-xl">
-                    <Edit3 className="h-4 w-4" />
-                    Manage Homepage Node
-                 </Button>
-               </Link>
-            </CardContent>
-          </Card>
-
           <Card className="rounded-none border shadow-sm bg-white">
             <CardHeader>
               <CardTitle className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
@@ -164,8 +180,9 @@ export default function AdminDashboard() {
               {[
                 { type: 'SLA Warning', text: 'Order 8815 @ 42h', status: 'warning' },
                 { type: 'High Volume', text: 'GH₵45k authorized', status: 'info' },
+                { type: 'New Vendor', text: 'PrimeRentals Verified', status: 'info' },
               ].map((alert, i) => (
-                <div key={i} className="flex gap-4 p-3 bg-muted/30 border border-transparent">
+                <div key={i} className="flex gap-4 p-3 bg-muted/30 border border-transparent hover:border-primary/20 transition-all cursor-pointer">
                   <div className={`h-2 w-2 rounded-full mt-1 shrink-0 ${alert.status === 'warning' ? 'bg-orange-500' : 'bg-primary'}`} />
                   <div>
                     <p className="text-[8px] font-black uppercase text-primary tracking-widest">{alert.type}</p>
@@ -175,64 +192,26 @@ export default function AdminDashboard() {
               ))}
             </CardContent>
           </Card>
+
+          <Card className="rounded-none border shadow-sm bg-white border-t-4 border-t-primary">
+            <CardHeader>
+              <CardTitle className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                <Database className="h-4 w-4 text-primary" />
+                Registry Nodes
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+               <Link href="/admin/pages" className="flex items-center justify-between p-3 bg-muted/20 hover:bg-muted/50 transition-colors">
+                  <span className="text-[10px] font-black uppercase tracking-widest">Page Registry</span>
+                  <ChevronRight className="h-3 w-3 text-primary" />
+               </Link>
+               <Link href="/admin/listings" className="flex items-center justify-between p-3 bg-muted/20 hover:bg-muted/50 transition-colors">
+                  <span className="text-[10px] font-black uppercase tracking-widest">Asset Registry</span>
+                  <ChevronRight className="h-3 w-3 text-primary" />
+               </Link>
+            </CardContent>
+          </Card>
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-         <Card className="rounded-none border shadow-sm bg-white border-t-4 border-t-primary">
-            <CardHeader>
-              <CardTitle className="text-xs font-black uppercase tracking-widest flex items-center gap-2">
-                <SettingsIcon className="h-4 w-4 text-primary" />
-                System Protocol
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-               <p className="text-[10px] text-muted-foreground font-bold uppercase leading-relaxed">Modify global parameters, escrow fees, and institutional branding metadata.</p>
-               <Link href="/admin/settings">
-                 <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 group">
-                    Enter Protocol Settings
-                    <ChevronRight className="h-3 w-3 ml-2 group-hover:translate-x-1 transition-transform" />
-                 </Button>
-               </Link>
-            </CardContent>
-         </Card>
-
-         <Card className="rounded-none border shadow-sm bg-white border-t-4 border-t-primary">
-            <CardHeader>
-              <CardTitle className="text-xs font-black uppercase tracking-widest flex items-center gap-2">
-                <Layout className="h-4 w-4 text-primary" />
-                Registry Pages
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-               <p className="text-[10px] text-muted-foreground font-bold uppercase leading-relaxed">Manage content nodes across all sovereign registry pages including About and Services.</p>
-               <Link href="/admin/pages">
-                 <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 group">
-                    Open Page Registry
-                    <ChevronRight className="h-3 w-3 ml-2 group-hover:translate-x-1 transition-transform" />
-                 </Button>
-               </Link>
-            </CardContent>
-         </Card>
-
-         <Card className="rounded-none border shadow-sm bg-secondary text-white overflow-hidden relative border-t-4 border-t-primary">
-            <div className="absolute top-0 right-0 p-8">
-              <Globe className="h-20 w-20 text-primary opacity-5" />
-            </div>
-            <CardHeader className="relative z-10">
-              <CardTitle className="text-xs font-black uppercase tracking-[0.3em] text-primary">Node Status</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 relative z-10">
-               <div>
-                  <p className="text-2xl font-black tracking-tighter mb-1">ACCRA-GHS-01</p>
-                  <p className="text-[8px] font-bold uppercase tracking-widest opacity-60">Primary settlement liquidity active</p>
-               </div>
-               <div className="flex items-center gap-3">
-                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-[8px] font-black uppercase tracking-widest">Authorized Session Active</span>
-               </div>
-            </CardContent>
-         </Card>
       </div>
     </div>
   );

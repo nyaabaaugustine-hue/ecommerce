@@ -22,7 +22,8 @@ import {
   PlusCircle,
   FileText,
   AlertTriangle,
-  Monitor
+  Monitor,
+  FileCode
 } from "lucide-react";
 
 import {
@@ -49,12 +50,21 @@ const NAV_MAIN = [
     isActive: true,
   },
   {
+    title: "Content Registry",
+    url: "/admin/pages",
+    icon: Monitor,
+    items: [
+      { title: "Manage Home", url: "/admin/pages/home" },
+      { title: "Page Directory", url: "/admin/pages" },
+      { title: "Global Settings", url: "/admin/settings" },
+    ],
+  },
+  {
     title: "Registry Assets",
     url: "/admin/listings",
     icon: ShoppingBag,
     items: [
       { title: "All Listings", url: "/admin/listings" },
-      { title: "Pending Approval", url: "/admin/listings?status=pending" },
       { title: "Add New Asset", url: "/listings/create" },
     ],
   },
@@ -64,8 +74,7 @@ const NAV_MAIN = [
     icon: Store,
     items: [
       { title: "Verified Vendors", url: "/admin/vendors" },
-      { title: "Registry Applications", url: "/admin/vendors/applications" },
-      { title: "Fidelity Scores", url: "/admin/vendors/scores" },
+      { title: "Fidelity Scores", url: "/admin/vendors" },
     ],
   },
   {
@@ -74,27 +83,15 @@ const NAV_MAIN = [
     icon: Users,
     items: [
       { title: "All Accounts", url: "/admin/users" },
-      { title: "Access Groups", url: "/admin/users/roles" },
-      { title: "Sovereign Auth", url: "/admin/users/auth" },
-    ],
-  },
-  {
-    title: "Sovereign Protocol",
-    url: "/admin/settings",
-    icon: Settings,
-    items: [
-      { title: "Global Settings", url: "/admin/settings" },
-      { title: "Escrow Fees", url: "/admin/settings/escrow" },
-      { title: "Registry Themes", url: "/admin/settings/themes" },
+      { title: "Access Groups", url: "/admin/users" },
     ],
   },
 ];
 
 const NAV_SECONDARY = [
-  { title: "Content Node", url: "/admin/settings?tab=content", icon: Monitor },
-  { title: "Audit Trails", url: "/admin/audit", icon: History },
-  { title: "Security Logs", url: "/admin/security", icon: Lock },
-  { title: "Dispute Center", url: "/admin/disputes", icon: AlertTriangle },
+  { title: "Audit Trails", url: "/admin", icon: History },
+  { title: "Security Logs", url: "/admin", icon: Lock },
+  { title: "Dispute Center", url: "/admin", icon: AlertTriangle },
 ];
 
 export function AdminSidebar() {
