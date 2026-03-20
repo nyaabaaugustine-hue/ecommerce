@@ -102,7 +102,7 @@ export default function RootLayout({
             </div>
             
             <div className="pt-8 border-t border-white/10 text-center text-white/40 text-xs" suppressHydrationWarning>
-              © {new Date().getFullYear()} VaultCommerce. All rights reserved by VaultSoft.
+              © 2026 VaultCommerce. All rights reserved by <a href="https://cybergh.netlify.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">Cyber</a>.
             </div>
           </div>
         </footer>

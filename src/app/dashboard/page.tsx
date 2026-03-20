@@ -1,37 +1,19 @@
-
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Checkbox } from '@/components/ui/checkbox';
-import Image from 'next/image';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { 
   Shield, 
   Clock, 
   CheckCircle, 
-  ArrowRightLeft, 
-  CreditCard, 
   Wallet, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
+  CreditCard, 
   AlertCircle,
-  TrendingUp,
-  ExternalLink,
-  ChevronRight,
-  Settings,
   Users,
   BarChart3,
   PackageCheck,
@@ -43,12 +25,29 @@ import {
   Timer,
   ShieldAlert,
   Lock,
-  ShieldCheck
+  ShieldCheck,
+  ChevronRight,
+  Settings,
+  Info
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
-import { Role, VENDORS } from '@/lib/mock-data';
+import { Role, VENDORS, MOCK_USERS } from '@/lib/mock-data';
 import { useRouter } from 'next/navigation';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -128,13 +127,13 @@ export default function Dashboard() {
     HIGH_ADMIN: [
       { label: 'Total Ecosystem GMV', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross volume processed' },
       { label: 'Active Disputes', val: '5', icon: AlertCircle, color: 'text-secondary', sub: 'High priority mediation' },
-      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-indigo-500', sub: '+12 this month' },
+      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-accent', sub: '+12 this month' },
       { label: 'Treasury Vault', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Held in secure escrow' },
     ],
     VENDOR_ADMIN: [
       { label: 'Store Revenue', val: 'GH₵186,750', icon: Wallet, color: 'text-primary', sub: 'Settled this month' },
       { label: 'Active Escrows', val: '12', icon: Shield, color: 'text-secondary', sub: 'Funds in progress' },
-      { label: 'Staff Count', val: '8', icon: Users, color: 'text-indigo-500', sub: 'Active staff accounts' },
+      { label: 'Staff Count', val: '8', icon: Users, color: 'text-accent', sub: 'Active staff accounts' },
       { label: 'Net Payout Ready', val: 'GH₵42,100', icon: CreditCard, color: 'text-green-500', sub: 'Available to withdraw' },
     ],
     VENDOR_STAFF: [
@@ -163,13 +162,43 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
-      {/* Role Switcher for Demo */}
-      <div className="flex justify-between items-center mb-8 bg-white p-4 rounded-3xl border shadow-sm">
-        <div className="flex items-center gap-2">
-           <Activity className="h-5 w-5 text-secondary animate-pulse" />
-           <span className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Proto-Switch Command</span>
+      {/* Role Switcher & Demo Credentials */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-4 rounded-3xl border shadow-sm gap-4">
+        <div className="flex items-center gap-4">
+           <div className="flex items-center gap-2">
+             <Activity className="h-5 w-5 text-secondary animate-pulse" />
+             <span className="text-[10px] font-black text-muted-foreground uppercase tracking-wider">Command Node</span>
+           </div>
+           
+           <Popover>
+             <PopoverTrigger asChild>
+               <Button variant="outline" size="sm" className="rounded-full h-8 border-primary/20 text-primary font-black gap-2">
+                 <Info className="h-3 w-3" />
+                 Demo Access
+               </Button>
+             </PopoverTrigger>
+             <PopoverContent className="w-80 rounded-[2rem] p-6 shadow-2xl border-none">
+               <h3 className="font-black text-primary mb-4 flex items-center gap-2">
+                 <ShieldCheck className="h-5 w-5 text-secondary" />
+                 Credential Registry
+               </h3>
+               <div className="space-y-4">
+                 {MOCK_USERS.map(user => (
+                   <div key={user.id} className="p-3 bg-muted/30 rounded-2xl border border-muted">
+                     <p className="text-[10px] font-black uppercase text-secondary tracking-widest">{user.role.replace('_', ' ')}</p>
+                     <p className="font-bold text-sm text-primary">{user.email}</p>
+                     <p className="text-[10px] text-muted-foreground">Name: {user.name}</p>
+                   </div>
+                 ))}
+               </div>
+               <p className="mt-4 text-[10px] text-muted-foreground font-medium leading-tight">
+                 *No password required. These identities are simulated for platform validation.
+               </p>
+             </PopoverContent>
+           </Popover>
         </div>
-        <div className="flex gap-2">
+
+        <div className="flex flex-wrap justify-center gap-2">
           {(['HIGH_ADMIN', 'VENDOR_ADMIN', 'VENDOR_STAFF', 'CUSTOMER'] as Role[]).map(role => (
             <Button 
               key={role} 
