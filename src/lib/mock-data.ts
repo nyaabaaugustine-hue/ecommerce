@@ -75,6 +75,7 @@ export const VENDORS: Vendor[] = [
 ];
 
 export const LISTINGS: Listing[] = [
+  // Vendor 1: Melcom Digital Hub (4 Items)
   {
     id: '1',
     title: 'Quantum Precision MacBook Pro M3 Max',
@@ -100,28 +101,6 @@ export const LISTINGS: Listing[] = [
     discount: '10% OFF'
   },
   {
-    id: '3',
-    title: 'Elite Heritage L-Shaped Sectional Sofa',
-    vendorId: 'v3',
-    category: 'Heritage Furniture',
-    price: 6800,
-    location: 'Spintex Road, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
-    rating: 5.0
-  },
-  {
-    id: '4',
-    title: 'Makola Select Premium Grocery Registry',
-    vendorId: 'v1',
-    category: 'Supermarket Registry',
-    price: 450,
-    oldPrice: 550,
-    location: 'Tema, Ghana',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
-    rating: 4.7,
-    discount: '18% OFF'
-  },
-  {
     id: '5',
     title: 'Titanium iPhone 15 Pro - Sovereign Edition',
     vendorId: 'v1',
@@ -141,6 +120,8 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
     rating: 4.8
   },
+
+  // Vendor 2: PrimeRentals GH (4 Items)
   {
     id: '7',
     title: 'Apex Ridge Commercial Executive Suite',
@@ -172,16 +153,6 @@ export const LISTINGS: Listing[] = [
     rating: 4.9
   },
   {
-    id: '10',
-    title: 'Royal Orchid Heritage Beauty Protocol',
-    vendorId: 'v3',
-    category: 'Beauty & Personal',
-    price: 850,
-    location: 'Labone, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
-    rating: 4.7
-  },
-  {
     id: '11',
     title: 'Protocol-Grade Professional Audit',
     vendorId: 'v2',
@@ -190,6 +161,18 @@ export const LISTINGS: Listing[] = [
     location: 'Accra Central',
     imageUrl: 'https://images.unsplash.com/photo-1454165833767-027eeea15c3e?q=80&w=2070&auto=format&fit=crop',
     rating: 4.8
+  },
+
+  // Vendor 3: HomeLiving Furniture (4 Items)
+  {
+    id: '3',
+    title: 'Elite Heritage L-Shaped Sectional Sofa',
+    vendorId: 'v3',
+    category: 'Heritage Furniture',
+    price: 6800,
+    location: 'Spintex Road, Accra',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
+    rating: 5.0
   },
   {
     id: '12',
@@ -200,6 +183,28 @@ export const LISTINGS: Listing[] = [
     location: 'Spintex',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     rating: 4.9
+  },
+  {
+    id: '10',
+    title: 'Royal Orchid Heritage Beauty Protocol',
+    vendorId: 'v3',
+    category: 'Beauty & Personal',
+    price: 850,
+    location: 'Labone, Accra',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
+    rating: 4.7
+  },
+  {
+    id: '4',
+    title: 'Makola Select Premium Grocery Registry',
+    vendorId: 'v1',
+    category: 'Supermarket Registry',
+    price: 450,
+    oldPrice: 550,
+    location: 'Tema, Ghana',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
+    rating: 4.7,
+    discount: '18% OFF'
   }
 ];
 
