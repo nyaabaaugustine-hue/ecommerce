@@ -61,39 +61,39 @@ export default function RootLayout({
                     <span>VaultCommerce</span>
                  </div>
                  <p className="text-white/60 text-sm leading-relaxed">
-                   The ultimate all-in-one solution for your e-commerce business worldwide. Secure, fast, and trusted.
+                   The ultimate all-in-one high-trust solution for secure commerce in Ghana. Powered by Paystack Escrow.
                  </p>
                  <div className="space-y-2">
-                    <p className="text-sm font-bold">Hotline: <span className="text-primary font-normal">+233 24 000 0000</span></p>
-                    <p className="text-sm font-bold">Email: <span className="text-primary font-normal">support@vaultcommerce.com</span></p>
+                    <p className="text-sm font-bold">Protocol Support: <span className="text-primary font-normal">+233 24 000 0000</span></p>
+                    <p className="text-sm font-bold">Secure Mail: <span className="text-primary font-normal">vault@vaultcommerce.com</span></p>
                  </div>
               </div>
               
               <div>
-                <h4 className="font-bold text-lg mb-6">Quick Links</h4>
+                <h4 className="font-bold text-lg mb-6">Marketplace</h4>
                 <ul className="space-y-4 text-white/60 text-sm">
-                  <li className="hover:text-primary transition-colors cursor-pointer">Products</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Most Popular</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Best Deal</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Blogs</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Become a Seller</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Live Inventory</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Vault Favorites</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Bulk Settlement</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">SLA Policy</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Vendor Portal</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-bold text-lg mb-6">Company</h4>
+                <h4 className="font-bold text-lg mb-6">Security</h4>
                 <ul className="space-y-4 text-white/60 text-sm">
-                  <li className="hover:text-primary transition-colors cursor-pointer">About Us</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Contact</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Terms & Conditions</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li>
-                  <li className="hover:text-primary transition-colors cursor-pointer">Return Policy</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Escrow Protocols</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Paystack GHS Layer</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Dispute Resolution</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Identity Vault</li>
+                  <li className="hover:text-primary transition-colors cursor-pointer">Fraud Prevention</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-bold text-lg mb-6">Download Our App</h4>
-                <p className="text-white/60 text-xs mb-6">Get 10% off your first purchase on our app!</p>
+                <h4 className="font-bold text-lg mb-6">Mobile Access</h4>
+                <p className="text-white/60 text-xs mb-6">Manage your vault on the go. Available for GHS users.</p>
                 <div className="flex flex-col gap-4">
                   <Image src="https://placehold.co/160x48/000000/ffffff?text=App+Store" alt="App Store" width={160} height={48} className="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" unoptimized />
                   <Image src="https://placehold.co/160x48/000000/ffffff?text=Google+Play" alt="Google Play" width={160} height={48} className="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" unoptimized />
