@@ -14,11 +14,9 @@ import {
   ShieldAlert,
   Fingerprint,
   Crown,
-  Store,
   Gavel,
   Zap,
   TrendingUp,
-  MessageSquare,
   Plus
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';

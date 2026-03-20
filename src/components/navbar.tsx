@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Heart, LayoutGrid, Phone, ChevronDown, ShieldCheck, Globe, LogOut } from 'lucide-react';
+import { Search, User, ShoppingCart, Heart, Phone, ChevronDown, ShieldCheck, Globe, LogOut } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
