@@ -6,6 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import Image from 'next/image';
 import { 
   Shield, 
@@ -22,7 +32,9 @@ import {
   ChevronRight,
   Settings,
   Users,
-  BarChart3
+  BarChart3,
+  PackageCheck,
+  ClipboardCheck
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
@@ -30,7 +42,14 @@ import { Role, VENDORS } from '@/lib/mock-data';
 
 export default function Dashboard() {
   const { toast } = useToast();
-  const [currentRole, setCurrentRole] = useState<Role>('VENDOR');
+  const [currentRole, setCurrentRole] = useState<Role>('CUSTOMER');
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [checklist, setChecklist] = useState({
+    condition: false,
+    authenticity: false,
+    functionality: false,
+    matches: false
+  });
   
   const [activeTransactions, setActiveTransactions] = useState([
     {
@@ -59,13 +78,25 @@ export default function Dashboard() {
     }
   ]);
 
-  const handleConfirm = (id: string) => {
+  const handleVerificationComplete = (id: string) => {
+    const isComplete = Object.values(checklist).every(v => v);
+    if (!isComplete) {
+      toast({
+        variant: "destructive",
+        title: "Checklist Incomplete",
+        description: "Please verify all satisfaction points before confirming.",
+      });
+      return;
+    }
+
     setActiveTransactions(prev => prev.map(tx => 
       tx.id === id ? { ...tx, status: 'Completed', progress: 100, action: 'Funds Released' } : tx
     ));
+    
+    setIsVerifying(false);
     toast({
-      title: "Confirmation Successful!",
-      description: `Transaction ${id} finalized. Funds disbursed in GHS.`,
+      title: "Satisfaction Verified!",
+      description: `GHS Funds for ${id} have been authorized for release by Admin.`,
     });
   };
 
@@ -112,16 +143,16 @@ export default function Dashboard() {
         <div>
           <div className="flex items-center gap-3 mb-2">
             <h1 className="text-4xl font-headline font-bold text-primary">
-              {currentRole === 'ADMIN' ? 'Platform Control' : 'Command Center'}
+              {currentRole === 'ADMIN' ? 'Vault Control' : 'My Command Center'}
             </h1>
             <Badge variant="secondary" className="bg-secondary/10 text-primary border-secondary/20 font-bold px-3">
-              {currentRole === 'ADMIN' ? 'Root Access' : currentRole === 'VENDOR' ? 'Verified Merchant' : 'Preferred Buyer'}
+              {currentRole === 'ADMIN' ? 'Escrow Admin' : currentRole === 'VENDOR' ? 'Verified Merchant' : 'Secure Buyer'}
             </Badge>
           </div>
           <p className="text-muted-foreground">
             {currentRole === 'ADMIN' 
-              ? 'Oversee global marketplace health in Ghana Cedis.' 
-              : 'Monitor your escrow pipeline and GHS financial settlements.'}
+              ? 'Managing GHS fund releases based on buyer satisfaction.' 
+              : 'Securely interact with your GHS trades and vault protection.'}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
@@ -130,7 +161,7 @@ export default function Dashboard() {
             Account Settings
           </Button>
           <Button className="bg-primary hover:bg-primary/90 rounded-full shadow-lg px-8">
-            {currentRole === 'CUSTOMER' ? 'Track Shipments' : 'Withdraw Funds (Momo/Bank)'}
+            {currentRole === 'CUSTOMER' ? 'Track My Vaults' : 'Settlement Queue'}
           </Button>
         </div>
       </div>
@@ -143,7 +174,7 @@ export default function Dashboard() {
                 <div className={`p-2 rounded-xl bg-muted`}>
                   <stat.icon className={`h-6 w-6 ${stat.color}`} />
                 </div>
-                <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">Live GHS</Badge>
+                <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider">GHS Vault</Badge>
               </div>
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
               <p className="text-3xl font-headline font-bold text-primary mb-2">{stat.val}</p>
@@ -162,9 +193,9 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-6">
               <TabsList className="bg-muted/50 p-1 border rounded-full">
                 <TabsTrigger value="active" className="rounded-full px-6 data-[state=active]:bg-white">
-                  {currentRole === 'ADMIN' ? 'Vaults (GH)' : 'Active Trades'}
+                  {currentRole === 'ADMIN' ? 'Treasury Queue' : 'Active Trades'}
                 </TabsTrigger>
-                <TabsTrigger value="payouts" className="rounded-full px-6 data-[state=active]:bg-white">Financials</TabsTrigger>
+                <TabsTrigger value="payouts" className="rounded-full px-6 data-[state=active]:bg-white">History</TabsTrigger>
               </TabsList>
             </div>
 
@@ -184,7 +215,7 @@ export default function Dashboard() {
                             <span className="text-xs text-muted-foreground font-mono">{tx.id}</span>
                             <div className="flex items-center gap-1 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                               <Shield className="h-3 w-3" />
-                              {currentRole === 'ADMIN' ? 'Overseen' : tx.role}
+                              {currentRole === 'ADMIN' ? 'Vault Oversight' : tx.role}
                             </div>
                             <span className="text-xs text-muted-foreground">{tx.date}</span>
                           </div>
@@ -200,7 +231,7 @@ export default function Dashboard() {
                     
                     <div className="space-y-3 mb-6">
                       <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                        <span>Escrow Progress</span>
+                        <span>Transaction Completion</span>
                         <span>{tx.progress}%</span>
                       </div>
                       <Progress value={tx.progress} className="h-2 bg-muted" />
@@ -218,12 +249,82 @@ export default function Dashboard() {
                         ))}
                       </div>
                       {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
-                        <Button size="sm" onClick={() => handleConfirm(tx.id)} className="bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-full px-6">
-                          Verify Delivery
+                        <Dialog open={isVerifying} onOpenChange={setIsVerifying}>
+                          <DialogTrigger asChild>
+                            <Button size="sm" className="bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-full px-6">
+                              Verify Satisfaction
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md">
+                            <DialogHeader>
+                              <DialogTitle className="flex items-center gap-2">
+                                <ClipboardCheck className="h-5 w-5 text-secondary" />
+                                Buyer Satisfaction Checklist
+                              </DialogTitle>
+                              <DialogDescription>
+                                To release GH₵{tx.amount.toLocaleString()} to the vendor, please confirm the following:
+                              </DialogDescription>
+                            </DialogHeader>
+                            <div className="space-y-4 py-4">
+                              <div className="flex items-start space-x-3">
+                                <Checkbox 
+                                  id="condition" 
+                                  checked={checklist.condition} 
+                                  onCheckedChange={(checked) => setChecklist(prev => ({...prev, condition: !!checked}))}
+                                />
+                                <label htmlFor="condition" className="text-sm font-medium leading-none">
+                                  Product arrived in good physical condition.
+                                </label>
+                              </div>
+                              <div className="flex items-start space-x-3">
+                                <Checkbox 
+                                  id="matches" 
+                                  checked={checklist.matches} 
+                                  onCheckedChange={(checked) => setChecklist(prev => ({...prev, matches: !!checked}))}
+                                />
+                                <label htmlFor="matches" className="text-sm font-medium leading-none">
+                                  Matches the description and photos provided.
+                                </label>
+                              </div>
+                              <div className="flex items-start space-x-3">
+                                <Checkbox 
+                                  id="authenticity" 
+                                  checked={checklist.authenticity} 
+                                  onCheckedChange={(checked) => setChecklist(prev => ({...prev, authenticity: !!checked}))}
+                                />
+                                <label htmlFor="authenticity" className="text-sm font-medium leading-none">
+                                  Authenticity is verified (if applicable).
+                                </label>
+                              </div>
+                              <div className="flex items-start space-x-3">
+                                <Checkbox 
+                                  id="functionality" 
+                                  checked={checklist.functionality} 
+                                  onCheckedChange={(checked) => setChecklist(prev => ({...prev, functionality: !!checked}))}
+                                />
+                                <label htmlFor="functionality" className="text-sm font-medium leading-none">
+                                  Functions as expected and fully operational.
+                                </label>
+                              </div>
+                            </div>
+                            <DialogFooter>
+                              <Button 
+                                type="button" 
+                                onClick={() => handleVerificationComplete(tx.id)}
+                                className="w-full bg-primary font-bold rounded-xl"
+                              >
+                                Finalize & Release GHS Funds
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
+                      ) : currentRole === 'ADMIN' && tx.status === 'Verification Pending' ? (
+                        <Button size="sm" className="bg-green-600 text-white hover:bg-green-700 font-bold rounded-full px-6">
+                          Manual Release
                         </Button>
                       ) : (
                         <Button size="sm" variant="ghost" className="text-xs font-bold text-primary">
-                          Details <ChevronRight className="h-4 w-4 ml-1" />
+                          View Timeline <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                       )}
                     </div>
@@ -236,20 +337,11 @@ export default function Dashboard() {
                <Card className="border-none shadow-sm">
                  <CardContent className="p-12 text-center space-y-4">
                    <div className="bg-muted h-16 w-16 rounded-full flex items-center justify-center mx-auto">
-                     <Clock className="h-8 w-8 text-muted-foreground" />
+                     <PackageCheck className="h-8 w-8 text-muted-foreground" />
                    </div>
-                   <h3 className="text-xl font-bold text-primary">Settlement Intelligence</h3>
-                   <div className="flex items-center justify-center gap-2 mb-4">
-                      <Image 
-                        src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773997887/vbb_kuy4qi.png" 
-                        alt="Paystack" 
-                        width={100} 
-                        height={30} 
-                        className="opacity-50 grayscale hover:grayscale-0 transition-all"
-                      />
-                   </div>
+                   <h3 className="text-xl font-bold text-primary">High-Trust History</h3>
                    <p className="text-muted-foreground max-w-sm mx-auto">
-                     Automatic split logic for GHS payouts is processing via Paystack Ghana. Next settlement in 14 hours.
+                     All completed interactions are archived here. Funds were released only after 100% satisfaction confirmation.
                    </p>
                  </CardContent>
                </Card>
@@ -262,12 +354,12 @@ export default function Dashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5 text-secondary" />
-                Ghanaian Assets
+                Treasury Assets (GHS)
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-1">
-                <span className="text-xs font-bold uppercase tracking-widest text-white/50">Total GHS Vault</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-white/50">Protected Vault Total</span>
                 <div className="text-4xl font-headline font-bold">GH₵273,682</div>
               </div>
               
@@ -277,8 +369,8 @@ export default function Dashboard() {
                   <div className="font-bold text-lg">+GH₵36,750</div>
                 </div>
                 <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
-                  <span className="text-[10px] font-bold uppercase block mb-1">Fees</span>
-                  <div className="font-bold text-lg">-GH₵1,293</div>
+                  <span className="text-[10px] font-bold uppercase block mb-1">Escrow Fee</span>
+                  <div className="font-bold text-lg">1.5%</div>
                 </div>
               </div>
             </CardContent>
@@ -288,9 +380,9 @@ export default function Dashboard() {
             <div className="flex gap-4">
               <Shield className="h-8 w-8 text-secondary shrink-0" />
               <div>
-                <h5 className="font-bold text-primary text-sm mb-1">Vault Protection (GH)</h5>
+                <h5 className="font-bold text-primary text-sm mb-1">Admin Treasury Protocol</h5>
                 <p className="text-[11px] text-muted-foreground leading-tight">
-                  Your Ghana Cedis are secured in a tiered escrow structure. Releasing funds is legally binding under Ghanaian commerce law.
+                  Funds held in the Paystack vault are only released after the buyer confirms satisfaction checklist. Admin oversees all manual overrides for disputes.
                 </p>
               </div>
             </div>

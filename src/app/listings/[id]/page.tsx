@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { EscrowBadge } from '@/components/escrow-badge';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Star, MapPin, Share2, Heart, ShieldCheck, Info } from 'lucide-react';
+import { Star, MapPin, Share2, Heart, ShieldCheck, Info, Gavel, CheckCircle2 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useToast } from '@/hooks/use-toast';
 import { LISTINGS } from '@/lib/mock-data';
@@ -17,7 +17,6 @@ export default function ListingDetails() {
   const { toast } = useToast();
   const router = useRouter();
 
-  // Find listing from mock data or fallback
   const listingData = LISTINGS.find(l => l.id === id);
   
   const listing = listingData || {
@@ -35,10 +34,9 @@ export default function ListingDetails() {
 
   const handlePurchase = () => {
     toast({
-      title: "Transaction Initiated",
-      description: "You're being redirected to Paystack (GH) to secure the funds in our Escrow Vault.",
+      title: "Escrow Initiated",
+      description: "You're being redirected to Paystack (GH). Funds will be held in a secure vault.",
     });
-    // Simulate navigation to dashboard after "payment"
     setTimeout(() => router.push('/dashboard'), 2000);
   };
 
@@ -47,7 +45,7 @@ export default function ListingDetails() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Left: Images and Info */}
         <div className="lg:col-span-2 space-y-8">
-          <div className="relative h-[400px] md:h-[500px] w-full rounded-[2rem] overflow-hidden group shadow-2xl">
+          <div className="relative h-[400px] md:h-[500px] w-full rounded-[2.5rem] overflow-hidden group shadow-2xl">
             <Image 
               src={listing.imageUrl || 'https://picsum.photos/seed/placeholder/800/600'} 
               alt={listing.title} 
@@ -83,8 +81,19 @@ export default function ListingDetails() {
 
             <Separator />
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center gap-3 p-4 bg-muted/30 rounded-2xl">
+                <CheckCircle2 className="h-5 w-5 text-secondary" />
+                <span className="text-sm font-medium">Buyer Satisfaction Guarantee</span>
+              </div>
+              <div className="flex items-center gap-3 p-4 bg-muted/30 rounded-2xl">
+                <Gavel className="h-5 w-5 text-secondary" />
+                <span className="text-sm font-medium">Admin Meditated Disputes</span>
+              </div>
+            </div>
+
             <div className="space-y-4">
-              <h3 className="text-xl font-bold text-primary">About this Listing</h3>
+              <h3 className="text-xl font-bold text-primary">High-Trust Escrow Protocol</h3>
               <p className="text-muted-foreground leading-relaxed">
                 {listing.description || "Fully protected by VaultCommerce Escrow Ghana. Funds will only be released to the provider after you confirm satisfactory delivery."}
               </p>
@@ -94,9 +103,9 @@ export default function ListingDetails() {
               <div className="flex gap-4">
                 <ShieldCheck className="h-10 w-10 text-secondary shrink-0" />
                 <div>
-                  <h4 className="font-bold text-primary mb-1">Local High-Trust Interaction</h4>
+                  <h4 className="font-bold text-primary mb-1">Paystack-Backed Security</h4>
                   <p className="text-sm text-muted-foreground">
-                    VaultCommerce Ghana protects both parties. The funds are held via Paystack's secure escrow API until you trigger the 'Proof of Delivery' confirmation on your dashboard.
+                    Your money stays in a secure Paystack account. We (Admin) only authorize the release once you complete the satisfaction checklist on your dashboard after delivery.
                   </p>
                 </div>
               </div>
@@ -108,8 +117,8 @@ export default function ListingDetails() {
         <div className="space-y-6">
           <Card className="border-none shadow-xl sticky top-24 overflow-hidden">
             <div className="bg-primary p-6 text-primary-foreground">
-              <h3 className="font-bold text-xl mb-1">Buy Securely (GHS)</h3>
-              <p className="text-xs opacity-70">Escrow Vault Service is Active</p>
+              <h3 className="font-bold text-xl mb-1">Secure GHS Vault</h3>
+              <p className="text-xs opacity-70">Escrow Interaction Active</p>
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="flex justify-between items-center py-2">
@@ -127,7 +136,7 @@ export default function ListingDetails() {
               </div>
               
               <Button onClick={handlePurchase} size="lg" className="w-full bg-secondary text-primary hover:bg-secondary/90 font-bold h-14 rounded-full shadow-lg shadow-secondary/10">
-                Secure Funds with Paystack
+                Deposit to Escrow Vault
               </Button>
               
               <div className="flex items-center justify-center gap-2 pt-2">
@@ -143,7 +152,7 @@ export default function ListingDetails() {
               <div className="bg-muted p-4 rounded-xl flex items-start gap-3">
                 <Info className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                 <p className="text-[11px] text-muted-foreground leading-tight">
-                  Funds are held in a vault. Releasing funds prematurely is not recommended unless service is fully completed.
+                  Funds are restricted until you provide satisfaction proof. Releasing funds prematurely voids the protection policy.
                 </p>
               </div>
             </CardContent>
