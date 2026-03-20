@@ -72,11 +72,9 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col bg-white min-h-screen">
-      {/* AliExpress Style Promotion Popup */}
       <PromotionPopup />
 
-      {/* Hero Slider Section */}
-      <section className="container mx-auto px-4 py-4 md:py-6">
+      <section className="container mx-auto px-4 py-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl h-[400px] md:h-[500px] border border-border">
             <div className={cn(
@@ -136,20 +134,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Products Section - Light Burgundy Background */}
-      <section className="bg-[hsl(var(--burgundy-light))] py-12 md:py-20">
+      <section className="bg-[hsl(var(--burgundy-light))] py-12">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 border-b border-burgundy/10 pb-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4 border-b border-burgundy/10 pb-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2 mb-1">
                  <Activity className="h-4 w-4 text-primary" />
                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Live Activity Feed</span>
               </div>
               <h2 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">FEATURED PRODUCTS</h2>
-              <p className="text-muted-foreground font-medium max-w-lg text-[10px] md:text-xs uppercase tracking-widest">Premium items protected via Secure Escrow Protocols.</p>
+              <p className="text-muted-foreground font-medium text-[10px] md:text-xs uppercase tracking-widest">Premium items protected via Secure Escrow Protocols.</p>
             </div>
             <Link href="/listings">
-              <Button variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white h-11 md:h-12 px-8 font-black rounded-none transition-all gap-2 text-[10px] uppercase tracking-[0.2em]">
+              <Button variant="outline" className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white h-11 px-8 font-black rounded-none transition-all gap-2 text-[10px] uppercase tracking-[0.2em]">
                 All Products <ChevronRight className="h-4 w-4" />
               </Button>
             </Link>
@@ -163,12 +160,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Vendor Marquee */}
       <section className="bg-white py-12 overflow-hidden border-y">
         <div className="container mx-auto px-4 mb-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-1 block">Our Trusted Partners</span>
-            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase text-center md:text-left">THE ELITE VENDOR REGISTRY</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-secondary tracking-tighter uppercase">THE ELITE VENDOR REGISTRY</h2>
           </div>
           
           <Dialog open={showVendorModal} onOpenChange={setShowVendorModal}>
@@ -179,6 +175,10 @@ export default function HomePage() {
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-primary">
+              <DialogHeader className="sr-only">
+                <DialogTitle>Become a Vault Partner</DialogTitle>
+                <DialogDescription>Register your business to join Ghana's most trusted institutional marketplace.</DialogDescription>
+              </DialogHeader>
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="bg-secondary p-8 md:p-12 text-white space-y-8">
                   <div className="space-y-4">
@@ -275,8 +275,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Full-Width CTA Section */}
-      <section className="w-full py-20 md:py-32 relative overflow-hidden">
+      <section className="w-full py-20 relative overflow-hidden">
         <div className="absolute inset-0">
           <Image 
             src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
@@ -301,20 +300,13 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Button size="lg" className="bg-primary text-secondary hover:bg-white hover:text-secondary rounded-none px-12 h-14 md:h-16 font-black shadow-2xl transition-all text-sm uppercase tracking-widest border-2 border-primary">
+            <Button size="lg" className="bg-primary text-secondary hover:bg-white hover:text-secondary rounded-none px-12 h-14 font-black shadow-2xl transition-all text-sm uppercase tracking-widest border-2 border-primary">
               Register My Vault <ChevronRight className="h-5 w-5 ml-2" />
             </Button>
-            <Button size="lg" className="bg-burgundy text-white hover:bg-burgundy/90 rounded-none px-12 h-14 md:h-16 font-black transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-burgundy">
+            <Button size="lg" className="bg-burgundy text-white hover:bg-burgundy/90 rounded-none px-12 h-14 font-black transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-burgundy">
               Learn How It Works
             </Button>
           </div>
-        </div>
-        
-        <div className="absolute top-1/2 left-20 -translate-y-1/2 opacity-10 pointer-events-none hidden lg:block">
-          <Lock className="h-64 w-64 text-white" />
-        </div>
-        <div className="absolute bottom-20 right-20 opacity-10 pointer-events-none hidden lg:block">
-          <ShieldCheck className="h-64 w-64 text-white" />
         </div>
       </section>
     </div>
