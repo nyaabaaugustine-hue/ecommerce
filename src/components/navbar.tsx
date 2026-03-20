@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -19,7 +20,7 @@ import {
   SelectValue 
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { useAuth, useCart, useCurrency, useTheme, type CurrencyCode, type PrimaryTheme } from '@/components/providers';
+import { useAuth, useCart, useCurrency, useTheme, useContent, type CurrencyCode, type PrimaryTheme } from '@/components/providers';
 import { useState, useEffect, useRef } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
@@ -42,6 +43,7 @@ export function Navbar() {
   const { items } = useCart();
   const { currency, setCurrency } = useCurrency();
   const { theme, setTheme } = useTheme();
+  const { content } = useContent();
   const [showAuth, setShowAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -86,11 +88,10 @@ export function Navbar() {
               Institutional Partnership
             </span>
             <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-80">
-              <Phone className="h-3.5 w-3.5" /> Support Node: +233 24 000 0000
+              <Phone className="h-3.5 w-3.5" /> Support: {content.settings.supportPhone}
             </span>
           </div>
           <div className="flex items-center gap-8">
-             {/* Theme Switcher - 7 Options */}
              <div className="flex items-center gap-2 border-r border-white/10 pr-6">
                <Palette className="h-3.5 w-3.5 text-accent" />
                <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
@@ -135,7 +136,6 @@ export function Navbar() {
       <div className="bg-white/95 backdrop-blur-2xl border-b py-0 shadow-xl">
         <div className="container mx-auto px-4 flex items-center justify-between gap-6 h-16 md:h-24">
           <div className="flex items-center gap-3 md:gap-6">
-            {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden rounded-none h-12 w-12">
@@ -164,22 +164,21 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-3 md:gap-4 font-headline font-black text-xl md:text-3xl text-secondary shrink-0 group">
               <div className="relative h-8 w-8 md:h-12 md:w-12 overflow-hidden rounded-none border-2 border-primary/20 shadow-xl">
                 <Image 
-                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-                  alt="VaultCommerce Logo" 
+                  src={content.settings.logoUrl} 
+                  alt="Logo" 
                   fill 
                   className="object-cover"
                 />
               </div>
               <div className="flex flex-col leading-none">
                 <span className="tracking-tighter uppercase">
-                  <span className="text-accent animate-v-glow">V</span>ault<span className="text-primary">Commerce</span>
+                  <span className="text-accent animate-v-glow">{content.settings.siteName.charAt(0)}</span>{content.settings.siteName.slice(1)}
                 </span>
-                <span className="text-[7px] md:text-[9px] font-black text-secondary/40 tracking-[0.3em] md:tracking-[0.4em] uppercase mt-1">Escrow Protected Trade</span>
+                <span className="text-[7px] md:text-[9px] font-black text-secondary/40 tracking-[0.3em] md:tracking-[0.4em] uppercase mt-1">{content.settings.siteTagline}</span>
               </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center h-full gap-4">
             <MegaMenu />
             <Separator orientation="vertical" className="h-10 mx-2" />
@@ -195,55 +194,12 @@ export function Navbar() {
                   setSearchQuery(e.target.value);
                   setShowSuggestions(e.target.value.length > 0);
                 }}
-                onFocus={() => setShowSuggestions(searchQuery.length > 0)}
                 className="w-full border-2 border-border border-r-0 rounded-none py-3.5 pl-8 pr-4 text-xs md:text-sm font-bold focus:border-accent focus:outline-none transition-all bg-background"
               />
               <Button className="rounded-none h-auto px-8 md:px-10 bg-primary hover:bg-accent hover:text-secondary transition-all">
                 <Search className="h-5 w-5 md:h-6 md:w-6" />
               </Button>
             </div>
-
-            {/* Suggestions */}
-            {showSuggestions && (
-              <div className="absolute top-full left-0 w-full bg-white border-2 border-t-0 shadow-2xl z-50 overflow-hidden">
-                <div className="bg-background px-5 py-3 border-b flex items-center justify-between">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-primary flex items-center gap-3">
-                    <Sparkles className="h-4 w-4 text-accent" /> Institutional Registry Matches
-                  </span>
-                  <Badge className="bg-accent text-secondary text-[8px] font-black rounded-none px-2">GOLD STANDARD</Badge>
-                </div>
-                <div className="py-2">
-                  {suggestions.length > 0 ? (
-                    suggestions.map((suggestion) => (
-                      <Link 
-                        key={suggestion.id} 
-                        href={`/listings/${suggestion.id}`}
-                        onClick={() => {
-                          setShowSuggestions(false);
-                          setSearchQuery('');
-                        }}
-                        className="flex items-center gap-5 px-6 py-4 hover:bg-primary/5 group transition-all"
-                      >
-                        <div className="h-12 w-12 relative bg-background border-2 overflow-hidden shadow-sm">
-                          <Image src={suggestion.imageUrl} alt={suggestion.title} fill className="object-cover" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-[11px] font-black text-secondary group-hover:text-primary transition-colors line-clamp-1 uppercase tracking-tight">{suggestion.title}</p>
-                          <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">{suggestion.category}</p>
-                        </div>
-                        <div className="text-right">
-                           <p className="text-[10px] font-black text-burgundy uppercase">GH₵{suggestion.price.toLocaleString()}</p>
-                        </div>
-                      </Link>
-                    ))
-                  ) : (
-                    <div className="px-6 py-10 text-center text-muted-foreground text-[11px] font-black uppercase tracking-widest">
-                      No Sovereign matches found
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
 
           <div className="flex items-center gap-2 md:gap-6 shrink-0">

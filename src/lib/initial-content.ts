@@ -7,11 +7,9 @@ export const INITIAL_CONTENT = {
       sections: {
         hero: {
           title: "ACCRA'S SOVEREIGN TRADE GATEWAY",
-          subtitle: "THE ULTIMATE HIGH-TRUST RETAIL AGGREGATOR",
           description: "Secure your funds in our escrow system and shop with total confidence across Ghana. Institutionally powered by multisig protocols.",
           badge: "Verified Escrow Protocol",
           primaryCta: "Enter Marketplace",
-          secondaryCta: "Learn Protocol",
           imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg"
         },
         highlights: {
