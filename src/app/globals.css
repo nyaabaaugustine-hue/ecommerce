@@ -27,7 +27,7 @@
     --burgundy: 0 100% 27%; /* #8B0000 High-Contrast Burgundy */
   }
 
-  /* Institutional Theme Variations */
+  /* Institutional Theme Variations with High Contrast */
   [data-theme="sovereign"] { --primary: 222 47% 11%; }
   [data-theme="deep"] { --primary: 215 80% 20%; }
   [data-theme="royal"] { --primary: 210 90% 40%; }
@@ -39,7 +39,7 @@
 
 @layer base {
   * {
-    @apply border-border rounded-none;
+    @apply border-border rounded-none transition-all duration-500 ease-in-out;
   }
   body {
     @apply bg-background text-foreground font-body antialiased;

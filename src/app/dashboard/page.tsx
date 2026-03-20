@@ -200,10 +200,12 @@ export default function Dashboard() {
                </Button>
              </PopoverTrigger>
              <PopoverContent className="w-80 rounded-none p-6 shadow-xl border mt-2">
-               <h3 className="font-bold text-secondary mb-4 flex items-center gap-2 text-sm">
-                 <ShieldCheck className="h-4 w-4 text-primary" />
-                 Institutional Nodes
-               </h3>
+               <DialogHeader>
+                  <DialogTitle className="font-bold text-secondary mb-4 flex items-center gap-2 text-sm uppercase tracking-tight">
+                    <ShieldCheck className="h-4 w-4 text-primary" />
+                    Institutional Nodes
+                  </DialogTitle>
+               </DialogHeader>
                <div className="space-y-3">
                  {MOCK_USERS.map(userItem => (
                    <div 
