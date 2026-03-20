@@ -32,7 +32,7 @@ import {
 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { VENDORS } from '@/lib/mock-data';
-import { useAuth } from '@/components/providers';
+import { useAuth, useCart, useCurrency } from '@/components/providers';
 import {
   ChartConfig,
   ChartContainer,
