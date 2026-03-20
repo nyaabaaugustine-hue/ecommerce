@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,16 +60,6 @@
   100% { transform: translateX(0); }
 }
 
-@keyframes slide-in-up {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slide-out-down {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(100%); opacity: 0; }
-}
-
 .animate-marquee {
   display: flex;
   width: max-content;
@@ -85,14 +76,6 @@
   animation-play-state: paused;
 }
 
-.animate-slide-up {
-  animation: slide-in-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-slide-down {
-  animation: slide-out-down 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
 .image-reveal {
   overflow: hidden;
   position: relative;
@@ -104,15 +87,6 @@
 
 .image-reveal:hover img {
   transform: scale(1.08);
-}
-
-.vault-lock-animation {
-  animation: vault-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes vault-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
 }
 
 .no-scrollbar::-webkit-scrollbar {
