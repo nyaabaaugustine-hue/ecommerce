@@ -47,29 +47,29 @@ export function ListingCard(props: ListingProps) {
   };
 
   return (
-    <Card className="group overflow-hidden bg-white border-border/50 hover:border-primary/40 hover:shadow-lg transition-all duration-300 relative flex flex-col h-full rounded-none">
+    <Card className="group overflow-hidden bg-white border-border/50 hover:border-primary/40 hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-none">
       {/* Top Badges */}
-      <div className="absolute top-2 left-2 z-10 flex flex-col gap-1.5">
+      <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
         {discount && (
-          <Badge className="bg-primary text-secondary text-[9px] font-black px-2 py-0.5 border-none rounded-none">
+          <Badge className="bg-primary text-secondary text-[9px] font-black px-2 py-0.5 border-none rounded-none shadow-sm">
             {discount}
           </Badge>
         )}
         <EscrowBadge className="bg-white/95 scale-75 origin-left shadow-sm py-1 px-3" />
       </div>
 
-      {/* Image Section */}
-      <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block">
+      {/* Image Section with Reveal Animation */}
+      <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block image-reveal bg-muted">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
-          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </Link>
 
-      <CardContent className="p-4 flex flex-col flex-1 gap-2">
+      <CardContent className="p-5 flex flex-col flex-1 gap-2">
         <div className="flex justify-between items-start">
           <Link href={`/listings?category=${category}`} className="text-[9px] text-primary font-black uppercase tracking-[0.2em] hover:underline">
             {category}
@@ -80,22 +80,22 @@ export function ListingCard(props: ListingProps) {
           </div>
         </div>
         
-        <Link href={`/listings/${id}`} className="block group-hover:text-primary transition-colors">
+        <Link href={`/listings/${id}`} className="block hover:text-primary transition-colors">
           <h3 className="font-bold text-sm line-clamp-2 leading-tight min-h-[2.5rem] text-secondary">{title}</h3>
         </Link>
         
-        <div className="mt-auto pt-2 flex items-baseline gap-2">
-          <span className="text-base font-black text-secondary">GH₵{price.toLocaleString()}</span>
+        <div className="mt-auto pt-3 flex items-baseline gap-2">
+          <span className="text-lg font-black text-secondary tracking-tight">GH₵{price.toLocaleString()}</span>
           {oldPrice && (
             <span className="text-[10px] text-muted-foreground line-through font-bold">GH₵{oldPrice.toLocaleString()}</span>
           )}
         </div>
       </CardContent>
 
-      <CardFooter className="px-4 py-3 bg-muted/20 border-t flex gap-2">
+      <CardFooter className="px-5 py-4 bg-muted/20 border-t flex gap-2">
         <Button 
           onClick={handleBuyNow}
-          className="flex-1 bg-secondary text-white hover:bg-secondary/90 rounded-none font-black text-[10px] uppercase tracking-widest h-9"
+          className="flex-1 bg-secondary text-white hover:bg-primary hover:text-secondary rounded-none font-black text-[10px] uppercase tracking-widest h-10 transition-all duration-300"
         >
           Secure Buy
         </Button>
@@ -103,9 +103,9 @@ export function ListingCard(props: ListingProps) {
           onClick={handleAddToCart}
           variant="outline"
           size="icon"
-          className="rounded-none border-primary/20 text-primary hover:bg-primary/5 h-9 w-9"
+          className="rounded-none border-primary/20 text-primary hover:bg-primary/5 h-10 w-10 transition-all"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-5 w-5" />
         </Button>
       </CardFooter>
     </Card>

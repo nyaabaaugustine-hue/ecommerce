@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -35,16 +34,16 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl min-h-[500px] border border-border">
+          <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl min-h-[500px] border border-border image-reveal">
             <Image 
               src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
               alt="Premium Accra Retail" 
               fill 
-              className="object-cover group-hover:scale-105 transition-transform duration-1000"
+              className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 to-transparent flex items-center">
-              <div className="pl-12 space-y-6 max-w-xl">
+              <div className="pl-12 space-y-6 max-w-xl animate-in fade-in slide-in-from-left-8 duration-1000">
                 <Badge className="bg-primary text-secondary font-bold uppercase text-[10px] tracking-widest px-4 py-1 rounded-none">Verified Escrow Protocol</Badge>
                 <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight">
                   ACCRA'S <span className="text-primary">GOLD</span> <br /> STANDARD
@@ -63,21 +62,50 @@ export default function HomePage() {
             </div>
           </div>
           <div className="lg:col-span-4 flex flex-col gap-8">
-            <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+            <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border image-reveal">
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover" />
               <div className="absolute inset-0 bg-primary/90 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all">
                 <Badge className="bg-secondary text-primary w-fit mb-2 font-bold px-3 rounded-none">50% LEGACY REBATE</Badge>
                 <h3 className="text-secondary font-bold text-2xl">Akwaaba Sale</h3>
               </div>
             </Link>
-            <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+            <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border image-reveal">
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover" />
               <div className="absolute inset-0 bg-secondary/90 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all">
                 <Badge className="bg-primary text-secondary w-fit mb-2 font-bold px-3 rounded-none">SOVEREIGN TRUST</Badge>
                 <h3 className="text-white font-bold text-2xl">Makola Select</h3>
               </div>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Slow-Moving Marquee Section */}
+      <section className="bg-secondary py-20 overflow-hidden">
+        <div className="container mx-auto px-4 mb-12 flex justify-between items-end">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-bold text-white tracking-tight">Institutional High-Movers</h2>
+            <p className="text-white/50 text-sm uppercase tracking-widest font-bold">Protocol-Synchronized Inventory</p>
+          </div>
+          <Link href="/listings">
+            <Button variant="outline" className="text-primary border-primary hover:bg-primary hover:text-secondary font-bold rounded-none h-12">
+              View Global Registry
+            </Button>
+          </Link>
+        </div>
+        
+        <div className="relative">
+          <div className="animate-marquee gap-8">
+            {/* Double the listings to ensure seamless loop */}
+            {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
+              <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
+                <ListingCard {...listing} provider={listing.vendorId} />
+              </div>
+            ))}
+          </div>
+          {/* Gradient Overlays for smooth edges */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-secondary to-transparent z-10" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-secondary to-transparent z-10" />
         </div>
       </section>
 
@@ -90,9 +118,9 @@ export default function HomePage() {
             { icon: Crown, title: 'Elite Concierge', sub: 'Priority GHS Support', color: 'text-primary' },
             { icon: ShieldCheck, title: 'Escrow Shield', sub: 'Sovereign Guarantee', color: 'text-secondary' },
           ].map((feat, i) => (
-            <Card key={i} className="border-border shadow-sm hover:shadow-md transition-all rounded-none">
+            <Card key={i} className="border-border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden group">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-none bg-muted flex items-center justify-center shrink-0">
+                <div className="h-12 w-12 rounded-none bg-muted flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors">
                   <feat.icon className={`h-6 w-6 ${feat.color}`} />
                 </div>
                 <div>
@@ -121,13 +149,13 @@ export default function HomePage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
           {categories.map((cat) => (
             <Link key={cat.name} href={`/listings?category=${cat.name}`} className="group flex flex-col items-center gap-4 transition-all">
-              <div className="w-24 h-24 rounded-none bg-white flex items-center justify-center overflow-hidden border border-border shadow-sm group-hover:border-primary transition-all p-4">
+              <div className="w-24 h-24 rounded-none bg-white flex items-center justify-center overflow-hidden border border-border shadow-sm group-hover:border-primary transition-all p-4 relative">
                 <Image 
                   src={cat.icon} 
                   alt={cat.name} 
                   width={80} 
                   height={80} 
-                  className="object-contain"
+                  className="object-contain group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
               <span className="text-xs font-bold text-center uppercase tracking-widest text-secondary/70">{cat.name}</span>
@@ -136,28 +164,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Vault Favorites */}
-      <section className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-10">
-          <h2 className="text-3xl font-bold text-secondary tracking-tight">Vault Favorites</h2>
-          <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="rounded-none h-10 w-10"><ChevronLeft className="h-4 w-4" /></Button>
-            <Button variant="outline" size="icon" className="rounded-none h-10 w-10"><ChevronRight className="h-4 w-4" /></Button>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {LISTINGS.slice(0, 4).map((listing) => (
-            <ListingCard key={listing.id} {...listing} provider={listing.vendorId} />
-          ))}
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="container mx-auto px-4">
         <div className="bg-secondary rounded-none p-16 relative overflow-hidden text-center text-white shadow-xl">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
           <div className="relative z-10 max-w-3xl mx-auto space-y-8">
             <div className="flex justify-center mb-4">
-              <ShieldAlert className="h-12 w-12 text-primary" />
+              <ShieldAlert className="h-12 w-12 text-primary animate-bounce" />
             </div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
               SECURE YOUR <span className="text-primary">NEXT TRADE</span>
