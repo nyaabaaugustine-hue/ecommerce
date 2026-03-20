@@ -2,51 +2,51 @@
   "placeholderImages": [
     {
       "id": "electronics",
-      "description": "Premium Electronics and Gadgets",
+      "description": "Quantum Precision MacBook Pro",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png",
-      "imageHint": "electronics gadget"
+      "imageHint": "laptop computer"
     },
     {
       "id": "appliances",
-      "description": "Modern Home Appliances",
+      "description": "Sovereign Series Refrigerator",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png",
-      "imageHint": "home appliance"
+      "imageHint": "modern fridge"
     },
     {
       "id": "supermarket",
-      "description": "Fresh Supermarket Products",
+      "description": "Makola Select Supermarket Registry",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png",
-      "imageHint": "supermarket goods"
+      "imageHint": "grocery bundle"
     },
     {
       "id": "furniture",
-      "description": "Premium Home Furniture",
+      "description": "Elite Heritage Sofa",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg",
-      "imageHint": "home furniture"
+      "imageHint": "luxury sofa"
     },
     {
       "id": "beauty",
-      "description": "Beauty and Personal Care",
+      "description": "Royal Orchid Beauty Protocol",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg",
-      "imageHint": "beauty care"
+      "imageHint": "beauty set"
     },
     {
-      "id": "photography",
-      "description": "Digital Photography Gear",
+      "id": "audio-visual",
+      "description": "Sovereign 4K OLED Hub",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png",
-      "imageHint": "camera gear"
+      "imageHint": "smart tv"
+    },
+    {
+      "id": "mobile",
+      "description": "Titanium iPhone 15 Pro",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png",
+      "imageHint": "iphone titanium"
     },
     {
       "id": "home-living",
-      "description": "Modern Living Essentials",
+      "description": "Elite Heritage Living Suite",
       "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg",
-      "imageHint": "living decor"
-    },
-    {
-      "id": "hero-fashion",
-      "description": "Accra Premium Retail",
-      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg",
-      "imageHint": "retail hero"
+      "imageHint": "interior decor"
     }
   ]
 }

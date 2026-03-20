@@ -56,7 +56,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Mar 2021',
     color: 'bg-accent',
     icon: 'P',
-    logoUrl: 'https://picsum.photos/seed/primerental/100/100',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     description: 'Curating the finest residential and commercial properties across East Legon.'
   },
   {
@@ -70,25 +70,13 @@ export const VENDORS: Vendor[] = [
     icon: 'H',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     description: 'Premium furniture and interior decor with secure delivery across Ghana.'
-  },
-  {
-    id: 'v4',
-    name: 'SuperStore Groceries',
-    category: 'Supermarket',
-    rating: 4.7,
-    itemsCount: 4500,
-    joinedDate: 'Sep 2022',
-    color: 'bg-destructive',
-    icon: 'S',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
-    description: 'Fresh daily essentials and imported household goods.'
   }
 ];
 
 export const LISTINGS: Listing[] = [
   {
     id: '1',
-    title: 'MacBook Pro M3 Max - Space Black',
+    title: 'Quantum Precision MacBook Pro M3 Max',
     vendorId: 'v1',
     category: 'Computing & Laptops',
     price: 8450,
@@ -100,7 +88,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '2',
-    title: 'LG Inverter Double Door Refrigerator',
+    title: 'Sovereign Series LG Inverter Refrigerator',
     vendorId: 'v1',
     category: 'Institutional Appliances',
     price: 12500,
@@ -112,7 +100,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '3',
-    title: 'Modern L-Shaped Sectional Sofa - Royal Velvet',
+    title: 'Elite Heritage L-Shaped Sectional Sofa',
     vendorId: 'v3',
     category: 'Heritage Furniture',
     price: 6800,
@@ -122,8 +110,8 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '4',
-    title: 'Premium Grocery Care Package - Makola Select',
-    vendorId: 'v4',
+    title: 'Makola Select Premium Grocery Registry',
+    vendorId: 'v1',
     category: 'Supermarket Registry',
     price: 450,
     oldPrice: 550,
@@ -134,7 +122,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '5',
-    title: 'iPhone 15 Pro Max - Natural Titanium',
+    title: 'Titanium iPhone 15 Pro - Sovereign Edition',
     vendorId: 'v1',
     category: 'Mobile Ecosystem',
     price: 9200,
@@ -144,27 +132,27 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '6',
-    title: 'High-End Smart 4K OLED TV - 65"',
+    title: 'Sovereign 4K OLED Audio/Visual Hub',
     vendorId: 'v1',
     category: 'Sovereign Audio/Visual',
     price: 15400,
     location: 'Osu, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
     rating: 4.8
   },
   {
     id: '7',
-    title: 'Executive Office Space - Ridge Financial District',
+    title: 'Apex Ridge Commercial Executive Suite',
     vendorId: 'v2',
     category: 'Commercial Rentals',
     price: 45000,
-    location: 'Ridge, Accra',
+    location: 'Ridge Financial District',
     imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop',
     rating: 4.9
   },
   {
     id: '8',
-    title: 'Luxury 4-Bedroom Villa - East Legon',
+    title: 'Sovereign 4-Bedroom Heritage Villa',
     vendorId: 'v2',
     category: 'Residential Sales',
     price: 2400000,
@@ -174,7 +162,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '9',
-    title: 'Corporate Legal Advisory - Gold Tier',
+    title: 'Institutional Corporate Legal Registry',
     vendorId: 'v2',
     category: 'Professional Services',
     price: 1500,
@@ -184,13 +172,33 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: '10',
-    title: 'Royal Orchid Beauty Set - Heritage Edition',
+    title: 'Royal Orchid Heritage Beauty Protocol',
     vendorId: 'v3',
     category: 'Beauty & Personal',
     price: 850,
     location: 'Labone, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
     rating: 4.7
+  },
+  {
+    id: '11',
+    title: 'Protocol-Grade Professional Audit',
+    vendorId: 'v2',
+    category: 'Professional Services',
+    price: 2500,
+    location: 'Accra Central',
+    imageUrl: 'https://images.unsplash.com/photo-1454165833767-027eeea15c3e?q=80&w=2070&auto=format&fit=crop',
+    rating: 4.8
+  },
+  {
+    id: '12',
+    title: 'Elite Heritage Living Room Suite',
+    vendorId: 'v3',
+    category: 'Heritage Furniture',
+    price: 12000,
+    location: 'Spintex',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
+    rating: 4.9
   }
 ];
 
