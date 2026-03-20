@@ -20,7 +20,9 @@ import {
   Briefcase,
   Utensils,
   Armchair,
-  Sparkles
+  Sparkles,
+  Zap,
+  ShieldAlert
 } from "lucide-react";
 import { 
   Popover, 
@@ -29,34 +31,35 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 const SECTORS = [
   {
     title: "Electronics & Tech",
     icon: Cpu,
     items: [
-      { name: "Laptops & Computers", href: "/listings?category=Computing %26 Laptops", icon: Monitor },
-      { name: "Phones & Tablets", href: "/listings?category=Mobile Ecosystem", icon: Smartphone },
-      { name: "Audio & Video", href: "/listings?category=Sovereign Audio/Visual", icon: Tv },
-      { name: "Home Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator },
+      { name: "Laptops & Computers", href: "/listings?category=Computing %26 Laptops", icon: Monitor, desc: "MacBook & Workstations" },
+      { name: "Phones & Tablets", href: "/listings?category=Mobile Ecosystem", icon: Smartphone, desc: "iPhone & Android Nodes" },
+      { name: "Audio & Video", href: "/listings?category=Sovereign Audio/Visual", icon: Tv, desc: "OLED & Hi-Fi Audio" },
+      { name: "Home Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator, desc: "Inverters & Smart Kitchen" },
     ]
   },
   {
     title: "Property & Real Estate",
     icon: Home,
     items: [
-      { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2 },
-      { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key },
-      { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase },
+      { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2, desc: "Ridge & Airport Offices" },
+      { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key, desc: "Elite Gated Villas" },
+      { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase, desc: "Audit & Legal Registry" },
     ]
   },
   {
     title: "Lifestyle & Home",
     icon: ShoppingBag,
     items: [
-      { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair },
-      { name: "Groceries & Kitchen", href: "/listings?category=Supermarket Registry", icon: Utensils },
-      { name: "Beauty & Health", href: "/listings?category=Beauty %26 Personal", icon: Sparkles },
+      { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair, desc: "Luxury Living Suites" },
+      { name: "Groceries & Kitchen", href: "/listings?category=Supermarket Registry", icon: Utensils, desc: "Makola Select Bundles" },
+      { name: "Beauty & Health", href: "/listings?category=Beauty %26 Personal", icon: Sparkles, desc: "Elite Personal Protocols" },
     ]
   }
 ];
@@ -65,93 +68,130 @@ export function MegaMenu() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" className="h-full px-6 flex flex-col items-center rounded-none hover:bg-primary/5 group transition-all">
-          <span className="text-[9px] uppercase tracking-[0.2em] opacity-50 font-black group-hover:text-primary transition-colors">All Categories</span>
-          <span className="font-black text-secondary group-hover:text-primary transition-colors">Shop Categories</span>
+        <Button variant="ghost" className="h-full px-6 flex flex-col items-center justify-center rounded-none hover:bg-primary/5 group transition-all gap-1">
+          <span className="text-[8px] uppercase tracking-[0.4em] text-muted-foreground font-black group-hover:text-primary transition-colors">Global Registry</span>
+          <span className="font-black text-secondary text-xs md:text-sm group-hover:text-primary transition-colors uppercase tracking-tighter">Shop Categories</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[100vw] max-w-7xl mx-auto p-0 border-x-0 border-t-4 border-t-primary shadow-2xl rounded-none bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-4">
+      <PopoverContent className="w-[95vw] max-w-7xl mx-auto p-0 border-x-0 border-t-4 border-t-primary shadow-2xl rounded-none bg-white overflow-hidden" align="center" sideOffset={0}>
+        <div className="grid grid-cols-1 lg:grid-cols-12">
           {/* Main Categories */}
-          {SECTORS.map((sector, idx) => (
-            <div key={idx} className="p-10 border-r last:border-r-0">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="h-10 w-10 bg-secondary flex items-center justify-center text-primary">
-                  <sector.icon className="h-5 w-5" />
+          <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-3 divide-x border-b lg:border-b-0">
+            {SECTORS.map((sector, idx) => (
+              <div key={idx} className="p-8 md:p-12 space-y-10">
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 bg-primary/5 border border-primary/10 flex items-center justify-center text-primary">
+                    <sector.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-secondary uppercase tracking-[0.2em] text-xs">{sector.title}</h3>
+                    <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Verified Nodes</p>
+                  </div>
                 </div>
-                <h3 className="font-black text-secondary uppercase tracking-widest text-sm">{sector.title}</h3>
+                
+                <ul className="space-y-8">
+                  {sector.items.map((item, i) => (
+                    <li key={i}>
+                      <Link 
+                        href={item.href} 
+                        className="group flex items-start gap-4 text-muted-foreground hover:text-primary transition-all"
+                      >
+                        <div className="mt-0.5 p-2 bg-muted rounded-none group-hover:bg-primary/10 transition-colors">
+                          <item.icon className="h-4 w-4 opacity-70 group-hover:opacity-100 group-hover:text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-black uppercase tracking-tight text-secondary group-hover:text-primary transition-colors">{item.name}</span>
+                            <ChevronRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
+                          </div>
+                          <p className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-0.5">{item.desc}</p>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-6">
-                {sector.items.map((item, i) => (
-                  <li key={i}>
-                    <Link 
-                      href={item.href} 
-                      className="group flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <item.icon className="h-4 w-4 opacity-50 group-hover:opacity-100" />
-                      <span className="text-xs font-bold uppercase tracking-tight">{item.name}</span>
-                      <ChevronRight className="h-3 w-3 ml-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))}
+          </div>
 
-          {/* Featured Spotlight */}
-          <div className="bg-secondary p-10 text-white flex flex-col justify-between">
-            <div>
-              <Badge className="bg-primary text-secondary font-black rounded-none mb-4 uppercase text-[9px] tracking-widest">Featured Vendor</Badge>
-              <h3 className="text-2xl font-black tracking-tighter mb-4 leading-tight">THE BEST <br /> SHOPPING DEALS</h3>
-              <p className="text-white/50 text-xs font-medium leading-relaxed mb-8">
-                Shop from verified partners with 100% security guarantee.
-              </p>
+          {/* Featured Spotlight - 25% of the Menu */}
+          <div className="lg:col-span-3 bg-secondary p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 -mr-32 -mt-32 rounded-none blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 space-y-10">
+              <div className="space-y-3">
+                <Badge className="bg-primary text-secondary font-black rounded-none uppercase text-[8px] tracking-[0.3em] px-3 py-1 border-none">
+                  Institutional Partner
+                </Badge>
+                <h3 className="text-2xl md:text-3xl font-black tracking-tighter leading-none uppercase">
+                  THE <span className="text-primary">GOLD</span> <br /> STANDARD
+                </h3>
+                <p className="text-white/40 text-[10px] font-medium leading-relaxed uppercase tracking-widest">
+                  Secure your next high-fidelity asset from Ghana's most trusted partners.
+                </p>
+              </div>
               
               <div className="space-y-4">
-                <div className="flex items-center gap-4 p-3 bg-white/5 border border-white/10 hover:border-primary/50 transition-all cursor-pointer">
-                  <div className="h-8 w-8 bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                    <ShieldCheck className="h-4 w-4" />
+                <p className="text-[8px] font-black uppercase tracking-[0.4em] text-primary/60 border-b border-white/5 pb-2">Elite Registry Members</p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
+                    <div className="h-10 w-10 bg-white relative p-1 shrink-0">
+                      <Image 
+                        src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
+                        fill 
+                        className="object-contain" 
+                        alt="Melcom" 
+                        unoptimized
+                      />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors">Melcom Digital</p>
+                      <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9 Rating</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest">Melcom Digital</p>
-                    <p className="text-[8px] text-white/40 uppercase">Verified Partner</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-white/5 border border-white/10 hover:border-primary/50 transition-all cursor-pointer">
-                  <div className="h-8 w-8 bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                    <ShieldCheck className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black uppercase tracking-widest">PrimeRentals GH</p>
-                    <p className="text-[8px] text-white/40 uppercase">Trusted Agency</p>
+                  
+                  <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
+                    <div className="h-10 w-10 bg-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
+                      <ShieldCheck className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors">PrimeRentals GH</p>
+                      <p className="text-[8px] text-white/30 uppercase tracking-tighter">Sovereign Agency • Certified</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <Link href="/listings" className="mt-8">
-              <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 uppercase text-[10px] tracking-widest gap-2">
-                Browse All <ArrowRight className="h-4 w-4" />
+            <Link href="/listings" className="mt-12 relative z-10">
+              <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-14 uppercase text-[10px] tracking-[0.3em] gap-3 shadow-2xl transition-all">
+                Browse All Registry <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
         </div>
 
-        {/* Bottom Trust Bar */}
-        <div className="bg-muted py-4 px-10 flex justify-between items-center border-t">
-          <div className="flex gap-10">
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 bg-primary rounded-none" />
-              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-widest">99.4% Delivery Rate</span>
+        {/* Global Institutional Trust Bar */}
+        <div className="bg-muted/30 py-4 px-10 flex flex-col md:flex-row justify-between items-center border-t border-dashed gap-4">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+            <div className="flex items-center gap-3">
+              <Zap className="h-4 w-4 text-primary animate-pulse" />
+              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.2em]">99.4% Fulfillment Rate</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 bg-primary rounded-none" />
-              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-widest">Escrow Protection Active</span>
+            <div className="flex items-center gap-3">
+              <ShieldAlert className="h-4 w-4 text-primary" />
+              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.2em]">Multisig Escrow Protection Active</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Key className="h-4 w-4 text-primary" />
+              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.2em]">Institutional Treasury Node: GHS-Accra</span>
             </div>
           </div>
-          <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
-            Verified Marketplace
-          </p>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="rounded-none border-primary/20 text-[8px] font-black px-3 py-1 uppercase tracking-widest text-primary bg-primary/5">
+              Sovereign Certified
+            </Badge>
+          </div>
         </div>
       </PopoverContent>
     </Popover>
