@@ -1,9 +1,10 @@
+
 "use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu } from 'lucide-react';
+import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
@@ -13,10 +14,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
 import { useAuth, useCart, useCurrency, type CurrencyCode } from '@/components/providers';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { LISTINGS } from '@/lib/mock-data';
+import { cn } from '@/lib/utils';
 
 const TICKER_ITEMS = [
   "LIVE ACTIVITY: GH₵8,450.00 SECURED IN ACCRA",
@@ -34,6 +37,24 @@ export function Navbar() {
   const { items } = useCart();
   const { currency, setCurrency } = useCurrency();
   const [showAuth, setShowAuth] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  const suggestions = LISTINGS.filter(l => 
+    l.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    l.category.toLowerCase().includes(searchQuery.toLowerCase())
+  ).slice(0, 5);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="w-full flex flex-col sticky top-0 z-50">
@@ -139,17 +160,68 @@ export function Navbar() {
             <Separator orientation="vertical" className="h-8 mx-2" />
           </div>
 
-          <div className="flex-1 max-w-lg hidden md:flex items-center relative">
+          <div className="flex-1 max-w-lg hidden md:flex items-center relative" ref={searchRef}>
             <div className="relative w-full flex">
               <input 
                 type="text" 
                 placeholder="Search products, services, properties..." 
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(e.target.value.length > 0);
+                }}
+                onFocus={() => setShowSuggestions(searchQuery.length > 0)}
                 className="w-full border border-border rounded-none py-2.5 md:py-3 pl-6 pr-4 text-[11px] md:text-sm font-medium focus:border-primary focus:outline-none transition-all bg-muted/20"
               />
               <Button className="rounded-none h-auto px-6 md:px-8 bg-secondary hover:bg-primary hover:text-secondary transition-all">
                 <Search className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </div>
+
+            {/* AI Autocomplete Suggestions */}
+            {showSuggestions && (
+              <div className="absolute top-full left-0 w-full bg-white border border-t-0 shadow-2xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2">
+                <div className="bg-muted/50 px-4 py-2 border-b flex items-center justify-between">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-primary flex items-center gap-2">
+                    <Sparkles className="h-3 w-3" /> Institutional Suggestions
+                  </span>
+                  <Badge variant="outline" className="text-[7px] font-black rounded-none">AI POWERED</Badge>
+                </div>
+                <div className="py-2">
+                  {suggestions.length > 0 ? (
+                    suggestions.map((suggestion) => (
+                      <Link 
+                        key={suggestion.id} 
+                        href={`/listings/${suggestion.id}`}
+                        onClick={() => {
+                          setShowSuggestions(false);
+                          setSearchQuery('');
+                        }}
+                        className="flex items-center gap-4 px-4 py-3 hover:bg-primary/5 group transition-all"
+                      >
+                        <div className="h-10 w-10 relative bg-muted border overflow-hidden">
+                          <Image src={suggestion.imageUrl} alt={suggestion.title} fill className="object-cover" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-[10px] font-black text-secondary group-hover:text-primary transition-colors line-clamp-1 uppercase">{suggestion.title}</p>
+                          <p className="text-[8px] font-bold text-muted-foreground uppercase">{suggestion.category}</p>
+                        </div>
+                        <ChevronDown className="h-3 w-3 text-muted-foreground -rotate-90" />
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="px-4 py-6 text-center text-muted-foreground text-[10px] font-black uppercase">
+                      No Sovereign matches found
+                    </div>
+                  )}
+                </div>
+                <div className="bg-secondary p-3 flex justify-center">
+                   <Link href="/listings" onClick={() => setShowSuggestions(false)} className="text-[8px] font-black text-primary uppercase tracking-widest hover:underline">
+                     Browse Full Global Registry
+                   </Link>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-1 md:gap-4 shrink-0">
