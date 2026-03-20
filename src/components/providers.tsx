@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, MOCK_USERS, Listing } from '@/lib/mock-data';
 
 // --- Theme Context ---
-export type PrimaryTheme = 'sovereign' | 'deep' | 'royal' | 'midnight' | 'cobalt';
+export type PrimaryTheme = 'sovereign' | 'deep' | 'royal' | 'midnight' | 'cobalt' | 'cold-white' | 'crimson';
 
 interface ThemeContextType {
   theme: PrimaryTheme;

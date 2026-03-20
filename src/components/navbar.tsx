@@ -90,7 +90,7 @@ export function Navbar() {
             </span>
           </div>
           <div className="flex items-center gap-8">
-             {/* Theme Switcher - 5 Options */}
+             {/* Theme Switcher - 7 Options */}
              <div className="flex items-center gap-2 border-r border-white/10 pr-6">
                <Palette className="h-3.5 w-3.5 text-accent" />
                <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
@@ -103,6 +103,8 @@ export function Navbar() {
                     <SelectItem value="royal">Royal Azure</SelectItem>
                     <SelectItem value="midnight">Midnight Vault</SelectItem>
                     <SelectItem value="cobalt">Steel Cobalt</SelectItem>
+                    <SelectItem value="cold-white">Cold Silver</SelectItem>
+                    <SelectItem value="crimson">Crimson Red</SelectItem>
                  </SelectContent>
                </Select>
              </div>
@@ -201,9 +203,9 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* AI Autocomplete Suggestions */}
+            {/* Suggestions */}
             {showSuggestions && (
-              <div className="absolute top-full left-0 w-full bg-white border-2 border-t-0 shadow-2xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-4">
+              <div className="absolute top-full left-0 w-full bg-white border-2 border-t-0 shadow-2xl z-50 overflow-hidden">
                 <div className="bg-background px-5 py-3 border-b flex items-center justify-between">
                   <span className="text-[9px] font-black uppercase tracking-widest text-primary flex items-center gap-3">
                     <Sparkles className="h-4 w-4 text-accent" /> Institutional Registry Matches
@@ -240,11 +242,6 @@ export function Navbar() {
                     </div>
                   )}
                 </div>
-                <div className="bg-secondary p-4 flex justify-center">
-                   <Link href="/listings" onClick={() => setShowSuggestions(false)} className="text-[9px] font-black text-accent uppercase tracking-[0.3em] hover:underline flex items-center gap-2">
-                     Browse Full Global Registry <ArrowRight className="h-3 w-3" />
-                   </Link>
-                </div>
               </div>
             )}
           </div>
@@ -254,10 +251,9 @@ export function Navbar() {
               <Button 
                 variant="outline" 
                 onClick={() => setShowAuth(true)}
-                className="hidden lg:flex flex-col items-center h-auto py-3 px-8 rounded-none border-2 border-primary/20 text-secondary font-black hover:bg-primary hover:text-white transition-all shadow-md group"
+                className="hidden lg:flex items-center h-12 px-8 rounded-none border-2 border-primary/20 text-secondary font-black hover:bg-primary hover:text-white transition-all shadow-md group"
               >
-                <span className="text-[10px] uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity">Registry Access</span>
-                <span className="text-sm">Secure Login</span>
+                <span className="text-sm uppercase tracking-widest">Secure Login</span>
               </Button>
             ) : (
               <div className="hidden lg:flex items-center gap-6">
@@ -272,9 +268,6 @@ export function Navbar() {
             )}
             
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="md:hidden rounded-none h-12 w-12">
-                <Search className="h-6 w-6 text-primary" />
-              </Button>
               <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5 h-12 w-12">
                 <ShoppingCart className="h-7 w-7 text-secondary group-hover:text-primary transition-colors" />
                 {items.length > 0 && (

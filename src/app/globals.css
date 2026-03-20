@@ -27,12 +27,14 @@
     --burgundy: 0 100% 27%; /* #8B0000 High-Contrast Burgundy */
   }
 
-  /* Theme Variations - High Contrast Blues */
+  /* Institutional Theme Variations */
   [data-theme="sovereign"] { --primary: 222 47% 11%; }
   [data-theme="deep"] { --primary: 215 80% 20%; }
   [data-theme="royal"] { --primary: 210 90% 40%; }
   [data-theme="midnight"] { --primary: 225 60% 5%; }
   [data-theme="cobalt"] { --primary: 210 40% 30%; }
+  [data-theme="cold-white"] { --primary: 210 20% 60%; } /* Icy Silver-Gray */
+  [data-theme="crimson"] { --primary: 0 72% 35%; } /* Institutional Red */
 }
 
 @layer base {

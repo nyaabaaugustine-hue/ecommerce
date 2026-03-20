@@ -376,9 +376,6 @@ export default function Dashboard() {
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-md rounded-none border-t-4 border-t-primary p-8 shadow-2xl">
                             <DialogHeader>
-                              <div className="h-14 w-14 bg-secondary flex items-center justify-center mx-auto mb-6">
-                                <ShieldCheck className="h-8 w-8 text-primary" />
-                              </div>
                               <DialogTitle className="text-2xl font-black text-secondary text-center uppercase tracking-tighter">
                                 Fidelity Audit Protocol
                               </DialogTitle>
