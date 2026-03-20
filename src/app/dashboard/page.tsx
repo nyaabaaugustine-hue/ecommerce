@@ -40,7 +40,8 @@ import {
   Activity,
   Timer,
   ShieldAlert,
-  Lock
+  Lock,
+  ShieldCheck
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
@@ -125,7 +126,7 @@ export default function Dashboard() {
     HIGH_ADMIN: [
       { label: 'Total Ecosystem GMV', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross volume processed' },
       { label: 'Active Disputes', val: '5', icon: AlertCircle, color: 'text-secondary', sub: 'High priority mediation' },
-      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-blue-500', sub: '+12 this month' },
+      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-indigo-500', sub: '+12 this month' },
       { label: 'Treasury Vault', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Held in secure escrow' },
     ],
     VENDOR_ADMIN: [

@@ -16,7 +16,8 @@ import {
   Headphones,
   ShoppingBag,
   TrendingUp,
-  ChevronLeft
+  ChevronLeft,
+  Lock
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
@@ -28,13 +29,13 @@ export default function HomePage() {
   const [loadingMore, setLoadingMore] = useState(false);
 
   const categories = [
-    { name: 'Beauty', icon: 'https://picsum.photos/seed/beauty/100/100', color: 'bg-pink-100' },
-    { name: 'Sports', icon: 'https://picsum.photos/seed/sport/100/100', color: 'bg-blue-100' },
+    { name: 'Beauty', icon: 'https://picsum.photos/seed/beauty/100/100', color: 'bg-accent/10' },
+    { name: 'Sports', icon: 'https://picsum.photos/seed/sport/100/100', color: 'bg-primary/10' },
     { name: 'Gadgets', icon: 'https://picsum.photos/seed/gadget/100/100', color: 'bg-slate-100' },
     { name: 'Clothing', icon: 'https://picsum.photos/seed/cloth/100/100', color: 'bg-amber-100' },
     { name: 'Stationery', icon: 'https://picsum.photos/seed/stat/100/100', color: 'bg-green-100' },
     { name: 'Groceries', icon: 'https://picsum.photos/seed/groc/100/100', color: 'bg-lime-100' },
-    { name: 'Toys', icon: 'https://picsum.photos/seed/toys/100/100', color: 'bg-purple-100' },
+    { name: 'Toys', icon: 'https://picsum.photos/seed/toys/100/100', color: 'bg-destructive/10' },
     { name: 'Appliances', icon: 'https://picsum.photos/seed/app/100/100', color: 'bg-indigo-100' },
   ];
 
@@ -92,53 +93,58 @@ export default function HomePage() {
     setTimeout(() => {
       setLoadingMore(false);
       toast({
-        title: "More Items Loaded",
-        description: "Displaying latest marketplace updates for you.",
+        title: "Vault Synchronized",
+        description: "Fresh Ghanaian inventory loaded into the marketplace.",
       });
     }, 1500);
   };
 
   return (
-    <div className="flex flex-col gap-12 pb-24 bg-[#f8f8f8]">
+    <div className="flex flex-col gap-12 pb-24 bg-mesh-gradient">
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-3 relative rounded-[1.5rem] overflow-hidden group shadow-lg min-h-[400px]">
+          <div className="lg:col-span-3 relative rounded-[2rem] overflow-hidden group shadow-2xl min-h-[450px] border-4 border-white">
             <Image 
               src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
               alt="Premium Accra Fashion" 
               fill 
-              className="object-cover"
+              className="object-cover group-hover:scale-105 transition-transform duration-1000"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-center">
-              <div className="pl-12 space-y-4 max-w-xl">
-                <Badge className="bg-primary text-white hover:bg-primary py-1 px-4">New Arrival</Badge>
-                <h2 className="text-4xl md:text-6xl font-headline font-bold text-white leading-tight">
-                  Premium <br /> Accra Fashion
+            <div className="absolute inset-0 bg-gradient-to-r from-destructive/60 via-primary/40 to-transparent flex items-center">
+              <div className="pl-12 space-y-6 max-w-xl">
+                <div className="flex gap-2">
+                  <Badge className="bg-white text-destructive hover:bg-white py-1 px-4 font-black">PREMIUM</Badge>
+                  <Badge className="bg-accent text-white hover:bg-accent py-1 px-4 font-black">SECURE</Badge>
+                </div>
+                <h2 className="text-5xl md:text-7xl font-headline font-black text-white leading-[0.9] tracking-tighter">
+                  HIGH-TRUST <br /> ACCRA RETAIL
                 </h2>
-                <p className="text-white/90 text-lg hidden md:block">
-                  Get up to 50% off on premium brands. Secured by Vault Escrow Ghana.
+                <p className="text-white/90 text-xl hidden md:block font-medium">
+                  Experience the ultimate GHS vault-protected shopping. Up to 50% off global brands.
                 </p>
                 <Link href="/listings">
-                  <Button size="lg" className="rounded-full px-10 bg-primary hover:bg-primary/90 mt-4">Shop Now</Button>
+                  <Button size="lg" className="rounded-full px-12 bg-white text-primary hover:bg-accent hover:text-white font-black h-14 text-lg shadow-xl transition-all">
+                    Unlock Deals <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
                 </Link>
               </div>
             </div>
           </div>
           <div className="hidden lg:flex flex-col gap-6">
-            <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-md group block">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/30 p-6 flex flex-col justify-center">
-                <span className="text-primary font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">UP TO 50% OFF</span>
-                <h3 className="text-white font-bold text-xl mt-2">Akwaaba Sale</h3>
+            <Link href="/listings" className="flex-1 relative rounded-[1.5rem] overflow-hidden shadow-lg group block border-2 border-white">
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-accent/40 backdrop-blur-[2px] p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white font-black text-xs bg-destructive w-fit px-3 py-1 rounded-full mb-2">50% OFF</span>
+                <h3 className="text-white font-black text-2xl">Akwaaba Sale</h3>
               </div>
             </Link>
-            <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-md group block">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/30 p-6 flex flex-col justify-center">
-                <span className="text-emerald-500 font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">FRESH ORGANIC</span>
-                <h3 className="text-white font-bold text-xl mt-2">Makola Market Deals</h3>
+            <Link href="/listings" className="flex-1 relative rounded-[1.5rem] overflow-hidden shadow-lg group block border-2 border-white">
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-primary/40 backdrop-blur-[2px] p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white font-black text-xs bg-accent w-fit px-3 py-1 rounded-full mb-2">TRUSTED</span>
+                <h3 className="text-white font-black text-2xl">Makola Deals</h3>
               </div>
             </Link>
           </div>
@@ -149,19 +155,19 @@ export default function HomePage() {
       <section className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { icon: Zap, title: 'Secure Payment', sub: 'Mobile Money & Cards' },
-            { icon: Star, title: 'Genuine Reviews', sub: 'Verified Ghanaian Users' },
-            { icon: Headphones, title: '24/7 Support', sub: 'Local support team' },
-            { icon: RefreshCw, title: 'Easy Returns', sub: '30 Days Refund Policy' },
+            { icon: Zap, title: 'Secure GHS Vault', sub: 'Paystack-Protected Payments', color: 'text-primary' },
+            { icon: Star, title: 'Verified Satisfy', sub: 'Protocol-Driven Reviews', color: 'text-accent' },
+            { icon: Headphones, title: '24/7 Concierge', sub: 'Local Support Hotline', color: 'text-destructive' },
+            { icon: Lock, title: 'Escrow Shield', sub: 'SLA Guaranteed Delivery', color: 'text-primary' },
           ].map((feat, i) => (
-            <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="p-5 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <feat.icon className="h-6 w-6 text-primary" />
+            <Card key={i} className="border-none shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 rounded-[2rem]">
+              <CardContent className="p-6 flex items-center gap-4">
+                <div className={`h-14 w-14 rounded-2xl bg-muted flex items-center justify-center`}>
+                  <feat.icon className={`h-7 w-7 ${feat.color}`} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">{feat.title}</h4>
-                  <p className="text-xs text-muted-foreground">{feat.sub}</p>
+                  <h4 className="font-black text-sm tracking-tight">{feat.title}</h4>
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{feat.sub}</p>
                 </div>
               </CardContent>
             </Card>
@@ -171,25 +177,30 @@ export default function HomePage() {
 
       {/* Categories Grid */}
       <section className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">Categories</h2>
+        <div className="flex justify-between items-center mb-10">
+          <div>
+            <h2 className="text-3xl font-black text-primary tracking-tighter">Market Sectors</h2>
+            <p className="text-sm font-medium text-muted-foreground">Diversified Ghanaian commerce protocols.</p>
+          </div>
           <Link href="/listings">
-            <Button variant="link" className="text-primary font-bold gap-1">View All <ChevronRight className="h-4 w-4" /></Button>
+            <Button variant="ghost" className="text-primary font-black gap-2 hover:bg-primary/5 rounded-full px-6">
+              View All <ChevronRight className="h-4 w-4" />
+            </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-8">
           {categories.map((cat) => (
-            <Link key={cat.name} href={`/listings?category=${cat.name}`} className="group flex flex-col items-center gap-3">
-              <div className={`w-20 h-20 rounded-full ${cat.color} flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-primary transition-all p-4`}>
+            <Link key={cat.name} href={`/listings?category=${cat.name}`} className="group flex flex-col items-center gap-4">
+              <div className={`w-24 h-24 rounded-[2rem] ${cat.color} flex items-center justify-center overflow-hidden border-4 border-white shadow-lg group-hover:rotate-6 transition-all duration-500 p-5`}>
                 <Image 
                   src={cat.icon} 
                   alt={cat.name} 
-                  width={60} 
-                  height={60} 
-                  className="object-contain group-hover:scale-110 transition-transform"
+                  width={80} 
+                  height={80} 
+                  className="object-contain group-hover:scale-125 transition-transform"
                 />
               </div>
-              <span className="text-xs font-bold text-center group-hover:text-primary transition-colors">{cat.name}</span>
+              <span className="text-xs font-black text-center group-hover:text-primary transition-colors tracking-tight">{cat.name}</span>
             </Link>
           ))}
         </div>
@@ -197,14 +208,14 @@ export default function HomePage() {
 
       {/* Popular Products */}
       <section className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">Popular in Ghana</h2>
+        <div className="flex justify-between items-center mb-10">
+          <h2 className="text-3xl font-black text-primary tracking-tighter">Vault Favorites</h2>
           <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="rounded-full shadow-sm"><ChevronLeft className="h-4 w-4" /></Button>
-            <Button variant="outline" size="icon" className="rounded-full shadow-sm"><ChevronRight className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" className="rounded-full shadow-sm border-primary/20"><ChevronLeft className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" className="rounded-full shadow-sm border-primary/20"><ChevronRight className="h-4 w-4" /></Button>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {popularListings.map((listing) => (
             <ListingCard key={listing.id} {...listing} />
           ))}
@@ -212,25 +223,26 @@ export default function HomePage() {
       </section>
 
       {/* Just For You */}
-      <section className="container mx-auto px-4 bg-white py-12 rounded-[2rem] shadow-sm">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Recommended For You</h2>
-          <p className="text-muted-foreground">AI-recommended listings curated for your secure browsing in GHS.</p>
+      <section className="container mx-auto px-4 bg-white/50 backdrop-blur-md py-16 rounded-[3rem] shadow-sm border border-white">
+        <div className="text-center mb-16 space-y-4">
+          <Badge className="bg-accent/10 text-accent hover:bg-accent/20 font-black py-1 px-4 border-none">INTELLIGENCE UNIT</Badge>
+          <h2 className="text-4xl font-black text-primary tracking-tighter">Curated Protocol Matches</h2>
+          <p className="text-muted-foreground font-medium max-w-lg mx-auto">AI-recommended listings verified by the VaultCommerce satisfaction algorithm.</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {popularListings.concat(popularListings).map((listing, i) => (
             <ListingCard key={`${listing.id}-${i}`} {...listing} />
           ))}
         </div>
-        <div className="mt-12 text-center">
+        <div className="mt-16 text-center">
           <Button 
             onClick={handleLoadMore}
             disabled={loadingMore}
             variant="outline" 
             size="lg" 
-            className="rounded-full px-12 border-primary text-primary hover:bg-primary hover:text-white font-bold transition-all"
+            className="rounded-full px-16 border-2 border-primary text-primary hover:bg-primary hover:text-white font-black h-16 transition-all shadow-xl shadow-primary/10"
           >
-            {loadingMore ? 'Syncing Vault...' : 'Load More Products'}
+            {loadingMore ? 'Syncing Vault Nodes...' : 'Load More GHS Products'}
           </Button>
         </div>
       </section>
