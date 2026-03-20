@@ -1,6 +1,6 @@
 import { PlaceHolderImages } from './placeholder-images';
 
-export type Role = 'ADMIN' | 'VENDOR' | 'CUSTOMER';
+export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
 
 export interface User {
   id: string;
@@ -96,7 +96,7 @@ export const LISTINGS: Listing[] = [
     price: 8450,
     oldPrice: 10200,
     location: 'Accra Mall, Ghana',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'electronics')?.imageUrl || '',
+    imageUrl: 'https://picsum.photos/seed/melcom-tv/800/600',
     rating: 4.9,
     discount: '17% OFF'
   },
@@ -108,7 +108,7 @@ export const LISTINGS: Listing[] = [
     price: 12500,
     oldPrice: 14000,
     location: 'Melcom Plus, Kaneshie',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'appliances')?.imageUrl || '',
+    imageUrl: 'https://picsum.photos/seed/melcom-fridge/800/600',
     rating: 4.8,
     discount: '10% OFF'
   },
@@ -119,7 +119,7 @@ export const LISTINGS: Listing[] = [
     category: 'Home & Living',
     price: 6800,
     location: 'Spintex Road, Accra',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'furniture')?.imageUrl || '',
+    imageUrl: 'https://picsum.photos/seed/melcom-sofa/800/600',
     rating: 5.0
   },
   {
@@ -130,14 +130,15 @@ export const LISTINGS: Listing[] = [
     price: 450,
     oldPrice: 550,
     location: 'Tema, Ghana',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'supermarket')?.imageUrl || '',
+    imageUrl: 'https://picsum.photos/seed/melcom-grocery/800/600',
     rating: 4.7,
     discount: '18% OFF'
   }
 ];
 
 export const MOCK_USERS: User[] = [
-  { id: 'u1', name: 'Platform Admin', email: 'admin@vault.com', role: 'ADMIN' },
-  { id: 'u2', name: 'Melcom Store Manager', email: 'tech@gadgets.com', role: 'VENDOR' },
-  { id: 'u3', name: 'John Buyer', email: 'user@example.com', role: 'CUSTOMER' }
+  { id: 'u1', name: 'Platform Admin', email: 'admin@vault.com', role: 'HIGH_ADMIN' },
+  { id: 'u2', name: 'Store Owner', email: 'owner@melcom.com', role: 'VENDOR_ADMIN' },
+  { id: 'u3', name: 'Store Staff', email: 'staff@melcom.com', role: 'VENDOR_STAFF' },
+  { id: 'u4', name: 'John Buyer', email: 'user@example.com', role: 'CUSTOMER' }
 ];
