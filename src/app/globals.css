@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 17% 96%; /* #F0F2F5 Off-white */
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 45 100% 42%; /* Heritage Gold */
+    --primary: 210 75% 35%; /* #16599C Deep Blue */
     --primary-foreground: 210 40% 98%;
-    --secondary: 222 47% 11%; /* Royal Navy */
+    --secondary: 222 47% 11%; /* Dark Navy for High-Contrast */
     --secondary-foreground: 210 40% 98%;
-    --muted: 210 40% 96.1%;
+    --muted: 210 20% 90%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 45 100% 42%;
+    --accent: 178 89% 49%; /* #0DEDE6 Aqua */
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 45 100% 42%;
+    --ring: 178 89% 49%;
     --radius: 0px;
     --burgundy: 345 75% 35%;
     --burgundy-light: 345 75% 98%;
@@ -40,13 +40,13 @@
 
 /* Custom Product Card Image Radius */
 .product-card-image-wrap {
-  border-radius: 7% !important;
+  border-radius: 4px !important;
   overflow: hidden;
 }
 
 .bg-subtle-pattern {
-  background-color: #ffffff;
-  background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+  background-color: #f0f2f5;
+  background-image: radial-gradient(#d1d5db 0.5px, transparent 0.5px);
   background-size: 24px 24px;
 }
 
@@ -63,12 +63,12 @@
 
 @keyframes v-glow {
   0%, 100% { 
-    text-shadow: 0 0 2px hsl(var(--primary)), 0 0 5px hsl(var(--primary));
-    filter: drop-shadow(0 0 2px hsl(var(--primary)));
+    text-shadow: 0 0 2px hsl(var(--accent)), 0 0 5px hsl(var(--accent));
+    filter: drop-shadow(0 0 2px hsl(var(--accent)));
   }
   50% { 
-    text-shadow: 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary));
-    filter: drop-shadow(0 0 8px hsl(var(--primary)));
+    text-shadow: 0 0 10px hsl(var(--accent)), 0 0 15px hsl(var(--accent));
+    filter: drop-shadow(0 0 8px hsl(var(--accent)));
   }
 }
 

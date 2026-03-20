@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EscrowBadge } from '@/components/escrow-badge';
-import { Star, Eye, ShoppingCart, Heart, Plus, Users } from 'lucide-react';
+import { Star, Plus, Users, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart, useCurrency } from '@/components/providers';
 import { useToast } from '@/hooks/use-toast';
@@ -43,68 +43,71 @@ export function ListingCard(props: ListingProps) {
     e.stopPropagation();
     addItem(props);
     toast({
-      title: "Secure Selection Updated",
-      description: "Item added to your cart for escrow protection.",
+      title: "Registry Item Secured",
+      description: "Asset added to your session for escrow authorization.",
     });
   };
 
   return (
-    <Card className="group overflow-hidden bg-white border-border/50 hover:border-primary/40 hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-none">
+    <Card className="group overflow-hidden bg-white border-2 border-border/50 hover:border-accent hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-none">
       {/* Top Badges */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
+      <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
         {discount && (
-          <Badge className="bg-primary text-secondary text-[9px] font-black px-2 py-0.5 border-none rounded-none shadow-sm">
+          <Badge className="bg-primary text-white text-[10px] font-black px-3 py-1 border-none rounded-none shadow-xl">
             {discount}
           </Badge>
         )}
-        <EscrowBadge className="bg-white/95 scale-75 origin-left shadow-sm py-1 px-3" />
+        <div className="flex items-center gap-1.5 bg-accent/90 text-secondary py-1 px-3 rounded-none shadow-lg backdrop-blur-sm">
+           <ShieldCheck className="h-3.5 w-3.5" />
+           <span className="text-[9px] font-black uppercase tracking-widest">Escrow Verified</span>
+        </div>
       </div>
 
       {/* Image Section with Reveal Animation */}
-      <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block image-reveal bg-muted product-card-image-wrap">
+      <Link href={`/listings/${id}`} className="relative h-56 w-full overflow-hidden block image-reveal bg-background product-card-image-wrap">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </Link>
 
-      <CardContent className="p-5 flex flex-col flex-1 gap-2">
+      <CardContent className="p-6 flex flex-col flex-1 gap-3">
         <div className="flex justify-between items-start">
-          <Link href={`/listings?category=${category}`} className="text-[9px] text-primary font-black uppercase tracking-[0.2em] hover:underline">
+          <Link href={`/listings?category=${category}`} className="text-[10px] text-primary font-black uppercase tracking-[0.2em] hover:text-accent transition-colors">
             {category}
           </Link>
-          <div className="flex items-center gap-1">
-            <Star className="h-3 w-3 fill-primary text-primary" />
-            <span className="text-[10px] font-black text-secondary">{rating}</span>
+          <div className="flex items-center gap-1.5">
+            <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+            <span className="text-[11px] font-black text-secondary">{rating}</span>
           </div>
         </div>
         
         <Link href={`/listings/${id}`} className="block hover:text-primary transition-colors">
-          <h3 className="font-bold text-sm line-clamp-2 leading-tight min-h-[2.5rem] text-secondary">{title}</h3>
+          <h3 className="font-bold text-base line-clamp-2 leading-snug min-h-[3rem] text-secondary tracking-tight uppercase">{title}</h3>
         </Link>
         
-        <div className="flex items-center gap-1.5 mt-1">
-          <div className="bg-secondary/5 border border-secondary/10 px-2 py-0.5 flex items-center gap-1.5">
-            <Users className="h-3 w-3 text-primary" />
-            <span className="text-[8px] font-black text-secondary uppercase tracking-widest">{salesCount} secured this item</span>
+        <div className="flex items-center gap-2 mt-1">
+          <div className="bg-background border-2 border-border px-3 py-1 flex items-center gap-2 shadow-sm">
+            <Users className="h-4 w-4 text-accent" />
+            <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Secured Items</span>
           </div>
         </div>
         
-        <div className="mt-auto pt-3 flex items-baseline gap-2">
-          <span className="text-lg font-black text-secondary tracking-tight">{formatPrice(price)}</span>
+        <div className="mt-auto pt-4 flex items-baseline gap-3">
+          <span className="text-xl font-black text-primary tracking-tighter">{formatPrice(price)}</span>
           {oldPrice && (
-            <span className="text-[10px] text-muted-foreground line-through font-bold">{formatPrice(oldPrice)}</span>
+            <span className="text-[11px] text-muted-foreground line-through font-bold">{formatPrice(oldPrice)}</span>
           )}
         </div>
       </CardContent>
 
-      <CardFooter className="px-5 py-4 bg-muted/20 border-t flex gap-2">
+      <CardFooter className="px-6 py-5 bg-background border-t-2 flex gap-3">
         <Button 
           onClick={handleBuyNow}
-          className="flex-1 bg-secondary text-white hover:bg-primary hover:text-secondary rounded-none font-black text-[10px] uppercase tracking-widest h-10 transition-all duration-300"
+          className="flex-1 bg-secondary text-white hover:bg-primary transition-all rounded-none font-black text-[11px] uppercase tracking-[0.2em] h-12 shadow-lg"
         >
           Secure Buy
         </Button>
@@ -112,9 +115,9 @@ export function ListingCard(props: ListingProps) {
           onClick={handleAddToCart}
           variant="outline"
           size="icon"
-          className="rounded-none border-primary/20 text-primary hover:bg-primary/5 h-10 w-10 transition-all"
+          className="rounded-none border-2 border-primary/20 text-primary hover:bg-accent hover:border-accent hover:text-secondary h-12 w-12 transition-all shadow-md"
         >
-          <Plus className="h-5 w-5" />
+          <Plus className="h-6 w-6" />
         </Button>
       </CardFooter>
     </Card>
