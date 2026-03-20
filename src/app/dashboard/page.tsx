@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -158,7 +157,7 @@ export default function Dashboard() {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
-      {/* Role Switcher */}
+      {/* Sovereign Role Switcher (Demo Registry) */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-12 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
            <Activity className="h-5 w-5 text-primary" />

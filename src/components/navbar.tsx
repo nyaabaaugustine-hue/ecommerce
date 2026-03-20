@@ -16,14 +16,14 @@ import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 
 const TICKER_ITEMS = [
-  "LIVE VAULT ACTIVITY: GH₵4,200.00 SECURED IN ACCRA",
+  "LIVE VAULT ACTIVITY: GH₵8,450.00 SECURED IN ACCRA",
   "SETTLEMENT VERIFIED: YAW MENSAH @ MELCOM DIGITAL",
   "PROTOCOL UPDATE: MULTISIG ESCROW V1.2 ENGAGED",
-  "HIGH DEMAND: 18 USERS VIEWING SAMSUNG 65\" QLED",
+  "HIGH DEMAND: 24 USERS VIEWING SAMSUNG 65\" QLED",
   "SOVEREIGN GUARANTEE: 100% GHS PROTECTION ACTIVE",
   "NEW VENDOR JOINED: PRIME RENTALS GH",
   "TREASURY SYNC: 99.4% SUCCESSFUL SETTLEMENT RATE",
-  "LIVE AUDIT: 24 ACTIVE VAULTS IN EAST LEGON"
+  "LIVE AUDIT: 12 ACTIVE VAULTS IN EAST LEGON"
 ];
 
 export function Navbar() {
@@ -35,7 +35,7 @@ export function Navbar() {
     <header className="w-full flex flex-col sticky top-0 z-50">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      {/* Busy Activity Ticker */}
+      {/* High-Velocity Activity Ticker */}
       <div className="bg-primary text-secondary overflow-hidden py-1.5 border-b border-secondary/10">
         <div className="animate-marquee whitespace-nowrap flex gap-12 items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
