@@ -41,7 +41,9 @@ import {
   BookOpen,
   ArrowDownLeft,
   FileText,
-  Zap
+  Zap,
+  Fingerprint,
+  LineChart
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
@@ -62,6 +64,29 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Line, LineChart as ReLineChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+
+const chartData = [
+  { month: "Jan", volume: 1200 },
+  { month: "Feb", volume: 2100 },
+  { month: "Mar", volume: 1800 },
+  { month: "Apr", volume: 3400 },
+  { month: "May", volume: 4200 },
+  { month: "Jun", volume: 5100 },
+];
+
+const chartConfig = {
+  volume: {
+    label: "Registry Volume",
+    color: "hsl(var(--primary))",
+  },
+} satisfies ChartConfig;
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -70,12 +95,14 @@ export default function Dashboard() {
   const currentRole = user?.role || 'CUSTOMER';
   
   const [isVerifying, setIsVerifying] = useState(false);
+  const [biometricScanning, setBiometricScanning] = useState(false);
   const [selectedTxId, setSelectedTxId] = useState<string | null>(null);
   
   const [checklist, setChecklist] = useState({
     condition: false,
     matches: false,
-    functionality: false
+    functionality: false,
+    biometric: false
   });
   
   const [activeTransactions, setActiveTransactions] = useState([
@@ -107,16 +134,28 @@ export default function Dashboard() {
     }
   ]);
 
+  const handleBiometricScan = () => {
+    setBiometricScanning(true);
+    setTimeout(() => {
+      setBiometricScanning(false);
+      setChecklist(prev => ({ ...prev, biometric: true }));
+      toast({
+        title: "Biometric Identity Synced",
+        description: "Node authorization successful.",
+      });
+    }, 2000);
+  };
+
   const handleVerificationComplete = () => {
     if (!selectedTxId) return;
     
-    const isComplete = checklist.condition && checklist.matches && checklist.functionality;
+    const isComplete = checklist.condition && checklist.matches && checklist.functionality && checklist.biometric;
     
     if (!isComplete) {
       toast({
         variant: "destructive",
         title: "Audit Incomplete",
-        description: "All checks must be certified to release funds.",
+        description: "All checks including biometric sync must be certified to release funds.",
       });
       return;
     }
@@ -127,7 +166,7 @@ export default function Dashboard() {
     
     setIsVerifying(false);
     setSelectedTxId(null);
-    setChecklist({ condition: false, matches: false, functionality: false });
+    setChecklist({ condition: false, matches: false, functionality: false, biometric: false });
 
     toast({
       title: "Funds released successfully!",
@@ -300,6 +339,44 @@ export default function Dashboard() {
         ))}
       </div>
 
+      {/* Analytics Node */}
+      <Card className="mb-12 rounded-none border shadow-sm">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
+              <LineChart className="h-4 w-4 text-primary" />
+              Institutional Velocity Registry
+            </CardTitle>
+            <CardDescription className="text-[10px] font-bold uppercase mt-1">Real-time liquidity and transaction flow analysis.</CardDescription>
+          </div>
+          <Badge className="bg-primary/10 text-primary border-none rounded-none text-[8px] font-black tracking-widest">LIVE DATA FEED</Badge>
+        </CardHeader>
+        <CardContent className="h-[300px]">
+          <ChartContainer config={chartConfig} className="h-full w-full">
+            <ReLineChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted))" />
+              <XAxis 
+                dataKey="month" 
+                axisLine={false} 
+                tickLine={false} 
+                tick={{ fontSize: 10, fontWeight: 900 }} 
+                className="uppercase tracking-widest"
+              />
+              <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 900 }} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <Line 
+                type="monotone" 
+                dataKey="volume" 
+                stroke="hsl(var(--primary))" 
+                strokeWidth={4} 
+                dot={{ r: 4, fill: "hsl(var(--primary))" }} 
+                activeDot={{ r: 8, strokeWidth: 0 }}
+              />
+            </ReLineChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div className="lg:col-span-2 space-y-8">
           <Tabs defaultValue="active" className="w-full">
@@ -391,7 +468,7 @@ export default function Dashboard() {
                                 { id: 'matches', label: 'Description Synchronized', checked: checklist.matches },
                                 { id: 'functionality', label: 'Operational Standards Met', checked: checklist.functionality },
                               ].map((item) => (
-                                <div key={item.id} className="flex items-center space-x-4 p-4 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all cursor-pointer" onClick={() => setChecklist(prev => ({...prev, [item.id]: !prev[item.id as keyof typeof prev]}))}>
+                                <div key={item.id} className="flex items-center space-x-4 p-4 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all cursor-pointer" onClick={() => setChecklist(prev => ({...prev, [item.id as keyof typeof prev] : !prev[item.id as keyof typeof prev]}))}>
                                   <Checkbox 
                                     id={item.id} 
                                     checked={item.checked} 
@@ -401,6 +478,27 @@ export default function Dashboard() {
                                   </label>
                                 </div>
                               ))}
+                              
+                              <div className="pt-6">
+                                <Button 
+                                  variant="outline" 
+                                  className={cn(
+                                    "w-full rounded-none h-16 gap-3 font-black text-[10px] uppercase tracking-widest border-2",
+                                    checklist.biometric ? "border-green-500 text-green-600 bg-green-50" : "border-primary/20 hover:border-primary"
+                                  )}
+                                  onClick={handleBiometricScan}
+                                  disabled={biometricScanning}
+                                >
+                                  {biometricScanning ? (
+                                    <Zap className="h-5 w-5 animate-spin" />
+                                  ) : checklist.biometric ? (
+                                    <ShieldCheck className="h-5 w-5" />
+                                  ) : (
+                                    <Fingerprint className="h-5 w-5" />
+                                  )}
+                                  {biometricScanning ? "Authorizing Identity..." : checklist.biometric ? "Sovereign Identity Synced" : "Authorize via Biometric Node"}
+                                </Button>
+                              </div>
                             </div>
                             <DialogFooter>
                               <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-14 text-xs uppercase tracking-widest shadow-2xl">
