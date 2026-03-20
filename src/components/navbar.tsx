@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -13,15 +14,15 @@ export function Navbar() {
         <div className="container mx-auto px-4 flex justify-between items-center text-xs font-medium">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 hover:opacity-80 cursor-pointer">
-              Become a Seller
+              Become a Seller in Ghana
             </span>
             <span className="flex items-center gap-1.5 hover:opacity-80 cursor-pointer">
-              <Phone className="h-3 w-3" /> Hotline: +233 24 000 0000
+              <Phone className="h-3 w-3" /> Support: +233 24 000 0000
             </span>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 cursor-pointer hover:opacity-80">
-              USD $ <ChevronDown className="h-3 w-3" />
+              GHS GH₵ <ChevronDown className="h-3 w-3" />
             </div>
             <div className="flex items-center gap-1 cursor-pointer hover:opacity-80">
               English <ChevronDown className="h-3 w-3" />
@@ -42,7 +43,7 @@ export function Navbar() {
             <div className="relative w-full flex">
               <input 
                 type="text" 
-                placeholder="Search products, services, rentals..." 
+                placeholder="Search products, services, rentals in Ghana..." 
                 className="w-full border-2 border-primary rounded-l-full py-2.5 pl-6 pr-4 text-sm focus:outline-none"
               />
               <Button className="rounded-r-full rounded-l-none h-auto px-6 bg-primary hover:bg-primary/90">
@@ -53,7 +54,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-2 md:gap-4 shrink-0">
             <div className="hidden lg:flex flex-col text-right mr-2">
-              <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-tighter">Hello, Guest</span>
+              <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-tighter">Akwaaba, Guest</span>
               <Link href="/dashboard" className="text-sm font-bold hover:text-primary transition-colors">Sign In / Join</Link>
             </div>
             <Button variant="ghost" size="icon" className="relative group">
@@ -78,9 +79,8 @@ export function Navbar() {
           <nav className="flex items-center gap-8 text-foreground/80 whitespace-nowrap">
             <Link href="/" className="text-primary border-b-2 border-primary pb-1">Home</Link>
             <Link href="/listings" className="hover:text-primary transition-colors">Products</Link>
-            <Link href="/listings?category=Digital" className="hover:text-primary transition-colors">Digital Products</Link>
+            <Link href="/listings?category=Digital" className="hover:text-primary transition-colors">Digital GH</Link>
             <Link href="/listings" className="hover:text-primary transition-colors">Shops</Link>
-            <Link href="/listings" className="hover:text-primary transition-colors">Most Popular</Link>
             <Link href="/listings" className="hover:text-primary transition-colors">Best Deal</Link>
             <Link href="/listings" className="hover:text-primary transition-colors">Contact</Link>
           </nav>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -73,9 +74,9 @@ export function ListingCard({ id, title, category, price, oldPrice, location, im
         </div>
 
         <div className="mt-auto flex items-baseline gap-2">
-          <span className="text-lg font-black text-primary">${price.toLocaleString()}</span>
+          <span className="text-lg font-black text-primary">GH₵{price.toLocaleString()}</span>
           {oldPrice && (
-            <span className="text-xs text-muted-foreground line-through">${oldPrice.toLocaleString()}</span>
+            <span className="text-xs text-muted-foreground line-through">GH₵{oldPrice.toLocaleString()}</span>
           )}
         </div>
       </CardContent>

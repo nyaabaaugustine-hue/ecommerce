@@ -39,29 +39,29 @@ export interface Listing {
 export const VENDORS: Vendor[] = [
   {
     id: 'v1',
-    name: 'GadgetZone',
+    name: 'GadgetZone Ghana',
     category: 'Electronics',
     rating: 4.9,
     itemsCount: 156,
     joinedDate: 'Jan 2022',
     color: 'bg-rose-500',
     icon: 'G',
-    description: 'Premier electronics distributor specializing in high-end computing and mobile devices.'
+    description: 'Premier electronics distributor in Accra specializing in high-end computing and mobile devices.'
   },
   {
     id: 'v2',
-    name: 'PrimeRentals',
+    name: 'PrimeRentals GH',
     category: 'Real Estate',
     rating: 4.8,
     itemsCount: 42,
     joinedDate: 'Mar 2021',
     color: 'bg-indigo-500',
     icon: 'P',
-    description: 'Curating the finest residential and commercial properties in premium urban locations.'
+    description: 'Curating the finest residential and commercial properties across East Legon and Airport Residential.'
   },
   {
     id: 'v3',
-    name: 'GlobalLex',
+    name: 'GlobalLex Consulting',
     category: 'Professional Services',
     rating: 5.0,
     itemsCount: 12,
@@ -72,14 +72,14 @@ export const VENDORS: Vendor[] = [
   },
   {
     id: 'v4',
-    name: 'DevMastery',
+    name: 'DevMastery Academy',
     category: 'Education',
     rating: 4.9,
     itemsCount: 28,
     joinedDate: 'Sep 2022',
     color: 'bg-amber-500',
     icon: 'D',
-    description: 'Elite coding bootcamps and specialized technical mentorship programs.'
+    description: 'Elite coding bootcamps and specialized technical mentorship programs in Kumasi and Accra.'
   }
 ];
 
@@ -89,8 +89,8 @@ export const LISTINGS: Listing[] = [
     title: 'MacBook Pro M3 Max 16"',
     vendorId: 'v1',
     category: 'Electronics',
-    price: 3499,
-    oldPrice: 3899,
+    price: 52499,
+    oldPrice: 58999,
     location: 'Accra, Ghana',
     imageUrl: PlaceHolderImages.find(img => img.id === 'electronics')?.imageUrl || '',
     rating: 4.9,
@@ -101,7 +101,7 @@ export const LISTINGS: Listing[] = [
     title: 'Modern 2-Bedroom Apartment',
     vendorId: 'v2',
     category: 'Real Estate',
-    price: 1200,
+    price: 18000,
     location: 'East Legon, Ghana',
     imageUrl: PlaceHolderImages.find(img => img.id === 'real-estate')?.imageUrl || '',
     rating: 4.7
@@ -111,7 +111,7 @@ export const LISTINGS: Listing[] = [
     title: 'Corporate Law - Annual Audit',
     vendorId: 'v3',
     category: 'Professional Services',
-    price: 5000,
+    price: 75000,
     location: 'Remote',
     imageUrl: PlaceHolderImages.find(img => img.id === 'legal')?.imageUrl || '',
     rating: 5.0
@@ -121,8 +121,8 @@ export const LISTINGS: Listing[] = [
     title: 'React Native Advanced Course',
     vendorId: 'v4',
     category: 'Education',
-    price: 250,
-    oldPrice: 400,
+    price: 3750,
+    oldPrice: 6000,
     location: 'Online',
     imageUrl: PlaceHolderImages.find(img => img.id === 'education')?.imageUrl || '',
     rating: 4.8,

@@ -51,7 +51,7 @@ export function ListingCreateForm() {
       category: "",
       price: "",
       description: "",
-      location: "",
+      location: "Accra, Ghana",
     },
   });
 
@@ -83,14 +83,14 @@ export function ListingCreateForm() {
       const result = await generateListingDescription({
         title,
         category,
-        keyFeatures: keyFeatures.length > 0 ? keyFeatures : ["Competitive pricing", "High quality", "Reliable support"],
+        keyFeatures: keyFeatures.length > 0 ? keyFeatures : ["Ghanaian warranty", "Verified local seller", "Paystack secured"],
         length: 'medium',
         tone: 'professional'
       });
       form.setValue('description', result.description);
       toast({
         title: "AI Description Generated!",
-        description: "Your listing description has been optimized by our assistant.",
+        description: "Your listing description has been optimized in GHS context.",
       });
     } catch (error) {
       toast({
@@ -118,7 +118,7 @@ export function ListingCreateForm() {
     console.log(values);
     toast({
       title: "Listing Published",
-      description: "Your listing is now live with escrow security enabled.",
+      description: "Your listing is now live in GH₵ with escrow security enabled.",
     });
   }
 
@@ -133,7 +133,7 @@ export function ListingCreateForm() {
               <FormItem>
                 <FormLabel className="text-primary font-bold">Listing Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Modern Office for Rent" className="rounded-xl h-12" {...field} />
+                  <Input placeholder="e.g. Modern Office for Rent in Accra" className="rounded-xl h-12" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -157,8 +157,6 @@ export function ListingCreateForm() {
                     <SelectItem value="Real Estate">Real Estate</SelectItem>
                     <SelectItem value="Education">Education</SelectItem>
                     <SelectItem value="Professional Services">Professional Services</SelectItem>
-                    <SelectItem value="Tutoring">Tutoring</SelectItem>
-                    <SelectItem value="Employment">Employment</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -171,11 +169,11 @@ export function ListingCreateForm() {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-primary font-bold">Price ($)</FormLabel>
+                <FormLabel className="text-primary font-bold">Price (GH₵)</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-muted-foreground">$</span>
-                    <Input type="number" placeholder="0.00" className="rounded-xl h-12 pl-8" {...field} />
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-muted-foreground">GH₵</span>
+                    <Input type="number" placeholder="0.00" className="rounded-xl h-12 pl-12" {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -190,7 +188,7 @@ export function ListingCreateForm() {
               <FormItem>
                 <FormLabel className="text-primary font-bold">Market Location</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Accra, Ghana" className="rounded-xl h-12" {...field} />
+                  <Input placeholder="e.g. Airport Residential, Accra" className="rounded-xl h-12" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -203,22 +201,22 @@ export function ListingCreateForm() {
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Calculator className="h-4 w-4 text-secondary" />
-                <h4 className="text-sm font-bold uppercase tracking-widest text-primary">Settlement Breakdown</h4>
+                <h4 className="text-sm font-bold uppercase tracking-widest text-primary">GHS Settlement Breakdown</h4>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="space-y-1">
                   <span className="text-xs text-muted-foreground">Listing Price</span>
-                  <p className="text-xl font-bold text-primary">${parseFloat(watchPrice).toLocaleString()}</p>
+                  <p className="text-xl font-bold text-primary">GH₵{parseFloat(watchPrice).toLocaleString()}</p>
                 </div>
                 <div className="space-y-1">
                   <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    Treasury Fee (2.5%) <Info className="h-3 w-3" />
+                    Vault Fee (2.5%) <Info className="h-3 w-3" />
                   </span>
-                  <p className="text-xl font-bold text-red-500">-${payoutStats.treasuryFee.toFixed(2)}</p>
+                  <p className="text-xl font-bold text-red-500">-GH₵{payoutStats.treasuryFee.toFixed(2)}</p>
                 </div>
                 <div className="space-y-1 bg-secondary/10 p-3 rounded-xl border border-secondary/20">
-                  <span className="text-xs font-bold text-secondary uppercase tracking-tighter">Your Net Payout</span>
-                  <p className="text-2xl font-black text-primary">${payoutStats.netEarnings.toLocaleString()}</p>
+                  <span className="text-xs font-bold text-secondary uppercase tracking-tighter">Your Net Payout (GH)</span>
+                  <p className="text-2xl font-black text-primary">GH₵{payoutStats.netEarnings.toLocaleString()}</p>
                 </div>
               </div>
             </CardContent>
@@ -228,13 +226,13 @@ export function ListingCreateForm() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <FormLabel className="text-primary font-bold">Key Selling Points</FormLabel>
-            <span className="text-xs text-muted-foreground">Used by AI for description</span>
+            <span className="text-xs text-muted-foreground">Used by AI for GHS optimization</span>
           </div>
           <div className="flex gap-2">
             <Input 
               value={featureInput}
               onChange={(e) => setFeatureInput(e.target.value)}
-              placeholder="e.g. 24/7 Support, Verified ownership..."
+              placeholder="e.g. Valid Ghanaian deed, Paystack verified..."
               className="rounded-xl"
               onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
             />
@@ -270,12 +268,12 @@ export function ListingCreateForm() {
                   disabled={isGenerating}
                 >
                   {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                  AI Optimizer
+                  AI Optimizer (GH)
                 </Button>
               </div>
               <FormControl>
                 <Textarea 
-                  placeholder="Provide a detailed overview of your offering..." 
+                  placeholder="Provide a detailed overview in GHS context..." 
                   className="min-h-[200px] rounded-2xl leading-relaxed border-muted focus:border-secondary transition-colors" 
                   {...field} 
                 />
@@ -283,7 +281,7 @@ export function ListingCreateForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        </div>
 
         <div className="bg-primary p-8 rounded-[2rem] text-white flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
           <div className="absolute -left-12 -top-12 w-32 h-32 bg-secondary/10 rounded-full blur-3xl" />
@@ -293,17 +291,17 @@ export function ListingCreateForm() {
           <div className="flex-1">
             <h4 className="font-bold text-xl mb-2 flex items-center gap-2">
               <ArrowRightLeft className="h-5 w-5 text-secondary" />
-              Automated Escrow Protocol
+              Paystack Escrow Protocol (GH)
             </h4>
             <p className="text-sm text-white/70 leading-relaxed">
-              VaultCommerce ensures high-trust interactions. Upon purchase, funds are restricted until the client confirms delivery. Payouts are split automatically via our Paystack-integrated treasury logic.
+              VaultCommerce ensures high-trust interactions in Ghana. Upon purchase, funds are restricted via Paystack until the client confirms delivery. Payouts are split automatically via our treasury logic.
             </p>
           </div>
         </div>
 
         <div className="flex justify-end pt-10">
           <Button type="submit" size="lg" className="px-16 bg-primary hover:bg-primary/90 rounded-full font-bold h-14 shadow-2xl shadow-primary/20">
-            Publish with Escrow Security
+            Publish with Escrow Security (GHS)
           </Button>
         </div>
       </form>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -38,9 +39,9 @@ export default function HomePage() {
       id: '1',
       title: 'Fitbit Charge 6 Fitness Tracker',
       category: 'Electronics',
-      price: 121,
-      oldPrice: 179,
-      location: 'Global',
+      price: 1815,
+      oldPrice: 2685,
+      location: 'Accra',
       imageUrl: PlaceHolderImages.find(img => img.id === 'electronics')?.imageUrl || '',
       rating: 4.8,
       provider: 'GadgetHub',
@@ -50,9 +51,9 @@ export default function HomePage() {
       id: '2',
       title: 'Premium Korean Skincare Set',
       category: 'Beauty',
-      price: 60,
-      oldPrice: 85,
-      location: 'Seoul',
+      price: 900,
+      oldPrice: 1275,
+      location: 'Accra',
       imageUrl: 'https://picsum.photos/seed/skincare/400/400',
       rating: 4.9,
       provider: 'K-Beauty',
@@ -62,9 +63,9 @@ export default function HomePage() {
       id: '3',
       title: 'HDR 4K UHD Smart TV 55"',
       category: 'Electronics',
-      price: 319,
-      oldPrice: 499,
-      location: 'USA',
+      price: 4785,
+      oldPrice: 7485,
+      location: 'Accra',
       imageUrl: 'https://picsum.photos/seed/tv/400/400',
       rating: 4.7,
       provider: 'VisionDirect',
@@ -74,8 +75,8 @@ export default function HomePage() {
       id: '4',
       title: 'Sony Alpha Mirrorless Camera',
       category: 'Photography',
-      price: 1800,
-      location: 'Japan',
+      price: 27000,
+      location: 'Kumasi',
       imageUrl: 'https://picsum.photos/seed/camera/400/400',
       rating: 5.0,
       provider: 'PhotoWorld'
@@ -83,10 +84,10 @@ export default function HomePage() {
   ];
 
   const topShops = [
-    { name: 'Razin Shop', rating: 5.0, items: 127, color: 'bg-rose-500', icon: 'R' },
-    { name: 'Easy Life', rating: 5.0, items: 14, color: 'bg-indigo-500', icon: 'E' },
-    { name: 'Echo Mart', rating: 5.0, items: 8, color: 'bg-emerald-500', icon: 'E' },
-    { name: 'Style Haven', rating: 5.0, items: 11, color: 'bg-amber-500', icon: 'S' },
+    { name: 'Razin Shop GH', rating: 5.0, items: 127, color: 'bg-rose-500', icon: 'R' },
+    { name: 'Easy Life Rentals', rating: 5.0, items: 14, color: 'bg-indigo-500', icon: 'E' },
+    { name: 'Echo Mart Accra', rating: 5.0, items: 8, color: 'bg-emerald-500', icon: 'E' },
+    { name: 'Style Haven GH', rating: 5.0, items: 11, color: 'bg-amber-500', icon: 'S' },
   ];
 
   return (
@@ -106,18 +107,13 @@ export default function HomePage() {
               <div className="pl-12 space-y-4 max-w-xl">
                 <Badge className="bg-primary text-white hover:bg-primary py-1 px-4">New Arrival</Badge>
                 <h2 className="text-4xl md:text-6xl font-headline font-bold text-white leading-tight">
-                  Fashion <br /> Seasonal Collection
+                  Premium <br /> Accra Fashion
                 </h2>
                 <p className="text-white/80 text-lg hidden md:block">
-                  Get up to 50% off on premium brands. Secured by Vault Escrow.
+                  Get up to 50% off on premium brands. Secured by Vault Escrow Ghana.
                 </p>
                 <Button size="lg" className="rounded-full px-10 bg-primary hover:bg-primary/90">Shop Now</Button>
               </div>
-            </div>
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-              <div className="w-2 h-2 rounded-full bg-primary" />
-              <div className="w-2 h-2 rounded-full bg-white/50" />
-              <div className="w-2 h-2 rounded-full bg-white/50" />
             </div>
           </div>
           <div className="hidden lg:flex flex-col gap-6">
@@ -125,14 +121,14 @@ export default function HomePage() {
               <Image src="https://picsum.photos/seed/sale/400/300" alt="Super Sale" fill className="object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/20 p-6 flex flex-col justify-center">
                 <span className="text-primary font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">UP TO 50% OFF</span>
-                <h3 className="text-white font-bold text-xl mt-2">Super Sale</h3>
+                <h3 className="text-white font-bold text-xl mt-2">Akwaaba Sale</h3>
               </div>
             </div>
             <div className="flex-1 relative rounded-2xl overflow-hidden shadow-md group">
               <Image src="https://picsum.photos/seed/veggie/400/300" alt="Fresh Food" fill className="object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/20 p-6 flex flex-col justify-center">
                 <span className="text-emerald-500 font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">FRESH ORGANIC</span>
-                <h3 className="text-white font-bold text-xl mt-2">Grocery Deals</h3>
+                <h3 className="text-white font-bold text-xl mt-2">Makola Market Deals</h3>
               </div>
             </div>
           </div>
@@ -143,9 +139,9 @@ export default function HomePage() {
       <section className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { icon: Zap, title: 'Secure Payment', sub: '48+ Payment Gateways' },
-            { icon: Star, title: 'Genuine Reviews', sub: '100% Verified Users' },
-            { icon: Headphones, title: '24/7 Support', sub: 'Always here to help' },
+            { icon: Zap, title: 'Secure Payment', sub: 'Mobile Money & Cards' },
+            { icon: Star, title: 'Genuine Reviews', sub: 'Verified Ghanaian Users' },
+            { icon: Headphones, title: '24/7 Support', sub: 'Local support team' },
             { icon: RefreshCw, title: 'Easy Returns', sub: '30 Days Refund Policy' },
           ].map((feat, i) => (
             <Card key={i} className="border-none shadow-sm hover:shadow-md transition-shadow">
@@ -190,7 +186,7 @@ export default function HomePage() {
       {/* Popular Products */}
       <section className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">Popular Products</h2>
+          <h2 className="text-2xl font-bold">Popular in Ghana</h2>
           <div className="flex gap-2">
             <Button variant="outline" size="icon" className="rounded-full"><ChevronLeft className="h-4 w-4" /></Button>
             <Button variant="outline" size="icon" className="rounded-full"><ChevronRight className="h-4 w-4" /></Button>
@@ -203,48 +199,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Top Rated Shops */}
-      <section className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">Top Rated Shops</h2>
-          <Button variant="link" className="text-primary font-bold">View All</Button>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {topShops.map((shop, i) => (
-            <Card key={i} className="overflow-hidden border-none shadow-sm hover:shadow-xl transition-all group">
-              <div className={`${shop.color} h-24 relative`}>
-                <div className="absolute -bottom-6 left-6 h-16 w-16 rounded-xl bg-white shadow-lg flex items-center justify-center font-black text-2xl text-primary border-4 border-white">
-                  {shop.icon}
-                </div>
-              </div>
-              <CardContent className="pt-10 pb-6 px-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="font-bold text-lg">{shop.name}</h3>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <span>{shop.items} Items</span>
-                      <span className="text-primary font-bold">•</span>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                        <span className="font-bold text-foreground">{shop.rating}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <Button className="w-full bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-full font-bold transition-all">
-                  Visit Store <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Just For You */}
       <section className="container mx-auto px-4 bg-white py-12 rounded-[2rem] shadow-sm">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-2">Just For You</h2>
-          <p className="text-muted-foreground">AI-recommended listings curated for your secure browsing.</p>
+          <h2 className="text-3xl font-bold mb-2">Recommended For You</h2>
+          <p className="text-muted-foreground">AI-recommended listings curated for your secure browsing in GHS.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {popularListings.concat(popularListings).map((listing, i) => (

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useParams, useRouter } from 'next/navigation';
@@ -10,23 +11,24 @@ import { Separator } from '@/components/ui/separator';
 import { Star, MapPin, Share2, Heart, ShieldCheck, Info } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useToast } from '@/hooks/use-toast';
+import { LISTINGS } from '@/lib/mock-data';
 
 export default function ListingDetails() {
   const { id } = useParams();
   const { toast } = useToast();
   const router = useRouter();
 
-  // Mock data fetching based on ID
-  const listing = {
+  // Find listing from mock data or fallback
+  const listingData = LISTINGS.find(l => l.id === id);
+  
+  const listing = listingData || {
     id: id,
-    title: id === '1' ? 'MacBook Pro M3 Max 16"' : 'Premium Professional Listing',
-    category: id === '1' ? 'Electronics' : 'Services',
-    price: id === '1' ? 3499 : 500,
+    title: 'Premium Professional Listing',
+    category: 'Services',
+    price: 7500,
     location: 'Accra, Ghana',
-    imageUrl: id === '1' 
-      ? PlaceHolderImages.find(img => img.id === 'electronics')?.imageUrl 
-      : PlaceHolderImages.find(img => img.id === 'services')?.imageUrl,
-    description: "Experience power and efficiency with this latest model. Featuring high performance storage, stunning display, and superior trust rating. This transaction is fully protected by VaultCommerce Escrow systems. Funds will only be released to the provider after you confirm satisfactory delivery.",
+    imageUrl: PlaceHolderImages.find(img => img.id === 'services')?.imageUrl,
+    description: "Experience power and efficiency with this latest offering. Featuring high performance storage, stunning results, and superior trust rating. This transaction is fully protected by VaultCommerce Escrow systems. Funds will only be released to the provider after you confirm satisfactory delivery via Paystack's secure gateway.",
     rating: 4.9,
     provider: 'Premium Provider',
     joinedDate: 'Jan 2022'
@@ -35,7 +37,7 @@ export default function ListingDetails() {
   const handlePurchase = () => {
     toast({
       title: "Transaction Initiated",
-      description: "You're being redirected to Paystack to secure the funds in our Escrow Vault.",
+      description: "You're being redirected to Paystack (GH) to secure the funds in our Escrow Vault.",
     });
     // Simulate navigation to dashboard after "payment"
     setTimeout(() => router.push('/dashboard'), 2000);
@@ -60,14 +62,6 @@ export default function ListingDetails() {
               </Badge>
               <EscrowBadge className="bg-white/95 py-1.5 px-4 rounded-full shadow-sm" />
             </div>
-            <div className="absolute top-6 right-6 flex gap-2">
-              <Button size="icon" variant="secondary" className="rounded-full bg-white/90 hover:bg-white shadow-sm">
-                <Heart className="h-5 w-5" />
-              </Button>
-              <Button size="icon" variant="secondary" className="rounded-full bg-white/90 hover:bg-white shadow-sm">
-                <Share2 className="h-5 w-5" />
-              </Button>
-            </div>
           </div>
 
           <div className="space-y-6">
@@ -82,11 +76,10 @@ export default function ListingDetails() {
                   <div className="flex items-center gap-1">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm font-bold text-foreground">{listing.rating}</span>
-                    <span className="text-xs">(124 verified reviews)</span>
                   </div>
                 </div>
               </div>
-              <div className="text-3xl font-bold text-primary">${listing.price.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-primary">GH₵{listing.price.toLocaleString()}</div>
             </div>
 
             <Separator />
@@ -94,7 +87,7 @@ export default function ListingDetails() {
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-primary">About this Listing</h3>
               <p className="text-muted-foreground leading-relaxed">
-                {listing.description}
+                {listing.description || "Fully protected by VaultCommerce Escrow Ghana. Funds will only be released to the provider after you confirm satisfactory delivery."}
               </p>
             </div>
 
@@ -102,9 +95,9 @@ export default function ListingDetails() {
               <div className="flex gap-4">
                 <ShieldCheck className="h-10 w-10 text-secondary shrink-0" />
                 <div>
-                  <h4 className="font-bold text-primary mb-1">High-Trust Interaction Guaranteed</h4>
+                  <h4 className="font-bold text-primary mb-1">Local High-Trust Interaction</h4>
                   <p className="text-sm text-muted-foreground">
-                    VaultCommerce protects both parties. The funds are held by Paystack's secure API until you trigger the 'Proof of Delivery' confirmation on your dashboard.
+                    VaultCommerce Ghana protects both parties. The funds are held via Paystack's secure escrow API until you trigger the 'Proof of Delivery' confirmation on your dashboard.
                   </p>
                 </div>
               </div>
@@ -116,31 +109,31 @@ export default function ListingDetails() {
         <div className="space-y-6">
           <Card className="border-none shadow-xl sticky top-24 overflow-hidden">
             <div className="bg-primary p-6 text-primary-foreground">
-              <h3 className="font-bold text-xl mb-1">Buy Securely</h3>
+              <h3 className="font-bold text-xl mb-1">Buy Securely (GHS)</h3>
               <p className="text-xs opacity-70">Escrow Vault Service is Active</p>
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="flex justify-between items-center py-2">
                 <span className="text-muted-foreground">Item Price</span>
-                <span className="font-bold">${listing.price.toLocaleString()}</span>
+                <span className="font-bold">GH₵{listing.price.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center py-2">
                 <span className="text-muted-foreground">Vault Fee (1.5%)</span>
-                <span className="font-bold">${(listing.price * 0.015).toFixed(2)}</span>
+                <span className="font-bold">GH₵{(listing.price * 0.015).toFixed(2)}</span>
               </div>
               <Separator />
               <div className="flex justify-between items-center py-2 text-lg font-headline">
                 <span className="font-bold">Total Secure Hold</span>
-                <span className="font-bold text-primary">${(listing.price * 1.015).toLocaleString()}</span>
+                <span className="font-bold text-primary">GH₵{(listing.price * 1.015).toLocaleString()}</span>
               </div>
               
               <Button onClick={handlePurchase} size="lg" className="w-full bg-secondary text-primary hover:bg-secondary/90 font-bold h-14 rounded-full shadow-lg shadow-secondary/10">
-                Confirm & Secure Funds
+                Secure Funds with Paystack
               </Button>
               
               <div className="flex items-center justify-center gap-2 pt-2">
                 <Image src="https://placehold.co/100x40/transparent/grey?text=Paystack" alt="Paystack" width={80} height={32} />
-                <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Secure Gateway</span>
+                <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Secure Gateway (GH)</span>
               </div>
               
               <div className="bg-muted p-4 rounded-xl flex items-start gap-3">
@@ -149,21 +142,6 @@ export default function ListingDetails() {
                   Funds are held in a vault. Releasing funds prematurely is not recommended unless service is fully completed.
                 </p>
               </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-none shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
-                  {listing.provider.charAt(0)}
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm">{listing.provider}</h4>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-tighter">Joined {listing.joinedDate}</p>
-                </div>
-              </div>
-              <Button variant="outline" className="w-full rounded-full text-xs font-bold">Message Provider</Button>
             </CardContent>
           </Card>
         </div>
