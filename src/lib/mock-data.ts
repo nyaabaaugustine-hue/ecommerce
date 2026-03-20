@@ -1,3 +1,4 @@
+
 import { PlaceHolderImages } from './placeholder-images';
 
 export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
@@ -44,7 +45,7 @@ export const VENDORS: Vendor[] = [
     rating: 4.9,
     itemsCount: 1560,
     joinedDate: 'Jan 2022',
-    color: 'bg-rose-600',
+    color: 'bg-primary',
     icon: 'M',
     logoUrl: 'https://picsum.photos/seed/melcom-logo/100/100',
     description: "Ghana's largest electronics and appliance department, powered by Melcom."
@@ -56,7 +57,7 @@ export const VENDORS: Vendor[] = [
     rating: 4.8,
     itemsCount: 42,
     joinedDate: 'Mar 2021',
-    color: 'bg-indigo-500',
+    color: 'bg-accent',
     icon: 'P',
     logoUrl: 'https://picsum.photos/seed/primerental/100/100',
     description: 'Curating the finest residential and commercial properties across East Legon.'
@@ -68,7 +69,7 @@ export const VENDORS: Vendor[] = [
     rating: 5.0,
     itemsCount: 85,
     joinedDate: 'Jun 2020',
-    color: 'bg-emerald-500',
+    color: 'bg-secondary',
     icon: 'H',
     logoUrl: 'https://picsum.photos/seed/homeliving/100/100',
     description: 'Premium furniture and interior decor with secure delivery across Ghana.'
@@ -80,7 +81,7 @@ export const VENDORS: Vendor[] = [
     rating: 4.7,
     itemsCount: 4500,
     joinedDate: 'Sep 2022',
-    color: 'bg-amber-500',
+    color: 'bg-destructive',
     icon: 'S',
     logoUrl: 'https://picsum.photos/seed/superstore/100/100',
     description: 'Fresh daily essentials and imported household goods.'
@@ -90,49 +91,79 @@ export const VENDORS: Vendor[] = [
 export const LISTINGS: Listing[] = [
   {
     id: '1',
-    title: 'Samsung 65" Crystal 4K UHD Smart TV',
+    title: 'Samsung 65" UHD Smart TV - Melcom Edition',
     vendorId: 'v1',
     category: 'Electronics',
     price: 8450,
     oldPrice: 10200,
     location: 'Accra Mall, Ghana',
-    imageUrl: 'https://picsum.photos/seed/melcom-tv/800/600',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
     rating: 4.9,
     discount: '17% OFF'
   },
   {
     id: '2',
-    title: 'LG Side-by-Side Inverter Refrigerator',
+    title: 'LG Inverter Double Door Refrigerator',
     vendorId: 'v1',
     category: 'Appliances',
     price: 12500,
     oldPrice: 14000,
     location: 'Melcom Plus, Kaneshie',
-    imageUrl: 'https://picsum.photos/seed/melcom-fridge/800/600',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png',
     rating: 4.8,
     discount: '10% OFF'
   },
   {
     id: '3',
-    title: 'Modern L-Shaped Sectional Sofa Set',
+    title: 'Modern L-Shaped Sectional Sofa - Royal Velvet',
     vendorId: 'v3',
     category: 'Home & Living',
     price: 6800,
     location: 'Spintex Road, Accra',
-    imageUrl: 'https://picsum.photos/seed/melcom-sofa/800/600',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     rating: 5.0
   },
   {
     id: '4',
-    title: 'Premium Grocery Care Package',
+    title: 'Premium Grocery Care Package - Makola Select',
     vendorId: 'v4',
     category: 'Supermarket',
     price: 450,
     oldPrice: 550,
     location: 'Tema, Ghana',
-    imageUrl: 'https://picsum.photos/seed/melcom-grocery/800/600',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.7,
     discount: '18% OFF'
+  },
+  {
+    id: '5',
+    title: 'High-Performance Blender & Food Processor',
+    vendorId: 'v1',
+    category: 'Appliances',
+    price: 1200,
+    location: 'Kumasi, Ghana',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/183297_wlhtmo.png',
+    rating: 4.6
+  },
+  {
+    id: '6',
+    title: 'Sony Alpha ZV-E10 Mirrorless Camera',
+    vendorId: 'v1',
+    category: 'Electronics',
+    price: 18500,
+    location: 'Airport Residential, Accra',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
+    rating: 4.9
+  },
+  {
+    id: '7',
+    title: 'Korean Advanced Skincare Hydration Set',
+    vendorId: 'v4',
+    category: 'Beauty',
+    price: 950,
+    location: 'East Legon, Accra',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
+    rating: 4.8
   }
 ];
 

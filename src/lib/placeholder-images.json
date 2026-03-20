@@ -2,57 +2,51 @@
   "placeholderImages": [
     {
       "id": "electronics",
-      "description": "High-end Smart TV and Home Audio",
-      "imageUrl": "https://picsum.photos/seed/melcom-tv/800/600",
-      "imageHint": "smart tv"
+      "description": "Premium Electronics and Gadgets",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png",
+      "imageHint": "electronics gadget"
     },
     {
       "id": "appliances",
-      "description": "Modern Kitchen Refrigerators",
-      "imageUrl": "https://picsum.photos/seed/melcom-fridge/800/600",
-      "imageHint": "refrigerator appliance"
+      "description": "Modern Home Appliances",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png",
+      "imageHint": "home appliance"
     },
     {
       "id": "supermarket",
-      "description": "Fresh Groceries and Supermarket Goods",
-      "imageUrl": "https://picsum.photos/seed/melcom-grocery/800/600",
-      "imageHint": "grocery supermarket"
+      "description": "Fresh Supermarket Products",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png",
+      "imageHint": "supermarket goods"
     },
     {
       "id": "furniture",
-      "description": "Contemporary Home Furniture",
-      "imageUrl": "https://picsum.photos/seed/melcom-sofa/800/600",
-      "imageHint": "modern sofa"
+      "description": "Premium Home Furniture",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg",
+      "imageHint": "home furniture"
     },
     {
-      "id": "real-estate",
-      "description": "Luxury Apartments in Accra",
-      "imageUrl": "https://picsum.photos/seed/home-gh/800/600",
-      "imageHint": "modern house"
+      "id": "beauty",
+      "description": "Beauty and Personal Care",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg",
+      "imageHint": "beauty care"
     },
     {
-      "id": "education",
-      "description": "Books and Stationery Supplies",
-      "imageUrl": "https://picsum.photos/seed/melcom-books/800/600",
-      "imageHint": "books stationery"
+      "id": "photography",
+      "description": "Digital Photography Gear",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png",
+      "imageHint": "camera gear"
     },
     {
-      "id": "services",
-      "description": "Professional Business Consulting",
-      "imageUrl": "https://picsum.photos/seed/service-gh/800/600",
-      "imageHint": "professional services"
+      "id": "home-living",
+      "description": "Modern Living Essentials",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg",
+      "imageHint": "living decor"
     },
     {
-      "id": "legal",
-      "description": "Legal Services and Contracts",
-      "imageUrl": "https://picsum.photos/seed/legal-gh/800/600",
-      "imageHint": "legal gavel"
-    },
-    {
-      "id": "hero-bg",
-      "description": "Secure Melcom-style Marketplace",
-      "imageUrl": "https://picsum.photos/seed/melcom-trust/1920/1080",
-      "imageHint": "retail shopping"
+      "id": "hero-fashion",
+      "description": "Accra Premium Retail",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg",
+      "imageHint": "retail hero"
     }
   ]
 }

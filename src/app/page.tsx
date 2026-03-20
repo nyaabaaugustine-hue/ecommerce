@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -23,69 +24,21 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { LISTINGS } from '@/lib/mock-data';
 
 export default function HomePage() {
   const { toast } = useToast();
   const [loadingMore, setLoadingMore] = useState(false);
 
   const categories = [
-    { name: 'Beauty', icon: 'https://picsum.photos/seed/beauty/100/100', color: 'bg-accent/10' },
+    { name: 'Beauty', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg', color: 'bg-accent/10' },
     { name: 'Sports', icon: 'https://picsum.photos/seed/sport/100/100', color: 'bg-primary/10' },
-    { name: 'Gadgets', icon: 'https://picsum.photos/seed/gadget/100/100', color: 'bg-slate-100' },
+    { name: 'Gadgets', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png', color: 'bg-slate-100' },
     { name: 'Clothing', icon: 'https://picsum.photos/seed/cloth/100/100', color: 'bg-amber-100' },
-    { name: 'Stationery', icon: 'https://picsum.photos/seed/stat/100/100', color: 'bg-green-100' },
-    { name: 'Groceries', icon: 'https://picsum.photos/seed/groc/100/100', color: 'bg-lime-100' },
+    { name: 'Stationery', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png', color: 'bg-green-100' },
+    { name: 'Groceries', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/183297_wlhtmo.png', color: 'bg-lime-100' },
     { name: 'Toys', icon: 'https://picsum.photos/seed/toys/100/100', color: 'bg-destructive/10' },
-    { name: 'Appliances', icon: 'https://picsum.photos/seed/app/100/100', color: 'bg-indigo-100' },
-  ];
-
-  const popularListings = [
-    {
-      id: '1',
-      title: 'Fitbit Charge 6 Fitness Tracker',
-      category: 'Electronics',
-      price: 1815,
-      oldPrice: 2685,
-      location: 'Accra',
-      imageUrl: PlaceHolderImages.find(img => img.id === 'electronics')?.imageUrl || '',
-      rating: 4.8,
-      provider: 'GadgetHub',
-      discount: '32% OFF'
-    },
-    {
-      id: '2',
-      title: 'Premium Korean Skincare Set',
-      category: 'Beauty',
-      price: 900,
-      oldPrice: 1275,
-      location: 'Accra',
-      imageUrl: 'https://picsum.photos/seed/skincare/400/400',
-      rating: 4.9,
-      provider: 'K-Beauty',
-      discount: '15% OFF'
-    },
-    {
-      id: '3',
-      title: 'HDR 4K UHD Smart TV 55"',
-      category: 'Electronics',
-      price: 4785,
-      oldPrice: 7485,
-      location: 'Accra',
-      imageUrl: 'https://picsum.photos/seed/tv/400/400',
-      rating: 4.7,
-      provider: 'VisionDirect',
-      discount: '36% OFF'
-    },
-    {
-      id: '4',
-      title: 'Sony Alpha Mirrorless Camera',
-      category: 'Photography',
-      price: 27000,
-      location: 'Kumasi',
-      imageUrl: 'https://picsum.photos/seed/camera/400/400',
-      rating: 5.0,
-      provider: 'PhotoWorld'
-    }
+    { name: 'Appliances', icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png', color: 'bg-indigo-100' },
   ];
 
   const handleLoadMore = () => {
@@ -216,8 +169,8 @@ export default function HomePage() {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {popularListings.map((listing) => (
-            <ListingCard key={listing.id} {...listing} />
+          {LISTINGS.slice(0, 4).map((listing) => (
+            <ListingCard key={listing.id} {...listing} provider={listing.vendorId} />
           ))}
         </div>
       </section>
@@ -230,8 +183,8 @@ export default function HomePage() {
           <p className="text-muted-foreground font-medium max-w-lg mx-auto">AI-recommended listings verified by the VaultCommerce satisfaction algorithm.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          {popularListings.concat(popularListings).map((listing, i) => (
-            <ListingCard key={`${listing.id}-${i}`} {...listing} />
+          {LISTINGS.map((listing, i) => (
+            <ListingCard key={`${listing.id}-${i}`} {...listing} provider={listing.vendorId} />
           ))}
         </div>
         <div className="mt-16 text-center">
