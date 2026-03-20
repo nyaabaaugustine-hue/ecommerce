@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -34,7 +35,8 @@ import {
   Cpu,
   ArrowUpRight,
   Banknote,
-  Key
+  Key,
+  BookOpen
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
@@ -168,6 +170,13 @@ export default function Dashboard() {
     ]
   };
 
+  const roleNarratives = {
+    HIGH_ADMIN: "You oversee the multisig integrity. Your primary duty is to authorize the 'Global Treasury Locks' that secure GHS liquidity during trades.",
+    VENDOR_ADMIN: "You monitor 'Capital in Restriction'. Funds only move to your 'Net Payout Ready' balance once the Customer certifies the Fidelity Audit.",
+    VENDOR_STAFF: "You manage the physical SLA. Your role is to fulfill tasks and move items through the registry to ensure timely customer satisfaction.",
+    CUSTOMER: "You are the final authority. Your GHS is held in the Sovereign Vault; you only release it once your 3-point Fidelity Audit is complete."
+  };
+
   return (
     <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
       {/* Sovereign Role Switcher (Demo Registry) */}
@@ -180,13 +189,13 @@ export default function Dashboard() {
              <PopoverTrigger asChild>
                <Button variant="outline" size="sm" className="rounded-none h-8 font-bold text-[10px] uppercase tracking-widest gap-2">
                  <Info className="h-3 w-3" />
-                 Sovereign Flows
+                 Role Registry
                </Button>
              </PopoverTrigger>
              <PopoverContent className="w-80 rounded-none p-6 shadow-xl border mt-2">
                <h3 className="font-bold text-secondary mb-4 flex items-center gap-2 text-sm">
                  <ShieldCheck className="h-4 w-4 text-primary" />
-                 Demo User Registry
+                 Protocol Credentials
                </h3>
                <div className="space-y-3">
                  {MOCK_USERS.map(userItem => (
@@ -195,11 +204,15 @@ export default function Dashboard() {
                     className={`p-3 rounded-none border transition-all cursor-pointer ${currentRole === userItem.role ? 'bg-primary/10 border-primary' : 'bg-muted/50 border-muted hover:border-primary/20'}`} 
                     onClick={() => {
                       login(userItem.email);
-                      toast({ title: "Role Authenticated", description: `Acting as ${userItem.role}` });
+                      toast({ title: "Identity Certified", description: `Acting as ${userItem.role}` });
                     }}
                   >
-                     <p className="text-[8px] font-bold uppercase text-primary tracking-widest">{userItem.role.replace('_', ' ')}</p>
+                     <div className="flex justify-between items-start mb-1">
+                        <p className="text-[8px] font-black uppercase text-primary tracking-widest">{userItem.role.replace('_', ' ')}</p>
+                        {currentRole === userItem.role && <CheckCircle className="h-3 w-3 text-primary" />}
+                     </div>
                      <p className="font-bold text-xs text-secondary">{userItem.email}</p>
+                     <p className="text-[9px] text-muted-foreground font-medium mt-1 leading-tight">{roleNarratives[userItem.role]}</p>
                    </div>
                  ))}
                </div>
@@ -236,11 +249,12 @@ export default function Dashboard() {
               {currentRole.replace('_', ' ')}
             </Badge>
           </div>
-          <p className="text-muted-foreground font-medium text-xs md:text-base">
-            {currentRole === 'HIGH_ADMIN' 
-              ? 'Institutional oversight of GHS liquidity and multisig protocol integrity.' 
-              : `Managing your restricted assets and fidelity-driven settlements.`}
-          </p>
+          <div className="flex items-center gap-2 text-muted-foreground">
+             <BookOpen className="h-4 w-4 text-primary" />
+             <p className="font-bold text-[10px] md:text-xs uppercase tracking-widest">
+               {roleNarratives[currentRole]}
+             </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-center gap-3 w-full lg:w-auto">
           {currentRole === 'VENDOR_ADMIN' && (
@@ -255,7 +269,7 @@ export default function Dashboard() {
               className="w-full lg:w-auto bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-xs"
             >
               <Key className="h-4 w-4" />
-              Authorize Pending Locks
+              Authorize Global Treasury Locks
             </Button>
           )}
           <Button variant="outline" className="w-full lg:w-auto rounded-none h-11 px-6 font-bold hover:bg-primary/5 text-xs">
@@ -296,7 +310,7 @@ export default function Dashboard() {
           <Tabs defaultValue="active" className="w-full">
             <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto flex">
               <TabsTrigger value="active" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">
-                {currentRole.includes('ADMIN') ? 'Settlement Pipeline' : 'Active Vaults'}
+                {currentRole.includes('ADMIN') ? 'Escrow Pipeline' : 'My Active Vaults'}
               </TabsTrigger>
               <TabsTrigger value="history" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">Audit Archive</TabsTrigger>
             </TabsList>
@@ -332,20 +346,23 @@ export default function Dashboard() {
                     
                     <div className="space-y-2 mb-6">
                       <div className="flex justify-between text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                        <span>Fidelity Verification</span>
+                        <span>Fidelity Verification Progress</span>
                         <span className="text-secondary">{tx.progress}% Verified</span>
                       </div>
                       <Progress value={tx.progress} className="h-1.5 md:h-2 rounded-none" />
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-dashed border-border gap-4">
-                      <div className="flex -space-x-2">
-                        {[1, 2, 3].map((i) => (
-                          <Avatar key={i} className="h-7 w-7 md:h-9 md:w-9 border-2 border-white shadow-sm rounded-none">
-                            <AvatarImage src={`https://picsum.photos/seed/${tx.id}-${i}/40/40`} />
-                            <AvatarFallback>U</AvatarFallback>
-                          </Avatar>
-                        ))}
+                      <div className="flex items-center gap-3">
+                         <div className="flex -space-x-2">
+                          {[1, 2, 3].map((i) => (
+                            <Avatar key={i} className="h-7 w-7 md:h-9 md:w-9 border-2 border-white shadow-sm rounded-none">
+                              <AvatarImage src={`https://picsum.photos/seed/${tx.id}-${i}/40/40`} />
+                              <AvatarFallback>U</AvatarFallback>
+                            </Avatar>
+                          ))}
+                        </div>
+                        <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-muted-foreground">Multisig Nodes Active</span>
                       </div>
                       
                       {currentRole === 'CUSTOMER' && tx.status !== 'Completed' ? (
@@ -355,7 +372,7 @@ export default function Dashboard() {
                         }}>
                           <DialogTrigger asChild>
                             <Button className="w-full sm:w-auto bg-secondary text-white hover:bg-secondary/90 font-bold rounded-none px-6 h-11 text-[10px] md:text-xs uppercase tracking-widest">
-                              Audit & Release
+                              Audit & Release Funds
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-md rounded-none p-6 md:p-8">
@@ -367,7 +384,7 @@ export default function Dashboard() {
                                 Fidelity Protocol Audit
                               </DialogTitle>
                               <DialogDescription className="text-center text-xs font-medium">
-                                Certify item integrity to trigger the multisig release of GH₵{tx.amount.toLocaleString()}.
+                                Certify item integrity to authorize the multisig release of GH₵{tx.amount.toLocaleString()} from the Sovereign Vault to the vendor.
                               </DialogDescription>
                             </DialogHeader>
                             <div className="space-y-3 py-4 md:py-6">
@@ -390,7 +407,7 @@ export default function Dashboard() {
                             </div>
                             <DialogFooter>
                               <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-12 text-sm uppercase">
-                                EXECUTE GHS RELEASE
+                                AUTHORIZE GHS RELEASE
                               </Button>
                             </DialogFooter>
                           </DialogContent>
@@ -414,17 +431,17 @@ export default function Dashboard() {
               <ShieldCheck className="h-10 w-10 md:h-12 md:w-12 text-primary opacity-20" />
             </div>
             <CardHeader className="p-6 md:p-8">
-              <CardTitle className="flex items-center gap-3 text-xl md:text-2xl font-bold tracking-tight">
+              <CardTitle className="flex items-center gap-3 text-xl md:text-2xl font-bold tracking-tight text-white">
                 <Wallet className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                Vault Registry
+                Vault Liquidity
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6 md:p-8 pt-0 space-y-6 md:space-y-8">
               <div className="space-y-1">
                 <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/50">
-                  {currentRole.includes('ADMIN') ? 'Global Protocol Liquidity' : 'Active Restricted Assets'}
+                  {currentRole.includes('ADMIN') ? 'Global Protocol Liquidity' : 'Restricted Vault Assets'}
                 </span>
-                <div className="text-3xl md:text-5xl font-black tracking-tighter">
+                <div className="text-3xl md:text-5xl font-black tracking-tighter text-white">
                   {currentRole.includes('ADMIN') ? 'GH₵273.6K' : 'GH₵8,500'}
                 </div>
               </div>
@@ -432,17 +449,17 @@ export default function Dashboard() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/5 p-3 rounded-none border border-white/10">
                   <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Success Rate</span>
-                  <div className="font-bold text-base md:text-xl">99.4%</div>
+                  <div className="font-bold text-base md:text-xl text-white">99.4%</div>
                 </div>
                 <div className="bg-white/5 p-3 rounded-none border border-white/10">
-                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Vault Fee</span>
-                  <div className="font-bold text-base md:text-xl text-primary">2.5%</div>
+                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">SLA Rating</span>
+                  <div className="font-bold text-base md:text-xl text-primary">A+</div>
                 </div>
               </div>
               
               <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 text-xs uppercase tracking-widest gap-2">
                 <ArrowUpRight className="h-4 w-4" />
-                {currentRole === 'HIGH_ADMIN' ? 'Manage Treasury' : 'Liquidity Management'}
+                {currentRole === 'HIGH_ADMIN' ? 'Manage Treasury' : 'Manage Liquidity'}
               </Button>
             </CardContent>
           </Card>
@@ -451,9 +468,12 @@ export default function Dashboard() {
             <div className="flex gap-4 relative z-10">
               <ShieldAlert className="h-8 w-8 text-secondary shrink-0" />
               <div>
-                <h5 className="font-bold text-secondary text-sm md:text-base mb-2 tracking-tight uppercase">Active Audit Node</h5>
+                <h5 className="font-bold text-secondary text-sm md:text-base mb-2 tracking-tight uppercase">Protocol Oversight</h5>
                 <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed font-medium">
-                  Every trade is restricted via the Sovereign Vault. Only High Admin can authorize global treasury locks for capital release.
+                  {currentRole === 'CUSTOMER' 
+                    ? "Every trade is secured by the Sovereign Vault. Your funds only move to the vendor once you certifiy delivery via the Fidelity Audit."
+                    : "The High Admin node provides oversight for all GHS settlements. Every transaction is cryptographically locked via the Sovereign Protocol."
+                  }
                 </p>
                 <Button variant="link" className="p-0 h-auto text-[9px] font-black text-primary uppercase tracking-widest mt-4">Security Manual v1.2</Button>
               </div>
@@ -464,3 +484,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
