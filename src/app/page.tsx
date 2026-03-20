@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -106,19 +105,19 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-3 relative rounded-[1.5rem] overflow-hidden group shadow-lg min-h-[400px]">
             <Image 
-              src="https://picsum.photos/seed/fashion/1200/600" 
-              alt="Promotion" 
+              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
+              alt="Premium Accra Fashion" 
               fill 
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-center">
               <div className="pl-12 space-y-4 max-w-xl">
                 <Badge className="bg-primary text-white hover:bg-primary py-1 px-4">New Arrival</Badge>
                 <h2 className="text-4xl md:text-6xl font-headline font-bold text-white leading-tight">
                   Premium <br /> Accra Fashion
                 </h2>
-                <p className="text-white/80 text-lg hidden md:block">
+                <p className="text-white/90 text-lg hidden md:block">
                   Get up to 50% off on premium brands. Secured by Vault Escrow Ghana.
                 </p>
                 <Link href="/listings">
@@ -129,15 +128,15 @@ export default function HomePage() {
           </div>
           <div className="hidden lg:flex flex-col gap-6">
             <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-md group block">
-              <Image src="https://picsum.photos/seed/sale/400/300" alt="Super Sale" fill className="object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/20 p-6 flex flex-col justify-center">
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover group-hover:scale-105 transition-transform" />
+              <div className="absolute inset-0 bg-black/30 p-6 flex flex-col justify-center">
                 <span className="text-primary font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">UP TO 50% OFF</span>
                 <h3 className="text-white font-bold text-xl mt-2">Akwaaba Sale</h3>
               </div>
             </Link>
             <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-md group block">
-              <Image src="https://picsum.photos/seed/veggie/400/300" alt="Fresh Food" fill className="object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/20 p-6 flex flex-col justify-center">
+              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover group-hover:scale-105 transition-transform" />
+              <div className="absolute inset-0 bg-black/30 p-6 flex flex-col justify-center">
                 <span className="text-emerald-500 font-bold text-sm bg-white/90 w-fit px-2 py-0.5 rounded">FRESH ORGANIC</span>
                 <h3 className="text-white font-bold text-xl mt-2">Makola Market Deals</h3>
               </div>
