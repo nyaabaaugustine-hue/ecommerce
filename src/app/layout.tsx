@@ -9,6 +9,10 @@ import Image from 'next/image';
 export const metadata: Metadata = {
   title: 'VaultCommerce | Secure Global Marketplace',
   description: 'The cross-category marketplace aggregator with high-trust escrow interactions.',
+  icons: {
+    icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+    apple: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+  },
 };
 
 export default function RootLayout({
