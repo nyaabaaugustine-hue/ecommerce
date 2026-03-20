@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -104,7 +103,8 @@ export default function Dashboard() {
   const handleVerificationComplete = () => {
     if (!selectedTxId) return;
     
-    const isComplete = Object.values(checklist).every(v => v);
+    const isComplete = checklist.condition && checklist.matches && checklist.functionality;
+    
     if (!isComplete) {
       toast({
         variant: "destructive",
@@ -169,9 +169,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
+    <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
       {/* Sovereign Role Switcher (Demo Registry) */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 bg-white shadow-sm border p-4 rounded-none gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-12 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
            <Activity className="h-5 w-5 text-primary" />
            <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Demo Control Center</span>
@@ -203,11 +203,6 @@ export default function Dashboard() {
                    </div>
                  ))}
                </div>
-               <div className="mt-6 pt-6 border-t border-dashed">
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase leading-relaxed">
-                    Logic: Only **High Admin** can lock global funds (automated for demo). Switch to **Customer** to initiate, then **High Admin** to audit.
-                  </p>
-               </div>
              </PopoverContent>
            </Popover>
         </div>
@@ -221,9 +216,9 @@ export default function Dashboard() {
               onClick={() => {
                 const targetUser = MOCK_USERS.find(u => u.role === role);
                 if (targetUser) login(targetUser.email);
-                toast({ title: `Role Synced: ${role}`, description: "Optimizing viewport for role-specific protocols." });
+                toast({ title: `Role Synced: ${role}` });
               }}
-              className={`rounded-none text-[9px] h-8 font-bold uppercase tracking-widest ${currentRole === role ? 'bg-secondary text-white' : ''}`}
+              className={`rounded-none text-[8px] md:text-[9px] h-8 font-bold uppercase tracking-widest flex-1 sm:flex-none ${currentRole === role ? 'bg-secondary text-white' : ''}`}
             >
               {role.replace('_', ' ')}
             </Button>
@@ -234,40 +229,40 @@ export default function Dashboard() {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 md:mb-12 gap-6">
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-bold text-secondary tracking-tight">
+            <h1 className="text-2xl md:text-4xl font-bold text-secondary tracking-tight">
               {currentRole === 'HIGH_ADMIN' ? 'Sovereign Console' : 'Registry Dashboard'}
             </h1>
             <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-none">
               {currentRole.replace('_', ' ')}
             </Badge>
           </div>
-          <p className="text-muted-foreground font-medium text-sm md:text-base">
+          <p className="text-muted-foreground font-medium text-xs md:text-base">
             {currentRole === 'HIGH_ADMIN' 
               ? 'Institutional oversight of GHS liquidity and multisig protocol integrity.' 
               : `Managing your restricted assets and fidelity-driven settlements.`}
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-4 w-full lg:w-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-center gap-3 w-full lg:w-auto">
           {currentRole === 'VENDOR_ADMIN' && (
-             <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 rounded-none px-8 font-black h-12 text-secondary gap-2">
-              <Banknote className="h-5 w-5" />
+             <Button className="w-full lg:w-auto bg-primary hover:bg-primary/90 rounded-none px-6 font-black h-11 text-secondary gap-2 text-xs">
+              <Banknote className="h-4 w-4" />
               Settle GHS to Bank
             </Button>
           )}
           {currentRole === 'HIGH_ADMIN' && (
             <Button 
               onClick={handleAuthorizeLocks}
-              className="w-full sm:w-auto bg-primary text-secondary rounded-none px-8 font-black h-12 gap-2 shadow-lg"
+              className="w-full lg:w-auto bg-primary text-secondary rounded-none px-6 font-black h-11 gap-2 shadow-lg text-xs"
             >
-              <Key className="h-5 w-5" />
+              <Key className="h-4 w-4" />
               Authorize Pending Locks
             </Button>
           )}
-          <Button variant="outline" className="w-full sm:w-auto rounded-none h-12 px-6 font-bold hover:bg-primary/5">
+          <Button variant="outline" className="w-full lg:w-auto rounded-none h-11 px-6 font-bold hover:bg-primary/5 text-xs">
             <Settings className="h-4 w-4 mr-2" />
             Registry Config
           </Button>
-          <Button className="w-full sm:w-auto bg-secondary hover:bg-secondary/90 rounded-none px-8 font-bold h-12 text-white" onClick={handleLogout}>
+          <Button className="w-full lg:w-auto bg-secondary hover:bg-secondary/90 rounded-none px-6 font-bold h-11 text-white text-xs" onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
             Sign Out
           </Button>
@@ -280,14 +275,14 @@ export default function Dashboard() {
           <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-none">
             <CardContent className="p-4 md:p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-none bg-muted flex items-center justify-center">
-                  <stat.icon className={`h-5 w-5 md:h-6 md:w-6 ${stat.color}`} />
+                <div className="p-2 md:p-3 rounded-none bg-muted flex items-center justify-center">
+                  <stat.icon className={`h-4 w-4 md:h-6 md:w-6 ${stat.color}`} />
                 </div>
-                <Badge variant="outline" className="text-[8px] font-bold uppercase tracking-widest border-primary/20 rounded-none">Registry Audit</Badge>
+                <Badge variant="outline" className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest border-primary/20 rounded-none">Registry Audit</Badge>
               </div>
-              <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
-              <p className="text-2xl md:text-3xl font-bold text-secondary mb-2">{stat.val}</p>
-              <p className="text-[10px] text-muted-foreground flex items-center gap-1 font-bold">
+              <p className="text-[9px] md:text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
+              <p className="text-xl md:text-3xl font-bold text-secondary mb-2">{stat.val}</p>
+              <p className="text-[9px] text-muted-foreground flex items-center gap-1 font-bold">
                 <Activity className="h-3 w-3 text-primary" />
                 {stat.sub}
               </p>
@@ -297,66 +292,56 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-6">
           <Tabs defaultValue="active" className="w-full">
-            <div className="flex items-center justify-between mb-6 md:mb-8">
-              <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto overflow-x-auto">
-                <TabsTrigger value="active" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">
-                  {currentRole.includes('ADMIN') ? 'Settlement Pipeline' : 'Active Vaults'}
-                </TabsTrigger>
-                <TabsTrigger value="history" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">Audit Archive</TabsTrigger>
-              </TabsList>
-            </div>
+            <TabsList className="bg-muted p-1 rounded-none w-full sm:w-auto flex">
+              <TabsTrigger value="active" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">
+                {currentRole.includes('ADMIN') ? 'Settlement Pipeline' : 'Active Vaults'}
+              </TabsTrigger>
+              <TabsTrigger value="history" className="rounded-none px-4 md:px-8 font-bold uppercase text-[9px] md:text-[10px] tracking-widest flex-1">Audit Archive</TabsTrigger>
+            </TabsList>
 
-            <TabsContent value="active" className="space-y-6">
+            <TabsContent value="active" className="space-y-4 md:space-y-6 mt-6">
               {activeTransactions.map((tx) => (
                 <Card key={tx.id} className="border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden group">
                   <div className="p-4 md:p-8">
-                    <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-6 mb-6 md:mb-8">
-                      <div className="flex gap-4 md:gap-6">
-                        <Avatar className="h-12 w-12 md:h-16 md:w-16 rounded-none border shadow-sm shrink-0">
+                    <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
+                      <div className="flex gap-4">
+                        <Avatar className="h-10 w-10 md:h-16 md:w-16 rounded-none border shadow-sm shrink-0">
                           <AvatarImage src={tx.vendorLogo} alt={tx.item} />
                           <AvatarFallback className="bg-muted font-bold">{tx.item.charAt(0)}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <h4 className="font-bold text-secondary text-lg md:text-xl tracking-tight mb-1">{tx.item}</h4>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                            <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">{tx.id}</span>
-                            <div className="flex items-center gap-1.5 text-[9px] font-bold text-secondary uppercase tracking-widest">
-                              <Lock className="h-3 w-3 text-primary" />
+                          <h4 className="font-bold text-secondary text-base md:text-xl tracking-tight mb-1">{tx.item}</h4>
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <span className="text-[8px] md:text-[9px] text-muted-foreground font-bold uppercase tracking-widest">{tx.id}</span>
+                            <div className="flex items-center gap-1 text-[8px] md:text-[9px] font-bold text-secondary uppercase tracking-widest">
+                              <Lock className="h-2.5 w-2.5 text-primary" />
                               Protocol v1.2
                             </div>
-                            <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest">{tx.date}</span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-2">
-                        <div className="text-xl md:text-3xl font-bold text-secondary tracking-tight">GH₵{tx.amount.toLocaleString()}</div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant={tx.status === 'Completed' ? 'default' : 'secondary'} className={`font-bold uppercase text-[8px] md:text-[9px] tracking-widest px-2 md:px-3 rounded-none ${tx.status === 'Completed' ? 'bg-green-500 text-white' : 'bg-primary text-secondary'}`}>
-                            {tx.status}
-                          </Badge>
-                          {tx.status !== 'Completed' && (
-                            <Badge variant="outline" className="border-primary text-primary font-bold rounded-none px-2 md:px-3 text-[8px] md:text-[9px]">
-                              <Timer className="h-3 w-3 mr-1" /> {tx.timer}
-                            </Badge>
-                          )}
-                        </div>
+                      <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2">
+                        <div className="text-lg md:text-2xl font-black text-secondary tracking-tight">GH₵{tx.amount.toLocaleString()}</div>
+                        <Badge variant={tx.status === 'Completed' ? 'default' : 'secondary'} className={`font-bold uppercase text-[8px] tracking-widest px-2 rounded-none ${tx.status === 'Completed' ? 'bg-green-500 text-white' : 'bg-primary text-secondary'}`}>
+                          {tx.status}
+                        </Badge>
                       </div>
                     </div>
                     
-                    <div className="space-y-3 mb-6 md:mb-8">
-                      <div className="flex justify-between text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                        <span>Fidelity Protocol Verification</span>
+                    <div className="space-y-2 mb-6">
+                      <div className="flex justify-between text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                        <span>Fidelity Verification</span>
                         <span className="text-secondary">{tx.progress}% Verified</span>
                       </div>
-                      <Progress value={tx.progress} className="h-2 rounded-none" />
+                      <Progress value={tx.progress} className="h-1.5 md:h-2 rounded-none" />
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-dashed border-border gap-4">
-                      <div className="flex -space-x-3">
+                      <div className="flex -space-x-2">
                         {[1, 2, 3].map((i) => (
-                          <Avatar key={i} className="h-8 w-8 md:h-10 md:w-10 border-2 border-white shadow-sm rounded-none">
+                          <Avatar key={i} className="h-7 w-7 md:h-9 md:w-9 border-2 border-white shadow-sm rounded-none">
                             <AvatarImage src={`https://picsum.photos/seed/${tx.id}-${i}/40/40`} />
                             <AvatarFallback>U</AvatarFallback>
                           </Avatar>
@@ -369,23 +354,23 @@ export default function Dashboard() {
                           if(open) setSelectedTxId(tx.id);
                         }}>
                           <DialogTrigger asChild>
-                            <Button className="w-full sm:w-auto bg-secondary text-white hover:bg-secondary/90 font-bold rounded-none px-6 md:px-8 h-12 shadow-lg text-xs md:text-sm">
-                              Audit & Authorize Release
+                            <Button className="w-full sm:w-auto bg-secondary text-white hover:bg-secondary/90 font-bold rounded-none px-6 h-11 text-[10px] md:text-xs uppercase tracking-widest">
+                              Audit & Release
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="sm:max-w-md rounded-none p-6 md:p-10">
+                          <DialogContent className="sm:max-w-md rounded-none p-6 md:p-8">
                             <DialogHeader>
-                              <div className="h-12 w-12 md:h-16 md:w-16 bg-primary/10 rounded-none flex items-center justify-center mx-auto mb-4">
-                                <ShieldAlert className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+                              <div className="h-12 w-12 bg-primary/10 rounded-none flex items-center justify-center mx-auto mb-4">
+                                <ShieldAlert className="h-6 w-6 text-primary" />
                               </div>
-                              <DialogTitle className="text-xl md:text-2xl font-black text-secondary text-center">
+                              <DialogTitle className="text-xl font-black text-secondary text-center">
                                 Fidelity Protocol Audit
                               </DialogTitle>
-                              <DialogDescription className="text-center text-xs md:text-sm font-medium">
+                              <DialogDescription className="text-center text-xs font-medium">
                                 Certify item integrity to trigger the multisig release of GH₵{tx.amount.toLocaleString()}.
                               </DialogDescription>
                             </DialogHeader>
-                            <div className="space-y-3 py-6">
+                            <div className="space-y-3 py-4 md:py-6">
                               {[
                                 { id: 'condition', label: 'Item satisfies physical audit', checked: checklist.condition },
                                 { id: 'matches', label: 'Serial number authenticity verified', checked: checklist.matches },
@@ -404,21 +389,14 @@ export default function Dashboard() {
                               ))}
                             </div>
                             <DialogFooter>
-                              <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-12 md:h-14 text-base md:text-lg">
+                              <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-black rounded-none h-12 text-sm uppercase">
                                 EXECUTE GHS RELEASE
                               </Button>
                             </DialogFooter>
                           </DialogContent>
                         </Dialog>
-                      ) : currentRole.includes('ADMIN') ? (
-                        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-                          <Button size="sm" variant="outline" className="flex-1 sm:flex-none rounded-none px-4 md:px-6 h-10 font-bold text-[10px] md:text-xs">Audit Trails</Button>
-                          <Button size="sm" className="flex-1 sm:flex-none bg-secondary hover:bg-secondary/90 rounded-none px-4 md:px-6 text-white font-bold h-10 text-[10px] md:text-xs">
-                            {tx.status === 'Completed' ? 'View Receipt' : 'Manual Check'}
-                          </Button>
-                        </div>
                       ) : (
-                        <Button size="sm" variant="ghost" className="text-[9px] md:text-[10px] font-bold text-secondary hover:bg-primary/5 rounded-none uppercase tracking-widest h-10">
+                        <Button size="sm" variant="ghost" className="w-full sm:w-auto text-[9px] md:text-[10px] font-bold text-secondary hover:bg-primary/5 rounded-none uppercase tracking-widest h-10">
                           Registry Timeline <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                       )}
@@ -427,28 +405,13 @@ export default function Dashboard() {
                 </Card>
               ))}
             </TabsContent>
-
-            <TabsContent value="history">
-               <Card className="border shadow-sm rounded-none">
-                 <CardContent className="p-10 md:p-20 text-center space-y-6">
-                   <div className="bg-muted h-16 w-16 md:h-20 md:w-20 rounded-none flex items-center justify-center mx-auto">
-                     <History className="h-8 w-8 md:h-10 md:w-10 text-muted-foreground" />
-                   </div>
-                   <div className="space-y-2">
-                    <h3 className="text-xl md:text-2xl font-bold text-secondary tracking-tight">Institutional Archive</h3>
-                    <p className="text-muted-foreground max-w-sm mx-auto text-xs md:text-sm">Secure record of all vault-protected trade settlements. Cryptographically signed by High Admin node.</p>
-                   </div>
-                   <Button variant="outline" className="rounded-none px-6 md:px-8 h-10 md:h-12 font-bold uppercase tracking-widest text-[9px] md:text-[10px]">Generate Archive Certificate</Button>
-                 </CardContent>
-               </Card>
-            </TabsContent>
           </Tabs>
         </div>
 
         <div className="space-y-6 md:space-y-8">
           <Card className="border shadow-lg bg-secondary text-white rounded-none overflow-hidden relative">
             <div className="absolute top-0 right-0 p-4">
-              <ShieldCheck className="h-8 w-8 md:h-12 md:w-12 text-primary opacity-20" />
+              <ShieldCheck className="h-10 w-10 md:h-12 md:w-12 text-primary opacity-20" />
             </div>
             <CardHeader className="p-6 md:p-8">
               <CardTitle className="flex items-center gap-3 text-xl md:text-2xl font-bold tracking-tight">
@@ -461,66 +424,41 @@ export default function Dashboard() {
                 <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white/50">
                   {currentRole.includes('ADMIN') ? 'Global Protocol Liquidity' : 'Active Restricted Assets'}
                 </span>
-                <div className="text-4xl md:text-5xl font-black tracking-tighter">
+                <div className="text-3xl md:text-5xl font-black tracking-tighter">
                   {currentRole.includes('ADMIN') ? 'GH₵273.6K' : 'GH₵8,500'}
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 p-3 md:p-4 rounded-none border border-white/10">
-                  <span className="text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Success Rate</span>
-                  <div className="font-bold text-lg md:text-xl">99.4%</div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-white/5 p-3 rounded-none border border-white/10">
+                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Success Rate</span>
+                  <div className="font-bold text-base md:text-xl">99.4%</div>
                 </div>
-                <div className="bg-white/5 p-3 md:p-4 rounded-none border border-white/10">
-                  <span className="text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Protocol Fee</span>
-                  <div className="font-bold text-lg md:text-xl text-primary">2.5%</div>
+                <div className="bg-white/5 p-3 rounded-none border border-white/10">
+                  <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Vault Fee</span>
+                  <div className="font-bold text-base md:text-xl text-primary">2.5%</div>
                 </div>
               </div>
               
-              <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 md:h-14 text-xs md:text-sm gap-2">
+              <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-12 text-xs uppercase tracking-widest gap-2">
                 <ArrowUpRight className="h-4 w-4" />
-                {currentRole === 'HIGH_ADMIN' ? 'Manage Global Treasury' : 'Liquidity Management'}
+                {currentRole === 'HIGH_ADMIN' ? 'Manage Treasury' : 'Liquidity Management'}
               </Button>
             </CardContent>
           </Card>
 
-          <div className="p-6 md:p-8 bg-muted/50 rounded-none border-2 border-border border-dashed relative group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform hidden sm:block">
-              <ShieldCheck className="h-16 w-16 md:h-20 md:w-20 text-secondary" />
-            </div>
+          <div className="p-6 bg-muted/50 rounded-none border-2 border-border border-dashed relative group">
             <div className="flex gap-4 relative z-10">
-              <ShieldAlert className="h-8 w-8 md:h-10 md:w-10 text-secondary shrink-0" />
+              <ShieldAlert className="h-8 w-8 text-secondary shrink-0" />
               <div>
-                <h5 className="font-bold text-secondary text-base md:text-lg mb-2 tracking-tight">Active Audit Node</h5>
-                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                  Every trade is restricted via the **Sovereign Vault Protocol**. Only **High Admin** can authorize global treasury locks for capital release.
+                <h5 className="font-bold text-secondary text-sm md:text-base mb-2 tracking-tight uppercase">Active Audit Node</h5>
+                <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed font-medium">
+                  Every trade is restricted via the Sovereign Vault. Only High Admin can authorize global treasury locks for capital release.
                 </p>
-                <Button variant="link" className="p-0 h-auto text-[10px] font-black text-primary uppercase tracking-widest mt-4">Security Manual v1.2</Button>
+                <Button variant="link" className="p-0 h-auto text-[9px] font-black text-primary uppercase tracking-widest mt-4">Security Manual v1.2</Button>
               </div>
             </div>
           </div>
-          
-          <Card className="border rounded-none shadow-sm">
-            <CardHeader className="p-4 md:p-6 pb-2">
-               <h4 className="font-bold text-secondary flex items-center gap-2 text-xs md:text-sm uppercase tracking-widest">
-                <History className="h-4 w-4 text-primary" />
-                Live Audit Logs
-               </h4>
-            </CardHeader>
-            <CardContent className="p-4 md:p-6 pt-0 space-y-4">
-               {[
-                 { msg: 'Vault Release GH₵8,450', role: 'CUSTOMER', time: '2m' },
-                 { msg: 'Protocol Lock Authorized', role: 'HIGH_ADMIN', time: '5m' },
-                 { msg: 'Fulfillment Assigned', role: 'VENDOR_ADMIN', time: '14m' },
-                 { msg: 'Registry Sync Success', role: 'SYSTEM', time: '1h' },
-               ].map((log, i) => (
-                 <div key={i} className="flex justify-between items-center text-[9px] md:text-[10px] border-b border-muted pb-2 last:border-0 last:pb-0">
-                    <span className="font-bold text-secondary">{log.msg}</span>
-                    <span className="text-muted-foreground">{log.time}</span>
-                 </div>
-               ))}
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

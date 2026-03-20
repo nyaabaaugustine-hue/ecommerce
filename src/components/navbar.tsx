@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -52,7 +51,7 @@ export function Navbar() {
       </div>
 
       {/* Utility Bar */}
-      <div className="bg-secondary text-white py-2 hidden sm:block border-b border-primary/10">
+      <div className="bg-secondary text-white py-2 hidden lg:block border-b border-primary/10">
         <div className="container mx-auto px-4 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em]">
           <div className="flex items-center gap-10">
             <span className="flex items-center gap-2 hover:text-primary cursor-pointer transition-colors opacity-80">
@@ -72,36 +71,36 @@ export function Navbar() {
 
       {/* Main Bar */}
       <div className="bg-white/95 backdrop-blur-xl border-b py-0 shadow-sm">
-        <div className="container mx-auto px-4 flex items-center justify-between gap-4 md:gap-8 h-20">
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto px-4 flex items-center justify-between gap-4 h-16 md:h-20">
+          <div className="flex items-center gap-2 md:gap-4">
             {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden rounded-none h-10 w-10">
-                  <Menu className="h-6 w-6 text-secondary" />
+                  <Menu className="h-5 w-5 text-secondary" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] rounded-none p-0">
+              <SheetContent side="left" className="w-[280px] md:w-[300px] rounded-none p-0">
                 <SheetHeader className="p-6 border-b text-left">
                   <SheetTitle className="text-xl font-black text-secondary uppercase tracking-tight">Registry Menu</SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col py-6">
-                  <Link href="/listings" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-sm uppercase tracking-widest">Global Registry</Link>
-                  <Link href="/dashboard" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-sm uppercase tracking-widest">Dashboard</Link>
-                  <Link href="/listings/create" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-sm uppercase tracking-widest">Sell on Vault</Link>
-                  <div className="mt-auto p-6 space-y-4">
+                <div className="flex flex-col py-4">
+                  <Link href="/listings" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Global Registry</Link>
+                  <Link href="/dashboard" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Dashboard</Link>
+                  <Link href="/listings/create" className="px-6 py-4 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Sell on Vault</Link>
+                  <div className="p-6 space-y-4">
                     {!user ? (
-                      <Button onClick={() => setShowAuth(true)} className="w-full bg-secondary text-white font-black rounded-none h-12">Vault Entry</Button>
+                      <Button onClick={() => setShowAuth(true)} className="w-full bg-secondary text-white font-black rounded-none h-12 text-xs uppercase">Vault Entry</Button>
                     ) : (
-                      <Button onClick={logout} variant="outline" className="w-full border-destructive text-destructive font-black rounded-none h-12">Sign Out</Button>
+                      <Button onClick={logout} variant="outline" className="w-full border-destructive text-destructive font-black rounded-none h-12 text-xs uppercase">Sign Out</Button>
                     )}
                   </div>
                 </div>
               </SheetContent>
             </Sheet>
 
-            <Link href="/" className="flex items-center gap-3 font-headline font-black text-xl md:text-2xl text-secondary shrink-0 group">
-              <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
+            <Link href="/" className="flex items-center gap-2 md:gap-3 font-headline font-black text-lg md:text-2xl text-secondary shrink-0 group">
+              <div className="relative h-7 w-7 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
                 <Image 
                   src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
                   alt="VaultCommerce Logo" 
@@ -111,7 +110,7 @@ export function Navbar() {
               </div>
               <div className="flex flex-col leading-none">
                 <span className="tracking-tighter">Vault<span className="text-primary">Commerce</span></span>
-                <span className="text-[7px] md:text-[8px] font-black text-secondary/40 tracking-[0.3em] uppercase mt-0.5 md:mt-1">Sovereign Escrow</span>
+                <span className="text-[6px] md:text-[8px] font-black text-secondary/40 tracking-[0.2em] md:tracking-[0.3em] uppercase mt-0.5 md:mt-1">Sovereign Escrow</span>
               </div>
             </Link>
           </div>
@@ -122,20 +121,20 @@ export function Navbar() {
             <Separator orientation="vertical" className="h-8 mx-2" />
           </div>
 
-          <div className="flex-1 max-w-xl hidden md:flex items-center relative">
+          <div className="flex-1 max-w-lg hidden md:flex items-center relative">
             <div className="relative w-full flex">
               <input 
                 type="text" 
-                placeholder="Search the Global Vault Inventory..." 
-                className="w-full border border-border rounded-none py-3 pl-6 pr-4 text-sm font-medium focus:border-primary focus:outline-none transition-all bg-muted/20"
+                placeholder="Search the Global Vault Registry..." 
+                className="w-full border border-border rounded-none py-2.5 md:py-3 pl-6 pr-4 text-[11px] md:text-sm font-medium focus:border-primary focus:outline-none transition-all bg-muted/20"
               />
-              <Button className="rounded-none h-auto px-8 bg-secondary hover:bg-primary hover:text-secondary transition-all">
-                <Search className="h-5 w-5" />
+              <Button className="rounded-none h-auto px-6 md:px-8 bg-secondary hover:bg-primary hover:text-secondary transition-all">
+                <Search className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <div className="flex items-center gap-1 md:gap-4 shrink-0">
             {!user ? (
               <Button 
                 variant="outline" 
@@ -157,17 +156,14 @@ export function Navbar() {
               </div>
             )}
             
-            <div className="flex items-center gap-1 md:gap-2">
+            <div className="flex items-center gap-1">
               <Button variant="ghost" size="icon" className="md:hidden rounded-none h-10 w-10">
                 <Search className="h-5 w-5 text-secondary" />
               </Button>
-              <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5 hidden sm:flex">
-                <Heart className="h-6 w-6 text-secondary group-hover:text-primary transition-colors" />
-              </Button>
               <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5">
-                <ShoppingCart className="h-6 w-6 text-secondary group-hover:text-primary transition-colors" />
+                <ShoppingCart className="h-5 w-5 md:h-6 md:w-6 text-secondary group-hover:text-primary transition-colors" />
                 {items.length > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 min-w-[20px] px-1 flex items-center justify-center bg-primary text-secondary text-[9px] font-black border-2 border-white shadow-md rounded-none">
+                  <Badge className="absolute -top-0.5 -right-0.5 h-4 md:h-5 min-w-[16px] md:min-w-[20px] px-1 flex items-center justify-center bg-primary text-secondary text-[8px] md:text-[9px] font-black border-2 border-white shadow-md rounded-none">
                     {items.length}
                   </Badge>
                 )}
@@ -176,21 +172,21 @@ export function Navbar() {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-none border-border lg:hidden h-10 w-10">
-                  <User className="h-5 w-5 text-primary" />
+                <Button variant="outline" size="icon" className="rounded-none border-border lg:hidden h-9 w-9 md:h-10 md:w-10">
+                  <User className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 rounded-none p-2 shadow-xl border-border">
+              <DropdownMenuContent align="end" className="w-52 rounded-none p-1 shadow-xl border-border">
                 {!user ? (
-                  <DropdownMenuItem onClick={() => setShowAuth(true)} className="rounded-none p-3 font-black text-secondary">
-                    <ShieldCheck className="h-4 w-4 mr-2 text-primary" /> Login
+                  <DropdownMenuItem onClick={() => setShowAuth(true)} className="rounded-none p-3 font-black text-secondary text-xs">
+                    <ShieldCheck className="h-4 w-4 mr-2 text-primary" /> LOGIN
                   </DropdownMenuItem>
                 ) : (
                   <>
-                    <DropdownMenuItem asChild className="rounded-none p-3 font-black text-secondary">
+                    <DropdownMenuItem asChild className="rounded-none p-3 font-black text-secondary text-xs uppercase">
                       <Link href="/dashboard" className="w-full">Dashboard</Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={logout} className="rounded-none p-3 font-black text-destructive">
+                    <DropdownMenuItem onClick={logout} className="rounded-none p-3 font-black text-destructive text-xs uppercase">
                       Logout
                     </DropdownMenuItem>
                   </>
