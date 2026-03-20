@@ -156,26 +156,26 @@ export default function Dashboard() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       {/* Role Switcher */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-12 bg-white shadow-sm border p-4 rounded-xl gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-12 bg-white shadow-sm border p-4 rounded-none gap-4">
         <div className="flex items-center gap-4">
            <Activity className="h-5 w-5 text-primary" />
            <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">Sovereign Control</span>
            
            <Popover>
              <PopoverTrigger asChild>
-               <Button variant="outline" size="sm" className="rounded-full h-8 font-bold text-[10px] uppercase tracking-widest gap-2">
+               <Button variant="outline" size="sm" className="rounded-none h-8 font-bold text-[10px] uppercase tracking-widest gap-2">
                  <Info className="h-3 w-3" />
                  Credentials
                </Button>
              </PopoverTrigger>
-             <PopoverContent className="w-80 rounded-xl p-6 shadow-xl border mt-2">
+             <PopoverContent className="w-80 rounded-none p-6 shadow-xl border mt-2">
                <h3 className="font-bold text-secondary mb-4 flex items-center gap-2 text-sm">
                  <ShieldCheck className="h-4 w-4 text-primary" />
                  Demo Registry
                </h3>
                <div className="space-y-3">
                  {MOCK_USERS.map(user => (
-                   <div key={user.id} className="p-3 bg-muted/50 rounded-lg border border-muted hover:border-primary/20 transition-all">
+                   <div key={user.id} className="p-3 bg-muted/50 rounded-none border border-muted hover:border-primary/20 transition-all">
                      <p className="text-[8px] font-bold uppercase text-primary tracking-widest">{user.role.replace('_', ' ')}</p>
                      <p className="font-bold text-xs text-secondary">{user.email}</p>
                    </div>
@@ -195,7 +195,7 @@ export default function Dashboard() {
                 setCurrentRole(role);
                 toast({ title: `Role Synchronized: ${role}`, description: "Viewport optimized." });
               }}
-              className={`rounded-full text-[9px] h-8 font-bold uppercase tracking-widest ${currentRole === role ? 'bg-secondary text-white' : ''}`}
+              className={`rounded-none text-[9px] h-8 font-bold uppercase tracking-widest ${currentRole === role ? 'bg-secondary text-white' : ''}`}
             >
               {role.replace('_', ' ')}
             </Button>
@@ -209,7 +209,7 @@ export default function Dashboard() {
             <h1 className="text-4xl font-bold text-secondary tracking-tight">
               {currentRole === 'HIGH_ADMIN' ? 'Sovereign Console' : 'Registry Vault'}
             </h1>
-            <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest">
+            <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-none">
               {currentRole.replace('_', ' ')}
             </Badge>
           </div>
@@ -220,11 +220,11 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Button variant="outline" className="rounded-full h-12 px-6 font-bold hover:bg-primary/5">
+          <Button variant="outline" className="rounded-none h-12 px-6 font-bold hover:bg-primary/5">
             <Settings className="h-4 w-4 mr-2" />
             Config
           </Button>
-          <Button className="bg-secondary hover:bg-secondary/90 rounded-full px-8 font-bold h-12" onClick={handleLogout}>
+          <Button className="bg-secondary hover:bg-secondary/90 rounded-none px-8 font-bold h-12 text-white" onClick={handleLogout}>
             <LogOut className="h-4 w-4 mr-2" />
             Sign Out
           </Button>
@@ -234,13 +234,13 @@ export default function Dashboard() {
       {/* Statistics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {stats[currentRole].map((stat, i) => (
-          <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-xl">
+          <Card key={i} className="border shadow-sm hover:shadow-md transition-all rounded-none">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 rounded-lg bg-muted flex items-center justify-center">
+                <div className="p-3 rounded-none bg-muted flex items-center justify-center">
                   <stat.icon className={`h-6 w-6 ${stat.color}`} />
                 </div>
-                <Badge variant="outline" className="text-[8px] font-bold uppercase tracking-widest border-primary/20">Audit</Badge>
+                <Badge variant="outline" className="text-[8px] font-bold uppercase tracking-widest border-primary/20 rounded-none">Audit</Badge>
               </div>
               <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">{stat.label}</p>
               <p className="text-3xl font-bold text-secondary mb-2">{stat.val}</p>
@@ -257,21 +257,21 @@ export default function Dashboard() {
         <div className="lg:col-span-2 space-y-8">
           <Tabs defaultValue="active" className="w-full">
             <div className="flex items-center justify-between mb-8">
-              <TabsList className="bg-muted p-1 rounded-full">
-                <TabsTrigger value="active" className="rounded-full px-8 font-bold uppercase text-[10px] tracking-widest">
+              <TabsList className="bg-muted p-1 rounded-none">
+                <TabsTrigger value="active" className="rounded-none px-8 font-bold uppercase text-[10px] tracking-widest">
                   {currentRole.includes('ADMIN') ? 'Settlement Registry' : 'Active Vaults'}
                 </TabsTrigger>
-                <TabsTrigger value="history" className="rounded-full px-8 font-bold uppercase text-[10px] tracking-widest">Audit Archive</TabsTrigger>
+                <TabsTrigger value="history" className="rounded-none px-8 font-bold uppercase text-[10px] tracking-widest">Audit Archive</TabsTrigger>
               </TabsList>
             </div>
 
             <TabsContent value="active" className="space-y-6">
               {activeTransactions.map((tx) => (
-                <Card key={tx.id} className="border shadow-sm hover:shadow-md transition-all rounded-xl overflow-hidden">
+                <Card key={tx.id} className="border shadow-sm hover:shadow-md transition-all rounded-none overflow-hidden">
                   <div className="p-8">
                     <div className="flex flex-col md:flex-row justify-between gap-6 mb-8">
                       <div className="flex gap-6">
-                        <Avatar className="h-16 w-16 rounded-lg border shadow-sm">
+                        <Avatar className="h-16 w-16 rounded-none border shadow-sm">
                           <AvatarImage src={tx.vendorLogo} alt={tx.item} />
                           <AvatarFallback className="bg-muted font-bold">{tx.item.charAt(0)}</AvatarFallback>
                         </Avatar>
@@ -290,11 +290,11 @@ export default function Dashboard() {
                       <div className="text-right">
                         <div className="text-3xl font-bold text-secondary tracking-tight mb-2">GH₵{tx.amount.toLocaleString()}</div>
                         <div className="flex items-center justify-end gap-2">
-                          <Badge variant={tx.status === 'Completed' ? 'default' : 'secondary'} className={`font-bold uppercase text-[9px] tracking-widest px-3 ${tx.status === 'Completed' ? 'bg-green-500 text-white' : 'bg-primary text-secondary'}`}>
+                          <Badge variant={tx.status === 'Completed' ? 'default' : 'secondary'} className={`font-bold uppercase text-[9px] tracking-widest px-3 rounded-none ${tx.status === 'Completed' ? 'bg-green-500 text-white' : 'bg-primary text-secondary'}`}>
                             {tx.status}
                           </Badge>
                           {tx.status !== 'Completed' && (
-                            <Badge variant="outline" className="border-primary text-primary font-bold rounded-full px-3">
+                            <Badge variant="outline" className="border-primary text-primary font-bold rounded-none px-3">
                               <Timer className="h-3 w-3 mr-1" /> {tx.timer}
                             </Badge>
                           )}
@@ -307,13 +307,13 @@ export default function Dashboard() {
                         <span>Fidelity Verification</span>
                         <span className="text-secondary">{tx.progress}% Verified</span>
                       </div>
-                      <Progress value={tx.progress} className="h-2" />
+                      <Progress value={tx.progress} className="h-2 rounded-none" />
                     </div>
 
                     <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-dashed border-border gap-4">
                       <div className="flex -space-x-3">
                         {[1, 2, 3].map((i) => (
-                          <Avatar key={i} className="h-10 w-10 border-2 border-white shadow-sm">
+                          <Avatar key={i} className="h-10 w-10 border-2 border-white shadow-sm rounded-none">
                             <AvatarImage src={`https://picsum.photos/seed/${tx.id}-${i}/40/40`} />
                             <AvatarFallback>U</AvatarFallback>
                           </Avatar>
@@ -326,13 +326,13 @@ export default function Dashboard() {
                           if(open) setSelectedTxId(tx.id);
                         }}>
                           <DialogTrigger asChild>
-                            <Button className="bg-secondary text-white hover:bg-secondary/90 font-bold rounded-full px-8 h-12 shadow-lg">
+                            <Button className="bg-secondary text-white hover:bg-secondary/90 font-bold rounded-none px-8 h-12 shadow-lg">
                               Verify & Release GHS
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="sm:max-w-md rounded-xl p-10">
+                          <DialogContent className="sm:max-w-md rounded-none p-10">
                             <DialogHeader>
-                              <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <div className="h-16 w-16 bg-primary/10 rounded-none flex items-center justify-center mx-auto mb-4">
                                 <ShieldAlert className="h-8 w-8 text-primary" />
                               </div>
                               <DialogTitle className="text-2xl font-bold text-secondary text-center">
@@ -348,7 +348,7 @@ export default function Dashboard() {
                                 { id: 'matches', label: 'Authenticity protocol verified', checked: checklist.matches },
                                 { id: 'functionality', label: 'Core functions fully operational', checked: checklist.functionality },
                               ].map((item) => (
-                                <div key={item.id} className="flex items-center space-x-3 p-3 rounded-lg bg-muted/30 border border-transparent hover:border-primary/20 transition-all">
+                                <div key={item.id} className="flex items-center space-x-3 p-3 rounded-none bg-muted/30 border border-transparent hover:border-primary/20 transition-all">
                                   <Checkbox 
                                     id={item.id} 
                                     checked={item.checked} 
@@ -361,7 +361,7 @@ export default function Dashboard() {
                               ))}
                             </div>
                             <DialogFooter>
-                              <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-bold rounded-full h-12">
+                              <Button onClick={handleVerificationComplete} className="w-full bg-primary text-secondary font-bold rounded-none h-12">
                                 Authorize Capital Release
                               </Button>
                             </DialogFooter>
@@ -369,11 +369,11 @@ export default function Dashboard() {
                         </Dialog>
                       ) : currentRole.includes('ADMIN') ? (
                         <div className="flex gap-4">
-                          <Button size="sm" variant="outline" className="rounded-full px-6">Audit</Button>
-                          <Button size="sm" className="bg-secondary hover:bg-secondary/90 rounded-full px-6 text-white">Authorize Payout</Button>
+                          <Button size="sm" variant="outline" className="rounded-none px-6">Audit</Button>
+                          <Button size="sm" className="bg-secondary hover:bg-secondary/90 rounded-none px-6 text-white">Authorize Payout</Button>
                         </div>
                       ) : (
-                        <Button size="sm" variant="ghost" className="text-[10px] font-bold text-secondary hover:bg-primary/5 rounded-full uppercase tracking-widest">
+                        <Button size="sm" variant="ghost" className="text-[10px] font-bold text-secondary hover:bg-primary/5 rounded-none uppercase tracking-widest">
                           Timeline <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                       )}
@@ -384,16 +384,16 @@ export default function Dashboard() {
             </TabsContent>
 
             <TabsContent value="history">
-               <Card className="border shadow-sm rounded-xl">
+               <Card className="border shadow-sm rounded-none">
                  <CardContent className="p-20 text-center space-y-6">
-                   <div className="bg-muted h-20 w-20 rounded-full flex items-center justify-center mx-auto">
+                   <div className="bg-muted h-20 w-20 rounded-none flex items-center justify-center mx-auto">
                      <History className="h-10 w-10 text-muted-foreground" />
                    </div>
                    <div className="space-y-2">
                     <h3 className="text-2xl font-bold text-secondary tracking-tight">Sovereign Archive</h3>
                     <p className="text-muted-foreground max-w-sm mx-auto text-sm">Institutional record of all vault-secured settlements. Cryptographically signed.</p>
                    </div>
-                   <Button variant="outline" className="rounded-full px-8 h-10 font-bold">Generate Certificate</Button>
+                   <Button variant="outline" className="rounded-none px-8 h-10 font-bold">Generate Certificate</Button>
                  </CardContent>
                </Card>
             </TabsContent>
@@ -401,7 +401,7 @@ export default function Dashboard() {
         </div>
 
         <div className="space-y-8">
-          <Card className="border shadow-lg bg-secondary text-white rounded-xl overflow-hidden relative">
+          <Card className="border shadow-lg bg-secondary text-white rounded-none overflow-hidden relative">
             <CardHeader className="p-8">
               <CardTitle className="flex items-center gap-3 text-2xl font-bold tracking-tight">
                 <Wallet className="h-6 w-6 text-primary" />
@@ -419,22 +419,22 @@ export default function Dashboard() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                <div className="bg-white/5 p-4 rounded-none border border-white/10">
                   <span className="text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Success Rate</span>
                   <div className="font-bold text-xl">98.4%</div>
                 </div>
-                <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                <div className="bg-white/5 p-4 rounded-none border border-white/10">
                   <span className="text-[8px] font-bold uppercase tracking-widest block mb-1 text-white/50">Fee</span>
                   <div className="font-bold text-xl text-primary">2.5%</div>
                 </div>
               </div>
-              <Button className="w-full bg-primary text-secondary hover:bg-white font-bold rounded-full h-12 text-sm">
+              <Button className="w-full bg-primary text-secondary hover:bg-white font-bold rounded-none h-12 text-sm">
                 Liquidity Management
               </Button>
             </CardContent>
           </Card>
 
-          <div className="p-8 bg-muted/50 rounded-xl border-2 border-border border-dashed relative group">
+          <div className="p-8 bg-muted/50 rounded-none border-2 border-border border-dashed relative group">
             <div className="flex gap-4">
               <ShieldCheck className="h-10 w-10 text-primary shrink-0" />
               <div>

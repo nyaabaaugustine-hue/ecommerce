@@ -87,7 +87,7 @@ export default function ListingDetails() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Left: Images and Info */}
         <div className="lg:col-span-2 space-y-8">
-          <div className="relative h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden group shadow-lg border border-border">
+          <div className="relative h-[400px] md:h-[500px] w-full rounded-none overflow-hidden group shadow-lg border border-border">
             <Image 
               src={listing.imageUrl} 
               alt={listing.title} 
@@ -95,10 +95,10 @@ export default function ListingDetails() {
               className="object-cover"
             />
             <div className="absolute top-6 left-6 flex gap-2">
-              <Badge className="bg-white/95 text-primary py-1.5 px-4 rounded-lg font-bold shadow-sm">
+              <Badge className="bg-white/95 text-primary py-1.5 px-4 rounded-none font-bold shadow-sm">
                 {listing.category}
               </Badge>
-              <EscrowBadge className="bg-white/95 py-1.5 px-4 rounded-lg shadow-sm" />
+              <EscrowBadge className="bg-white/95 py-1.5 px-4 rounded-none shadow-sm" />
             </div>
           </div>
 
@@ -123,11 +123,11 @@ export default function ListingDetails() {
             <Separator />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+              <div className="flex items-center gap-3 p-4 bg-primary/5 border border-primary/20 rounded-none">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
                 <span className="text-xs font-black uppercase tracking-widest">100% Protection Policy</span>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-secondary/5 border border-secondary/20 rounded-xl">
+              <div className="flex items-center gap-3 p-4 bg-secondary/5 border border-secondary/20 rounded-none">
                 <Timer className="h-5 w-5 text-secondary" />
                 <span className="text-xs font-black uppercase tracking-widest">48h Delivery SLA Guarantee</span>
               </div>
@@ -143,8 +143,8 @@ export default function ListingDetails() {
               </p>
             </div>
 
-            <Card className="bg-secondary text-white border-none rounded-2xl p-8 relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full -mr-20 -mt-20 blur-3xl" />
+            <Card className="bg-secondary text-white border-none rounded-none p-8 relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-none -mr-20 -mt-20 blur-3xl" />
                <div className="flex gap-6 relative z-10">
                 <ShieldCheck className="h-12 w-12 text-primary shrink-0" />
                 <div>
@@ -160,7 +160,7 @@ export default function ListingDetails() {
 
         {/* Right: Purchase Sidebar */}
         <div className="space-y-6">
-          <Card className="border-none shadow-xl sticky top-24 overflow-hidden rounded-2xl border border-border">
+          <Card className="border-none shadow-xl sticky top-24 overflow-hidden rounded-none border border-border">
             <div className="bg-secondary p-8 text-white">
               <h3 className="font-black text-2xl mb-1 flex items-center gap-2 tracking-tight">
                 <ShieldAlert className="h-6 w-6 text-primary" />
@@ -187,7 +187,7 @@ export default function ListingDetails() {
                 <Button 
                   onClick={handlePurchase} 
                   size="lg" 
-                  className="w-full bg-secondary text-white hover:bg-secondary/90 font-black h-16 rounded-xl shadow-lg transition-all"
+                  className="w-full bg-secondary text-white hover:bg-secondary/90 font-black h-16 rounded-none shadow-lg transition-all"
                 >
                   Deposit to Escrow Vault
                 </Button>
@@ -195,7 +195,7 @@ export default function ListingDetails() {
                   variant="outline"
                   onClick={handleAddToCart} 
                   size="lg" 
-                  className="w-full border-primary/20 text-secondary hover:bg-primary/5 font-black h-16 rounded-xl transition-all gap-2"
+                  className="w-full border-primary/20 text-secondary hover:bg-primary/5 font-black h-16 rounded-none transition-all gap-2"
                 >
                   <ShoppingCart className="h-5 w-5 text-primary" />
                   Add to Vault Selection
@@ -219,7 +219,7 @@ export default function ListingDetails() {
                 />
               </div>
               
-              <div className="bg-muted/50 p-4 rounded-xl flex items-start gap-3 border border-dashed border-primary/20">
+              <div className="bg-muted/50 p-4 rounded-none flex items-start gap-3 border border-dashed border-primary/20">
                 <Timer className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <p className="text-[10px] text-muted-foreground leading-tight font-black uppercase">
                   SLA Active: 48h Auto-Refund triggers if delivery is not initiated.
@@ -234,13 +234,13 @@ export default function ListingDetails() {
 
       {/* Vault Locking Animation Modal */}
       <Dialog open={isLocking}>
-        <DialogContent className="sm:max-w-md border-none bg-secondary text-white text-center p-12 rounded-2xl">
+        <DialogContent className="sm:max-w-md border-none bg-secondary text-white text-center p-12 rounded-none">
           <div className="flex flex-col items-center gap-8 py-4">
             <div className="relative">
-              <div className="h-32 w-32 rounded-full border-4 border-primary/20 flex items-center justify-center vault-lock-animation">
+              <div className="h-32 w-32 rounded-none border-4 border-primary/20 flex items-center justify-center vault-lock-animation">
                 <Lock className="h-16 w-16 text-primary" />
               </div>
-              <div className="absolute inset-0 h-32 w-32 rounded-full border-4 border-primary border-t-transparent animate-spin" />
+              <div className="absolute inset-0 h-32 w-32 rounded-none border-4 border-primary border-t-transparent animate-spin" />
             </div>
             <div className="space-y-4 w-full">
               <DialogTitle className="text-2xl font-black text-white tracking-tighter">Vault Lockdown Initiated</DialogTitle>
@@ -257,9 +257,9 @@ export default function ListingDetails() {
 
       {/* Success Modal */}
       <Dialog open={showVaultSuccess}>
-        <DialogContent className="sm:max-w-md rounded-2xl p-10">
+        <DialogContent className="sm:max-w-md rounded-none p-10">
           <div className="text-center space-y-6">
-            <div className="h-20 w-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+            <div className="h-20 w-20 bg-primary/10 rounded-none flex items-center justify-center mx-auto">
               <CheckCircle2 className="h-10 w-10 text-primary" />
             </div>
             <div className="space-y-2">
@@ -269,7 +269,7 @@ export default function ListingDetails() {
               </DialogDescription>
             </div>
             
-            <Card className="bg-muted p-6 rounded-xl border-none">
+            <Card className="bg-muted p-6 rounded-none border-none">
               <div className="flex items-center justify-center gap-3 text-secondary font-black">
                 <Timer className="h-6 w-6 text-primary" />
                 <span className="text-2xl font-black tracking-tighter">48:00:00</span>
@@ -279,7 +279,7 @@ export default function ListingDetails() {
               </p>
             </Card>
 
-            <Button onClick={handleRedirectToDashboard} className="w-full h-14 bg-secondary text-white rounded-xl font-black gap-2 text-lg hover:bg-secondary/90 shadow-xl">
+            <Button onClick={handleRedirectToDashboard} className="w-full h-14 bg-secondary text-white rounded-none font-black gap-2 text-lg hover:bg-secondary/90 shadow-xl">
               Manage in My Vault <ArrowRight className="h-5 w-5" />
             </Button>
             

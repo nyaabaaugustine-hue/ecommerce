@@ -23,13 +23,13 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 45 100% 42%;
-    --radius: 0.75rem;
+    --radius: 0px;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border rounded-none;
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
@@ -43,7 +43,7 @@
 }
 
 .glass-card {
-  @apply bg-white/90 backdrop-blur-md border border-border/50 shadow-sm;
+  @apply bg-white/90 backdrop-blur-md border border-border/50 shadow-sm rounded-none;
 }
 
 .vault-lock-animation {

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useMemo } from 'react';
@@ -133,7 +132,7 @@ export function ListingCreateForm() {
               <FormItem>
                 <FormLabel className="text-primary font-bold">Listing Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Modern Office for Rent in Accra" className="rounded-xl h-12" {...field} />
+                  <Input placeholder="e.g. Modern Office for Rent in Accra" className="rounded-none h-12" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -148,11 +147,11 @@ export function ListingCreateForm() {
                 <FormLabel className="text-primary font-bold">Category</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="rounded-xl h-12">
+                    <SelectTrigger className="rounded-none h-12">
                       <SelectValue placeholder="Select a category" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="rounded-none">
                     <SelectItem value="Electronics">Electronics</SelectItem>
                     <SelectItem value="Real Estate">Real Estate</SelectItem>
                     <SelectItem value="Education">Education</SelectItem>
@@ -173,7 +172,7 @@ export function ListingCreateForm() {
                 <FormControl>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-muted-foreground">GH₵</span>
-                    <Input type="number" placeholder="0.00" className="rounded-xl h-12 pl-12" {...field} />
+                    <Input type="number" placeholder="0.00" className="rounded-none h-12 pl-12" {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -188,7 +187,7 @@ export function ListingCreateForm() {
               <FormItem>
                 <FormLabel className="text-primary font-bold">Market Location</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Airport Residential, Accra" className="rounded-xl h-12" {...field} />
+                  <Input placeholder="e.g. Airport Residential, Accra" className="rounded-none h-12" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -197,7 +196,7 @@ export function ListingCreateForm() {
         </div>
 
         {watchPrice && (
-          <Card className="bg-muted/30 border-none overflow-hidden">
+          <Card className="bg-muted/30 border-none rounded-none overflow-hidden">
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Calculator className="h-4 w-4 text-secondary" />
@@ -214,7 +213,7 @@ export function ListingCreateForm() {
                   </span>
                   <p className="text-xl font-bold text-red-500">-GH₵{payoutStats.treasuryFee.toFixed(2)}</p>
                 </div>
-                <div className="space-y-1 bg-secondary/10 p-3 rounded-xl border border-secondary/20">
+                <div className="space-y-1 bg-secondary/10 p-3 rounded-none border border-secondary/20">
                   <span className="text-xs font-bold text-secondary uppercase tracking-tighter">Your Net Payout (GH)</span>
                   <p className="text-2xl font-black text-primary">GH₵{payoutStats.netEarnings.toLocaleString()}</p>
                 </div>
@@ -233,16 +232,16 @@ export function ListingCreateForm() {
               value={featureInput}
               onChange={(e) => setFeatureInput(e.target.value)}
               placeholder="e.g. Valid Ghanaian deed, Paystack verified..."
-              className="rounded-xl"
+              className="rounded-none"
               onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
             />
-            <Button type="button" variant="outline" onClick={addFeature} className="rounded-xl px-4">
+            <Button type="button" variant="outline" onClick={addFeature} className="rounded-none px-4">
               <Plus className="h-4 w-4" />
             </Button>
           </div>
           <div className="flex flex-wrap gap-2">
             {keyFeatures.map((feature, i) => (
-              <Badge key={i} variant="secondary" className="bg-secondary/10 text-primary py-1.5 px-3 border-secondary/20">
+              <Badge key={i} variant="secondary" className="bg-secondary/10 text-primary py-1.5 px-3 border-secondary/20 rounded-none">
                 {feature}
                 <button type="button" onClick={() => removeFeature(i)} className="ml-2">
                   <X className="h-3 w-3 hover:text-red-500" />
@@ -263,7 +262,7 @@ export function ListingCreateForm() {
                   type="button" 
                   size="sm" 
                   variant="secondary" 
-                  className="h-9 gap-2 bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-full px-6"
+                  className="h-9 gap-2 bg-secondary text-primary hover:bg-secondary/90 font-bold rounded-none px-6"
                   onClick={handleGenerateDescription}
                   disabled={isGenerating}
                 >
@@ -274,18 +273,18 @@ export function ListingCreateForm() {
               <FormControl>
                 <Textarea 
                   placeholder="Provide a detailed overview in GHS context..." 
-                  className="min-h-[200px] rounded-2xl leading-relaxed border-muted focus:border-secondary transition-colors" 
+                  className="min-h-[200px] rounded-none leading-relaxed border-muted focus:border-secondary transition-colors" 
                   {...field} 
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
-        </div>
+        />
 
-        <div className="bg-primary p-8 rounded-[2rem] text-white flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-          <div className="absolute -left-12 -top-12 w-32 h-32 bg-secondary/10 rounded-full blur-3xl" />
-          <div className="bg-white/10 p-5 rounded-3xl backdrop-blur-sm border border-white/20">
+        <div className="bg-primary p-8 rounded-none text-white flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+          <div className="absolute -left-12 -top-12 w-32 h-32 bg-secondary/10 rounded-none blur-3xl" />
+          <div className="bg-white/10 p-5 rounded-none backdrop-blur-sm border border-white/20">
             <ShieldCheck className="h-10 w-10 text-secondary" />
           </div>
           <div className="flex-1">
@@ -300,7 +299,7 @@ export function ListingCreateForm() {
         </div>
 
         <div className="flex justify-end pt-10">
-          <Button type="submit" size="lg" className="px-16 bg-primary hover:bg-primary/90 rounded-full font-bold h-14 shadow-2xl shadow-primary/20">
+          <Button type="submit" size="lg" className="px-16 bg-primary hover:bg-primary/90 rounded-none font-bold h-14 shadow-2xl shadow-primary/20">
             Publish with Escrow Security (GHS)
           </Button>
         </div>

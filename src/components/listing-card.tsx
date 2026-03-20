@@ -47,11 +47,11 @@ export function ListingCard(props: ListingProps) {
   };
 
   return (
-    <Card className="group overflow-hidden bg-white border-border/50 hover:border-primary/40 hover:shadow-lg transition-all duration-300 relative flex flex-col h-full rounded-xl">
+    <Card className="group overflow-hidden bg-white border-border/50 hover:border-primary/40 hover:shadow-lg transition-all duration-300 relative flex flex-col h-full rounded-none">
       {/* Top Badges */}
       <div className="absolute top-2 left-2 z-10 flex flex-col gap-1.5">
         {discount && (
-          <Badge className="bg-primary text-secondary text-[9px] font-black px-2 py-0.5 border-none rounded">
+          <Badge className="bg-primary text-secondary text-[9px] font-black px-2 py-0.5 border-none rounded-none">
             {discount}
           </Badge>
         )}
@@ -95,7 +95,7 @@ export function ListingCard(props: ListingProps) {
       <CardFooter className="px-4 py-3 bg-muted/20 border-t flex gap-2">
         <Button 
           onClick={handleBuyNow}
-          className="flex-1 bg-secondary text-white hover:bg-secondary/90 rounded-lg font-black text-[10px] uppercase tracking-widest h-9"
+          className="flex-1 bg-secondary text-white hover:bg-secondary/90 rounded-none font-black text-[10px] uppercase tracking-widest h-9"
         >
           Secure Buy
         </Button>
@@ -103,7 +103,7 @@ export function ListingCard(props: ListingProps) {
           onClick={handleAddToCart}
           variant="outline"
           size="icon"
-          className="rounded-lg border-primary/20 text-primary hover:bg-primary/5 h-9 w-9"
+          className="rounded-none border-primary/20 text-primary hover:bg-primary/5 h-9 w-9"
         >
           <Plus className="h-4 w-4" />
         </Button>

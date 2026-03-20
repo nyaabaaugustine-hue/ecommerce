@@ -47,7 +47,7 @@ export function Navbar() {
       <div className="bg-white/95 backdrop-blur-xl border-b py-4 shadow-sm">
         <div className="container mx-auto px-4 flex items-center justify-between gap-8">
           <Link href="/" className="flex items-center gap-3 font-headline font-black text-2xl text-secondary shrink-0 group">
-            <div className="relative h-10 w-10 overflow-hidden rounded-lg border border-primary/20 shadow-md">
+            <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/20 shadow-md">
               <Image 
                 src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
                 alt="VaultCommerce Logo" 
@@ -66,9 +66,9 @@ export function Navbar() {
               <input 
                 type="text" 
                 placeholder="Search the Global Vault Inventory..." 
-                className="w-full border border-border rounded-l-xl py-3 pl-6 pr-4 text-sm font-medium focus:border-primary focus:outline-none transition-all bg-muted/20"
+                className="w-full border border-border rounded-none py-3 pl-6 pr-4 text-sm font-medium focus:border-primary focus:outline-none transition-all bg-muted/20"
               />
-              <Button className="rounded-r-xl rounded-l-none h-auto px-8 bg-secondary hover:bg-primary hover:text-secondary transition-all">
+              <Button className="rounded-none h-auto px-8 bg-secondary hover:bg-primary hover:text-secondary transition-all">
                 <Search className="h-5 w-5" />
               </Button>
             </div>
@@ -79,7 +79,7 @@ export function Navbar() {
               <Button 
                 variant="outline" 
                 onClick={() => setShowAuth(true)}
-                className="hidden lg:flex flex-col items-center h-auto py-2 px-6 rounded-xl border-primary/20 text-secondary font-black hover:bg-primary/5"
+                className="hidden lg:flex flex-col items-center h-auto py-2 px-6 rounded-none border-primary/20 text-secondary font-black hover:bg-primary/5"
               >
                 <span className="text-[9px] uppercase tracking-widest opacity-50">Identity Registry</span>
                 <span>Vault Entry</span>
@@ -90,20 +90,20 @@ export function Navbar() {
                   <span className="text-[9px] text-primary uppercase font-black tracking-widest">Logged in as</span>
                   <Link href="/dashboard" className="text-sm font-black text-secondary hover:text-primary transition-colors">{user.name}</Link>
                 </div>
-                <Button variant="ghost" size="icon" onClick={logout} className="rounded-full hover:text-destructive">
+                <Button variant="ghost" size="icon" onClick={logout} className="rounded-none hover:text-destructive">
                   <LogOut className="h-5 w-5" />
                 </Button>
               </div>
             )}
             
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative group rounded-full hover:bg-primary/5">
+              <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5">
                 <Heart className="h-6 w-6 text-secondary group-hover:text-primary transition-colors" />
               </Button>
-              <Button variant="ghost" size="icon" className="relative group rounded-full hover:bg-primary/5">
+              <Button variant="ghost" size="icon" className="relative group rounded-none hover:bg-primary/5">
                 <ShoppingCart className="h-6 w-6 text-secondary group-hover:text-primary transition-colors" />
                 {items.length > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 min-w-[20px] px-1 flex items-center justify-center bg-primary text-secondary text-[9px] font-black border-2 border-white shadow-md">
+                  <Badge className="absolute -top-1 -right-1 h-5 min-w-[20px] px-1 flex items-center justify-center bg-primary text-secondary text-[9px] font-black border-2 border-white shadow-md rounded-none">
                     {items.length}
                   </Badge>
                 )}
@@ -112,21 +112,21 @@ export function Navbar() {
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-xl border-border md:hidden h-10 w-10">
+                <Button variant="outline" size="icon" className="rounded-none border-border md:hidden h-10 w-10">
                   <User className="h-5 w-5 text-primary" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 rounded-xl p-2 shadow-xl border-border">
+              <DropdownMenuContent align="end" className="w-56 rounded-none p-2 shadow-xl border-border">
                 {!user ? (
-                  <DropdownMenuItem onClick={() => setShowAuth(true)} className="rounded-lg p-3 font-black text-secondary">
+                  <DropdownMenuItem onClick={() => setShowAuth(true)} className="rounded-none p-3 font-black text-secondary">
                     <ShieldCheck className="h-4 w-4 mr-2 text-primary" /> Login
                   </DropdownMenuItem>
                 ) : (
                   <>
-                    <DropdownMenuItem asChild className="rounded-lg p-3 font-black text-secondary">
+                    <DropdownMenuItem asChild className="rounded-none p-3 font-black text-secondary">
                       <Link href="/dashboard">Dashboard</Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={logout} className="rounded-lg p-3 font-black text-destructive">
+                    <DropdownMenuItem onClick={logout} className="rounded-none p-3 font-black text-destructive">
                       Logout
                     </DropdownMenuItem>
                   </>

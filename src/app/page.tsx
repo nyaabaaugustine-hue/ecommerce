@@ -35,7 +35,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 relative rounded-2xl overflow-hidden group shadow-xl min-h-[500px] border border-border">
+          <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-xl min-h-[500px] border border-border">
             <Image 
               src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
               alt="Premium Accra Retail" 
@@ -45,7 +45,7 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 to-transparent flex items-center">
               <div className="pl-12 space-y-6 max-w-xl">
-                <Badge className="bg-primary text-secondary font-bold uppercase text-[10px] tracking-widest px-4 py-1">Verified Escrow Protocol</Badge>
+                <Badge className="bg-primary text-secondary font-bold uppercase text-[10px] tracking-widest px-4 py-1 rounded-none">Verified Escrow Protocol</Badge>
                 <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight">
                   ACCRA'S <span className="text-primary">GOLD</span> <br /> STANDARD
                 </h2>
@@ -54,7 +54,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex gap-4">
                   <Link href="/listings">
-                    <Button size="lg" className="rounded-full px-8 bg-primary text-secondary hover:bg-white transition-all font-bold h-14 text-lg">
+                    <Button size="lg" className="rounded-none px-8 bg-primary text-secondary hover:bg-white transition-all font-bold h-14 text-lg">
                       Explore the Vault <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
@@ -63,17 +63,17 @@ export default function HomePage() {
             </div>
           </div>
           <div className="lg:col-span-4 flex flex-col gap-8">
-            <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-lg group block border border-border">
+            <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border">
               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Akwaaba Sale" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-primary/90 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all">
-                <Badge className="bg-secondary text-primary w-fit mb-2 font-bold px-3">50% LEGACY REBATE</Badge>
+                <Badge className="bg-secondary text-primary w-fit mb-2 font-bold px-3 rounded-none">50% LEGACY REBATE</Badge>
                 <h3 className="text-secondary font-bold text-2xl">Akwaaba Sale</h3>
               </div>
             </Link>
-            <Link href="/listings" className="flex-1 relative rounded-2xl overflow-hidden shadow-lg group block border border-border">
+            <Link href="/listings" className="flex-1 relative rounded-none overflow-hidden shadow-lg group block border border-border">
               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Makola Market deals" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-secondary/90 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all">
-                <Badge className="bg-primary text-secondary w-fit mb-2 font-bold px-3">SOVEREIGN TRUST</Badge>
+                <Badge className="bg-primary text-secondary w-fit mb-2 font-bold px-3 rounded-none">SOVEREIGN TRUST</Badge>
                 <h3 className="text-white font-bold text-2xl">Makola Select</h3>
               </div>
             </Link>
@@ -90,9 +90,9 @@ export default function HomePage() {
             { icon: Crown, title: 'Elite Concierge', sub: 'Priority GHS Support', color: 'text-primary' },
             { icon: ShieldCheck, title: 'Escrow Shield', sub: 'Sovereign Guarantee', color: 'text-secondary' },
           ].map((feat, i) => (
-            <Card key={i} className="border-border shadow-sm hover:shadow-md transition-all rounded-xl">
+            <Card key={i} className="border-border shadow-sm hover:shadow-md transition-all rounded-none">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center shrink-0">
+                <div className="h-12 w-12 rounded-none bg-muted flex items-center justify-center shrink-0">
                   <feat.icon className={`h-6 w-6 ${feat.color}`} />
                 </div>
                 <div>
@@ -113,7 +113,7 @@ export default function HomePage() {
             <p className="text-muted-foreground">Browse by professional category</p>
           </div>
           <Link href="/listings">
-            <Button variant="ghost" className="text-primary font-bold gap-2">
+            <Button variant="ghost" className="text-primary font-bold gap-2 rounded-none">
               Explore All <ChevronRight className="h-4 w-4" />
             </Button>
           </Link>
@@ -121,7 +121,7 @@ export default function HomePage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
           {categories.map((cat) => (
             <Link key={cat.name} href={`/listings?category=${cat.name}`} className="group flex flex-col items-center gap-4 transition-all">
-              <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden border border-border shadow-sm group-hover:border-primary transition-all p-4">
+              <div className="w-24 h-24 rounded-none bg-white flex items-center justify-center overflow-hidden border border-border shadow-sm group-hover:border-primary transition-all p-4">
                 <Image 
                   src={cat.icon} 
                   alt={cat.name} 
@@ -141,8 +141,8 @@ export default function HomePage() {
         <div className="flex justify-between items-center mb-10">
           <h2 className="text-3xl font-bold text-secondary tracking-tight">Vault Favorites</h2>
           <div className="flex gap-2">
-            <Button variant="outline" size="icon" className="rounded-full h-10 w-10"><ChevronLeft className="h-4 w-4" /></Button>
-            <Button variant="outline" size="icon" className="rounded-full h-10 w-10"><ChevronRight className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" className="rounded-none h-10 w-10"><ChevronLeft className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" className="rounded-none h-10 w-10"><ChevronRight className="h-4 w-4" /></Button>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -154,7 +154,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-4">
-        <div className="bg-secondary rounded-2xl p-16 relative overflow-hidden text-center text-white shadow-xl">
+        <div className="bg-secondary rounded-none p-16 relative overflow-hidden text-center text-white shadow-xl">
           <div className="relative z-10 max-w-3xl mx-auto space-y-8">
             <div className="flex justify-center mb-4">
               <ShieldAlert className="h-12 w-12 text-primary" />
@@ -166,7 +166,7 @@ export default function HomePage() {
               Join the institutional-grade trade economy. From appliances to real estate, VaultCommerce ensures your capital is restricted until sovereign satisfaction is reached.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-              <Button size="lg" className="bg-primary text-secondary hover:bg-white rounded-full px-10 h-14 font-bold shadow-lg transition-all">
+              <Button size="lg" className="bg-primary text-secondary hover:bg-white rounded-none px-10 h-14 font-bold shadow-lg transition-all">
                 Register My Vault <ChevronRight className="h-5 w-5 ml-2" />
               </Button>
             </div>
