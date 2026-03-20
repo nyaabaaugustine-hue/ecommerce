@@ -2,39 +2,57 @@
   "placeholderImages": [
     {
       "id": "electronics",
-      "description": "Modern laptop and gadgets",
-      "imageUrl": "https://picsum.photos/seed/elec/800/600",
-      "imageHint": "laptop electronics"
+      "description": "High-end Smart TV and Home Audio",
+      "imageUrl": "https://picsum.photos/seed/melcom-tv/800/600",
+      "imageHint": "smart tv"
+    },
+    {
+      "id": "appliances",
+      "description": "Modern Kitchen Refrigerators",
+      "imageUrl": "https://picsum.photos/seed/melcom-fridge/800/600",
+      "imageHint": "refrigerator appliance"
+    },
+    {
+      "id": "supermarket",
+      "description": "Fresh Groceries and Supermarket Goods",
+      "imageUrl": "https://picsum.photos/seed/melcom-grocery/800/600",
+      "imageHint": "grocery supermarket"
+    },
+    {
+      "id": "furniture",
+      "description": "Contemporary Home Furniture",
+      "imageUrl": "https://picsum.photos/seed/melcom-sofa/800/600",
+      "imageHint": "modern sofa"
     },
     {
       "id": "real-estate",
-      "description": "Cozy modern apartment",
-      "imageUrl": "https://picsum.photos/seed/home/800/600",
+      "description": "Luxury Apartments in Accra",
+      "imageUrl": "https://picsum.photos/seed/home-gh/800/600",
       "imageHint": "modern house"
     },
     {
       "id": "education",
-      "description": "Books and learning materials",
-      "imageUrl": "https://picsum.photos/seed/edu/800/600",
-      "imageHint": "books education"
+      "description": "Books and Stationery Supplies",
+      "imageUrl": "https://picsum.photos/seed/melcom-books/800/600",
+      "imageHint": "books stationery"
     },
     {
       "id": "services",
-      "description": "Professional consulting",
-      "imageUrl": "https://picsum.photos/seed/service/800/600",
+      "description": "Professional Business Consulting",
+      "imageUrl": "https://picsum.photos/seed/service-gh/800/600",
       "imageHint": "professional services"
     },
     {
       "id": "legal",
-      "description": "Legal gavel and documents",
-      "imageUrl": "https://picsum.photos/seed/legal/800/600",
+      "description": "Legal Services and Contracts",
+      "imageUrl": "https://picsum.photos/seed/legal-gh/800/600",
       "imageHint": "legal gavel"
     },
     {
       "id": "hero-bg",
-      "description": "Secure transaction network",
-      "imageUrl": "https://picsum.photos/seed/trust/1920/1080",
-      "imageHint": "abstract security"
+      "description": "Secure Melcom-style Marketplace",
+      "imageUrl": "https://picsum.photos/seed/melcom-trust/1920/1080",
+      "imageHint": "retail shopping"
     }
   ]
 }

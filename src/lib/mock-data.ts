@@ -39,15 +39,15 @@ export interface Listing {
 export const VENDORS: Vendor[] = [
   {
     id: 'v1',
-    name: 'GadgetZone Ghana',
+    name: 'Melcom Digital Hub',
     category: 'Electronics',
     rating: 4.9,
-    itemsCount: 156,
+    itemsCount: 1560,
     joinedDate: 'Jan 2022',
-    color: 'bg-rose-500',
-    icon: 'G',
-    logoUrl: 'https://picsum.photos/seed/gadgetzone/100/100',
-    description: 'Premier electronics distributor in Accra specializing in high-end computing and mobile devices.'
+    color: 'bg-rose-600',
+    icon: 'M',
+    logoUrl: 'https://picsum.photos/seed/melcom-logo/100/100',
+    description: "Ghana's largest electronics and appliance department, powered by Melcom."
   },
   {
     id: 'v2',
@@ -59,83 +59,85 @@ export const VENDORS: Vendor[] = [
     color: 'bg-indigo-500',
     icon: 'P',
     logoUrl: 'https://picsum.photos/seed/primerental/100/100',
-    description: 'Curating the finest residential and commercial properties across East Legon and Airport Residential.'
+    description: 'Curating the finest residential and commercial properties across East Legon.'
   },
   {
     id: 'v3',
-    name: 'GlobalLex Consulting',
-    category: 'Professional Services',
+    name: 'HomeLiving Furniture',
+    category: 'Home & Living',
     rating: 5.0,
-    itemsCount: 12,
+    itemsCount: 85,
     joinedDate: 'Jun 2020',
     color: 'bg-emerald-500',
-    icon: 'L',
-    logoUrl: 'https://picsum.photos/seed/globallex/100/100',
-    description: 'Verified legal and corporate consulting services with escrow-backed project milestones.'
+    icon: 'H',
+    logoUrl: 'https://picsum.photos/seed/homeliving/100/100',
+    description: 'Premium furniture and interior decor with secure delivery across Ghana.'
   },
   {
     id: 'v4',
-    name: 'DevMastery Academy',
-    category: 'Education',
-    rating: 4.9,
-    itemsCount: 28,
+    name: 'SuperStore Groceries',
+    category: 'Supermarket',
+    rating: 4.7,
+    itemsCount: 4500,
     joinedDate: 'Sep 2022',
     color: 'bg-amber-500',
-    icon: 'D',
-    logoUrl: 'https://picsum.photos/seed/devmastery/100/100',
-    description: 'Elite coding bootcamps and specialized technical mentorship programs in Kumasi and Accra.'
+    icon: 'S',
+    logoUrl: 'https://picsum.photos/seed/superstore/100/100',
+    description: 'Fresh daily essentials and imported household goods.'
   }
 ];
 
 export const LISTINGS: Listing[] = [
   {
     id: '1',
-    title: 'MacBook Pro M3 Max 16"',
+    title: 'Samsung 65" Crystal 4K UHD Smart TV',
     vendorId: 'v1',
     category: 'Electronics',
-    price: 52499,
-    oldPrice: 58999,
-    location: 'Accra, Ghana',
+    price: 8450,
+    oldPrice: 10200,
+    location: 'Accra Mall, Ghana',
     imageUrl: PlaceHolderImages.find(img => img.id === 'electronics')?.imageUrl || '',
     rating: 4.9,
-    discount: '10% OFF'
+    discount: '17% OFF'
   },
   {
     id: '2',
-    title: 'Modern 2-Bedroom Apartment',
-    vendorId: 'v2',
-    category: 'Real Estate',
-    price: 18000,
-    location: 'East Legon, Ghana',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'real-estate')?.imageUrl || '',
-    rating: 4.7
+    title: 'LG Side-by-Side Inverter Refrigerator',
+    vendorId: 'v1',
+    category: 'Appliances',
+    price: 12500,
+    oldPrice: 14000,
+    location: 'Melcom Plus, Kaneshie',
+    imageUrl: PlaceHolderImages.find(img => img.id === 'appliances')?.imageUrl || '',
+    rating: 4.8,
+    discount: '10% OFF'
   },
   {
     id: '3',
-    title: 'Corporate Law - Annual Audit',
+    title: 'Modern L-Shaped Sectional Sofa Set',
     vendorId: 'v3',
-    category: 'Professional Services',
-    price: 75000,
-    location: 'Remote',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'legal')?.imageUrl || '',
+    category: 'Home & Living',
+    price: 6800,
+    location: 'Spintex Road, Accra',
+    imageUrl: PlaceHolderImages.find(img => img.id === 'furniture')?.imageUrl || '',
     rating: 5.0
   },
   {
     id: '4',
-    title: 'React Native Advanced Course',
+    title: 'Premium Grocery Care Package',
     vendorId: 'v4',
-    category: 'Education',
-    price: 3750,
-    oldPrice: 6000,
-    location: 'Online',
-    imageUrl: PlaceHolderImages.find(img => img.id === 'education')?.imageUrl || '',
-    rating: 4.8,
-    discount: '37% OFF'
+    category: 'Supermarket',
+    price: 450,
+    oldPrice: 550,
+    location: 'Tema, Ghana',
+    imageUrl: PlaceHolderImages.find(img => img.id === 'supermarket')?.imageUrl || '',
+    rating: 4.7,
+    discount: '18% OFF'
   }
 ];
 
 export const MOCK_USERS: User[] = [
   { id: 'u1', name: 'Platform Admin', email: 'admin@vault.com', role: 'ADMIN' },
-  { id: 'u2', name: 'GadgetZone Manager', email: 'tech@gadgets.com', role: 'VENDOR' },
+  { id: 'u2', name: 'Melcom Store Manager', email: 'tech@gadgets.com', role: 'VENDOR' },
   { id: 'u3', name: 'John Buyer', email: 'user@example.com', role: 'CUSTOMER' }
 ];
