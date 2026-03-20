@@ -1,4 +1,3 @@
-
 import { PlaceHolderImages } from './placeholder-images';
 
 export type Role = 'ADMIN' | 'VENDOR' | 'CUSTOMER';
@@ -20,6 +19,7 @@ export interface Vendor {
   joinedDate: string;
   color: string;
   icon: string;
+  logoUrl: string;
   description: string;
 }
 
@@ -46,6 +46,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Jan 2022',
     color: 'bg-rose-500',
     icon: 'G',
+    logoUrl: 'https://picsum.photos/seed/gadgetzone/100/100',
     description: 'Premier electronics distributor in Accra specializing in high-end computing and mobile devices.'
   },
   {
@@ -57,6 +58,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Mar 2021',
     color: 'bg-indigo-500',
     icon: 'P',
+    logoUrl: 'https://picsum.photos/seed/primerental/100/100',
     description: 'Curating the finest residential and commercial properties across East Legon and Airport Residential.'
   },
   {
@@ -68,6 +70,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Jun 2020',
     color: 'bg-emerald-500',
     icon: 'L',
+    logoUrl: 'https://picsum.photos/seed/globallex/100/100',
     description: 'Verified legal and corporate consulting services with escrow-backed project milestones.'
   },
   {
@@ -79,6 +82,7 @@ export const VENDORS: Vendor[] = [
     joinedDate: 'Sep 2022',
     color: 'bg-amber-500',
     icon: 'D',
+    logoUrl: 'https://picsum.photos/seed/devmastery/100/100',
     description: 'Elite coding bootcamps and specialized technical mentorship programs in Kumasi and Accra.'
   }
 ];

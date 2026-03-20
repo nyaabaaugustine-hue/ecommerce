@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -6,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { 
   Shield, 
   Clock, 
@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
-import { Role } from '@/lib/mock-data';
+import { Role, VENDORS } from '@/lib/mock-data';
 
 export default function Dashboard() {
   const { toast } = useToast();
@@ -41,6 +41,7 @@ export default function Dashboard() {
       progress: 65,
       date: 'Oct 24, 2023',
       buyer: 'Yaw Mensah',
+      vendorLogo: VENDORS[0].logoUrl,
       action: 'Awaiting Delivery'
     },
     {
@@ -52,6 +53,7 @@ export default function Dashboard() {
       progress: 90,
       date: 'Oct 22, 2023',
       seller: 'PrimeRentals GH',
+      vendorLogo: VENDORS[1].logoUrl,
       action: 'Confirm Delivery'
     }
   ]);
@@ -171,9 +173,10 @@ export default function Dashboard() {
                   <div className="p-6">
                     <div className="flex flex-col md:flex-row justify-between gap-6 mb-6">
                       <div className="flex gap-4">
-                        <div className="h-12 w-12 rounded-2xl bg-muted flex items-center justify-center font-bold text-primary text-xl shrink-0">
-                          {tx.item.charAt(0)}
-                        </div>
+                        <Avatar className="h-12 w-12 rounded-2xl border-none">
+                          <AvatarImage src={tx.vendorLogo} alt={tx.item} />
+                          <AvatarFallback className="bg-muted text-primary font-bold">{tx.item.charAt(0)}</AvatarFallback>
+                        </Avatar>
                         <div>
                           <h4 className="font-bold text-primary text-lg group-hover:text-secondary transition-colors">{tx.item}</h4>
                           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
@@ -205,8 +208,11 @@ export default function Dashboard() {
                     <div className="flex items-center justify-between pt-4 border-t">
                       <div className="flex -space-x-2">
                         {[1, 2].map((i) => (
-                          <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-muted flex items-center justify-center text-[10px] font-bold">
-                            U{i}
+                          <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-muted flex items-center justify-center text-[10px] font-bold overflow-hidden">
+                             <Avatar className="h-full w-full">
+                               <AvatarImage src={`https://picsum.photos/seed/${tx.id}-${i}/40/40`} />
+                               <AvatarFallback>U</AvatarFallback>
+                             </Avatar>
                           </div>
                         ))}
                       </div>
@@ -232,6 +238,15 @@ export default function Dashboard() {
                      <Clock className="h-8 w-8 text-muted-foreground" />
                    </div>
                    <h3 className="text-xl font-bold text-primary">Settlement Intelligence</h3>
+                   <div className="flex items-center justify-center gap-2 mb-4">
+                      <Image 
+                        src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773997887/vbb_kuy4qi.png" 
+                        alt="Paystack" 
+                        width={100} 
+                        height={30} 
+                        className="opacity-50 grayscale hover:grayscale-0 transition-all"
+                      />
+                   </div>
                    <p className="text-muted-foreground max-w-sm mx-auto">
                      Automatic split logic for GHS payouts is processing via Paystack Ghana. Next settlement in 14 hours.
                    </p>

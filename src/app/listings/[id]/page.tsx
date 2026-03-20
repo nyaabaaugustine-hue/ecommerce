@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useParams, useRouter } from 'next/navigation';
@@ -132,8 +131,13 @@ export default function ListingDetails() {
               </Button>
               
               <div className="flex items-center justify-center gap-2 pt-2">
-                <Image src="https://placehold.co/100x40/transparent/grey?text=Paystack" alt="Paystack" width={80} height={32} />
-                <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Secure Gateway (GH)</span>
+                <Image 
+                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773997887/vbb_kuy4qi.png" 
+                  alt="Paystack Secure Checkout" 
+                  width={140} 
+                  height={50} 
+                  className="h-10 object-contain"
+                />
               </div>
               
               <div className="bg-muted p-4 rounded-xl flex items-start gap-3">
