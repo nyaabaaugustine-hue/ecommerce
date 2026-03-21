@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -17,7 +18,13 @@ import {
   Plus,
   Rocket,
   TrendingUp,
-  Zap
+  Zap,
+  Smartphone,
+  Home,
+  ShoppingBag,
+  HelpCircle,
+  Truck,
+  Phone
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -35,11 +42,22 @@ import { PromotionPopup } from '@/components/promotion-popup';
 import { NewsletterPopup } from '@/components/newsletter-popup';
 import { useContent, useCurrency } from '@/components/providers';
 
+const CATEGORIES = [
+  { name: 'Supermarket', icon: ShoppingBag },
+  { name: 'Phones & Tablets', icon: Smartphone },
+  { name: 'Electronics', icon: Zap },
+  { name: 'Home & Office', icon: Home },
+  { name: 'Appliances', icon: Activity },
+  { name: 'Computing', icon: Smartphone },
+  { name: 'Fashion', icon: ShoppingBag },
+  { name: 'Gaming', icon: Rocket },
+  { name: 'Other categories', icon: Plus },
+];
+
 export default function HomePage() {
   const { content } = useContent();
   const { formatPrice } = useCurrency();
   const { hero, highlights, trust, cta } = content.pages.home.sections;
-  const [isSliding, setIsSliding] = useState(false);
   const [showVendorModal, setShowVendorModal] = useState(false);
 
   return (
@@ -47,60 +65,148 @@ export default function HomePage() {
       <PromotionPopup />
       <NewsletterPopup />
 
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-8 relative rounded-none overflow-hidden group shadow-2xl h-[450px] md:h-[550px] border border-primary/10">
-            <div className={cn(
-              "absolute inset-0 transition-all duration-700 ease-in-out transform scale-100 opacity-100 blur-0"
-            )}>
-              <Image 
-                src={hero.imageUrl} 
-                alt="Hero" 
-                fill 
-                className="object-cover"
-                priority
-              />
+      {/* Jumia Style Hero Node (Triple Column) */}
+      <section className="container mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          
+          {/* Left Node: Category Sidebar */}
+          <div className="hidden lg:flex lg:col-span-3 bg-white flex-col border shadow-sm">
+            <div className="p-4 border-b bg-muted/20">
+               <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary flex items-center gap-2">
+                  <Activity className="h-4 w-4 text-primary" /> Sector Registry
+               </h3>
+            </div>
+            <div className="flex-1 py-2">
+              {CATEGORIES.map((cat, i) => (
+                <Link 
+                  key={i} 
+                  href={`/listings?category=${cat.name}`} 
+                  className="flex items-center gap-3 px-4 py-2.5 hover:bg-primary/5 group transition-colors"
+                >
+                  <cat.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
+                  <span className="text-[11px] font-bold text-secondary uppercase tracking-tight group-hover:text-primary">{cat.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Center Node: Hero Slider */}
+          <div className="lg:col-span-6 relative bg-white border shadow-sm overflow-hidden h-[400px] md:h-auto group min-h-[400px]">
+            <Image 
+              src={hero.imageUrl} 
+              alt="Hero" 
+              fill 
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center p-8 md:p-12 space-y-6">
+               <div className="bg-primary w-fit px-4 py-1">
+                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">{hero.badge}</p>
+               </div>
+               <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none max-w-md">
+                  {hero.title}
+               </h2>
+               <p className="text-white/70 text-sm font-medium uppercase tracking-widest max-w-sm hidden md:block">
+                  {hero.description}
+               </p>
+               <Button className="w-fit h-14 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest rounded-none shadow-2xl">
+                  {hero.primaryCta} <ArrowRight className="ml-3 h-5 w-5" />
+               </Button>
+            </div>
+          </div>
+
+          {/* Right Node: Utility Widgets */}
+          <div className="lg:col-span-3 flex flex-col gap-4">
+            <div className="flex-1 bg-white border p-6 flex flex-col justify-center gap-6 shadow-sm group hover:border-primary transition-all cursor-pointer">
+               <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                     <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-black uppercase text-muted-foreground">Call / WhatsApp</p>
+                     <p className="text-sm font-black text-secondary">{content.settings.supportPhone}</p>
+                  </div>
+               </div>
+               <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                     <Store className="h-5 w-5" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-black uppercase text-muted-foreground">Sell on Vault</p>
+                     <p className="text-sm font-black text-secondary">Apply for node</p>
+                  </div>
+               </div>
+               <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                     <Truck className="h-5 w-5" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-black uppercase text-muted-foreground">Track Order</p>
+                     <p className="text-sm font-black text-secondary">Fidelity Sync</p>
+                  </div>
+               </div>
             </div>
             
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 to-transparent flex items-center">
-              <div className="px-8 md:pl-16 space-y-6 md:space-y-8 max-w-2xl">
-                <Badge className="bg-accent text-secondary font-black uppercase text-[10px] tracking-0.2em px-5 py-1.5 rounded-none">
-                  {hero.badge}
-                </Badge>
-                <h2 className="text-4xl md:text-7xl font-black text-white leading-tight tracking-tighter uppercase">
-                  {hero.title}
-                </h2>
-                <p className="text-white/70 text-sm md:text-lg hidden sm:block font-medium leading-relaxed max-w-lg">
-                  {hero.description}
-                </p>
-                <div className="flex gap-4 pt-4">
-                  <Link href="/listings" className="w-full sm:w-auto">
-                    <Button size="lg" className="w-full rounded-none px-10 bg-primary text-white hover:bg-accent hover:text-secondary transition-all font-black h-14 md:h-16 text-[11px] uppercase tracking-widest border-2 border-primary">
-                      {hero.primaryCta} <ArrowRight className="ml-3 h-5 w-5" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+            <div className="h-40 relative border shadow-sm group overflow-hidden">
+               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Clearance" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+               <div className="absolute inset-0 bg-primary/40 flex items-center justify-center">
+                  <h3 className="text-white font-black uppercase italic tracking-tighter text-2xl">CLEARANCE SALE</h3>
+               </div>
             </div>
           </div>
-          
-          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-            <Link href="/listings" className="relative h-full rounded-none overflow-hidden shadow-xl group block border border-border image-reveal min-h-[210px]">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Sale" fill className="object-cover" />
-              <div className="absolute inset-0 bg-primary/80 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm">
-                <Badge className="bg-accent text-secondary w-fit mb-3 font-black px-4 py-1 rounded-none text-[10px] tracking-widest uppercase">Limited Institutional Sale</Badge>
-                <h3 className="text-white font-black text-xl uppercase tracking-tighter">Ghana Heritage Selection</h3>
-              </div>
+        </div>
+      </section>
+
+      {/* Jumia Style Flash Sales Bar */}
+      <section className="container mx-auto px-4 pb-6">
+         <div className="bg-[#e61601] p-4 flex flex-col sm:flex-row items-center justify-between text-white border-b-4 border-accent">
+            <div className="flex items-center gap-6">
+               <div className="flex items-center gap-3">
+                  <Zap className="h-6 w-6 text-accent animate-pulse" />
+                  <h3 className="text-xl font-black uppercase italic tracking-tighter">Flash Sales</h3>
+               </div>
+               <div className="hidden md:flex items-center gap-4 text-[11px] font-black uppercase tracking-widest">
+                  <span className="opacity-70">Time Left:</span>
+                  <div className="bg-white text-[#e61601] px-3 py-1 font-black">10h : 30m : 51s</div>
+               </div>
+            </div>
+            <Link href="/listings" className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2 hover:underline">
+               See All <ChevronRight className="h-4 w-4" />
             </Link>
-            <Link href="/listings" className="relative h-full rounded-none overflow-hidden shadow-xl group block border border-border image-reveal min-h-[210px]">
-              <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/milkana-widget-1_aof3w4.jpg" alt="Market deals" fill className="object-cover" />
-              <div className="absolute inset-0 bg-secondary/80 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all backdrop-blur-sm">
-                <Badge className="bg-accent text-secondary w-fit mb-3 font-black px-4 py-1 rounded-none text-[10px] tracking-widest uppercase">Verified Partners</Badge>
-                <h3 className="text-white font-black text-xl uppercase tracking-tighter">Elite Vendor Registry</h3>
-              </div>
-            </Link>
+         </div>
+      </section>
+
+      {/* Weekly Velocity Section (Faster Scrolling) */}
+      <section className="bg-primary py-12 overflow-hidden border-y border-accent/20">
+        <div className="container mx-auto px-4 mb-8">
+          <div className="flex items-center gap-4">
+             <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
+             <h2 className="text-xl font-black text-white uppercase tracking-0.2em">Weekly Velocity: Best Selling Nodes</h2>
           </div>
+        </div>
+        <div className="animate-marquee gap-8 py-4 [animation-duration:25s]">
+          {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
+            <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
+               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-4 flex gap-4 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer">
+                  <div className="relative h-16 w-16 bg-white overflow-hidden shrink-0">
+                     <Image src={listing.imageUrl} alt={listing.title} fill className="object-cover group-hover:scale-110 transition-transform" />
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center overflow-hidden">
+                     <h4 className="text-[10px] font-black text-white uppercase tracking-tighter truncate mb-1">{listing.title}</h4>
+                     <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-black text-accent">{formatPrice(listing.price)}</span>
+                        <div className="flex items-center gap-1">
+                           <Star className="h-2.5 w-2.5 fill-accent text-accent" />
+                           <span className="text-[8px] font-bold text-white/60">{listing.rating}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="flex items-center opacity-0 group-hover:opacity-100 transition-all">
+                     <ArrowRight className="h-4 w-4 text-accent" />
+                  </div>
+               </Card>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -128,40 +234,6 @@ export default function HomePage() {
               <ListingCard key={listing.id} {...listing} vendorId={listing.vendorId} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Innovation: Weekly Best Sellers Scrolling Section */}
-      <section className="bg-primary py-12 overflow-hidden border-y border-accent/20">
-        <div className="container mx-auto px-4 mb-8">
-          <div className="flex items-center gap-4">
-             <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
-             <h2 className="text-xl font-black text-white uppercase tracking-0.2em">Weekly Velocity: Best Selling Nodes</h2>
-          </div>
-        </div>
-        <div className="animate-marquee gap-8 py-4 [animation-duration:40s]">
-          {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
-            <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
-               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-4 flex gap-4 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer">
-                  <div className="relative h-16 w-16 bg-white overflow-hidden shrink-0">
-                     <Image src={listing.imageUrl} alt={listing.title} fill className="object-cover group-hover:scale-110 transition-transform" />
-                  </div>
-                  <div className="flex-1 flex flex-col justify-center overflow-hidden">
-                     <h4 className="text-[10px] font-black text-white uppercase tracking-tighter truncate mb-1">{listing.title}</h4>
-                     <div className="flex items-center justify-between">
-                        <span className="text-[9px] font-black text-accent">{formatPrice(listing.price)}</span>
-                        <div className="flex items-center gap-1">
-                           <Star className="h-2.5 w-2.5 fill-accent text-accent" />
-                           <span className="text-[8px] font-bold text-white/60">{listing.rating}</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div className="flex items-center opacity-0 group-hover:opacity-100 transition-all">
-                     <ArrowRight className="h-4 w-4 text-accent" />
-                  </div>
-               </Card>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -206,7 +278,7 @@ export default function HomePage() {
         </div>
         
         <div className="relative">
-          <div className="animate-marquee-reverse gap-8 py-6 [animation-duration:66s]">
+          <div className="animate-marquee-reverse gap-8 py-6 [animation-duration:40s]">
             {[...VENDORS, ...VENDORS].map((vendor, idx) => (
               <div key={`${vendor.id}-${idx}`} className="w-[350px] md:w-[480px] shrink-0 px-3">
                 <Card className="border-none shadow-2xl hover:border-accent transition-all duration-500 h-[240px] md:h-[320px] bg-secondary group rounded-none relative overflow-hidden border-t-2 border-t-transparent hover:border-t-accent">

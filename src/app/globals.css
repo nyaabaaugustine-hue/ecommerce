@@ -105,16 +105,17 @@
   }
 }
 
+/* HIGH VELOCITY SPEED: Increased by 50% (40s -> 25s, 66s -> 40s) */
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 50s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
 .animate-marquee-reverse {
   display: flex;
   width: max-content;
-  animation: marquee-reverse 80s linear infinite;
+  animation: marquee-reverse 40s linear infinite;
 }
 
 .animate-v-glow {
