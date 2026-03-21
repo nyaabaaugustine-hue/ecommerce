@@ -85,7 +85,7 @@ export function MegaMenu() {
             {SECTORS.map((sector, idx) => (
               <div key={idx} className="flex flex-col">
                 <div className="relative h-24 w-full overflow-hidden border-b bg-muted/20">
-                  <Image src={sector.bgImage} alt={sector.title} fill className="object-cover opacity-40 mix-blend-overlay contrast-125" />
+                  <Image src={sector.bgImage} alt={sector.title} fill sizes="400px" className="object-cover opacity-40 mix-blend-overlay contrast-125" />
                   <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent p-8 flex items-center gap-4">
                     <div className="h-10 w-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                       <sector.icon className="h-5 w-5" />
@@ -152,6 +152,7 @@ export function MegaMenu() {
                       <Image 
                         src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
                         fill 
+                        sizes="40px"
                         className="object-contain" 
                         alt="Melcom" 
                         unoptimized

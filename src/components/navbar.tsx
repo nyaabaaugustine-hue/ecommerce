@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -251,7 +250,7 @@ export function Navbar() {
 
               <Link href="/" className="flex items-center gap-2 group shrink-0">
                 <div className="relative h-8 w-8 md:h-9 md:w-9 overflow-hidden rounded-none border border-primary/20 shadow-sm">
-                  <Image src={content.settings.logoUrl} alt="Logo" fill sizes="(max-width: 768px) 32px, 36px" className="object-cover" />
+                  <Image src={content.settings.logoUrl} alt="Logo" fill sizes="36px" className="object-cover" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-headline font-black text-lg md:text-xl text-secondary tracking-tighter uppercase leading-none">

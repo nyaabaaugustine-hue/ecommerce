@@ -38,6 +38,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                         src={content.settings.logoUrl} 
                         alt="Logo" 
                         fill 
+                        sizes="32px"
                         className="object-cover"
                       />
                     </div>

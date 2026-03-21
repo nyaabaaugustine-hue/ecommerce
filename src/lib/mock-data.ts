@@ -6,7 +6,7 @@ export interface User {
   email: string;
   role: Role;
   avatar?: string;
-  fidelityScore?: number; // Added: Customer Fidelity Score
+  fidelityScore?: number;
 }
 
 export interface Vendor {
@@ -21,8 +21,8 @@ export interface Vendor {
   logoUrl: string;
   bgUrl: string;
   description: string;
-  fidelityScore: number; // Added: Vendor Fidelity Score (1-100)
-  settlementSpeed: string; // Added: Average time to release funds
+  fidelityScore: number;
+  settlementSpeed: string;
 }
 
 export interface Listing {
@@ -38,7 +38,7 @@ export interface Listing {
   discount?: string;
   salesCount: number;
   inventoryStatus?: 'In Stock' | 'Limited Stock' | 'Sold Out';
-  requiresMultisig?: boolean; // Added: High-value flag
+  requiresMultisig?: boolean;
 }
 
 export const VENDORS: Vendor[] = [
