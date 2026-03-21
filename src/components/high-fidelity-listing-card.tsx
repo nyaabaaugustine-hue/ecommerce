@@ -17,7 +17,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
  * Uses blended theme colors for a premium finish.
  */
 export function HighFidelityListingCard(props: Listing) {
-  const { id, title, price, location, imageUrl, category, subcategory, specs, seller, isNegotiable } = props;
+  const { id, title, price, location, imageUrl, imageHint, category, subcategory, specs, seller, isNegotiable } = props;
   const { formatPrice } = useCurrency();
 
   return (
@@ -30,6 +30,7 @@ export function HighFidelityListingCard(props: Listing) {
           fill 
           sizes="200px"
           className="object-cover transition-all duration-700 group-hover:scale-105"
+          data-ai-hint={imageHint}
         />
         
         {/* Floating Seller Avatar */}

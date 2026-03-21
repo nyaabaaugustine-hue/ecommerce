@@ -9,22 +9,26 @@ const SPOTLIGHTS = [
   {
     title: "Cell phones",
     href: "/listings?category=Electronics",
-    imageUrl: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop",
+    imageUrl: "https://picsum.photos/seed/gh-spot-phone/800/600",
+    imageHint: "ghanaian smartphone"
   },
   {
     title: "Video games",
     href: "/listings?category=Electronics",
-    imageUrl: "https://images.unsplash.com/photo-1605906302474-f60df68a60c3?q=80&w=800&auto=format&fit=crop",
+    imageUrl: "https://picsum.photos/seed/gh-spot-games/800/600",
+    imageHint: "gaming console"
   },
   {
     title: "Computers",
     href: "/listings?category=Electronics",
-    imageUrl: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop",
+    imageUrl: "https://picsum.photos/seed/gh-spot-pc/800/600",
+    imageHint: "office computer"
   },
   {
     title: "Cameras and Drones",
     href: "/listings?category=Electronics",
-    imageUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop",
+    imageUrl: "https://picsum.photos/seed/gh-spot-cam/800/600",
+    imageHint: "digital camera"
   },
 ];
 
@@ -62,6 +66,7 @@ export function SpotlightCategories() {
                 fill 
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, 300px"
+                data-ai-hint={item.imageHint}
               />
             </div>
             <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">

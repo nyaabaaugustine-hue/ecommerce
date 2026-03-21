@@ -11,7 +11,7 @@ import type { Listing } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 
 export function ListingCard(props: Listing) {
-  const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isFreeShipping, isEmphasis } = props;
+  const { id, title, price, oldPrice, location, postedAt, imageUrl, imageHint, isEscrowProtected, isFreeShipping, isEmphasis } = props;
   const { formatPrice } = useCurrency();
 
   return (
@@ -38,7 +38,7 @@ export function ListingCard(props: Listing) {
           fill 
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"
           className="object-cover transition-all duration-700 group-hover:scale-110 contrast-[1.02] saturate-[1.1]"
-          data-ai-hint="product listing"
+          data-ai-hint={imageHint}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </Link>

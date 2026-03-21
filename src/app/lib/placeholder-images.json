@@ -3,63 +3,51 @@
   "placeholderImages": [
     {
       "id": "electronics",
-      "description": "Premium MacBook Pro - Accra Tech Hub",
-      "imageUrl": "https://picsum.photos/seed/gh-elec/800/600",
-      "imageHint": "ghanaian electronics store"
-    },
-    {
-      "id": "appliances",
-      "description": "Sovereign Series Refrigerator - Melcom Grade",
-      "imageUrl": "https://picsum.photos/seed/gh-app/800/600",
-      "imageHint": "modern kitchen ghana"
-    },
-    {
-      "id": "supermarket",
-      "description": "Makola Select Supermarket Registry",
-      "imageUrl": "https://picsum.photos/seed/gh-market/800/600",
-      "imageHint": "african grocery store"
-    },
-    {
-      "id": "furniture",
-      "description": "Elite Heritage Sofa - Kumasi Crafted",
-      "imageUrl": "https://picsum.photos/seed/gh-furniture/800/600",
-      "imageHint": "luxury african living room"
-    },
-    {
-      "id": "beauty",
-      "description": "Royal Orchid Beauty Protocol",
-      "imageUrl": "https://picsum.photos/seed/gh-beauty/800/600",
-      "imageHint": "ghanaian shea butter products"
-    },
-    {
-      "id": "audio-visual",
-      "description": "Sovereign 4K OLED Hub",
-      "imageUrl": "https://picsum.photos/seed/gh-tv/800/600",
-      "imageHint": "smart tv showroom accra"
+      "description": "Quantum Precision MacBook Pro",
+      "imageUrl": "https://picsum.photos/seed/gh-lp1/800/600",
+      "imageHint": "ghanaian laptop"
     },
     {
       "id": "mobile",
-      "description": "Titanium iPhone 15 Pro - Cantonments Stock",
-      "imageUrl": "https://picsum.photos/seed/gh-phone/800/600",
-      "imageHint": "smartphone store ghana"
+      "description": "Titanium iPhone 15 Pro",
+      "imageUrl": "https://picsum.photos/seed/gh-ph1/800/600",
+      "imageHint": "ghanaian smartphone"
     },
     {
-      "id": "home-living",
-      "description": "Elite Heritage Living Suite",
-      "imageUrl": "https://picsum.photos/seed/gh-home/800/600",
-      "imageHint": "modern accra apartment"
+      "id": "vehicles",
+      "description": "Luxury SUV Accra",
+      "imageUrl": "https://picsum.photos/seed/gh-v1/800/600",
+      "imageHint": "luxury suv"
     },
     {
-      "id": "vehicle",
-      "description": "Premium Sovereign Auto - East Legon Showroom",
-      "imageUrl": "https://picsum.photos/seed/gh-car/800/600",
-      "imageHint": "luxury car accra"
+      "id": "property",
+      "description": "Elite Residential Villa",
+      "imageUrl": "https://picsum.photos/seed/gh-pr1/800/600",
+      "imageHint": "luxury villa"
     },
     {
       "id": "agriculture",
-      "description": "Industrial Agro-Business Hub",
-      "imageUrl": "https://picsum.photos/seed/gh-farm/800/600",
-      "imageHint": "ghanaian cocoa farm"
+      "description": "Industrial Agro Hub",
+      "imageUrl": "https://picsum.photos/seed/gh-ag1/800/600",
+      "imageHint": "farm tractor"
+    },
+    {
+      "id": "fashion",
+      "description": "Royal Kente Weave",
+      "imageUrl": "https://picsum.photos/seed/gh-fa1/800/600",
+      "imageHint": "kente fabric"
+    },
+    {
+      "id": "services",
+      "description": "Corporate Audit Node",
+      "imageUrl": "https://picsum.photos/seed/gh-se1/800/600",
+      "imageHint": "legal document"
+    },
+    {
+      "id": "sports",
+      "description": "Performance Gym Node",
+      "imageUrl": "https://picsum.photos/seed/gh-sp1/800/600",
+      "imageHint": "treadmill gym"
     }
   ]
 }
