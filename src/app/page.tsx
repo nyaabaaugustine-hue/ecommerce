@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -32,6 +33,7 @@ import {
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
+  DialogDescription,
   DialogTrigger 
 } from '@/components/ui/dialog';
 import { PromotionPopup } from '@/components/promotion-popup';
@@ -61,13 +63,13 @@ export default function HomePage() {
       <PromotionPopup />
       <NewsletterPopup />
 
-      {/* NODE 1: Jumia Style Hero Registry */}
+      {/* SECTION 1: Gateway Navigation Hub */}
       <section className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           <div className="hidden lg:flex lg:col-span-3 bg-white flex-col border shadow-sm rounded-none">
             <div className="p-4 border-b bg-muted/20">
                <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary flex items-center gap-2">
-                  <Activity className="h-4 w-4 text-primary" /> Sector Registry
+                  <Activity className="h-4 w-4 text-primary" /> Product Categories
                </h3>
             </div>
             <div className="flex-1 py-2">
@@ -94,13 +96,13 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center p-8 md:p-12 space-y-6">
                <div className="bg-primary w-fit px-4 py-1 rounded-none">
-                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">Verified Escrow Protection</p>
+                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">Secure Escrow Protection</p>
                </div>
                <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none max-w-md">
-                  ACCRA'S SOVEREIGN TRADE GATEWAY
+                  ACCRA'S PRIMARY TRADE GATEWAY
                </h2>
                <Button className="w-fit h-14 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest shadow-2xl">
-                  Enter Marketplace <ArrowRight className="ml-3 h-5 w-5" />
+                  Start Shopping <ArrowRight className="ml-3 h-5 w-5" />
                </Button>
             </div>
           </div>
@@ -137,13 +139,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NODE 2: Institutional Registry Section */}
+      {/* SECTION 2: Verified Partner Hub */}
       <section className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 relative bg-secondary overflow-hidden h-[500px] border-4 border-white shadow-2xl rounded-none">
              <Image 
                src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
-               alt="Kerrygold" 
+               alt="Marketplace Selection" 
                fill 
                className="object-cover opacity-90 contrast-125" 
              />
@@ -158,27 +160,27 @@ export default function HomePage() {
                   The ultimate high-trust retail aggregator. Secure your next purchase with total confidence.
                 </p>
                 <Button className="w-fit h-16 px-12 bg-accent text-secondary hover:bg-white font-black uppercase text-xs tracking-[0.2em] shadow-2xl transition-all">
-                  Explore Escrow <ArrowRight className="ml-3 h-6 w-6" />
+                  Explore Security <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
              </div>
           </div>
 
           <div className="lg:col-span-4 flex flex-col gap-6">
              <div className="relative h-[238px] bg-[#f68b1e] overflow-hidden border-4 border-white shadow-xl rounded-none">
-                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Seara" fill className="object-cover" />
+                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Partner Deal" fill className="object-cover" />
                 <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl rounded-none">
-                   <span className="text-[10px] font-black text-white uppercase tracking-widest">ESCROW: 142</span>
-                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">GHC 4.2M</span>
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">ESCROW ACTIVE</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">GH₵ 4.2M</span>
                 </div>
              </div>
              <div className="relative h-[238px] bg-white overflow-hidden border-4 border-white shadow-xl group rounded-none">
-                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" alt="Milkana" fill className="object-cover opacity-80" />
+                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" alt="Partner Selection" fill className="object-cover opacity-80" />
                 <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl group-hover:scale-110 transition-transform rounded-none">
                    <div className="h-8 w-8 bg-accent/20 flex items-center justify-center mb-2 rounded-none">
                       <ShoppingBag className="h-4 w-4 text-accent" />
                    </div>
-                   <span className="text-[10px] font-black text-white uppercase tracking-widest">System Sync</span>
-                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">Live System</span>
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">System Live</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">Secure Flow</span>
                 </div>
                 <div className="absolute bottom-6 left-6">
                    <span className="text-secondary font-black uppercase text-xs bg-white px-4 py-1.5 shadow-lg tracking-widest rounded-none">Shop Now</span>
@@ -188,12 +190,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Weekly Velocity Section */}
+      {/* Fastest Selling Items Section */}
       <section className="bg-primary py-16 overflow-hidden border-y border-accent/20">
         <div className="container mx-auto px-4 mb-8">
           <div className="flex items-center gap-4">
              <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
-             <h2 className="text-2xl font-black text-white uppercase tracking-widest">Weekly Velocity: Best Selling Items</h2>
+             <h2 className="text-2xl font-black text-white uppercase tracking-widest">Fastest Selling This Week</h2>
           </div>
         </div>
         <div className="animate-marquee gap-10 py-6">
@@ -272,6 +274,10 @@ export default function HomePage() {
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-accent shadow-2xl">
+              <DialogHeader className="sr-only">
+                <DialogTitle>Partner Application</DialogTitle>
+                <DialogDescription>Become a verified partner in our marketplace hub.</DialogDescription>
+              </DialogHeader>
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="bg-secondary p-10 md:p-14 text-white space-y-10">
                   <div className="space-y-6">

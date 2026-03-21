@@ -1,7 +1,8 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, Lock, Timer, ArrowRight, ShieldAlert } from 'lucide-react';
 
@@ -39,7 +40,7 @@ export function OnboardingTour() {
     },
     {
       title: "Ready to Start?",
-      desc: "Browse our verified product nodes and shop with absolute confidence.",
+      desc: "Browse our verified product catalog and shop with absolute confidence.",
       icon: ShieldAlert,
     }
   ];
@@ -49,13 +50,17 @@ export function OnboardingTour() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md rounded-none border-t-4 border-t-primary p-0 overflow-hidden shadow-2xl">
+        <DialogHeader className="sr-only">
+          <DialogTitle>{current.title}</DialogTitle>
+          <DialogDescription>{current.desc}</DialogDescription>
+        </DialogHeader>
         <div className="bg-secondary p-10 flex flex-col items-center justify-center text-white space-y-6">
           <div className="h-20 w-20 bg-primary/20 flex items-center justify-center border-2 border-primary animate-pulse">
             <current.icon className="h-10 w-10 text-primary" />
           </div>
           <div className="text-center space-y-2">
             <h3 className="text-2xl font-black uppercase tracking-tighter">{current.title}</h3>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Secure Registry Node</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Secure Account Access</p>
           </div>
         </div>
         <div className="p-10 space-y-8 bg-white">
@@ -73,7 +78,7 @@ export function OnboardingTour() {
             onClick={() => step < steps.length - 1 ? setStep(s => s + 1) : handleFinish()}
             className="w-full h-14 bg-secondary text-white hover:bg-primary font-black uppercase text-[10px] tracking-widest rounded-none shadow-xl gap-3"
           >
-            {step < steps.length - 1 ? "Authorize Next" : "Enter Marketplace"}
+            {step < steps.length - 1 ? "Next Step" : "Enter Marketplace"}
             <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
