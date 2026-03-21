@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { User, PlusCircle, Menu, LogOut, ShieldCheck, Search, LayoutGrid, MapPin, MessageSquare } from 'lucide-react';
+import { User, PlusCircle, Menu, LogOut, ShieldCheck, Search, LayoutGrid, MapPin, MessageSquare, ShoppingBag } from 'lucide-react';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -26,11 +26,11 @@ export function Navbar() {
     <header className="w-full flex flex-col sticky top-0 z-50 shadow-2xl">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      {/* HERITAGE ACCENT STRIP */}
+      {/* CULTURAL ACCENT NODE */}
       <div className="h-1.5 w-full relative overflow-hidden">
         <Image 
           src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
-          alt="Heritage Accent" 
+          alt="Heritage Stripe" 
           fill 
           sizes="100vw"
           className="object-cover"
@@ -41,7 +41,7 @@ export function Navbar() {
       <div className="bg-secondary border-b border-white/10 py-4">
         <div className="container mx-auto px-4 flex items-center justify-between gap-8">
           <div className="flex items-center gap-8 shrink-0">
-            {/* MOBILE NAV TRIGGER */}
+            {/* MOBILE NAVIGATION */}
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden h-10 w-10 text-white hover:bg-primary hover:text-secondary">
@@ -51,8 +51,8 @@ export function Navbar() {
               <SheetContent side="left" className="w-[320px] p-0 flex flex-col border-r-8 border-primary rounded-none bg-secondary text-white">
                 <div className="sr-only">
                   <SheetHeader>
-                    <SheetTitle>Marketplace Gateway</SheetTitle>
-                    <SheetDescription>Access categories and session nodes.</SheetDescription>
+                    <SheetTitle>Vault Menu</SheetTitle>
+                    <SheetDescription>Marketplace Navigation</SheetDescription>
                   </SheetHeader>
                 </div>
                 
@@ -63,7 +63,7 @@ export function Navbar() {
                     </div>
                     <div>
                       <h2 className="font-black text-2xl tracking-tighter uppercase">{content.settings.siteName}</h2>
-                      <p className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Ghana's Secure Market</p>
+                      <p className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">GHANA'S SECURE MARKET</p>
                     </div>
                   </div>
                 </div>
@@ -77,9 +77,9 @@ export function Navbar() {
                      </Button>
                    </Link>
                    <nav className="space-y-8">
-                      <Link href="/listings" onClick={() => setIsMobileMenuOpen(false)} className="block font-black uppercase text-white/70 text-xl hover:text-primary transition-colors">Browse Ads</Link>
-                      <Link href="/vendors" onClick={() => setIsMobileMenuOpen(false)} className="block font-black uppercase text-white/70 text-xl hover:text-primary transition-colors">Verified Sellers</Link>
-                      <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block font-black uppercase text-white/70 text-xl hover:text-primary transition-colors">Escrow Protocol</Link>
+                      <Link href="/listings" onClick={() => setIsMobileMenuOpen(false)} className="block font-black uppercase text-white/70 text-xl hover:text-primary transition-colors">Browse Marketplace</Link>
+                      <Link href="/vendors" onClick={() => setIsMobileMenuOpen(false)} className="block font-black uppercase text-white/70 text-xl hover:text-primary transition-colors">Verified Dealers</Link>
+                      <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="block font-black uppercase text-white/70 text-xl hover:text-primary transition-colors">How Escrow Works</Link>
                    </nav>
                 </div>
 
@@ -107,7 +107,7 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* ADVANCED HEADER SEARCH INTEGRATION */}
+          {/* INTEGRATED SEARCH COMMAND (HIDDEN ON SMALL) */}
           <div className="hidden lg:flex items-center flex-1 max-w-2xl">
             <div className="w-full h-12 bg-white/5 border border-white/10 flex items-center group focus-within:border-primary transition-all">
               <div className="px-4 border-r border-white/10 flex items-center gap-2 shrink-0">
@@ -117,7 +117,7 @@ export function Navbar() {
               <div className="flex-1 flex items-center px-4 gap-3">
                 <Search className="h-4 w-4 text-primary" />
                 <input 
-                  placeholder="Find anything in Ghana..." 
+                  placeholder="What are you looking for today?" 
                   className="w-full bg-transparent outline-none text-white text-[11px] font-black uppercase placeholder:text-white/20"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}

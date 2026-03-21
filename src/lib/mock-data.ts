@@ -30,7 +30,7 @@ export interface Listing {
   category: ListingCategory;
   location: string;
   postedAt: string;
-  postedTimestamp: number; // For sorting
+  postedTimestamp: number;
   imageUrl: string;
   seller: SellerIdentity;
   vendorId: string;
@@ -38,7 +38,6 @@ export interface Listing {
   status: ListingStatus;
   isEscrowProtected: boolean;
   requiresMultisig?: boolean;
-  metadata?: Record<string, string | number>;
 }
 
 export const MOCK_USERS: User[] = [
@@ -80,7 +79,7 @@ export const LISTINGS: Listing[] = [
     description: 'Brand new in box, global warranty. Verified node stock.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '3',
@@ -97,7 +96,7 @@ export const LISTINGS: Listing[] = [
     description: 'Executive luxury villa in the heart of East Legon. Fully furnished options available.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
+    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '4',
@@ -113,7 +112,7 @@ export const LISTINGS: Listing[] = [
     description: 'Unopened, standard institutional hardware.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '5',
@@ -129,7 +128,7 @@ export const LISTINGS: Listing[] = [
     description: 'High-fidelity fabrics, custom wood frame. Heritage series.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021' }
+    seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '6',
@@ -145,7 +144,7 @@ export const LISTINGS: Listing[] = [
     description: 'Crystal clear 4K hub. Authorized dealer warranty.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '7',
@@ -161,7 +160,7 @@ export const LISTINGS: Listing[] = [
     description: 'Very clean title, sunroof, leather seats. Reliable daily node.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's5', name: 'Kwame Mensah', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023' }
+    seller: { id: 's5', name: 'Kwame Mensah', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '8',
@@ -177,7 +176,7 @@ export const LISTINGS: Listing[] = [
     description: 'Litigation-free land with registered title. Ready for building.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
+    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '9',
@@ -193,7 +192,7 @@ export const LISTINGS: Listing[] = [
     description: 'Deep cleaning for offices and homes. 24/7 node availability.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's6', name: 'CleanNode Pro', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2022' }
+    seller: { id: 's6', name: 'CleanNode Pro', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '10',
@@ -209,7 +208,7 @@ export const LISTINGS: Listing[] = [
     description: 'Used Corolla in excellent engine condition. AC works perfectly.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's7', name: 'Abu Bakar', type: 'Individual', rating: 4.2, isVerified: true, joinDate: '2021' }
+    seller: { id: 's7', name: 'Abu Bakar', type: 'Individual', rating: 4.2, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   }
 ];
 
