@@ -4,39 +4,42 @@
 
 @layer base {
   :root {
-    --background: 210 17% 96%; /* #F0F2F5 Off-white */
+    --background: 210 17% 96%; /* #F0F2F5 Neutral Gray-White */
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 222 47% 11%; /* Default Sovereign Navy */
-    --primary-foreground: 210 20% 98%; /* Milky White */
-    --secondary: 222 47% 11%; 
-    --secondary-foreground: 210 20% 98%; /* Milky White */
+    --primary: 45 100% 50%; /* #FFD700 Pure Institutional Gold */
+    --primary-foreground: 222 47% 11%;
+    --secondary: 222 47% 11%; /* Deep Sovereign Navy */
+    --secondary-foreground: 210 20% 98%;
     --muted: 210 20% 90%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 178 89% 49%; /* #0DEDE6 Aqua */
+    --accent: 178 89% 49%; /* Aqua Pulse */
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 178 89% 49%;
-    --radius: 0px; /* Reverted to square for containers */
-    --burgundy: 0 100% 27%; /* #8B0000 High-Contrast Burgundy */
-    --milky-white: 210 20% 98%;
-    --gold: 45 100% 50%; /* Institutional Gold */
+    --ring: 45 100% 50%;
+    --radius: 0px; /* Institutional Sharp Containers */
+    --burgundy: 0 100% 27%;
+    --gold: 45 100% 50%;
   }
 
-  /* Institutional Theme Registry - 7 Tiers */
-  [data-theme="sovereign"] { --primary: 222 47% 11%; --primary-foreground: var(--milky-white); }
-  [data-theme="deep"] { --primary: 215 80% 20%; --primary-foreground: var(--milky-white); }
-  [data-theme="royal"] { --primary: 210 90% 40%; --primary-foreground: var(--milky-white); }
-  [data-theme="midnight"] { --primary: 225 60% 5%; --primary-foreground: var(--milky-white); }
-  [data-theme="cobalt"] { --primary: 210 40% 30%; --primary-foreground: var(--milky-white); }
-  [data-theme="cold-white"] { --primary: 210 20% 60%; --primary-foreground: 222 47% 11%; } /* Silver-Gray */
-  [data-theme="crimson"] { --primary: 0 72% 35%; --primary-foreground: var(--milky-white); } /* Institutional Red */
+  /* Core Dark Mode Protocol */
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --primary: 45 100% 50%;
+    --secondary: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --border: 217.2 32.6% 17.5%;
+  }
 }
 
 @layer base {
@@ -44,99 +47,42 @@
     @apply border-border transition-all duration-500 ease-in-out;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
   }
   
   img {
-    filter: contrast(1.15) brightness(1.02) saturate(1.05);
-    transition: filter 0.5s ease-in-out;
+    filter: contrast(1.1) brightness(1.02);
+    transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out;
   }
 
-  .bg-primary, .bg-secondary, .bg-burgundy, .bg-midnight {
-    @apply text-white/95;
-  }
-  
-  .bg-primary *, .bg-secondary *, .bg-burgundy * {
-    @apply text-milky;
+  /* Optimized Performance Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tighter;
   }
 }
 
-.text-burgundy {
-  color: hsl(var(--burgundy)) !important;
+/* Senior Interaction Nodes */
+.btn-protocol {
+  @apply rounded-[7%] transition-all active:scale-95 hover:shadow-2xl hover:-translate-y-0.5;
 }
 
-.text-milky {
-  color: hsl(var(--milky-white)) !important;
-}
-
-.text-gold {
-  color: hsl(var(--gold)) !important;
-}
-
-.fill-gold {
-  fill: hsl(var(--gold)) !important;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes marquee-reverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
+.text-gold { color: hsl(var(--gold)) !important; }
+.bg-gold { background-color: hsl(var(--gold)) !important; }
+.text-burgundy { color: hsl(var(--burgundy)) !important; }
 
 @keyframes v-glow {
-  0%, 100% { 
-    text-shadow: 0 0 2px hsl(var(--accent)), 0 0 5px hsl(var(--accent));
-    filter: drop-shadow(0 0 2px hsl(var(--accent)));
-  }
-  50% { 
-    text-shadow: 0 0 10px hsl(var(--accent)), 0 0 15px hsl(var(--accent));
-    filter: drop_shadow(0 0 8px hsl(var(--accent)));
-  }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 25s linear infinite;
-}
-
-.animate-marquee-reverse {
-  display: flex;
-  width: max-content;
-  animation: marquee-reverse 40s linear infinite;
+  0%, 100% { text-shadow: 0 0 2px hsl(var(--primary)), 0 0 5px hsl(var(--primary)); }
+  50% { text-shadow: 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary)); }
 }
 
 .animate-v-glow {
   animation: v-glow 2s ease-in-out infinite;
-  display: inline-block;
 }
 
-.animate-marquee:hover, .animate-marquee-reverse:hover {
-  animation-play-state: paused;
-}
+/* Scrollbar Registry */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { @apply bg-secondary; }
+::-webkit-scrollbar-thumb { @apply bg-primary/20 hover:bg-primary/40; }
 
-.image-reveal {
-  overflow: hidden;
-  position: relative;
-}
-
-.image-reveal img {
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease-in-out;
-}
-
-.image-reveal:hover img {
-  transform: scale(1.08);
-  filter: contrast(1.22) brightness(1.05) saturate(1.1);
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

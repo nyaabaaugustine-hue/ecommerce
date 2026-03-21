@@ -7,93 +7,91 @@ import { Badge } from '@/components/ui/badge';
 import { ShieldCheck, MapPin, Clock, Star, CheckCircle2 } from 'lucide-react';
 import { useCurrency } from '@/components/providers';
 import { cn } from '@/lib/utils';
+import type { Listing } from '@/lib/mock-data';
 
-interface ListingProps {
-  id: string;
-  title: string;
-  category: string;
-  price: number;
-  location: string;
-  imageUrl: string;
-  rating: number;
-  postedAt: string;
-  isNegotiable?: boolean;
-  sellerType: 'Individual' | 'Dealer' | 'Verified Pro';
-  sellerName: string;
-}
-
-export function ListingCard(props: ListingProps) {
-  const { id, title, category, price, location, imageUrl, rating, postedAt, isNegotiable, sellerType, sellerName } = props;
+/**
+ * @fileOverview Senior Marketplace Listing Card
+ * Focuses on scanning efficiency, price dominance, and trust visibility.
+ */
+export function ListingCard(props: Listing) {
+  const { id, title, price, location, postedAt, imageUrl, seller, isNegotiable, isEscrowProtected } = props;
   const { formatPrice } = useCurrency();
 
   return (
-    <Card className="group overflow-hidden bg-white border border-border/60 hover:border-primary hover:shadow-2xl transition-all duration-300 relative flex flex-col h-full rounded-none">
-      {/* Escrow Trust Layer */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
-        <Badge className="bg-primary/95 text-white text-[8px] font-black px-2 py-0.5 rounded-none shadow-lg border-none flex items-center gap-1.5 backdrop-blur-sm">
-           <ShieldCheck className="h-2.5 w-2.5 text-accent" />
-           <span className="uppercase tracking-widest">Escrow Protected</span>
-        </Badge>
-        {sellerType === 'Verified Pro' && (
-          <Badge className="bg-accent text-secondary text-[8px] font-black px-2 py-0.5 rounded-none shadow-md border-none flex items-center gap-1">
+    <Card className="group overflow-hidden bg-white border border-border/60 hover:border-primary/40 hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-none shadow-sm">
+      {/* Dynamic Trust Overlay */}
+      <div className="absolute top-3 left-3 z-10 flex flex-col gap-2 pointer-events-none">
+        {isEscrowProtected && (
+          <Badge className="bg-secondary/90 text-white text-[8px] font-black px-2 py-1 rounded-none shadow-lg border-none flex items-center gap-1.5 backdrop-blur-md">
+             <ShieldCheck className="h-2.5 w-2.5 text-primary" />
+             <span className="uppercase tracking-widest">Escrow Protected</span>
+          </Badge>
+        )}
+        {seller.isVerified && (
+          <Badge className="bg-primary text-gold text-[8px] font-black px-2 py-1 rounded-none shadow-md border-none flex items-center gap-1">
              <CheckCircle2 className="h-2.5 w-2.5" />
-             <span className="uppercase tracking-widest">Verified Pro</span>
+             <span className="uppercase tracking-widest">Verified {seller.type.split(' ')[1] || 'Seller'}</span>
           </Badge>
         )}
       </div>
 
-      {/* Image Section */}
-      <Link href={`/listings/${id}`} className="relative h-56 w-full overflow-hidden block bg-muted rounded-none">
+      {/* Asset Visualization */}
+      <Link href={`/listings/${id}`} className="relative h-52 w-full overflow-hidden block bg-muted rounded-none border-b border-border/10">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
-          sizes="(max-width: 768px) 100vw, 300px"
-          className="object-cover transition-transform duration-700 group-hover:scale-110 contrast-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+          className="object-cover transition-transform duration-1000 group-hover:scale-110 contrast-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </Link>
 
-      <CardContent className="p-5 flex flex-col flex-1 gap-3">
-        <div className="flex justify-between items-center">
-          <p className="text-[10px] font-black text-primary uppercase tracking-widest">{category}</p>
-          <div className="flex items-center gap-1">
-            <Clock className="h-3 w-3 text-muted-foreground" />
-            <span className="text-[9px] font-bold text-muted-foreground uppercase">{postedAt}</span>
+      <CardContent className="p-5 flex flex-col flex-1 gap-4">
+        <div className="space-y-1.5">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="text-2xl font-black text-burgundy tracking-tighter leading-none">
+              {formatPrice(price)}
+            </span>
+            {isNegotiable && (
+              <span className="text-[7px] font-black text-green-600 uppercase bg-green-50 px-1.5 py-0.5 border border-green-100 leading-none">
+                Negotiable
+              </span>
+            )}
           </div>
-        </div>
-        
-        <div className="space-y-1">
-          <span className="text-2xl font-black text-burgundy tracking-tighter block">{formatPrice(price)}</span>
           <Link href={`/listings/${id}`} className="block group/title">
-            <h3 className="font-bold text-sm line-clamp-2 text-secondary tracking-tight uppercase min-h-[2.5rem] group-hover/title:text-primary transition-colors">{title}</h3>
+            <h3 className="font-bold text-sm line-clamp-2 text-secondary tracking-tight uppercase min-h-[2.5rem] group-hover/title:text-primary transition-colors duration-300">
+              {title}
+            </h3>
           </Link>
         </div>
 
-        <div className="mt-auto pt-4 border-t border-dashed flex flex-col gap-3">
-          <div className="flex items-center justify-between text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5 text-primary" />
-              <span className="text-[10px] font-black uppercase tracking-tight truncate max-w-[120px]">{location}</span>
+        {/* Marketplace Metadata Node */}
+        <div className="mt-auto space-y-4">
+          <div className="flex items-center justify-between text-muted-foreground border-t border-dashed pt-4">
+            <div className="flex items-center gap-1.5 overflow-hidden">
+              <MapPin className="h-3 w-3 text-primary shrink-0" />
+              <span className="text-[9px] font-black uppercase tracking-tight truncate">{location}</span>
             </div>
-            {isNegotiable && (
-              <span className="text-[8px] font-black text-green-600 uppercase bg-green-50 px-2 py-0.5 border border-green-100">Negotiable</span>
-            )}
+            <div className="flex items-center gap-1 shrink-0">
+              <Clock className="h-3 w-3" />
+              <span className="text-[8px] font-bold uppercase">{postedAt}</span>
+            </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-               <div className="h-6 w-6 bg-secondary flex items-center justify-center text-[9px] font-black text-white shadow-inner">
-                 {sellerName.charAt(0)}
+          <div className="flex items-center justify-between bg-muted/20 p-2 border border-transparent group-hover:border-primary/10 transition-colors">
+            <div className="flex items-center gap-2 overflow-hidden">
+               <div className="h-7 w-7 bg-secondary flex items-center justify-center text-[10px] font-black text-primary shadow-inner shrink-0">
+                 {seller.name.charAt(0)}
                </div>
-               <div className="flex flex-col">
-                 <p className="text-[9px] font-black text-secondary leading-none uppercase truncate max-w-[90px]">{sellerName}</p>
-                 <p className="text-[7px] font-bold text-muted-foreground uppercase">{sellerType}</p>
+               <div className="flex flex-col min-w-0">
+                 <p className="text-[9px] font-black text-secondary leading-none uppercase truncate">{seller.name}</p>
+                 <p className="text-[7px] font-bold text-muted-foreground uppercase">{seller.type}</p>
                </div>
             </div>
-            <div className="flex items-center gap-1 bg-muted/30 px-2 py-0.5">
+            <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white border shadow-sm shrink-0">
                <Star className="h-2.5 w-2.5 fill-gold text-gold" />
-               <span className="text-[9px] font-black text-secondary">{rating}</span>
+               <span className="text-[9px] font-black text-secondary">{seller.rating}</span>
             </div>
           </div>
         </div>
