@@ -48,8 +48,8 @@ export function NewsletterPopup() {
         {/* Left Side: Institutional Image & Promises (50% Opacity Overlay) */}
         <div className="w-full md:w-[45%] relative bg-secondary text-white min-h-[400px]">
           <Image 
-            src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057741/cx_n0ltnr.jpg" 
-            alt="Institutional Protocol" 
+            src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg" 
+            alt="Institutional Registry" 
             fill 
             className="object-cover"
             priority
