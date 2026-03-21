@@ -1,6 +1,8 @@
+
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Car, 
   Smartphone, 
@@ -18,7 +20,12 @@ import {
 import { cn } from '@/lib/utils';
 
 const CATEGORIES = [
-  { name: 'Categories', icon: Shapes, href: '/listings' },
+  { 
+    name: 'Categories', 
+    icon: Shapes, 
+    imageUrl: 'https://images.unsplash.com/photo-1526170315873-3a98658c7a6a?q=80&w=100&auto=format&fit=crop',
+    href: '/listings' 
+  },
   { name: 'Favorites', icon: Heart, href: '/dashboard' },
   { name: 'Coupons', icon: Ticket, href: '/listings' },
   { name: 'Vehicles', icon: Car, href: '/listings?category=Vehicles' },
@@ -34,6 +41,7 @@ const CATEGORIES = [
 /**
  * @fileOverview Compact Monochromatic Category Registry
  * Precision spacing (py-3) and monochromatic chips for professional noise reduction.
+ * Now supports photographic nodes starting with Photography/Categories.
  */
 export function CategoryBar() {
   return (
@@ -49,7 +57,19 @@ export function CategoryBar() {
                 `delay-${idx * 30}`
               )}
             >
-              <cat.icon className="h-4 w-4 text-muted-foreground group-hover/chip:text-primary transition-colors" />
+              {cat.imageUrl ? (
+                <div className="relative h-4 w-4 overflow-hidden rounded-none">
+                  <Image 
+                    src={cat.imageUrl} 
+                    alt={cat.name} 
+                    fill 
+                    className="object-cover grayscale group-hover/chip:grayscale-0 transition-all"
+                    sizes="16px"
+                  />
+                </div>
+              ) : (
+                <cat.icon className="h-4 w-4 text-muted-foreground group-hover/chip:text-primary transition-colors" />
+              )}
               <span className="text-[10px] font-black text-muted-foreground group-hover/chip:text-primary whitespace-nowrap uppercase tracking-[0.1em]">
                 {cat.name}
               </span>
