@@ -4,41 +4,28 @@
 
 @layer base {
   :root {
-    --background: 210 17% 96%; /* #F0F2F5 Neutral Gray-White */
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 45 100% 50%; /* #FFD700 Pure Institutional Gold */
+    --background: 222 47% 11%; /* Deep Sovereign Navy */
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 45 100% 50%; /* Institutional Gold */
     --primary-foreground: 222 47% 11%;
-    --secondary: 222 47% 11%; /* Deep Sovereign Navy */
-    --secondary-foreground: 210 20% 98%;
-    --muted: 210 20% 90%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 178 89% 49%; /* Aqua Pulse */
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 45 100% 50%;
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
     --ring: 45 100% 50%;
     --radius: 0px; /* Institutional Sharp Containers */
     --burgundy: 0 100% 27%;
     --gold: 45 100% 50%;
-  }
-
-  /* Core Dark Mode Protocol */
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --primary: 45 100% 50%;
-    --secondary: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --border: 217.2 32.6% 17.5%;
   }
 }
 
@@ -51,19 +38,13 @@
   }
   
   img {
-    filter: contrast(1.1) brightness(1.02);
+    filter: contrast(1.1) brightness(1.05);
     transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out;
   }
 
-  /* Optimized Performance Typography */
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline tracking-tighter;
   }
-}
-
-/* Senior Interaction Nodes */
-.btn-protocol {
-  @apply rounded-[7%] transition-all active:scale-95 hover:shadow-2xl hover:-translate-y-0.5;
 }
 
 .text-gold { color: hsl(var(--gold)) !important; }
@@ -79,9 +60,8 @@
   animation: v-glow 2s ease-in-out infinite;
 }
 
-/* Scrollbar Registry */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { @apply bg-secondary; }
+::-webkit-scrollbar-track { @apply bg-background; }
 ::-webkit-scrollbar-thumb { @apply bg-primary/20 hover:bg-primary/40; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }

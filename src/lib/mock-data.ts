@@ -1,9 +1,3 @@
-/**
- * @fileOverview Institutional Data Registry
- * Senior-level mock dataset localized for the Ghanaian marketplace.
- * Governs the core domain models for Listings, Vendors, and Users.
- */
-
 export type SellerType = 'Individual' | 'Verified Dealer' | 'Business Vendor';
 export type ListingCategory = 'Vehicles' | 'Property' | 'Electronics' | 'Home & Furniture' | 'Jobs' | 'Services' | 'Fashion' | 'Agriculture' | 'Other';
 export type ListingStatus = 'Active' | 'Sold' | 'Under Review';
@@ -69,37 +63,13 @@ export const VENDORS: Vendor[] = [
     id: 'v1',
     name: 'Melcom Digital Hub',
     category: 'Electronics',
-    description: 'Ghana\'s leading multi-category retailer. Authorized node for institutional electronics and appliances.',
+    description: 'Ghana\'s leading multi-category retailer.',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     bgUrl: 'https://images.unsplash.com/photo-1556740734-7f1a0297ba16?q=80&w=800&auto=format&fit=crop',
     rating: 4.9,
     itemsCount: 1240,
     fidelityScore: 98,
     joinedYear: '2018'
-  },
-  {
-    id: 'v2',
-    name: 'PrimeRentals GH',
-    category: 'Real Estate',
-    description: 'Premier residential asset management node. Verified listings across Accra\'s elite residential corridors.',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
-    bgUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop',
-    rating: 5.0,
-    itemsCount: 85,
-    fidelityScore: 100,
-    joinedYear: '2020'
-  },
-  {
-    id: 'v3',
-    name: 'AutoTrust Motors',
-    category: 'Vehicles',
-    description: 'Verified dealership specializing in luxury and commercial vehicles. Sovereign inspection guaranteed.',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
-    bgUrl: 'https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop',
-    rating: 4.8,
-    itemsCount: 320,
-    fidelityScore: 95,
-    joinedYear: '2021'
   }
 ];
 
@@ -110,111 +80,105 @@ export const LISTINGS: Listing[] = [
     price: 1250000,
     isNegotiable: false,
     category: 'Vehicles',
-    location: 'Airport Residential, Accra',
-    postedAt: '2 hours ago',
+    location: 'Airport Residential',
+    postedAt: '2h ago',
     imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v3',
     requiresMultisig: true,
-    description: 'Full option, pristine condition, duty paid. Sovereign series inspection certified.',
+    description: 'Full option, pristine condition.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: {
-      id: 's1',
-      name: 'AutoTrust Motors',
-      type: 'Verified Dealer',
-      rating: 4.9,
-      isVerified: true,
-      joinDate: '2021'
-    }
+    seller: { id: 's1', name: 'AutoTrust', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021' }
   },
   {
     id: '2',
+    title: 'MacBook Pro M3 Max 16-inch',
+    price: 45000,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'East Legon',
+    postedAt: '1h ago',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
+    vendorId: 'v1',
+    description: 'Institutional hardware.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's3', name: 'Melcom', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+  },
+  {
+    id: '3',
     title: 'Modern 4-Bedroom Villa with Pool',
     price: 3450000,
     isNegotiable: true,
     category: 'Property',
-    location: 'East Legon, Accra',
-    postedAt: '5 hours ago',
+    location: 'East Legon',
+    postedAt: '5h ago',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     vendorId: 'v2',
     requiresMultisig: true,
-    description: 'Luxury living in the heart of East Legon. Gated community with 24/7 security node.',
+    description: 'Luxury living.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: {
-      id: 's2',
-      name: 'PrimeRentals GH',
-      type: 'Business Vendor',
-      rating: 5.0,
-      isVerified: true,
-      joinDate: '2020'
-    }
-  },
-  {
-    id: '3',
-    title: 'iPhone 15 Pro Max Titanium - 256GB',
-    price: 12800,
-    isNegotiable: false,
-    category: 'Electronics',
-    location: 'Spintex Road, Accra',
-    postedAt: '1 hour ago',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
-    vendorId: 'v1',
-    description: 'Factory sealed, US spec. Immediate delivery available via secure logistics.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: {
-      id: 's3',
-      name: 'Melcom Hub',
-      type: 'Verified Dealer',
-      rating: 4.8,
-      isVerified: true,
-      joinDate: '2022'
-    }
+    seller: { id: 's2', name: 'PrimeRentals', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
   },
   {
     id: '4',
-    title: 'Land for Sale - 2 Prime Plots',
-    price: 185000,
-    isNegotiable: true,
-    category: 'Property',
-    location: 'Kasoa, Central Region',
-    postedAt: 'Yesterday',
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v4',
-    requiresMultisig: true,
-    description: 'Walled and gated, litigation free. Ready for institutional development.',
+    title: 'Samsung 65" QLED 4K Smart TV',
+    price: 12500,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Tema',
+    postedAt: '3h ago',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
+    vendorId: 'v1',
+    description: '4K OLED Hub.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: {
-      id: 's4',
-      name: 'Yaw Mensah',
-      type: 'Individual',
-      rating: 4.5,
-      isVerified: false,
-      joinDate: '2023'
-    }
+    seller: { id: 's3', name: 'Melcom', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
   },
   {
     id: '5',
-    title: 'Professional Civil Engineering Audit',
-    price: 5000,
+    title: 'Elite Heritage Sofa Suite',
+    price: 8500,
     isNegotiable: true,
-    category: 'Services',
-    location: 'Osu, Accra',
-    postedAt: '3 hours ago',
-    imageUrl: 'https://images.unsplash.com/photo-1581244277943-fe4a9c777189?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v5',
-    description: 'Structural integrity audits for commercial developments. Accredited nodes.',
+    category: 'Home & Furniture',
+    location: 'Spintex',
+    postedAt: 'Yesterday',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
+    vendorId: 'v4',
+    description: 'Luxury furniture.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: {
-      id: 's5',
-      name: 'Elite Audits GH',
-      type: 'Business Vendor',
-      rating: 4.9,
-      isVerified: true,
-      joinDate: '2019'
-    }
+    seller: { id: 's4', name: 'HomeLiving', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021' }
+  },
+  {
+    id: '6',
+    title: 'iPhone 15 Pro Titanium',
+    price: 14800,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Accra',
+    postedAt: '30m ago',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
+    vendorId: 'v1',
+    description: 'Titanium phone.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's3', name: 'Melcom', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+  },
+  {
+    id: '7',
+    title: '2018 Honda Civic Full Spec',
+    price: 85000,
+    isNegotiable: true,
+    category: 'Vehicles',
+    location: 'Kumasi',
+    postedAt: '4h ago',
+    imageUrl: 'https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v3',
+    description: 'Clean title.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's1', name: 'AutoTrust', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021' }
   }
 ];
