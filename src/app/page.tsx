@@ -200,34 +200,34 @@ export default function HomePage() {
          </div>
       </section>
 
-      {/* Weekly Velocity Section (High Kinetic Speed: 25s) - LARGER CARDS (450px) */}
-      <section className="bg-primary py-12 overflow-hidden border-y border-accent/20">
+      {/* Weekly Velocity Section (High Kinetic Speed: 25s) - MASSIVE CARDS (630px) */}
+      <section className="bg-primary py-16 overflow-hidden border-y border-accent/20">
         <div className="container mx-auto px-4 mb-8">
           <div className="flex items-center gap-4">
              <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
              <h2 className="text-2xl font-black text-white uppercase tracking-0.2em">Weekly Velocity: Best Selling Nodes</h2>
           </div>
         </div>
-        <div className="animate-marquee gap-8 py-4 [animation-duration:25s]">
+        <div className="animate-marquee gap-10 py-6 [animation-duration:25s]">
           {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
-            <div key={`${listing.id}-${idx}`} className="w-[450px] shrink-0">
-               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-6 flex gap-6 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer h-full">
-                  <div className="relative h-32 w-32 bg-white overflow-hidden shrink-0 shadow-xl border border-white/10">
+            <div key={`${listing.id}-${idx}`} className="w-[630px] shrink-0">
+               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-8 flex gap-8 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer h-full">
+                  <div className="relative h-48 w-48 bg-white overflow-hidden shrink-0 shadow-xl border border-white/10">
                      <Image src={listing.imageUrl} alt={listing.title} fill className="object-cover group-hover:scale-110 transition-transform" />
                   </div>
                   <div className="flex-1 flex flex-col justify-center overflow-hidden">
-                     <h4 className="text-xs font-black text-white uppercase tracking-tighter truncate mb-2 leading-none">{listing.title}</h4>
-                     <p className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-3">{listing.category}</p>
+                     <h4 className="text-base font-black text-white uppercase tracking-tighter truncate mb-2 leading-none">{listing.title}</h4>
+                     <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-4">{listing.category}</p>
                      <div className="flex items-center justify-between mt-auto">
-                        <span className="text-sm font-black text-accent">{formatPrice(listing.price)}</span>
-                        <div className="flex items-center gap-1.5">
-                           <Star className="h-3.5 w-3.5 fill-gold text-gold" />
-                           <span className="text-[10px] font-bold text-white/60">{listing.rating}</span>
+                        <span className="text-2xl font-black text-accent">{formatPrice(listing.price)}</span>
+                        <div className="flex items-center gap-2">
+                           <Star className="h-5 w-5 fill-gold text-gold" />
+                           <span className="text-xs font-bold text-white/60">{listing.rating}</span>
                         </div>
                      </div>
                   </div>
-                  <div className="flex items-center opacity-0 group-hover:opacity-100 transition-all pr-2">
-                     <ArrowRight className="h-6 w-6 text-accent" />
+                  <div className="flex items-center opacity-0 group-hover:opacity-100 transition-all pr-4">
+                     <ArrowRight className="h-10 w-10 text-accent" />
                   </div>
                </Card>
             </div>
