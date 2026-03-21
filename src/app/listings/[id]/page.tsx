@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -53,10 +54,10 @@ export default function ListingDetails() {
 
     setIsLocking(true);
     const steps = [
-      "Connecting to Secure Payment Layer...",
-      "Syncing with Escrow Node...",
-      "Authorizing Treasury Deposit...",
-      "Locking Funds in Escrow..."
+      "Connecting to Payment Gateway...",
+      "Securing Funds in Escrow...",
+      "Authorizing Payment Hold...",
+      "Locking Transaction..."
     ];
 
     let currentStep = 0;
@@ -76,7 +77,7 @@ export default function ListingDetails() {
     addItem(listing);
     toast({
       title: "Added to Cart",
-      description: `${listing.title} is now in your secure selection.`,
+      description: `${listing.title} is now in your secure cart.`,
     });
   };
 
@@ -86,10 +87,10 @@ export default function ListingDetails() {
 
   const ESCROW_STEPS = [
     { label: "Deposit", icon: Wallet, desc: "GHS Secured" },
-    { label: "Lock", icon: Lock, desc: "Treasury Lock" },
-    { label: "Shipping", icon: Timer, desc: "48h SLA Window" },
-    { label: "Audit", icon: ShieldCheck, desc: "Quality Sync" },
-    { label: "Disburse", icon: Key, desc: "Final Settlement" },
+    { label: "Lock", icon: Lock, desc: "Safe Escrow" },
+    { label: "Shipping", icon: Timer, desc: "48h Window" },
+    { label: "Inspection", icon: ShieldCheck, desc: "Quality Check" },
+    { label: "Payout", icon: Key, desc: "Seller Payment" },
   ];
 
   return (
@@ -127,7 +128,7 @@ export default function ListingDetails() {
                   </div>
                   <div className="bg-secondary/10 px-3 py-1 flex items-center gap-2 border border-secondary/20">
                     <Users className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{listing.salesCount} verified buyers secured this</span>
+                    <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{listing.salesCount} verified buyers</span>
                   </div>
                 </div>
               </div>
@@ -140,7 +141,7 @@ export default function ListingDetails() {
             <div className="space-y-6 py-4">
                <div className="flex items-center gap-3">
                   <ShieldCheck className="h-5 w-5 text-primary" />
-                  <h3 className="text-xs font-black uppercase tracking-[0.2em] text-secondary">Interactive Protocol Lifecycle</h3>
+                  <h3 className="text-xs font-black uppercase tracking-[0.2em] text-secondary">Purchase Journey</h3>
                </div>
                <div className="grid grid-cols-5 gap-2">
                  {ESCROW_STEPS.map((step, idx) => (
@@ -160,7 +161,7 @@ export default function ListingDetails() {
                </div>
                <div className="bg-muted/30 p-4 border border-dashed text-center">
                   <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
-                    Funds transition through 5 security layers before disbursement
+                    Funds are held securely in escrow until you confirm the order is correct.
                   </p>
                </div>
             </div>
@@ -170,21 +171,21 @@ export default function ListingDetails() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3 p-4 bg-primary/5 border border-primary/20 rounded-none">
                 <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
-                <span className="text-[10px] font-black uppercase tracking-widest">100% Protection Policy</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">Buyer Protection Policy</span>
               </div>
               <div className="flex items-center gap-3 p-4 bg-secondary/5 border border-secondary/20 rounded-none">
                 <Timer className="h-5 w-5 text-secondary shrink-0" />
-                <span className="text-[10px] font-black uppercase tracking-widest">48h Delivery SLA Guarantee</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">48h Shipping Guarantee</span>
               </div>
             </div>
 
             <div className="space-y-4">
               <h3 className="text-xl font-black text-secondary flex items-center gap-2 tracking-tight">
                 <Lock className="h-5 w-5 text-primary" />
-                The Secure Protocol
+                How Escrow Protects You
               </h3>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">
-                This transaction is protected by the **Escrow Security System**. Once you deposit funds, they are restricted in our secure treasury until you certify delivery. The vendor has 48 hours to initiate shipping. If they fail, your funds are automatically returned to your wallet.
+                This transaction is protected by our **Secure Escrow System**. Once you pay, the funds are held safely until you verify the delivery. The vendor must ship within 48 hours, or your money is automatically returned to you.
               </p>
             </div>
 
@@ -193,9 +194,9 @@ export default function ListingDetails() {
                <div className="flex flex-col sm:flex-row gap-4 md:gap-6 relative z-10">
                 <ShieldCheck className="h-10 w-10 md:h-12 md:w-12 text-primary shrink-0" />
                 <div>
-                  <h4 className="font-black text-lg md:text-xl mb-1 tracking-tight">Institutional Trust</h4>
+                  <h4 className="font-black text-lg md:text-xl mb-1 tracking-tight">Verified Safety</h4>
                   <p className="text-xs md:text-sm text-white/70 leading-relaxed font-medium">
-                    VaultCommerce acts as the neutral mediator. Every transaction is cryptographically verified by our high-fidelity node. Your money is secured at the highest level of Ghanaian retail standards.
+                    Ecommerce acts as a neutral middleman. Every transaction is verified by our security system to ensure your money is safe and the products meet the standards.
                   </p>
                 </div>
               </div>
@@ -210,11 +211,11 @@ export default function ListingDetails() {
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-black text-xl md:text-2xl flex items-center gap-2 tracking-tight">
                   <ShieldAlert className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-                  Secure Transaction
+                  Secure Checkout
                 </h3>
                 <Badge className="bg-primary text-secondary animate-pulse rounded-none text-[8px]">HIGH DEMAND</Badge>
               </div>
-              <p className="text-[9px] opacity-70 font-black uppercase tracking-[0.2em]">Active Escrow Session</p>
+              <p className="text-[9px] opacity-70 font-black uppercase tracking-[0.2em]">Escrow Protected Session</p>
             </div>
             <CardContent className="p-6 md:p-8 space-y-4 md:space-y-6">
               <div className="flex justify-between items-center py-2">
@@ -222,18 +223,18 @@ export default function ListingDetails() {
                 <span className="font-black text-burgundy text-sm md:text-base">{formatPrice(listing.price)}</span>
               </div>
               <div className="flex justify-between items-center py-2">
-                <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Escrow Fee (2%)</span>
+                <span className="text-muted-foreground font-bold uppercase text-[10px] tracking-widest">Escrow Service Fee (2%)</span>
                 <span className="font-black text-primary text-sm md:text-base">{formatPrice(listing.price * 0.02)}</span>
               </div>
               <Separator />
               <div className="flex justify-between items-center py-4 text-lg md:text-xl font-headline">
-                <span className="font-black text-secondary tracking-tight">Total Deposit</span>
+                <span className="font-black text-secondary tracking-tight">Total Payment</span>
                 <span className="font-black text-burgundy">{formatPrice(listing.price * 1.02)}</span>
               </div>
 
               <div className="flex items-center gap-2 mb-4 p-3 bg-muted/50 border border-dashed border-primary/20">
                 <Activity className="h-4 w-4 text-primary" />
-                <span className="text-[9px] font-black text-secondary uppercase tracking-tight">Verified by {listing.salesCount} happy customers</span>
+                <span className="text-[9px] font-black text-secondary uppercase tracking-tight">Verified by {listing.salesCount} customers</span>
               </div>
               
               <div className="grid gap-3">
@@ -242,7 +243,7 @@ export default function ListingDetails() {
                   size="lg" 
                   className="w-full bg-secondary text-white hover:bg-secondary/90 font-black h-14 md:h-16 rounded-none shadow-lg transition-all text-sm md:text-base"
                 >
-                  Deposit to Escrow
+                  Confirm & Pay Securely
                 </Button>
                 <Button 
                   variant="outline"
@@ -257,7 +258,7 @@ export default function ListingDetails() {
               
               {!user && (
                 <p className="text-[9px] md:text-[10px] text-center font-black text-primary uppercase tracking-widest animate-pulse">
-                  Login Required to Authorize Deposit
+                  Login Required to Purchase
                 </p>
               )}
               
@@ -275,7 +276,7 @@ export default function ListingDetails() {
               <div className="bg-muted/50 p-4 rounded-none flex items-start gap-3 border border-dashed border-primary/20">
                 <Timer className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0 mt-0.5" />
                 <p className="text-[9px] text-muted-foreground leading-tight font-black uppercase">
-                  48h Auto-Refund triggers if delivery is not initiated by the vendor.
+                  Automatic refund if the seller doesn't ship within 48 hours.
                 </p>
               </div>
             </CardContent>
@@ -285,12 +286,12 @@ export default function ListingDetails() {
 
       <AuthDialog open={showAuthDialog} onOpenChange={setShowAuthDialog} />
 
-      {/* Vault Locking Animation Modal */}
+      {/* Escrow Locking Animation Modal */}
       <Dialog open={isLocking}>
         <DialogContent className="sm:max-w-md border-none bg-secondary text-white text-center p-8 md:p-12 rounded-none">
           <DialogHeader className="sr-only">
-             <DialogTitle>Escrow Authorization</DialogTitle>
-             <DialogDescription>Securing funds in the sovereign vault node.</DialogDescription>
+             <DialogTitle>Processing Payment</DialogTitle>
+             <DialogDescription>Securing your funds in our escrow system.</DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center gap-6 md:gap-8 py-4">
             <div className="relative">
@@ -300,10 +301,10 @@ export default function ListingDetails() {
               <div className="absolute inset-0 h-24 w-24 md:h-32 md:w-32 rounded-none border-4 border-primary border-t-transparent animate-spin" />
             </div>
             <div className="space-y-4 w-full">
-              <h3 className="text-xl md:text-2xl font-black text-white tracking-tighter">Escrow Authorization</h3>
+              <h3 className="text-xl md:text-2xl font-black text-white tracking-tighter uppercase">Securing Escrow</h3>
               <div className="space-y-2">
                 <p className="text-primary/80 text-[9px] md:text-[10px] font-black uppercase tracking-widest animate-pulse">
-                  {["Connecting...", "Syncing Node...", "Syncing Treasury...", "Securing Deposit..."][lockStep]}
+                  {lockStep < 4 ? ["Connecting...", "Securing Funds...", "Authorizing...", "Finalizing..."][lockStep] : "Complete!"}
                 </p>
                 <Progress value={(lockStep + 1) * 25} className="h-2 bg-white/10" />
               </div>
@@ -316,9 +317,9 @@ export default function ListingDetails() {
       <Dialog open={showVaultSuccess}>
         <DialogContent className="sm:max-w-md rounded-none p-6 md:p-10 border-t-4 border-t-primary shadow-2xl">
           <DialogHeader>
-            <DialogTitle className="text-xl md:text-2xl font-black text-secondary tracking-tight uppercase text-center">Deposit Success!</DialogTitle>
+            <DialogTitle className="text-xl md:text-2xl font-black text-secondary tracking-tight uppercase text-center">Payment Secured!</DialogTitle>
             <DialogDescription className="text-[10px] md:text-sm font-bold text-muted-foreground uppercase tracking-widest text-center mt-2">
-              {formatPrice(listing.price * 1.02)} restricted in Escrow.
+              {formatPrice(listing.price * 1.02)} is now held safely in Escrow.
             </DialogDescription>
           </DialogHeader>
           <div className="text-center space-y-6 pt-4">
@@ -332,16 +333,16 @@ export default function ListingDetails() {
                 <span className="text-xl md:text-2xl font-black tracking-tighter">48:00:00</span>
               </div>
               <p className="text-[9px] md:text-[10px] uppercase font-black text-muted-foreground mt-2 tracking-widest">
-                Vendor Delivery Window
+                Seller's Shipping Deadline
               </p>
             </Card>
 
             <Button onClick={handleRedirectToDashboard} className="w-full h-12 md:h-14 bg-secondary text-white rounded-none font-black gap-2 text-xs uppercase tracking-widest hover:bg-secondary/90 shadow-xl">
-              Manage in Account <ArrowRight className="h-5 w-5" />
+              Track in My Account <ArrowRight className="h-5 w-5" />
             </Button>
             
             <p className="text-[9px] md:text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
-              Notification SMS sent to your verified node
+              Confirmation SMS sent to your phone
             </p>
           </div>
         </DialogContent>

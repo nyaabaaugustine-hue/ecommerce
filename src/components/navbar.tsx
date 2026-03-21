@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -30,12 +31,12 @@ import { usePathname } from 'next/navigation';
 
 const TICKER_ITEMS = [
   "IN ACCRA",
-  "SETTLEMENT VERIFIED: YAW MENSAH @ MELCOM DIGITAL",
-  "PROTOCOL UPDATE: MULTISIG ESCROW V1.2 ENGAGED",
+  "SALE CONFIRMED: YAW MENSAH @ MELCOM DIGITAL",
+  "SYSTEM UPDATE: SECURE ESCROW PROTECTION ACTIVE",
   "HIGH DEMAND: 24 USERS VIEWING SAMSUNG 65\" QLED",
-  "SECURITY ALERT: MULTISIG ESCROW PROTECTION ACTIVE",
-  "MARKET DATA: 12 NEW ORDERS SECURED IN EAST LEGON",
-  "NEW PARTNER: PRIME RENTALS GH JOINED REGISTRY"
+  "SAFETY ALERT: BUYER PROTECTION SYSTEM ACTIVE",
+  "MARKET DATA: 12 NEW ORDERS IN EAST LEGON",
+  "NEW PARTNER: PRIME RENTALS GH JOINED MARKETPLACE"
 ];
 
 const NAV_LINKS = [
@@ -46,12 +47,12 @@ const NAV_LINKS = [
 ];
 
 const THEMES: { label: string; value: PrimaryTheme }[] = [
-  { label: "Sovereign Navy", value: "sovereign" },
-  { label: "Deep Registry", value: "deep" },
-  { label: "Royal Node", value: "royal" },
+  { label: "Classic Navy", value: "sovereign" },
+  { label: "Deep Blue", value: "deep" },
+  { label: "Royal Gold", value: "royal" },
   { label: "Midnight", value: "midnight" },
-  { label: "Cobalt Hub", value: "cobalt" },
-  { label: "Silver Node", value: "cold-white" },
+  { label: "Cobalt", value: "cobalt" },
+  { label: "Silver Grey", value: "cold-white" },
   { label: "Crimson Red", value: "crimson" },
 ];
 
@@ -86,7 +87,7 @@ export function Navbar() {
     <header className="w-full flex flex-col sticky top-0 z-50 shadow-sm">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      {/* Ticker Node */}
+      {/* News Ticker */}
       <div className="bg-primary text-primary-foreground overflow-hidden py-1 border-b border-accent/10">
         <div className="animate-marquee whitespace-nowrap flex gap-12 items-center">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
@@ -98,7 +99,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Institutional Top Bar (Streamlined) */}
+      {/* Top Banner */}
       <div className="bg-secondary text-white py-1.5 px-4 md:px-10 flex items-center justify-between text-[8px] font-black uppercase tracking-widest border-b border-white/5">
          <div className="flex items-center gap-4">
             <Badge className="bg-[#f68b1e] text-secondary rounded-[var(--radius)] font-black text-[7px] uppercase tracking-widest px-2 py-0.5">CLEARANCE SALE</Badge>
@@ -111,8 +112,8 @@ export function Navbar() {
          <div className="flex items-center gap-6">
             <div className="flex items-center gap-4 opacity-70">
                <span className="hover:text-accent cursor-pointer transition-colors">Sell on Ecommerce</span>
-               <span className="hover:text-accent cursor-pointer transition-colors">VAULT PAY</span>
-               <span className="hover:text-accent cursor-pointer transition-colors">VAULT DELIVERY</span>
+               <span className="hover:text-accent cursor-pointer transition-colors">SAFE PAY</span>
+               <span className="hover:text-accent cursor-pointer transition-colors">FAST DELIVERY</span>
             </div>
             <Separator orientation="vertical" className="h-3 bg-white/10" />
             <div className="flex items-center gap-4">
@@ -123,7 +124,7 @@ export function Navbar() {
          </div>
       </div>
 
-      {/* Main Bar (Streamlined) */}
+      {/* Main Navigation */}
       <div className="bg-white border-b py-3 shadow-md">
         <div className="container mx-auto px-4 flex items-center justify-between gap-6">
           <div className="flex items-center gap-8">
@@ -135,14 +136,14 @@ export function Navbar() {
                 <span className="font-headline font-black text-xl text-secondary tracking-tighter uppercase leading-none">
                   {content.settings.siteName}
                 </span>
-                <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em]">Sovereign Escrow</span>
+                <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em]">Secure Escrow</span>
               </div>
             </Link>
 
             <div className="hidden lg:flex items-center gap-2 border-l pl-6 border-dashed">
                <div className="flex flex-col text-left leading-none">
-                  <span className="text-[7px] text-muted-foreground uppercase font-black tracking-widest">Global Inventory</span>
-                  <span className="text-xs font-black text-secondary uppercase tracking-tight">Browse Registry</span>
+                  <span className="text-[7px] text-muted-foreground uppercase font-black tracking-widest">Global Marketplace</span>
+                  <span className="text-xs font-black text-secondary uppercase tracking-tight">Browse All</span>
                </div>
                <MegaMenu />
             </div>
@@ -192,7 +193,7 @@ export function Navbar() {
                    <DropdownMenuTrigger asChild>
                      <div className="flex items-center gap-3 cursor-pointer group">
                         <div className="text-right flex flex-col">
-                           <span className="text-[7px] text-muted-foreground uppercase font-black tracking-widest">Logged In As</span>
+                           <span className="text-[7px] text-muted-foreground uppercase font-black tracking-widest">Welcome</span>
                            <span className="text-xs font-black text-secondary uppercase tracking-tight group-hover:text-primary transition-colors">{user.name}</span>
                         </div>
                         <User className="h-5 w-5 text-secondary group-hover:text-primary transition-colors" />
@@ -200,9 +201,9 @@ export function Navbar() {
                    </DropdownMenuTrigger>
                    <DropdownMenuContent align="end" className="rounded-[var(--radius)] w-48 border-t-2 border-primary">
                      <DropdownMenuItem asChild>
-                        <Link href="/dashboard" className="text-[9px] font-black uppercase tracking-widest cursor-pointer">Protocol Dashboard</Link>
+                        <Link href="/dashboard" className="text-[9px] font-black uppercase tracking-widest cursor-pointer">My Dashboard</Link>
                      </DropdownMenuItem>
-                     <DropdownMenuItem onClick={logout} className="text-[9px] font-black uppercase tracking-widest cursor-pointer text-burgundy">Authorize Logout</DropdownMenuItem>
+                     <DropdownMenuItem onClick={logout} className="text-[9px] font-black uppercase tracking-widest cursor-pointer text-burgundy">Logout</DropdownMenuItem>
                    </DropdownMenuContent>
                  </DropdownMenu>
                ) : (

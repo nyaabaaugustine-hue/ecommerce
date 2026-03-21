@@ -54,7 +54,7 @@ const chartData = [
 
 const chartConfig = {
   volume: {
-    label: "Registry Volume",
+    label: "Sales Volume",
     color: "hsl(var(--primary))",
   },
 } satisfies ChartConfig;
@@ -95,10 +95,10 @@ export default function Dashboard() {
 
   const stats = {
     HIGH_ADMIN: [
-      { label: 'Platform GMV', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross Sales Volume' },
-      { label: 'Pending Payouts', val: '5', icon: Key, color: 'text-primary', sub: 'Awaiting Authorization' },
-      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-primary', sub: 'Trusted Institutional Vendors' },
-      { label: 'Escrow Balance', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Total Secure Liquidity' },
+      { label: 'Platform Sales', val: 'GH₵4.2M', icon: BarChart3, color: 'text-primary', sub: 'Gross Sales Volume' },
+      { label: 'Pending Payouts', val: '5', icon: Key, color: 'text-primary', sub: 'Awaiting Approval' },
+      { label: 'Verified Partners', val: '124', icon: Users, color: 'text-primary', sub: 'Trusted Vendors' },
+      { label: 'Escrow Balance', val: 'GH₵1.8M', icon: Lock, color: 'text-primary', sub: 'Total Secure Funds' },
     ],
     VENDOR_ADMIN: [
       { label: 'Total Revenue', val: 'GH₵186,750', icon: TrendingUp, color: 'text-primary', sub: 'Settled to date' },
@@ -126,7 +126,7 @@ export default function Dashboard() {
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">
-              {currentRole === 'HIGH_ADMIN' ? 'Platform Command' : 'Account Console'}
+              {currentRole === 'HIGH_ADMIN' ? 'Admin Dashboard' : 'Account Center'}
             </h1>
             <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-[var(--radius)] px-3">
               {currentRole.replace('_', ' ')}
@@ -150,7 +150,7 @@ export default function Dashboard() {
                className="bg-secondary text-white hover:bg-secondary/90 rounded-[var(--radius)] px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
              >
                <Terminal className="h-4 w-4 text-primary" />
-               Admin Console
+               Management Console
              </Button>
           )}
           <Button className="bg-secondary hover:bg-secondary/90 rounded-[var(--radius)] px-6 font-bold h-11 text-white text-[10px] uppercase tracking-widest" onClick={logout}>
@@ -182,9 +182,9 @@ export default function Dashboard() {
         <CardHeader>
           <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
             <LineChart className="h-4 w-4 text-primary" />
-            Institutional Velocity Registry
+            Transaction Analysis
           </CardTitle>
-          <CardDescription className="text-[10px] font-bold uppercase mt-1">Real-time liquidity and transaction flow analysis.</CardDescription>
+          <CardDescription className="text-[10px] font-bold uppercase mt-1">Real-time marketplace activity and volume.</CardDescription>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ChartContainer config={chartConfig} className="h-full w-full">
@@ -201,7 +201,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-lg font-black uppercase tracking-widest text-secondary">Active Protocol Nodes</h2>
+          <h2 className="text-lg font-black uppercase tracking-widest text-secondary">Active Orders</h2>
           {activeTransactions.map((tx) => (
             <Card key={tx.id} className="border shadow-sm rounded-[var(--radius)] group">
               <div className="p-6 md:p-8">
@@ -229,8 +229,8 @@ export default function Dashboard() {
                 
                 <div className="space-y-3 mb-8">
                   <div className="flex justify-between text-[9px] font-black uppercase tracking-widest text-muted-foreground">
-                    <span>Fulfillment Cycle</span>
-                    <span className="text-secondary">{tx.progress}% Synchronized</span>
+                    <span>Fulfillment Progress</span>
+                    <span className="text-secondary">{tx.progress}% Complete</span>
                   </div>
                   <Progress value={tx.progress} className="h-2 rounded-none" />
                 </div>
@@ -238,14 +238,14 @@ export default function Dashboard() {
                 <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-dashed gap-4">
                   <div className="flex items-center gap-3">
                      <Activity className="h-4 w-4 text-primary" />
-                     <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Mediation Node Active</p>
+                     <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">Mediation Service Active</p>
                   </div>
                   
                   <Button 
                     onClick={() => router.push(`/orders/${tx.id}`)}
                     className="w-full sm:w-auto bg-secondary text-white hover:bg-primary hover:text-secondary font-black rounded-[var(--radius)] px-8 h-12 text-[10px] uppercase tracking-[0.2em] shadow-xl"
                   >
-                    Manage Lifecycle Node
+                    View Order Details
                   </Button>
                 </div>
               </div>
@@ -258,8 +258,8 @@ export default function Dashboard() {
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-secondary rounded-[var(--radius)]"><FileText className="h-5 w-5 text-primary" /></div>
               <div>
-                <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Fidelity Reports</h5>
-                <p className="text-[10px] text-muted-foreground uppercase">Export transaction audit trails.</p>
+                <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Reports & Audits</h5>
+                <p className="text-[10px] text-muted-foreground uppercase">Download transaction history.</p>
               </div>
             </div>
             <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Download PDF</Button>
@@ -268,18 +268,18 @@ export default function Dashboard() {
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-secondary rounded-[var(--radius)]"><MessageSquare className="h-5 w-5 text-primary" /></div>
               <div>
-                <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Protocol Support</h5>
-                <p className="text-[10px] text-muted-foreground uppercase">Connect with mediation node.</p>
+                <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Customer Support</h5>
+                <p className="text-[10px] text-muted-foreground uppercase">Connect with our support team.</p>
               </div>
             </div>
-            <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Open Session</Button>
+            <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Open Ticket</Button>
           </Card>
           <Card className="rounded-[var(--radius)] border shadow-sm p-6 hover:border-primary transition-all">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-3 bg-secondary rounded-[var(--radius)]"><ArrowRightLeft className="h-5 w-5 text-primary" /></div>
               <div>
-                <h5 className="font-black text-secondary text-xs uppercase tracking-widest">GHS Settlements</h5>
-                <p className="text-[10px] text-muted-foreground uppercase">Manage bank node connections.</p>
+                <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Bank Details</h5>
+                <p className="text-[10px] text-muted-foreground uppercase">Manage payout methods.</p>
               </div>
             </div>
             <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Manage Accounts</Button>

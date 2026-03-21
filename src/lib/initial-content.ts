@@ -6,27 +6,27 @@ export const INITIAL_CONTENT = {
       slug: "home",
       sections: {
         hero: {
-          title: "ACCRA'S SOVEREIGN TRADE GATEWAY",
-          description: "Secure your funds in our escrow system and shop with total confidence across Ghana. Institutionally powered by multisig protocols.",
-          badge: "Verified Escrow Protocol",
-          primaryCta: "Enter Marketplace",
+          title: "ACCRA'S PREMIER SECURE MARKETPLACE",
+          description: "Shop with total confidence across Ghana using our secure escrow system. Your funds are protected until you confirm delivery.",
+          badge: "Secure Escrow Protection",
+          primaryCta: "Start Shopping",
           imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg"
         },
         highlights: {
           title: "Marketplace Highlights",
-          subtitle: "Premium assets protected via Sovereign Escrow Protocols.",
-          badge: "Live Institutional Feed"
+          subtitle: "Premium products protected by our Secure Escrow System.",
+          badge: "Live Activity Feed"
         },
         trust: {
-          title: "The Sovereign Vendor Registry",
-          subtitle: "Our Trusted Partners",
-          description: "Join Ghana's most trusted institutional marketplace. Benefit from multisig security and GHS settlement speed."
+          title: "Our Verified Partners",
+          subtitle: "Trusted Local Vendors",
+          description: "Join Ghana's most trusted marketplace. Benefit from multi-signature security and fast GHS payments."
         },
         cta: {
-          title: "SECURE YOUR NEXT ASSET",
-          subtitle: "Escrow Protection Protocol Active for all GHS Transactions.",
-          primaryButton: "Open Institutional Vault",
-          secondaryButton: "Learn Protocol Workflow"
+          title: "SECURE YOUR NEXT PURCHASE",
+          subtitle: "Escrow Protection is active for all GHS transactions.",
+          primaryButton: "Browse Marketplace",
+          secondaryButton: "How Escrow Works"
         }
       }
     },
@@ -35,13 +35,13 @@ export const INITIAL_CONTENT = {
       slug: "about",
       sections: {
         mission: {
-          title: "OUR SOVEREIGN MISSION",
-          description: "To establish the gold standard for commerce in West Africa through cryptographic trust and institutional escrow excellence.",
+          title: "OUR MISSION",
+          description: "To establish the gold standard for commerce in West Africa through transparency, safety, and escrow excellence.",
           imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg"
         },
         values: {
-          title: "INSTITUTIONAL VALUES",
-          description: "Integrity, Transparency, and Security are the pillars of the Ecommerce registry.",
+          title: "CORE VALUES",
+          description: "Integrity, Transparency, and Security are the pillars of the Ecommerce marketplace.",
           imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg"
         }
       }
@@ -52,7 +52,7 @@ export const INITIAL_CONTENT = {
       sections: {
         support: {
           title: "GET IN TOUCH",
-          description: "Our support node is active 24/7 to assist with registry inquiries and escrow mediation.",
+          description: "Our support team is active 24/7 to assist with inquiries and escrow mediation.",
           imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg"
         }
       }

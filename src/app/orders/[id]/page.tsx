@@ -29,11 +29,11 @@ import { cn } from '@/lib/utils';
 import { useCurrency } from '@/components/providers';
 
 const ESCROW_STEPS = [
-  { id: 1, label: "GHS Secured", desc: "Funds in Treasury", icon: Wallet, status: 'complete' },
-  { id: 2, label: "Vault Locked", desc: "Sovereign Restriction", icon: Lock, status: 'complete' },
-  { id: 3, label: "Dispatch Sync", desc: "Vendor Verification", icon: Truck, status: 'active' },
-  { id: 4, label: "Fidelity Audit", desc: "Customer Certification", icon: ShieldCheck, status: 'pending' },
-  { id: 5, label: "Final Settlement", desc: "Vendor Disbursement", icon: Key, status: 'pending' },
+  { id: 1, label: "Payment Received", desc: "Funds in Escrow", icon: Wallet, status: 'complete' },
+  { id: 2, label: "Safe Hold", desc: "Securely Locked", icon: Lock, status: 'complete' },
+  { id: 3, label: "Shipping", desc: "In Transit", icon: Truck, status: 'active' },
+  { id: 4, label: "Quality Check", desc: "Customer Inspection", icon: ShieldCheck, status: 'pending' },
+  { id: 5, label: "Final Payment", desc: "Seller Payout", icon: Key, status: 'pending' },
 ];
 
 export default function OrderLifecycle() {
@@ -57,8 +57,8 @@ export default function OrderLifecycle() {
       setBiometricScanning(false);
       setChecklist(prev => ({ ...prev, biometric: true }));
       toast({
-        title: "Biometric Identity Synced",
-        description: "Node authorization successful.",
+        title: "Identity Verified",
+        description: "Authentication successful.",
       });
     }, 2000);
   };
@@ -69,15 +69,15 @@ export default function OrderLifecycle() {
     if (!isComplete) {
       toast({
         variant: "destructive",
-        title: "Audit Incomplete",
-        description: "All fidelity checks and biometric sync must be authorized.",
+        title: "Inspection Incomplete",
+        description: "Please complete all checks and verify your identity.",
       });
       return;
     }
 
     toast({
-      title: "GHS Settlement Authorized",
-      description: "Funds are transitioning to the vendor's node.",
+      title: "Payment Authorized",
+      description: "Funds are being released to the seller.",
     });
     router.push('/dashboard');
   };
@@ -85,7 +85,7 @@ export default function OrderLifecycle() {
   return (
     <div className="container mx-auto px-4 py-8 md:py-16 max-w-6xl">
       <Button variant="ghost" onClick={() => router.back()} className="mb-8 rounded-none gap-2 font-black text-[10px] uppercase tracking-widest border px-6">
-        <ArrowLeft className="h-4 w-4" /> Exit to Registry
+        <ArrowLeft className="h-4 w-4" /> Back to Account
       </Button>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -94,16 +94,16 @@ export default function OrderLifecycle() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                  <Badge className="bg-primary text-secondary rounded-none font-black text-[10px] px-3">{id}</Badge>
-                 <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Protocol Node: ACCRA-01</span>
+                 <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Order Center: ACCRA-01</span>
               </div>
-              <h1 className="text-3xl md:text-5xl font-black text-secondary uppercase tracking-tighter">Order Lifecycle</h1>
+              <h1 className="text-3xl md:text-5xl font-black text-secondary uppercase tracking-tighter">Order Progress</h1>
             </div>
             <div className="bg-white border p-6 rounded-none shadow-sm flex items-center gap-4">
               <div className="h-12 w-12 bg-primary/5 flex items-center justify-center text-primary">
                 <Timer className="h-6 w-6" />
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">SLA Window Remaining</p>
+                <p className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">Estimated Delivery</p>
                 <p className="text-2xl font-black text-burgundy tracking-tighter">32:14:05</p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function OrderLifecycle() {
             <CardHeader className="bg-muted/30 border-b">
                <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
                  <Activity className="h-4 w-4 text-primary" />
-                 Sovereign Escrow Timeline
+                 Escrow Journey
                </CardTitle>
             </CardHeader>
             <CardContent className="p-8 md:p-12">
@@ -152,14 +152,14 @@ export default function OrderLifecycle() {
             </CardContent>
           </Card>
 
-          {/* Fidelity Audit Node */}
+          {/* Inspection Hub */}
           <Card className="rounded-none border-t-4 border-t-primary shadow-2xl bg-white">
             <CardHeader className="p-8">
                <div className="flex items-center gap-4 mb-2">
                   <ShieldCheck className="h-8 w-8 text-primary" />
                   <div>
-                    <CardTitle className="text-2xl font-black text-secondary uppercase tracking-tighter">Institutional Fidelity Audit</CardTitle>
-                    <CardDescription className="text-[10px] font-black uppercase tracking-widest mt-1">Verify asset integrity to authorize GHS disbursement from treasury.</CardDescription>
+                    <CardTitle className="text-2xl font-black text-secondary uppercase tracking-tighter">Quality Inspection</CardTitle>
+                    <CardDescription className="text-[10px] font-black uppercase tracking-widest mt-1">Verify your item to release the payment to the seller.</CardDescription>
                   </div>
                </div>
             </CardHeader>
@@ -167,9 +167,9 @@ export default function OrderLifecycle() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                  <div className="space-y-4">
                     {[
-                      { id: 'condition', label: 'Item Integrity Verified', desc: 'No physical damage or defects detected.' },
-                      { id: 'matches', label: 'Description Synchronized', desc: 'Product matches all registry specifications.' },
-                      { id: 'functionality', label: 'Operational Standards Met', desc: 'Performance node fully functional.' },
+                      { id: 'condition', label: 'Item Condition Verified', desc: 'No physical damage or defects.' },
+                      { id: 'matches', label: 'Correct Item Received', desc: 'Product matches all specifications.' },
+                      { id: 'functionality', label: 'Item is Functional', desc: 'Everything works as expected.' },
                     ].map((item) => (
                       <div key={item.id} className="flex items-start gap-4 p-4 bg-muted/20 border border-transparent hover:border-primary/20 transition-all cursor-pointer" onClick={() => setChecklist(prev => ({...prev, [item.id as keyof typeof prev] : !prev[item.id as keyof typeof prev]}))}>
                         <Checkbox id={item.id} checked={checklist[item.id as keyof typeof checklist]} className="mt-1" />
@@ -184,8 +184,8 @@ export default function OrderLifecycle() {
                  <div className="flex flex-col justify-center gap-6 p-8 border-2 border-dashed bg-primary/5 text-center">
                     <div className="space-y-3">
                        <Fingerprint className={cn("h-16 w-16 mx-auto transition-all", checklist.biometric ? "text-green-500 scale-110" : "text-primary opacity-40")} />
-                       <h4 className="text-xs font-black uppercase tracking-widest">Biometric Identity Authorization</h4>
-                       <p className="text-[9px] text-muted-foreground uppercase font-medium leading-relaxed">Securely authorize this node session via biometric fingerprint or face ID protocol.</p>
+                       <h4 className="text-xs font-black uppercase tracking-widest">Confirm Your Identity</h4>
+                       <p className="text-[9px] text-muted-foreground uppercase font-medium leading-relaxed">Securely authorize this payment via fingerprint or face ID.</p>
                     </div>
                     <Button 
                       className={cn(
@@ -195,7 +195,7 @@ export default function OrderLifecycle() {
                       onClick={handleBiometricScan}
                       disabled={biometricScanning}
                     >
-                      {biometricScanning ? "Syncing Identity..." : checklist.biometric ? "Identity Synchronized" : "Authorize Session"}
+                      {biometricScanning ? "Verifying..." : checklist.biometric ? "Identity Verified" : "Verify Now"}
                     </Button>
                  </div>
               </div>
@@ -203,13 +203,13 @@ export default function OrderLifecycle() {
               <div className="pt-8 border-t border-dashed flex flex-col sm:flex-row justify-between items-center gap-6">
                  <div className="flex items-center gap-3">
                     <ShieldAlert className="h-5 w-5 text-burgundy" />
-                    <p className="text-[9px] font-black uppercase text-secondary max-w-xs">Funds are cryptographically restricted in the vault until this audit is certified.</p>
+                    <p className="text-[9px] font-black uppercase text-secondary max-w-xs">Funds are safely held until you authorize the release.</p>
                  </div>
                  <Button 
                    onClick={handleFinalSettlement}
                    className="w-full sm:w-auto bg-primary text-secondary hover:bg-white hover:text-secondary border-2 border-primary font-black rounded-none h-16 px-16 text-xs uppercase tracking-[0.3em] shadow-2xl"
                  >
-                   AUTHORIZE SETTLEMENT
+                   AUTHORIZE PAYMENT
                  </Button>
               </div>
             </CardContent>
@@ -219,46 +219,46 @@ export default function OrderLifecycle() {
         <div className="lg:col-span-4 space-y-8">
            <Card className="rounded-none border shadow-xl bg-secondary text-white overflow-hidden">
               <div className="bg-primary p-6">
-                 <h3 className="font-black uppercase tracking-widest text-secondary text-sm">Treasury Node Details</h3>
+                 <h3 className="font-black uppercase tracking-widest text-secondary text-sm">Escrow Details</h3>
               </div>
               <CardContent className="p-8 space-y-6">
                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Gross Value</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Item Price</span>
                     <span className="text-lg font-black text-milky">{formatPrice(8450)}</span>
                  </div>
                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Escrow Fee (2%)</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Service Fee (2%)</span>
                     <span className="text-sm font-bold text-primary">{formatPrice(169)}</span>
                  </div>
                  <div className="h-px bg-white/10 my-2" />
                  <div className="flex justify-between items-center">
-                    <span className="text-xs font-black uppercase tracking-widest text-accent">Vault Restricted</span>
+                    <span className="text-xs font-black uppercase tracking-widest text-accent">Total Held Safely</span>
                     <span className="text-2xl font-black text-milky tracking-tighter">{formatPrice(8619)}</span>
                  </div>
               </CardContent>
               <div className="bg-white/5 p-6 border-t border-white/5">
                  <div className="flex items-center gap-3">
                     <Activity className="h-4 w-4 text-primary animate-pulse" />
-                    <p className="text-[9px] font-black uppercase tracking-widest opacity-60">Real-time GHS Liquidity Locked</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest opacity-60">Real-time Safety Status: ACTIVE</p>
                  </div>
               </div>
            </Card>
 
            <Card className="rounded-none border shadow-sm p-8 space-y-6 bg-white">
-              <h4 className="font-black text-xs uppercase tracking-[0.2em] border-b pb-4">Institutional Partners</h4>
+              <h4 className="font-black text-xs uppercase tracking-[0.2em] border-b pb-4">Order Partners</h4>
               <div className="space-y-6">
                  <div className="flex gap-4 items-center">
                     <div className="h-10 w-10 bg-muted flex items-center justify-center font-black">M</div>
                     <div>
                        <p className="text-[10px] font-black uppercase text-secondary">Melcom Digital Hub</p>
-                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Authorized Vendor Node</p>
+                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Verified Seller</p>
                     </div>
                  </div>
                  <div className="flex gap-4 items-center">
-                    <div className="h-10 w-10 bg-primary/10 flex items-center justify-center font-black text-primary">SC</div>
+                    <div className="h-10 w-10 bg-primary/10 flex items-center justify-center font-black text-primary">SL</div>
                     <div>
-                       <p className="text-[10px] font-black uppercase text-secondary">Sovereign Logistics</p>
-                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Certified Fulfillment</p>
+                       <p className="text-[10px] font-black uppercase text-secondary">Secure Logistics</p>
+                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Delivery Partner</p>
                     </div>
                  </div>
               </div>
@@ -267,10 +267,10 @@ export default function OrderLifecycle() {
            <Card className="rounded-none border shadow-sm p-8 bg-muted/20 border-dashed">
               <div className="flex items-center gap-3 mb-4">
                  <Info className="h-4 w-4 text-primary" />
-                 <h5 className="text-[10px] font-black uppercase tracking-widest">Protocol Support</h5>
+                 <h5 className="text-[10px] font-black uppercase tracking-widest">Support Center</h5>
               </div>
-              <p className="text-[9px] font-medium text-muted-foreground leading-relaxed uppercase mb-4">In case of a delivery dispute, authorize a Mediation Node session to freeze liquidity and initiate arbitration.</p>
-              <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 border-primary/20">Open Dispute Registry</Button>
+              <p className="text-[9px] font-medium text-muted-foreground leading-relaxed uppercase mb-4">If you have any issues with your order, you can open a dispute to freeze the payment and request help.</p>
+              <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 border-primary/20">Help / Dispute</Button>
            </Card>
         </div>
       </div>
