@@ -1,3 +1,4 @@
+
 export type SellerType = 'Individual' | 'Verified Dealer' | 'Business Vendor';
 export type ListingCategory = 'Vehicles' | 'Property' | 'Electronics' | 'Home & Furniture' | 'Jobs' | 'Services' | 'Fashion' | 'Agriculture' | 'Other';
 export type ListingStatus = 'Active' | 'Sold' | 'Under Review';
