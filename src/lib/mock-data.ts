@@ -19,6 +19,7 @@ export interface SellerIdentity {
   rating: number;
   isVerified: boolean;
   joinDate: string;
+  avatar?: string;
   phone?: string;
   whatsapp?: string;
 }
@@ -30,6 +31,7 @@ export interface Listing {
   oldPrice?: number;
   isNegotiable: boolean;
   category: ListingCategory;
+  subcategory?: string;
   location: string;
   postedAt: string;
   postedTimestamp: number;
@@ -43,6 +45,7 @@ export interface Listing {
   isFreeShipping?: boolean;
   requiresMultisig?: boolean;
   isEmphasis?: boolean;
+  specs?: string[];
 }
 
 export const MOCK_USERS: User[] = [
@@ -53,6 +56,98 @@ export const MOCK_USERS: User[] = [
 ];
 
 export const LISTINGS: Listing[] = [
+  // HIGH FIDELITY LAPTOPS (IMAGE STYLE CLONE)
+  {
+    id: 'lp1',
+    title: 'HP Spectre x360 Luxury Node',
+    price: 8500,
+    isNegotiable: true,
+    category: 'Electronics',
+    subcategory: 'Laptops',
+    location: 'Ashanti Region',
+    postedAt: 'Today, 10:15',
+    postedTimestamp: Date.now() - 100000,
+    imageUrl: 'https://images.unsplash.com/photo-1544006659-f0b21f04cb1d?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Ultra-slim professional laptop with OLED display.',
+    status: 'Active',
+    isEscrowProtected: true,
+    specs: ['Core i7', '16GB RAM', '512GB SSD'],
+    seller: { id: 's30', name: 'Kwame Tech', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2022', avatar: 'https://i.pravatar.cc/150?u=lp1', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'lp2',
+    title: 'MacBook Air M2 Midnight',
+    price: 9200,
+    isNegotiable: false,
+    category: 'Electronics',
+    subcategory: 'Laptops',
+    location: 'Greater Accra Region',
+    postedAt: 'Today, 09:45',
+    postedTimestamp: Date.now() - 200000,
+    imageUrl: 'https://images.unsplash.com/photo-1611186871348-b1ec6ceea2bd?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Powerful and portable M2 chip MacBook.',
+    status: 'Active',
+    isEscrowProtected: true,
+    specs: ['M2 Chip', '8-Core GPU', 'Liquid Retina'],
+    seller: { id: 's31', name: 'Abena Laptops', type: 'Business Vendor', rating: 4.8, isVerified: true, joinDate: '2023', avatar: 'https://i.pravatar.cc/150?u=lp2', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'lp3',
+    title: 'Dell XPS 15 InfinityEdge',
+    price: 12500,
+    isNegotiable: true,
+    category: 'Electronics',
+    subcategory: 'Laptops',
+    location: 'Central Region',
+    postedAt: 'Yesterday, 18:20',
+    postedTimestamp: Date.now() - 86400000,
+    imageUrl: 'https://images.unsplash.com/photo-1593642632823-8f785bf67e45?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'High-performance workstation node.',
+    status: 'Active',
+    isEscrowProtected: true,
+    specs: ['Core i9', '32GB RAM', 'RTX 4060'],
+    seller: { id: 's32', name: 'Yaw Enterprise', type: 'Verified Dealer', rating: 5.0, isVerified: true, joinDate: '2021', avatar: 'https://i.pravatar.cc/150?u=lp3', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'lp4',
+    title: 'Lenovo ThinkPad X1 Carbon',
+    price: 7800,
+    isNegotiable: true,
+    category: 'Electronics',
+    subcategory: 'Laptops',
+    location: 'Ashanti Region',
+    postedAt: '2h ago',
+    postedTimestamp: Date.now() - 7200000,
+    imageUrl: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'The gold standard for business productivity.',
+    status: 'Active',
+    isEscrowProtected: true,
+    specs: ['Core i5', '16GB RAM', 'Carbon Fiber'],
+    seller: { id: 's33', name: 'Efya Gadgets', type: 'Verified Dealer', rating: 4.7, isVerified: true, joinDate: '2022', avatar: 'https://i.pravatar.cc/150?u=lp4', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'lp5',
+    title: 'Asus ROG Zephyrus G14',
+    price: 11000,
+    isNegotiable: false,
+    category: 'Electronics',
+    subcategory: 'Laptops',
+    location: 'Greater Accra Region',
+    postedAt: 'Just Now',
+    postedTimestamp: Date.now() - 60000,
+    imageUrl: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Compact gaming beast with Anime Matrix.',
+    status: 'Active',
+    isEscrowProtected: true,
+    specs: ['Ryzen 9', '16GB RAM', 'RTX 4050'],
+    seller: { id: 's34', name: 'Gaming Hub GH', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', avatar: 'https://i.pravatar.cc/150?u=lp5', phone: '0541988383', whatsapp: '233541988383' }
+  },
+
   // SPONSORED ADS
   {
     id: 'sp1',

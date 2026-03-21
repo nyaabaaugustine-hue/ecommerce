@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ListingCard } from '@/components/listing-card';
+import { HighFidelityListingCard } from '@/components/high-fidelity-listing-card';
 import { CategoryBar } from '@/components/category-bar';
 import { HeroCarousel } from '@/components/hero-carousel';
 import { BenefitsSection } from '@/components/benefits-section';
@@ -13,22 +14,25 @@ import { SpotlightCategories } from '@/components/spotlight-categories';
 import { TipsSection } from '@/components/tips-section';
 import { FooterTabs } from '@/components/footer-tabs';
 import { LISTINGS } from '@/lib/mock-data';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 /**
  * @fileOverview VaultCommerce Home Command Node
- * High-density architecture mirroring the OLX marketplace flow.
- * All sections aligned to max-w-7xl (1280px) grid with ShadCN animations.
- * Force clone: 5 items per row to fit the project alignment.
+ * High-density architecture mirroring the elite marketplace flow.
+ * Integrated new High Fidelity Laptops section following the Jiji-style visual signature.
  */
 export function HomePage() {
+  const highFidelityLaptops = useMemo(() => {
+    return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 5);
+  }, []);
+
   const sponsoredAds = useMemo(() => {
     return LISTINGS.filter(l => l.id.startsWith('sp')).slice(0, 5);
   }, []);
 
   const priceDropItems = useMemo(() => {
-    return LISTINGS.filter(l => l.oldPrice && l.category === 'Electronics').slice(0, 5);
+    return LISTINGS.filter(l => l.oldPrice && l.category === 'Electronics' && !l.id.startsWith('lp')).slice(0, 5);
   }, []);
 
   const cellPhones = useMemo(() => {
@@ -79,6 +83,31 @@ export function HomePage() {
       <div className="max-w-7xl mx-auto w-full px-4 mb-12 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <HeroCarousel />
       </div>
+
+      {/* NEW: HIGH FIDELITY LAPTOPS CLONE (JIJI STYLE) */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
+        <div className="flex items-center justify-between mb-8">
+          <div className="space-y-1">
+            <h2 className="text-3xl font-black text-secondary tracking-tighter uppercase leading-none flex items-center gap-3">
+              <Sparkles className="h-6 w-6 text-primary" /> Most Popular Laptops
+            </h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Sovereign Computing Registry • GHS-ACCRA</p>
+          </div>
+          <Link href="/listings?category=Electronics" className="text-xs font-black text-primary hover:underline uppercase tracking-widest">
+            View All Laptops
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {highFidelityLaptops.map((item, idx) => (
+            <div key={item.id} className={cn("animate-in fade-in slide-in-from-bottom-4 duration-500", `delay-${idx * 100}`)}>
+              <HighFidelityListingCard {...item} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
       {/* CLONE ROW: Sponsored Ads Registry */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
