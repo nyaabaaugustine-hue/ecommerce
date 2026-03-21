@@ -29,6 +29,33 @@ export const INITIAL_CONTENT = {
           secondaryButton: "Learn Protocol Workflow"
         }
       }
+    },
+    about: {
+      title: "About Us",
+      slug: "about",
+      sections: {
+        mission: {
+          title: "OUR SOVEREIGN MISSION",
+          description: "To establish the gold standard for commerce in West Africa through cryptographic trust and institutional escrow excellence.",
+          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg"
+        },
+        values: {
+          title: "INSTITUTIONAL VALUES",
+          description: "Integrity, Transparency, and Security are the pillars of the VaultCommerce registry.",
+          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg"
+        }
+      }
+    },
+    contact: {
+      title: "Contact Us",
+      slug: "contact",
+      sections: {
+        support: {
+          title: "GET IN TOUCH",
+          description: "Our support node is active 24/7 to assist with registry inquiries and escrow mediation.",
+          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg"
+        }
+      }
     }
   },
   settings: {

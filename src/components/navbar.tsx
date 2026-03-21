@@ -27,6 +27,7 @@ import { MegaMenu } from '@/components/mega-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { LISTINGS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 const TICKER_ITEMS = [
   "LIVE ACTIVITY: GH₵8,450.00 SECURED IN ACCRA VAULT",
@@ -38,12 +39,20 @@ const TICKER_ITEMS = [
   "SETTLEMENT UPDATE: 99.8% TRANSACTION SUCCESS RATE"
 ];
 
+const NAV_LINKS = [
+  { name: 'Home', href: '/' },
+  { name: 'About Us', href: '/about' },
+  { name: 'Our Vendors', href: '/vendors' },
+  { name: 'Contact Us', href: '/contact' }
+];
+
 export function Navbar() {
   const { user, logout } = useAuth();
   const { items } = useCart();
   const { currency, setCurrency } = useCurrency();
   const { theme, setTheme } = useTheme();
   const { content } = useContent();
+  const pathname = usePathname();
   const [showAuth, setShowAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -147,8 +156,18 @@ export function Navbar() {
                   <SheetTitle className="text-2xl font-black text-secondary uppercase tracking-tighter">Sovereign Registry</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col py-6">
-                  <Link href="/listings" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Global Marketplace</Link>
-                  <Link href="/vendors" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Vendor Directory</Link>
+                  {NAV_LINKS.map((link) => (
+                    <Link 
+                      key={link.name} 
+                      href={link.href} 
+                      className={cn(
+                        "px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest",
+                        pathname === link.href && "bg-primary/5 text-primary"
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
                   <Link href="/dashboard" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Account Dashboard</Link>
                   <Link href="/listings/create" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Publish Listing</Link>
                   <div className="p-8 space-y-6">
@@ -180,25 +199,40 @@ export function Navbar() {
             </Link>
           </div>
 
-          <div className="hidden lg:flex items-center h-full gap-4">
+          {/* Desktop Navigation Node */}
+          <div className="hidden lg:flex items-center h-full gap-2">
             <MegaMenu />
-            <Separator orientation="vertical" className="h-10 mx-2" />
+            <Separator orientation="vertical" className="h-8 mx-2" />
+            <nav className="flex items-center gap-6">
+              {NAV_LINKS.map((link) => (
+                <Link 
+                  key={link.name} 
+                  href={link.href}
+                  className={cn(
+                    "text-[10px] font-black uppercase tracking-[0.2em] text-secondary hover:text-primary transition-colors py-2 border-b-2 border-transparent",
+                    pathname === link.href && "border-primary text-primary"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
           </div>
 
-          <div className="flex-1 max-w-xl hidden md:flex items-center relative" ref={searchRef}>
+          <div className="flex-1 max-w-sm hidden xl:flex items-center relative" ref={searchRef}>
             <div className="relative w-full flex shadow-lg">
               <input 
                 type="text" 
-                placeholder="Search global registry assets..." 
+                placeholder="Search registry..." 
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                   setShowSuggestions(e.target.value.length > 0);
                 }}
-                className="w-full border-2 border-border border-r-0 rounded-none py-3.5 pl-8 pr-4 text-xs md:text-sm font-bold focus:border-accent focus:outline-none transition-all bg-background"
+                className="w-full border-2 border-border border-r-0 rounded-none py-3 pl-6 pr-4 text-xs font-bold focus:border-accent focus:outline-none transition-all bg-background"
               />
-              <Button className="rounded-none h-auto px-8 md:px-10 bg-primary hover:bg-accent hover:text-secondary transition-all">
-                <Search className="h-5 w-5 md:h-6 md:w-6" />
+              <Button className="rounded-none h-auto px-6 bg-primary hover:bg-accent hover:text-secondary transition-all">
+                <Search className="h-4 w-4" />
               </Button>
             </div>
           </div>
