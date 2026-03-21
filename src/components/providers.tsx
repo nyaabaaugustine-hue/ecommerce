@@ -16,7 +16,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Master Default: cold-white (Clinical Light)
+  // MASTER DEFAULT: cold-white (Clinical Light)
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
@@ -35,15 +35,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    const stored = localStorage.getItem('vault_theme') as PrimaryTheme;
-    // On fresh load, we prioritize 'cold-white' but allow stored preference if it exists.
-    // To satisfy the "KEEP WHITE ON FRESH LOAD" requirement, we could also force it:
-    // setTheme('cold-white'); 
-    if (stored) {
-      setTheme(stored);
-    } else {
-      setTheme('cold-white'); 
-    }
+    // FORCE WHITE ON FRESH LOAD: Ignore localStorage preference to satisfy "KEEP WHITE ON FRESH LOAD"
+    setTheme('cold-white');
   }, []);
 
   return (

@@ -84,7 +84,7 @@ export function HomePage() {
 
       <SpotlightCategories />
 
-      {/* CATEGORY REGISTRIES */}
+      {/* CATEGORY REGISTRIES - 8 SECTORS SATURATED WITH 5 ITEMS EACH */}
       {eliteComputing.length > 0 && (
         <section className="w-full py-12 bg-muted/5 overflow-hidden border-y border-primary/10">
           <div className="max-w-7xl mx-auto px-4 mb-8 flex items-end justify-between">
