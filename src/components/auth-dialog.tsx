@@ -22,10 +22,10 @@ export function AuthDialog({ open, onOpenChange }: { open: boolean, onOpenChange
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md rounded-none border-t-4 border-t-primary shadow-2xl">
+      <DialogContent className="sm:max-w-md rounded-[var(--radius)] border-t-4 border-t-primary shadow-2xl">
         <DialogHeader>
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-8 w-8 bg-secondary flex items-center justify-center">
+            <div className="h-8 w-8 bg-secondary flex items-center justify-center rounded-[var(--radius)]">
                <ShieldCheck className="h-4 w-4 text-primary" />
             </div>
             <DialogTitle className="text-xl md:text-2xl font-black text-secondary uppercase tracking-tight">Access Registry</DialogTitle>
@@ -38,11 +38,11 @@ export function AuthDialog({ open, onOpenChange }: { open: boolean, onOpenChange
           {MOCK_USERS.map((user) => (
             <button
               key={user.id}
-              className="flex flex-col items-stretch p-4 gap-3 hover:border-primary transition-all text-left bg-muted/20 border border-border/50 group rounded-none outline-none focus:ring-2 focus:ring-primary/20"
+              className="flex flex-col items-stretch p-4 gap-3 hover:border-primary transition-all text-left bg-muted/20 border border-border/50 group rounded-[var(--radius)] outline-none focus:ring-2 focus:ring-primary/20"
               onClick={() => handleLogin(user.email)}
             >
               <div className="flex items-center gap-4">
-                <div className="bg-secondary p-2 group-hover:bg-primary transition-colors">
+                <div className="bg-secondary p-2 group-hover:bg-primary transition-colors rounded-[var(--radius)]">
                   {user.role === 'HIGH_ADMIN' && <Shield className="h-5 w-5 text-primary group-hover:text-secondary" />}
                   {user.role === 'VENDOR_ADMIN' && <Store className="h-5 w-5 text-primary group-hover:text-secondary" />}
                   {user.role === 'CUSTOMER' && <UserIcon className="h-5 w-5 text-primary group-hover:text-secondary" />}
@@ -58,12 +58,12 @@ export function AuthDialog({ open, onOpenChange }: { open: boolean, onOpenChange
                     <Key className="h-3 w-3 text-primary" />
                     <span className="text-[9px] font-black text-secondary/60 tracking-widest">{user.email}</span>
                  </div>
-                 <Badge className="bg-primary/10 text-primary border-none text-[7px] font-black px-2 py-0.5 rounded-none uppercase">Authorized Node</Badge>
+                 <Badge className="bg-primary/10 text-primary border-none text-[7px] font-black px-2 py-0.5 rounded-[var(--radius)] uppercase">Authorized Node</Badge>
               </div>
             </button>
           ))}
         </div>
-        <div className="bg-muted p-4 border border-dashed text-center">
+        <div className="bg-muted p-4 border border-dashed text-center rounded-[var(--radius)]">
            <p className="text-[8px] font-black text-muted-foreground uppercase tracking-[0.2em]">Sovereign Vault Protocol v1.2.4 Certified Access</p>
         </div>
       </DialogContent>

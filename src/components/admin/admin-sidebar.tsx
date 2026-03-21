@@ -23,7 +23,8 @@ import {
   FileText,
   AlertTriangle,
   Monitor,
-  FileCode
+  FileCode,
+  Home
 } from "lucide-react";
 
 import {
@@ -191,9 +192,17 @@ export function AdminSidebar() {
            <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton className="hover:bg-primary/10 text-white/70 hover:text-white" asChild>
+                  <Link href="/" className="flex items-center gap-3">
+                    <Home className="h-4 w-4 text-primary" />
+                    <span className="text-[10px] font-black uppercase tracking-widest">Return to Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton className="hover:bg-primary/10 text-white/70 hover:text-white" asChild>
                   <Link href="/dashboard" className="flex items-center gap-3">
                     <ExternalLink className="h-4 w-4 text-primary" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Exit to Registry</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest">Exit to Dashboard</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

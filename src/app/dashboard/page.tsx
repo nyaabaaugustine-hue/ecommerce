@@ -28,7 +28,9 @@ import {
   Key, 
   FileText, 
   LineChart, 
-  Terminal
+  Terminal,
+  ShoppingBag,
+  Home
 } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { VENDORS } from '@/lib/mock-data';
@@ -126,23 +128,32 @@ export default function Dashboard() {
             <h1 className="text-2xl md:text-4xl font-black text-secondary tracking-tighter uppercase">
               {currentRole === 'HIGH_ADMIN' ? 'Platform Command' : 'Account Console'}
             </h1>
-            <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-none px-3">
+            <Badge className="bg-primary text-secondary border-none font-bold uppercase text-[9px] tracking-widest rounded-[var(--radius)] px-3">
               {currentRole.replace('_', ' ')}
             </Badge>
           </div>
         </div>
         
         <div className="grid grid-cols-2 sm:flex items-center gap-3 w-full lg:w-auto">
+          <Button 
+            variant="outline"
+            onClick={() => router.push('/')}
+            className="border-2 border-primary text-secondary hover:bg-primary hover:text-white rounded-[var(--radius)] px-6 font-black h-11 gap-2 text-[10px] uppercase tracking-widest"
+          >
+            <Home className="h-4 w-4" />
+            Go to Home
+          </Button>
+          
           {currentRole === 'HIGH_ADMIN' && (
              <Button 
                onClick={() => router.push('/admin')}
-               className="bg-secondary text-white hover:bg-secondary/90 rounded-none px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
+               className="bg-secondary text-white hover:bg-secondary/90 rounded-[var(--radius)] px-6 font-black h-11 gap-2 shadow-lg text-[10px] uppercase tracking-widest"
              >
                <Terminal className="h-4 w-4 text-primary" />
-               Launch Admin Console
+               Admin Console
              </Button>
           )}
-          <Button className="bg-secondary hover:bg-secondary/90 rounded-none px-6 font-bold h-11 text-white text-[10px] uppercase tracking-widest" onClick={logout}>
+          <Button className="bg-secondary hover:bg-secondary/90 rounded-[var(--radius)] px-6 font-bold h-11 text-white text-[10px] uppercase tracking-widest" onClick={logout}>
             <LogOut className="h-4 w-4 mr-2" />
             Logout
           </Button>
@@ -151,10 +162,10 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
         {stats[currentRole].map((stat, i) => (
-          <Card key={i} className="border-none shadow-sm hover:shadow-md transition-all rounded-none bg-white border-l-4 border-l-primary">
+          <Card key={i} className="border-none shadow-sm hover:shadow-md transition-all rounded-[var(--radius)] bg-white border-l-4 border-l-primary">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-muted rounded-none">
+                <div className="p-3 bg-muted rounded-[var(--radius)]">
                   <stat.icon className={`h-5 w-5 ${stat.color}`} />
                 </div>
                 <Activity className="h-3 w-3 text-green-500" />
@@ -167,7 +178,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <Card className="mb-12 rounded-none border shadow-sm">
+      <Card className="mb-12 rounded-[var(--radius)] border shadow-sm">
         <CardHeader>
           <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
             <LineChart className="h-4 w-4 text-primary" />
@@ -192,11 +203,11 @@ export default function Dashboard() {
         <div className="lg:col-span-2 space-y-6">
           <h2 className="text-lg font-black uppercase tracking-widest text-secondary">Active Protocol Nodes</h2>
           {activeTransactions.map((tx) => (
-            <Card key={tx.id} className="border shadow-sm rounded-none group">
+            <Card key={tx.id} className="border shadow-sm rounded-[var(--radius)] group">
               <div className="p-6 md:p-8">
                 <div className="flex flex-col sm:flex-row justify-between gap-6 mb-8">
                   <div className="flex gap-6">
-                    <div className="relative h-16 w-16 bg-white border shrink-0">
+                    <div className="relative h-16 w-16 bg-white border shrink-0 rounded-[var(--radius)] overflow-hidden">
                       <Avatar className="h-full w-full rounded-none">
                         <AvatarImage src={tx.vendorLogo} alt={tx.item} className="object-contain p-2" />
                         <AvatarFallback className="bg-muted font-bold">{tx.item.charAt(0)}</AvatarFallback>
@@ -232,7 +243,7 @@ export default function Dashboard() {
                   
                   <Button 
                     onClick={() => router.push(`/orders/${tx.id}`)}
-                    className="w-full sm:w-auto bg-secondary text-white hover:bg-primary hover:text-secondary font-black rounded-none px-8 h-12 text-[10px] uppercase tracking-[0.2em] shadow-xl"
+                    className="w-full sm:w-auto bg-secondary text-white hover:bg-primary hover:text-secondary font-black rounded-[var(--radius)] px-8 h-12 text-[10px] uppercase tracking-[0.2em] shadow-xl"
                   >
                     Manage Lifecycle Node
                   </Button>
@@ -243,35 +254,35 @@ export default function Dashboard() {
         </div>
 
         <div className="space-y-8">
-          <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+          <Card className="rounded-[var(--radius)] border shadow-sm p-6 hover:border-primary transition-all">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-secondary rounded-none"><FileText className="h-5 w-5 text-primary" /></div>
+              <div className="p-3 bg-secondary rounded-[var(--radius)]"><FileText className="h-5 w-5 text-primary" /></div>
               <div>
                 <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Fidelity Reports</h5>
                 <p className="text-[10px] text-muted-foreground uppercase">Export transaction audit trails.</p>
               </div>
             </div>
-            <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Download PDF</Button>
+            <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Download PDF</Button>
           </Card>
-          <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+          <Card className="rounded-[var(--radius)] border shadow-sm p-6 hover:border-primary transition-all">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-secondary rounded-none"><MessageSquare className="h-5 w-5 text-primary" /></div>
+              <div className="p-3 bg-secondary rounded-[var(--radius)]"><MessageSquare className="h-5 w-5 text-primary" /></div>
               <div>
                 <h5 className="font-black text-secondary text-xs uppercase tracking-widest">Protocol Support</h5>
                 <p className="text-[10px] text-muted-foreground uppercase">Connect with mediation node.</p>
               </div>
             </div>
-            <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Open Session</Button>
+            <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Open Session</Button>
           </Card>
-          <Card className="rounded-none border shadow-sm p-6 hover:border-primary transition-all">
+          <Card className="rounded-[var(--radius)] border shadow-sm p-6 hover:border-primary transition-all">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-secondary rounded-none"><ArrowRightLeft className="h-5 w-5 text-primary" /></div>
+              <div className="p-3 bg-secondary rounded-[var(--radius)]"><ArrowRightLeft className="h-5 w-5 text-primary" /></div>
               <div>
                 <h5 className="font-black text-secondary text-xs uppercase tracking-widest">GHS Settlements</h5>
                 <p className="text-[10px] text-muted-foreground uppercase">Manage bank node connections.</p>
               </div>
             </div>
-            <Button variant="outline" className="w-full rounded-none font-bold text-[9px] uppercase tracking-widest">Manage Accounts</Button>
+            <Button variant="outline" className="w-full rounded-[var(--radius)] font-bold text-[9px] uppercase tracking-widest">Manage Accounts</Button>
           </Card>
         </div>
       </div>
