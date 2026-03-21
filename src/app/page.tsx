@@ -110,7 +110,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right Node: Utility Widgets */}
+          {/* Right Node: Utility Widgets Stacked */}
           <div className="lg:col-span-3 flex flex-col gap-4">
             <div className="flex-1 bg-white border p-6 flex flex-col justify-center gap-6 shadow-sm group hover:border-primary transition-all cursor-pointer">
                <div className="flex items-center gap-4">
@@ -152,12 +152,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NODE 2: Reverted Sovereign Hero Registry (Full Width) */}
+      {/* NODE 2: Full Width Sovereign Hero (Restored as 2nd Section) */}
       <section className="container mx-auto px-4 py-8">
         <div className="relative h-[400px] md:h-[600px] w-full rounded-none overflow-hidden group shadow-2xl border-4 border-primary/10">
            <Image 
              src={hero.imageUrl} 
-             alt="Hero" 
+             alt="Full Hero" 
              fill 
              className="object-cover group-hover:scale-105 transition-transform duration-700" 
              priority 
@@ -200,7 +200,7 @@ export default function HomePage() {
          </div>
       </section>
 
-      {/* Weekly Velocity Section (High Kinetic Speed) */}
+      {/* Weekly Velocity Section (High Kinetic Speed: 25s) */}
       <section className="bg-primary py-12 overflow-hidden border-y border-accent/20">
         <div className="container mx-auto px-4 mb-8">
           <div className="flex items-center gap-4">
