@@ -1,9 +1,7 @@
-
 "use client";
 
 import { useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ListingCard } from '@/components/listing-card';
 import { HighFidelityListingCard } from '@/components/high-fidelity-listing-card';
 import { CategoryBar } from '@/components/category-bar';
@@ -15,14 +13,11 @@ import { TipsSection } from '@/components/tips-section';
 import { FooterTabs } from '@/components/footer-tabs';
 import { NewsletterPopup } from '@/components/newsletter-popup';
 import { LISTINGS } from '@/lib/mock-data';
-import { ChevronRight, Sparkles, ArrowRight, Mail, ShieldCheck, Briefcase, ShoppingBag, Shirt, Sprout, Dumbbell, Smartphone, Refrigerator, Home, Key } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 
 /**
  * @fileOverview Marketplace Home Hub
  * Saturated grid architecture with exactly 5 listings per row.
- * Professional, simple descriptive headings.
+ * Refined descriptive headings using the requested "perfect" typography node.
  */
 export function HomePage() {
   const eliteComputing = useMemo(() => {
@@ -57,10 +52,6 @@ export function HomePage() {
     return LISTINGS.filter(l => l.category === 'Property').slice(0, 5);
   }, []);
 
-  const climateControl = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
-  }, []);
-
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20 overflow-x-hidden">
       <CategoryBar />
@@ -69,7 +60,7 @@ export function HomePage() {
         <HeroCarousel />
       </div>
 
-      {/* FORCE REDUCED HUB (35% REDUCTION) */}
+      {/* COMPACT HUB: LAPTOPS */}
       <section className="w-full py-6 bg-muted/5 overflow-hidden border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-4 mb-4 flex items-end justify-between">
           <div className="space-y-0.5">
@@ -98,7 +89,7 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most searched for mobiles)
             </h2>
             <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified iPhone & Smartphone Node</p>
@@ -113,10 +104,12 @@ export function HomePage() {
       </section>
 
       {/* PREMIUM AUTOS */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group bg-muted/5">
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic">(Most searched for vehicles)</h2>
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
+              (Most searched for vehicles)
+            </h2>
             <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified High-Value Vehicle Registry</p>
           </div>
           <Link href="/listings?category=Vehicles" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
@@ -132,10 +125,10 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most searched for agriculture)
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Heavy Machinery & Farming Assets</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Heavy Machinery & Farming Assets</p>
           </div>
           <Link href="/listings?category=Agriculture" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
@@ -148,10 +141,10 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most popular fashion)
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Apparel & High-End Timepieces</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Luxury Apparel & High-End Timepieces</p>
           </div>
           <Link href="/listings?category=Fashion" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
@@ -166,10 +159,10 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most popular services)
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Corporate Services & Technical Audits</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Corporate Services & Technical Audits</p>
           </div>
           <Link href="/listings?category=Services" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
@@ -182,10 +175,10 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most searched for sports)
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Elite Fitness & Sporting Hardware</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Elite Fitness & Sporting Hardware</p>
           </div>
           <Link href="/listings?category=Sports" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
@@ -194,30 +187,14 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* CLIMATE CONTROL & APPLIANCES */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="mb-8 flex justify-between items-end">
-          <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              (Most popular appliances)
-            </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Premium AC & Smart Appliances</p>
-          </div>
-          <Link href="/listings?category=Electronics" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {climateControl.map((item) => <ListingCard key={item.id} {...item} />)}
-        </div>
-      </section>
-
       {/* ELITE ESTATES */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5 border-b">
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 border-b">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter italic leading-none">
                (Most popular property)
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Residential & Commercial Real Estate</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Luxury Residential & Commercial Real Estate</p>
           </div>
           <Link href="/listings?category=Property" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View all</Link>
         </div>
