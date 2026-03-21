@@ -45,54 +45,54 @@ import { Separator } from "@/components/ui/separator";
 
 const NAV_MAIN = [
   {
-    title: "Command Center",
+    title: "Admin Home",
     url: "/admin",
     icon: LayoutDashboard,
     isActive: true,
   },
   {
-    title: "Content Registry",
+    title: "Content",
     url: "/admin/pages",
     icon: Monitor,
     items: [
-      { title: "Manage Home", url: "/admin/pages/home" },
-      { title: "Page Directory", url: "/admin/pages" },
-      { title: "Global Settings", url: "/admin/settings" },
+      { title: "Edit Homepage", url: "/admin/pages/home" },
+      { title: "All Pages", url: "/admin/pages" },
+      { title: "Settings", url: "/admin/settings" },
     ],
   },
   {
-    title: "Registry Assets",
+    title: "Listings",
     url: "/admin/listings",
     icon: ShoppingBag,
     items: [
-      { title: "All Listings", url: "/admin/listings" },
-      { title: "Add New Asset", url: "/listings/create" },
+      { title: "All Ads", url: "/admin/listings" },
+      { title: "Create Ad", url: "/listings/create" },
     ],
   },
   {
-    title: "Institutional Nodes",
+    title: "Sellers",
     url: "/admin/vendors",
     icon: Store,
     items: [
-      { title: "Verified Vendors", url: "/admin/vendors" },
-      { title: "Fidelity Scores", url: "/admin/vendors" },
+      { title: "Verified Sellers", url: "/admin/vendors" },
+      { title: "Performance", url: "/admin/vendors" },
     ],
   },
   {
-    title: "Global Identity",
+    title: "Users",
     url: "/admin/users",
     icon: Users,
     items: [
       { title: "All Accounts", url: "/admin/users" },
-      { title: "Access Groups", url: "/admin/users" },
+      { title: "Access Rights", url: "/admin/users" },
     ],
   },
 ];
 
 const NAV_SECONDARY = [
-  { title: "Audit Trails", url: "/admin", icon: History },
-  { title: "Security Logs", url: "/admin", icon: Lock },
-  { title: "Dispute Center", url: "/admin", icon: AlertTriangle },
+  { title: "Activity Log", url: "/admin", icon: History },
+  { title: "Security", url: "/admin", icon: Lock },
+  { title: "Disputes", url: "/admin", icon: AlertTriangle },
 ];
 
 export function AdminSidebar() {
@@ -106,7 +106,7 @@ export function AdminSidebar() {
           <div className="relative h-10 w-10 overflow-hidden rounded-[var(--radius)] border border-primary/30 shrink-0">
             <Image 
               src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057903/ai-removebg-preview_ikywpe.png" 
-              alt="Ecommerce" 
+              alt="Logo" 
               fill 
               className="object-cover"
             />
@@ -114,9 +114,9 @@ export function AdminSidebar() {
           {state !== "collapsed" && (
             <div className="flex flex-col overflow-hidden">
                <span className="font-black text-sm uppercase tracking-tighter text-white truncate">
-                  <span className="text-primary animate-v-glow">E</span>com<span className="text-primary">Admin</span>
+                  Admin <span className="text-primary">Panel</span>
                </span>
-               <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em] truncate">Sovereign Backend</span>
+               <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em] truncate">Marketplace Backend</span>
             </div>
           )}
         </Link>
@@ -158,7 +158,7 @@ export function AdminSidebar() {
         </SidebarMenu>
 
         <div className="mt-8 px-4 py-2">
-           <p className="text-[7px] font-black text-primary uppercase tracking-[0.3em] mb-4">Internal Protocols</p>
+           <p className="text-[7px] font-black text-primary uppercase tracking-[0.3em] mb-4">Monitoring</p>
            <SidebarMenu>
               {NAV_SECONDARY.map((item) => (
                 <SidebarMenuItem key={item.title}>
@@ -184,9 +184,9 @@ export function AdminSidebar() {
               <div className="bg-white/5 p-3 border border-white/10 rounded-none mb-4">
                  <div className="flex items-center gap-2 mb-2">
                     <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[8px] font-black uppercase text-white/50 tracking-widest">Protocol Node Online</span>
+                    <span className="text-[8px] font-black uppercase text-white/50 tracking-widest">Admin Online</span>
                  </div>
-                 <p className="text-[7px] font-bold text-white/30 uppercase leading-relaxed">High Admin authorized for registry modification and fund release.</p>
+                 <p className="text-[7px] font-bold text-white/30 uppercase leading-relaxed">High-level access enabled for marketplace management.</p>
               </div>
            )}
            <SidebarMenu>
@@ -194,7 +194,7 @@ export function AdminSidebar() {
                 <SidebarMenuButton className="hover:bg-primary/10 text-white/70 hover:text-white" asChild>
                   <Link href="/" className="flex items-center gap-3">
                     <Home className="h-4 w-4 text-primary" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Return to Home</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest">Back to Site</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -202,15 +202,15 @@ export function AdminSidebar() {
                 <SidebarMenuButton className="hover:bg-primary/10 text-white/70 hover:text-white" asChild>
                   <Link href="/dashboard" className="flex items-center gap-3">
                     <ExternalLink className="h-4 w-4 text-primary" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">Exit to Dashboard</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest">My Dashboard</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton className="text-burgundy hover:bg-burgundy/10 hover:text-burgundy" asChild>
+                <SidebarMenuButton className="text-red-500 hover:bg-red-500/10 hover:text-red-500" asChild>
                    <Link href="/" className="flex items-center gap-3">
                      <LogOut className="h-4 w-4" />
-                     <span className="text-[10px] font-black uppercase tracking-widest">Terminate Console</span>
+                     <span className="text-[10px] font-black uppercase tracking-widest">Exit Panel</span>
                    </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

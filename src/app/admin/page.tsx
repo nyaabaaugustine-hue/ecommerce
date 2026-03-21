@@ -36,6 +36,7 @@ import {
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { VENDORS, LISTINGS } from "@/lib/mock-data";
 import { useCurrency } from "@/components/providers";
+import { cn } from "@/lib/utils";
 
 const chartData = [
   { month: "Jan", volume: 450000 },
@@ -48,7 +49,7 @@ const chartData = [
 
 const chartConfig = {
   volume: {
-    label: "Registry Liquidity",
+    label: "Total Sales",
     color: "hsl(var(--primary))",
   },
 } satisfies ChartConfig;
@@ -56,13 +57,13 @@ const chartConfig = {
 export default function AdminDashboard() {
   const { formatPrice } = useCurrency();
   const stats = [
-    { label: "Total Gross Registry", val: "GH₵4.2M", icon: TrendingUp, change: "+12.4%", status: "up" },
-    { label: "Active Escrow Locks", val: "142", icon: Lock, change: "+5", status: "up" },
-    { label: "Institutional Vendors", val: VENDORS.length.toString(), icon: ShieldCheck, change: "Stable", status: "neutral" },
-    { label: "Global Identity Nodes", val: "1,248", icon: Users, change: "+24", status: "up" },
+    { label: "Total Sales", val: "GH₵4.2M", icon: TrendingUp, change: "+12.4%", status: "up" },
+    { label: "Active Orders", val: "142", icon: Lock, change: "+5", status: "up" },
+    { label: "Partner Sellers", val: VENDORS.length.toString(), icon: ShieldCheck, change: "Stable", status: "neutral" },
+    { label: "Total Users", val: "1,248", icon: Users, change: "+24", status: "up" },
   ];
 
-  const multisigQueue = [
+  const approvalQueue = [
     { id: 'TX-9912', title: 'Industrial Generator Set', price: 125000, vendor: 'Melcom Digital Hub', date: '2h ago' },
     { id: 'TX-9915', title: 'Plot - Airport Residential', price: 450000, vendor: 'PrimeEstate GH', date: '5h ago' },
   ];
@@ -71,19 +72,19 @@ export default function AdminDashboard() {
     <div className="space-y-10 max-w-7xl mx-auto pb-20 bg-background/50">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="space-y-1">
-          <h1 className="text-4xl font-black text-foreground uppercase tracking-tighter">Command Center</h1>
-          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Sovereign Platform Oversight Node • GHS-ACCRA</p>
+          <h1 className="text-4xl font-black text-foreground uppercase tracking-tighter">Admin Dashboard</h1>
+          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">ACCRA HUB • MASTER CONTROL</p>
         </div>
         <div className="flex items-center gap-4">
-           <Badge className="bg-primary text-primary-foreground rounded-none font-black text-[10px] px-5 h-10 uppercase tracking-widest shadow-2xl">High Admin Authorized</Badge>
+           <Badge className="bg-primary text-primary-foreground rounded-none font-black text-[10px] px-5 h-10 uppercase tracking-widest shadow-2xl">ADMIN AUTHORIZED</Badge>
            <div className="bg-card border-2 border-primary/20 px-4 h-10 rounded-none flex items-center gap-3 shadow-xl">
               <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[10px] font-black text-foreground uppercase tracking-widest">Network Online</span>
+              <span className="text-[10px] font-black text-foreground uppercase tracking-widest">System Online</span>
            </div>
         </div>
       </div>
 
-      {/* High-Value Multisig Authorization Queue */}
+      {/* High-Value Approvals */}
       <Card className="rounded-none border-t-4 border-t-destructive shadow-2xl bg-card overflow-hidden">
         <CardHeader className="bg-destructive/5 border-b p-8">
           <div className="flex items-center gap-6">
@@ -91,14 +92,14 @@ export default function AdminDashboard() {
                 <Key className="h-8 w-8" />
              </div>
              <div>
-               <CardTitle className="text-2xl font-black text-foreground uppercase tracking-tighter">Multisig Payout Queue</CardTitle>
-               <CardDescription className="text-[10px] font-black uppercase tracking-[0.2em] mt-1 text-muted-foreground">Threshold Alert: Secondary authorization required for settlements above GH₵50,000.</CardDescription>
+               <CardTitle className="text-2xl font-black text-foreground uppercase tracking-tighter">High-Value Approvals</CardTitle>
+               <CardDescription className="text-[10px] font-black uppercase tracking-[0.2em] mt-1 text-muted-foreground">Orders over GH₵50,000 require admin approval.</CardDescription>
              </div>
           </div>
         </CardHeader>
         <CardContent className="p-0">
           <div className="divide-y divide-dashed border-b border-dashed">
-            {multisigQueue.map((item) => (
+            {approvalQueue.map((item) => (
               <div key={item.id} className="flex flex-col md:flex-row items-center justify-between p-8 hover:bg-muted/20 transition-colors gap-8">
                 <div className="flex gap-8 items-center flex-1">
                    <div className="h-16 w-16 bg-muted relative rounded-none shrink-0 border-2 border-destructive/20 flex items-center justify-center">
@@ -106,20 +107,20 @@ export default function AdminDashboard() {
                    </div>
                    <div className="space-y-1">
                       <div className="flex items-center gap-3">
-                        <p className="text-[10px] font-black text-destructive uppercase tracking-widest">HIGH-VALUE AUTHORIZATION</p>
+                        <p className="text-[10px] font-black text-destructive uppercase tracking-widest">PENDING APPROVAL</p>
                         <span className="text-[9px] text-muted-foreground font-black uppercase">{item.date}</span>
                       </div>
                       <h4 className="font-black text-foreground uppercase text-xl leading-none tracking-tight">{item.title}</h4>
-                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Vendor: {item.vendor} • ID: {item.id}</p>
+                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Seller: {item.vendor} • ID: {item.id}</p>
                    </div>
                 </div>
                 <div className="text-right flex items-center gap-10 w-full md:w-auto">
                    <div>
-                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-1">Locked Liquidity</p>
+                      <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-1">Locked Funds</p>
                       <p className="text-3xl font-black text-destructive tracking-tighter">{formatPrice(item.price)}</p>
                    </div>
                    <Button className="h-16 px-12 bg-foreground text-background font-black uppercase text-[11px] tracking-[0.3em] rounded-none shadow-2xl gap-4 hover:bg-primary hover:text-primary-foreground transition-all">
-                      RELEASE FUNDS <Zap className="h-4 w-4" />
+                      RELEASE PAYMENT <Zap className="h-4 w-4" />
                    </Button>
                 </div>
               </div>
@@ -128,7 +129,7 @@ export default function AdminDashboard() {
         </CardContent>
       </Card>
 
-      {/* Main CMS & Global Settings Access */}
+      {/* Main CMS & Settings */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <Card className="rounded-none border-4 border-primary shadow-2xl bg-foreground text-background overflow-hidden relative group">
           <div className="absolute top-0 right-0 p-12 pointer-events-none">
@@ -136,16 +137,16 @@ export default function AdminDashboard() {
           </div>
           <CardContent className="p-12 space-y-10 relative z-10">
              <div className="space-y-4">
-                <Badge className="bg-primary text-primary-foreground rounded-none font-black text-[9px] uppercase tracking-[0.4em] px-4">Registry CMS</Badge>
-                <h2 className="text-4xl font-black uppercase tracking-tighter">Content Manager</h2>
+                <Badge className="bg-primary text-primary-foreground rounded-none font-black text-[9px] uppercase tracking-[0.4em] px-4">Content Management</Badge>
+                <h2 className="text-4xl font-black uppercase tracking-tighter">Website Editor</h2>
                 <p className="text-xs font-medium text-background/60 uppercase tracking-widest max-w-md leading-relaxed">
-                  Modify institutional registry nodes, including headlines, primary assets, and gateway imagery.
+                  Edit homepage content, banners, and featured categories.
                 </p>
              </div>
              <Link href="/admin/pages/home" className="block">
                <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-background hover:text-foreground font-black rounded-none h-16 px-14 uppercase text-[12px] tracking-[0.3em] gap-4 shadow-2xl">
                   <Edit3 className="h-5 w-5" />
-                  Enter CMS Hub
+                  Edit Website
                </Button>
              </Link>
           </CardContent>
@@ -154,16 +155,16 @@ export default function AdminDashboard() {
         <Card className="rounded-none border-4 border-primary/20 shadow-2xl bg-card overflow-hidden relative group">
           <CardContent className="p-12 space-y-10 relative z-10">
              <div className="space-y-4">
-                <Badge variant="outline" className="border-primary/40 text-primary rounded-none font-black text-[9px] uppercase tracking-[0.4em] px-4 bg-primary/5">Global Protocol</Badge>
-                <h2 className="text-4xl font-black uppercase tracking-tighter text-foreground">Global Settings</h2>
+                <Badge variant="outline" className="border-primary/40 text-primary rounded-none font-black text-[9px] uppercase tracking-[0.4em] px-4 bg-primary/5">Global Settings</Badge>
+                <h2 className="text-4xl font-black uppercase tracking-tighter text-foreground">App Settings</h2>
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest max-w-md leading-relaxed">
-                  Configure escrow fee structures, SLA windows, and institutional support metadata across the regional network.
+                  Manage fees, delivery windows, and seller support contact details.
                 </p>
              </div>
              <Link href="/admin/settings" className="block">
                <Button variant="outline" className="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-black rounded-none h-16 px-14 uppercase text-[12px] tracking-[0.3em] gap-4 shadow-2xl">
                   <SettingsIcon className="h-5 w-5" />
-                  Registry Settings
+                  General Settings
                </Button>
              </Link>
           </CardContent>
@@ -195,9 +196,9 @@ export default function AdminDashboard() {
           <CardHeader className="p-8 border-b border-dashed">
             <CardTitle className="text-base font-black uppercase tracking-widest flex items-center gap-3 text-foreground">
               <BarChart3 className="h-5 w-5 text-primary" />
-              Sovereign Registry Liquidity
+              Total Sales Volume
             </CardTitle>
-            <CardDescription className="text-[10px] font-bold uppercase text-muted-foreground">Aggregated GHS flow through the secure escrow node.</CardDescription>
+            <CardDescription className="text-[10px] font-bold uppercase text-muted-foreground">Total funds flowing through the marketplace.</CardDescription>
           </CardHeader>
           <CardContent className="p-8 h-[400px]">
             <ChartContainer config={chartConfig} className="h-full w-full">
@@ -240,14 +241,14 @@ export default function AdminDashboard() {
             <CardHeader className="p-8 border-b border-dashed">
               <CardTitle className="text-[11px] font-black uppercase tracking-[0.3em] flex items-center gap-3 text-destructive">
                 <ShieldAlert className="h-5 w-5" />
-                Protocol Alerts
+                System Alerts
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6 space-y-4">
               {[
-                { type: 'SLA BREACH', text: 'Order 8815 @ 48h deadline', status: 'destructive' },
-                { type: 'MULTISIG PENDING', text: 'GH₵450k authorized by Node 1', status: 'warning' },
-                { type: 'NODE VERIFIED', text: 'PrimeRentals Node Authorized', status: 'success' },
+                { type: 'DELIVERY LATE', text: 'Order 8815 past 48h', status: 'destructive' },
+                { type: 'PENDING APPROVAL', text: 'GH₵450k order waiting', status: 'warning' },
+                { type: 'NEW SELLER', text: 'PrimeRentals joined today', status: 'success' },
               ].map((alert, i) => (
                 <div key={i} className="flex gap-5 p-5 bg-muted/20 border-l-4 border-l-border hover:border-l-primary transition-all cursor-pointer group">
                   <div className={cn(
@@ -270,20 +271,20 @@ export default function AdminDashboard() {
             <CardHeader className="p-8 bg-primary/5 border-b border-dashed">
               <CardTitle className="text-[11px] font-black uppercase tracking-[0.3em] flex items-center gap-3 text-primary">
                 <Database className="h-5 w-5" />
-                System Registries
+                Quick Links
               </CardTitle>
             </CardHeader>
             <CardContent className="p-4 space-y-2">
                <Link href="/admin/pages" className="flex items-center justify-between p-5 bg-muted/20 hover:bg-primary/10 transition-all group">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">CMS Node Hub</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">Edit Pages</span>
                   <ChevronRight className="h-4 w-4 text-primary opacity-40 group-hover:opacity-100 transition-opacity" />
                </Link>
                <Link href="/admin/listings" className="flex items-center justify-between p-5 bg-muted/20 hover:bg-primary/10 transition-all group">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">Asset Inventory</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">All Listings</span>
                   <ChevronRight className="h-4 w-4 text-primary opacity-40 group-hover:opacity-100 transition-opacity" />
                </Link>
                <Link href="/admin/vendors" className="flex items-center justify-between p-5 bg-muted/20 hover:bg-primary/10 transition-all group">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">Vendor Nodes</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover:text-primary transition-colors">Partner Sellers</span>
                   <ChevronRight className="h-4 w-4 text-primary opacity-40 group-hover:opacity-100 transition-opacity" />
                </Link>
             </CardContent>

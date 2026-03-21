@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -35,41 +36,41 @@ export function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const themes: { id: PrimaryTheme; name: string; color: string; desc: string }[] = [
-    { id: 'sovereign', name: 'Sovereign', color: 'bg-slate-900', desc: 'Prestige Dark' },
+    { id: 'sovereign', name: 'Elite Dark', color: 'bg-slate-900', desc: 'Prestige Style' },
     { id: 'midnight', name: 'Midnight', color: 'bg-black', desc: 'OLED Black' },
-    { id: 'cold-white', name: 'Cold White', color: 'bg-white border', desc: 'Institutional Light' },
-    { id: 'cobalt', name: 'Cobalt', color: 'bg-blue-900', desc: 'Enterprise Series' },
-    { id: 'royal', name: 'Royal', color: 'bg-purple-900', desc: 'Regal Elite' },
-    { id: 'crimson', name: 'Crimson', color: 'bg-red-900', desc: 'Power Series' },
+    { id: 'cold-white', name: 'Light Mode', color: 'bg-white border', desc: 'Clean White' },
+    { id: 'cobalt', name: 'Enterprise Blue', color: 'bg-blue-900', desc: 'Corporate Blue' },
+    { id: 'royal', name: 'Royal Purple', color: 'bg-purple-900', desc: 'Regal Style' },
+    { id: 'crimson', name: 'Power Red', color: 'bg-red-900', desc: 'Bold Crimson' },
   ];
 
   return (
     <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-300">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      {/* Top Institutional Bar */}
+      {/* Top Bar */}
       <div className="bg-muted border-b border-dashed">
         <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/about" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
-              <Info className="h-3 w-3" /> Institutional About
+              <Info className="h-3 w-3" /> About Us
             </Link>
             <Link href="/vendors" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
-              <ShieldCheck className="h-3 w-3" /> Verified Vendors
+              <ShieldCheck className="h-3 w-3" /> Verified Sellers
             </Link>
             <Link href="/help" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
-              <HelpCircle className="h-3 w-3" /> Support Hub
+              <HelpCircle className="h-3 w-3" /> Help Center
             </Link>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <span className="text-[9px] font-bold text-primary uppercase tracking-[0.3em]">Vault Escrow Protocol Active: GHS-ACCRA</span>
+            <span className="text-[9px] font-bold text-primary uppercase tracking-[0.3em]">SECURE ESCROW ACTIVE: ACCRA, GHANA</span>
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between gap-4 md:gap-8">
         <div className="flex items-center gap-8 h-full">
-          {/* LOGO NODE */}
+          {/* LOGO */}
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <div className="relative h-12 w-12 overflow-hidden rounded-none border-2 border-primary/20 p-1 bg-white shadow-xl group-hover:scale-105 transition-transform duration-500">
               <Image 
@@ -85,7 +86,7 @@ export function Navbar() {
               <span className="font-headline font-black text-2xl text-foreground tracking-tighter uppercase leading-none">
                 {content.settings.siteName}
               </span>
-              <span className="text-[8px] font-black text-primary uppercase tracking-[0.4em] mt-1">Sovereign Registry</span>
+              <span className="text-[8px] font-black text-primary uppercase tracking-[0.4em] mt-1">Marketplace</span>
             </div>
           </Link>
 
@@ -95,11 +96,11 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* SEARCH COMMAND CENTER */}
+        {/* SEARCH */}
         <div className="hidden lg:flex flex-1 max-w-xl items-center h-14 border-2 border-border rounded-md overflow-hidden bg-muted/20 focus-within:border-primary focus-within:bg-background transition-all duration-500 shadow-sm">
           <div className="flex-1 flex items-center px-5 gap-3 border-r border-border">
             <input 
-              placeholder='Search verified institutional inventory...' 
+              placeholder='Search verified listings...' 
               className="w-full bg-transparent outline-none text-foreground text-[14px] font-bold placeholder:text-muted-foreground/50 uppercase tracking-tight"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -115,21 +116,21 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* UTILITY ACTIONS ROW */}
+        {/* ACTIONS */}
         <div className="flex items-center gap-4 md:gap-8">
           <div className="hidden xl:flex items-center gap-6">
-            {/* THEME REGISTRY SELECTOR */}
+            {/* THEME SELECTOR */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
                   <div className="p-2 rounded-full hover:bg-muted transition-colors">
                     <Palette className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest">Protocol</span>
+                  <span className="text-[9px] font-black uppercase tracking-widest">THEME</span>
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64 rounded-none border-t-4 border-t-primary shadow-2xl p-2" align="end">
-                <DropdownMenuLabel className="text-[10px] uppercase font-black tracking-[0.2em] text-muted-foreground mb-2">Institutional Environments</DropdownMenuLabel>
+                <DropdownMenuLabel className="text-[10px] uppercase font-black tracking-[0.2em] text-muted-foreground mb-2">Display Themes</DropdownMenuLabel>
                 <DropdownMenuSeparator className="mb-2" />
                 <div className="grid gap-1">
                   {themes.map((t) => (
@@ -165,7 +166,7 @@ export function Navbar() {
             {user ? (
               <Link href="/dashboard">
                 <Button variant="outline" className="text-foreground font-black text-[11px] uppercase tracking-[0.2em] px-6 h-12 hover:bg-muted rounded-md border-2 border-border transition-all">
-                  Registry Node
+                  My Dashboard
                 </Button>
               </Link>
             ) : (
@@ -174,7 +175,7 @@ export function Navbar() {
                 variant="ghost" 
                 className="text-foreground font-black text-[11px] uppercase tracking-[0.2em] px-8 h-12 hover:bg-muted rounded-[2rem] border-2 border-border transition-all"
               >
-                Access
+                Login
               </Button>
             )}
 
