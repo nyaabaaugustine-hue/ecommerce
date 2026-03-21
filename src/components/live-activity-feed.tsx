@@ -94,16 +94,6 @@ export function LiveActivityFeed() {
         isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
       )}>
         <Card className="bg-secondary text-white border-2 border-white/10 shadow-2xl rounded-none overflow-hidden pointer-events-auto relative">
-          {/* Heritage Accent Strip */}
-          <div className="absolute top-0 left-0 w-1.5 h-full relative overflow-hidden shrink-0">
-            <Image 
-              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
-              alt="Heritage Strip" 
-              fill 
-              className="object-cover"
-            />
-          </div>
-          
           <Button 
             variant="ghost" 
             size="icon" 
@@ -113,7 +103,7 @@ export function LiveActivityFeed() {
             <X className="h-3 w-3" />
           </Button>
 
-          <CardContent className="p-5 pl-7 flex gap-5 items-center">
+          <CardContent className="p-5 flex gap-5 items-center">
             <div className="relative h-16 w-16 bg-white overflow-hidden shrink-0 shadow-lg">
               <Image 
                 src={activity.image} 

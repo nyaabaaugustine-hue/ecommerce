@@ -13,14 +13,17 @@ import { PrivacyPopup } from '@/components/privacy-popup';
 import { SpotlightCategories } from '@/components/spotlight-categories';
 import { TipsSection } from '@/components/tips-section';
 import { FooterTabs } from '@/components/footer-tabs';
+import { NewsletterPopup } from '@/components/newsletter-popup';
 import { LISTINGS } from '@/lib/mock-data';
-import { ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronRight, Sparkles, ArrowRight, Mail, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 /**
  * @fileOverview Marketplace Home Hub
- * High-density architecture mirroring the elite marketplace flow.
- * Integrated new High Fidelity Laptops section with smooth auto-scroll logic.
+ * High-density architecture with zero empty space.
+ * Integrated new Newsletter node and saturated listings grid.
  */
 export function HomePage() {
   const highFidelityLaptops = useMemo(() => {
@@ -28,27 +31,23 @@ export function HomePage() {
   }, []);
 
   const sponsoredAds = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('sp')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('sp') || l.category === 'Electronics').slice(0, 5);
   }, []);
 
   const priceDropItems = useMemo(() => {
-    return LISTINGS.filter(l => l.oldPrice && l.category === 'Electronics' && !l.id.startsWith('lp')).slice(0, 5);
+    return LISTINGS.filter(l => l.oldPrice).slice(0, 5);
   }, []);
 
   const cellPhones = useMemo(() => {
     return LISTINGS.filter(l => l.subcategory === 'Mobiles').slice(0, 5);
   }, []);
 
-  const cabinets = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Home & Furniture').slice(0, 5);
-  }, []);
-
   const airConditioners = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('ac') || l.title.includes('AC')).slice(0, 5);
   }, []);
 
   const gameBoys = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('gb')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('gb') || l.category === 'Electronics').slice(5, 10);
   }, []);
 
   const vehiclesMostSearched = useMemo(() => {
@@ -56,7 +55,7 @@ export function HomePage() {
   }, []);
 
   const realEstateRegistry = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Property' && l.id.startsWith('re')).slice(0, 5);
+    return LISTINGS.filter(l => l.category === 'Property').slice(0, 5);
   }, []);
 
   const REAL_ESTATE_SPOTLIGHT = [
@@ -91,7 +90,7 @@ export function HomePage() {
             <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase leading-none flex items-center gap-3">
               <Sparkles className="h-6 w-6 text-primary" /> Most Popular Laptops
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Premium Computing Hub • GHS-ACCRA</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Premium Computing Hub • ACCRA</p>
           </div>
           <Link href="/listings?category=Electronics" className="text-xs font-black text-primary hover:underline uppercase tracking-widest">
             View All Laptops
@@ -100,7 +99,6 @@ export function HomePage() {
         
         <div className="relative group">
           <div className="animate-marquee hover:pause flex gap-6 px-4">
-            {/* Double the items for seamless loop */}
             {[...highFidelityLaptops, ...highFidelityLaptops].map((item, idx) => (
               <div key={`${item.id}-${idx}`} className="w-[300px] shrink-0">
                 <HighFidelityListingCard {...item} />
@@ -110,32 +108,18 @@ export function HomePage() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
-
       {/* SPONSORED ADS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Sponsored ads
-          </h2>
+          <h2 className="text-2xl font-medium text-foreground tracking-tight">Sponsored ads</h2>
           <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest mt-1">Exclusive Highlights</p>
         </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {sponsoredAds.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {sponsoredAds.map((item) => (
+            <ListingCard key={item.id} {...item} />
+          ))}
         </div>
       </section>
-
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
       {/* AUTOS SPOTLIGHT */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
@@ -144,216 +128,66 @@ export function HomePage() {
           <p className="text-sm text-muted-foreground font-medium mt-1">The best vehicles</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {AUTOS_SPOTLIGHT.map((item, idx) => (
-            <Link 
-              key={item.title} 
-              href={`/listings?category=Vehicles`}
-              className={cn(
-                "group relative flex flex-col bg-card border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
-                `animate-in slide-in-from-bottom-4 delay-${idx * 100}`
-              )}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
+          {AUTOS_SPOTLIGHT.map((item) => (
+            <Link key={item.title} href="/listings?category=Vehicles" className="group relative flex flex-col bg-card border rounded-md overflow-hidden hover:shadow-xl transition-all duration-500">
+              <div className="relative aspect-[4/3] w-full">
                 <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
               <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
-                <p className="text-center font-bold text-[13px] text-foreground group-hover:text-primary uppercase tracking-tight">
-                  {item.title}
-                </p>
+                <p className="text-center font-bold text-[13px] text-foreground group-hover:text-primary uppercase tracking-tight">{item.title}</p>
               </div>
             </Link>
           ))}
-        </div>
-      </section>
-
-      {/* MOST SEARCHED AUTOS */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most searched in <span className="font-bold">Autos</span>
-          </h2>
-          <Link href="/listings?category=Vehicles" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {vehiclesMostSearched.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
-        </div>
-      </section>
-
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
-
-      <SpotlightCategories />
-
-      {/* REAL ESTATE SPOTLIGHT */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="mb-8">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Buy or rent
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {REAL_ESTATE_SPOTLIGHT.map((item, idx) => (
-            <Link 
-              key={item.title} 
-              href="/listings?category=Property"
-              className={cn(
-                "group relative flex flex-col bg-card border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
-                `animate-in slide-in-from-bottom-4 delay-${idx * 100}`
-              )}
-            >
-              <div className="relative aspect-square w-full overflow-hidden">
-                <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              </div>
-              <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
-                <p className="text-center font-bold text-[13px] text-foreground group-hover:text-primary uppercase tracking-tight">
-                  {item.title}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* MOST SEARCHED REAL ESTATE */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most searched in <span className="font-bold">Real Estate</span>
-          </h2>
-          <Link href="/listings?category=Property" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {realEstateRegistry.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
         </div>
       </section>
 
       {/* PRICE DROPS */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group">
-        <div className="mb-8">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight leading-none">
-            Prices have dropped on <span className="font-bold">electronics and cell phones.</span>
-          </h2>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {priceDropItems.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8"><h2 className="text-2xl font-medium">Prices dropped on <span className="font-bold">Electronics.</span></h2></div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {priceDropItems.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
+      <SpotlightCategories />
 
-      {/* CELL PHONES (EXTRACTED RESULTS) */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most searched in <span className="font-bold">Cell Phones and Smartphones</span>
-          </h2>
-          <Link href="/listings?category=Electronics" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {cellPhones.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
+      {/* NEWSLETTER NODE (Filling space) */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="bg-secondary rounded-none overflow-hidden flex flex-col md:flex-row border-t-4 border-primary">
+          <div className="flex-1 p-12 md:p-20 space-y-8 text-white">
+            <div className="space-y-4">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none italic">Join the <br /><span className="text-primary">Registry.</span></h2>
+              <p className="text-xs font-bold text-white/50 uppercase tracking-[0.3em]">Institutional Updates & Exclusive Deal Access</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="relative flex-1">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                <Input placeholder="Enter Email Node" className="bg-white/5 border-white/10 h-14 pl-12 rounded-none text-white font-black uppercase text-[10px] tracking-widest" />
               </div>
-            ))}
+              <Button className="h-14 px-10 bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.2em] rounded-none hover:bg-white transition-all shadow-2xl">
+                Authorize <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex items-center gap-3 pt-4">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              <p className="text-[8px] font-black uppercase text-white/30 tracking-widest">Secured by AES-256 Encryption Protocol</p>
+            </div>
           </div>
-          
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
+          <div className="w-full md:w-[40%] relative min-h-[300px]">
+            <Image src="https://images.unsplash.com/photo-1556740734-7f1a0297ba16?q=80&w=800&auto=format&fit=crop" alt="Newsletter" fill className="object-cover contrast-125 saturate-0 opacity-40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary to-transparent" />
+          </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
-
-      {/* AIR CONDITIONERS */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most popular <span className="font-bold">air conditioners</span>
-          </h2>
-          <Link href="/listings?category=Electronics" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
+      {/* REAL ESTATE */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <h2 className="text-2xl font-medium">Most searched in <span className="font-bold">Real Estate</span></h2>
+          <Link href="/listings?category=Property" className="text-sm font-bold text-primary hover:underline">View all</Link>
         </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {airConditioners.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
-        </div>
-      </section>
-
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
-
-      {/* GAME BOY TRENDING */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Trending on Ecommerce - <span className="font-bold">"game boy"</span>
-          </h2>
-          <Link href="/listings?category=Electronics" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {gameBoys.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {realEstateRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
@@ -367,6 +201,7 @@ export function HomePage() {
       <FooterTabs />
 
       <PrivacyPopup />
+      <NewsletterPopup />
     </div>
   );
 }

@@ -77,7 +77,7 @@ export default function Dashboard() {
       status: 'Escrow Secured',
       progress: 65,
       date: 'Oct 24, 2023',
-      vendor: 'Melcom Digital',
+      vendor: 'Kwame Tech',
       action: 'Awaiting Delivery',
       slaTimer: '32:15:00',
       type: 'BUY'

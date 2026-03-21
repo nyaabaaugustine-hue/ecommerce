@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -55,19 +56,21 @@ export function PromotionPopup() {
       return;
     }
 
-    // Initial show
+    // Initial show delay
     const initialTimer = setTimeout(() => {
       setIsOpen(true);
-    }, 2000);
+    }, 5000);
 
-    // Re-trigger every 10 seconds if closed
+    // Re-trigger every 15 seconds if closed
     const retriggerInterval = setInterval(() => {
       setIsOpen((prev) => {
-        if (!prev && !hasDismissed) return true;
+        if (!prev && !hasDismissed) {
+          setCurrentAdIndex((idx) => (idx + 1) % ADS.length);
+          return true;
+        }
         return prev;
       });
-      setCurrentAdIndex((prev) => (prev + 1) % ADS.length);
-    }, 10000);
+    }, 15000);
 
     return () => {
       clearTimeout(initialTimer);
@@ -77,7 +80,6 @@ export function PromotionPopup() {
 
   const handleDismiss = () => {
     setIsOpen(false);
-    // Note: We don't set permanent dismissal in localStorage yet to allow the "every 10 seconds" behavior requested
   };
 
   const handlePermanentDismiss = () => {
@@ -99,8 +101,8 @@ export function PromotionPopup() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
       <div className="relative w-full max-w-[380px] group">
         <button 
-          onClick={handlePermanentDismiss}
-          className="absolute -top-12 right-0 md:-right-12 h-10 w-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all z-10"
+          onClick={handleDismiss}
+          className="absolute -top-12 right-0 h-10 w-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all z-10"
         >
           <X className="h-6 w-6" />
         </button>

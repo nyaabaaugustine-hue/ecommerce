@@ -101,30 +101,19 @@ export function OnboardingTour() {
           </div>
         </div>
 
-        {/* Kente Heritage Footer Action Area (The Surprise) */}
-        <div className="relative p-8 overflow-hidden group">
-          <div className="absolute inset-0">
-            <Image 
-              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
-              alt="Kente Background" 
-              fill 
-              sizes="(max-width: 768px) 100vw, 448px"
-              className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-secondary/40 group-hover:bg-secondary/20 transition-colors" />
-          </div>
-          
+        {/* Action Area */}
+        <div className="relative p-8 overflow-hidden group bg-secondary">
           <div className="relative z-10 flex flex-col gap-4">
             <Button 
               onClick={() => step < steps.length - 1 ? setStep(s => s + 1) : handleFinish()}
               className="w-full h-16 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-[11px] tracking-[0.3em] rounded-none shadow-2xl gap-3 transition-all border-2 border-transparent hover:border-white"
             >
-              {step < steps.length - 1 ? "AUTHORIZE NEXT" : "ENTER MARKETPLACE"}
+              {step < steps.length - 1 ? "NEXT STEP" : "ENTER MARKETPLACE"}
               <ArrowRight className="h-5 w-5" />
             </Button>
             
             <div className="flex items-center justify-between px-2">
-               <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Sovereign Protocol v1.4</span>
+               <span className="text-[8px] font-black text-white/60 uppercase tracking-widest">Secure Protocol v1.4</span>
                {step > 0 && (
                  <button 
                    onClick={() => setStep(s => s - 1)}

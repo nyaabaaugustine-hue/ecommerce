@@ -10,6 +10,7 @@ import { WhatsAppButton } from '@/components/whatsapp-button';
 import { PostAdButton } from '@/components/post-ad-button';
 import { ShoppingAssistant } from '@/components/shopping-assistant';
 import { OnboardingTour } from '@/components/onboarding-tour';
+import { PromotionPopup } from '@/components/promotion-popup';
 import { Facebook, Youtube, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -28,6 +29,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <LiveActivityFeed />
       <ShoppingAssistant />
       <OnboardingTour />
+      <PromotionPopup />
 
       <footer className="bg-white dark:bg-background text-foreground pt-12 pb-8 border-t">
         <div className="max-w-7xl mx-auto px-4">
