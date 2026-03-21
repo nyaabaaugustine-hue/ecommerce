@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo } from 'react';
@@ -22,7 +21,7 @@ import { Input } from '@/components/ui/input';
 
 /**
  * @fileOverview Marketplace Home Hub
- * Industrial architecture with exactly 5 saturated listings per row.
+ * Saturated grid architecture with force-reduced computing marquee section.
  */
 export function HomePage() {
   const highFidelityLaptops = useMemo(() => {
@@ -31,14 +30,6 @@ export function HomePage() {
 
   const sponsoredAds = useMemo(() => {
     return LISTINGS.filter(l => l.id.startsWith('v_')).slice(0, 5);
-  }, []);
-
-  const priceDropItems = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('ph')).slice(0, 5);
-  }, []);
-
-  const airConditioners = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
   }, []);
 
   const agricultureRegistry = useMemo(() => {
@@ -71,32 +62,30 @@ export function HomePage() {
 
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20 overflow-x-hidden">
-      {/* CATEGORY NAV */}
       <CategoryBar />
       
-      {/* HERO SECTION */}
       <div className="max-w-7xl mx-auto w-full px-4 mb-12 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <HeroCarousel />
       </div>
 
-      {/* AUTO-SCROLLING LAPTOPS SECTION */}
-      <section className="w-full py-12 bg-muted/5 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 mb-8 flex items-end justify-between">
-          <div className="space-y-1">
-            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase leading-none flex items-center gap-3">
-              <Sparkles className="h-6 w-6 text-primary" /> Most Popular Laptops
+      {/* FORCE REDUCED COMPUTING SECTION (35% REDUCTION) */}
+      <section className="w-full py-6 bg-muted/5 overflow-hidden border-y border-primary/10">
+        <div className="max-w-7xl mx-auto px-4 mb-4 flex items-end justify-between">
+          <div className="space-y-0.5">
+            <h2 className="text-xl md:text-2xl font-black text-foreground tracking-tighter uppercase leading-none flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-primary" /> Most Popular Laptops
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Premium Computing Hub • ACCRA</p>
+            <p className="text-[8px] font-black text-muted-foreground uppercase tracking-[0.3em]">Premium Computing Hub • ACCRA</p>
           </div>
-          <Link href="/listings?category=Electronics" className="text-xs font-black text-primary hover:underline uppercase tracking-widest">
+          <Link href="/listings?category=Electronics" className="text-[9px] font-black text-primary hover:underline uppercase tracking-widest">
             View All Laptops
           </Link>
         </div>
         
         <div className="relative group">
-          <div className="animate-marquee hover:pause flex gap-6 px-4">
-            {[...highFidelityLaptops, ...highFidelityLaptops].map((item, idx) => (
-              <div key={`${item.id}-${idx}`} className="w-[300px] shrink-0">
+          <div className="animate-marquee hover:pause flex gap-4 px-4">
+            {[...highFidelityLaptops, ...highFidelityLaptops, ...highFidelityLaptops].map((item, idx) => (
+              <div key={`${item.id}-${idx}`} className="w-[200px] shrink-0 transform scale-95 origin-center">
                 <HighFidelityListingCard {...item} />
               </div>
             ))}
@@ -104,11 +93,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SPONSORED ADS (AUTOS ROW) */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="mb-6 flex justify-between items-end">
+      {/* SPONSORED AUTOS GRID */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group">
+        <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-2xl font-black text-foreground tracking-tighter uppercase italic">Sponsored Autos</h2>
+            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic">Sponsored Autos</h2>
             <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Exclusive Vehicle Registry</p>
           </div>
           <Link href="/listings?category=Vehicles" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
@@ -120,11 +109,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* AGRICULTURE SECTION */}
+      {/* AGRICULTURE GRID */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
               <Sprout className="h-6 w-6 text-green-600" /> Agri-Business <span className="text-primary">Hub</span>
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Industrial Farming Registry</p>
@@ -136,7 +125,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* AUTOS SPOTLIGHT (5 COLS) */}
+      {/* AUTO CATEGORIES SPOTLIGHT */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8">
           <h2 className="text-3xl font-black uppercase tracking-tighter italic">Auto Categories</h2>
@@ -156,11 +145,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* FASHION SECTION */}
+      {/* FASHION GRID */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
               <Shirt className="h-6 w-6 text-pink-500" /> Designer <span className="text-primary">Registry</span>
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Apparel & Accessories</p>
@@ -172,24 +161,13 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* PRICE DROPS (PHONES ROW) */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="mb-8">
-          <h2 className="text-2xl font-black uppercase tracking-tighter italic">Price Drops: <span className="text-primary">Mobiles</span></h2>
-          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Global Smartphone Registry</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {priceDropItems.map((item) => <ListingCard key={item.id} {...item} />)}
-        </div>
-      </section>
-
       <SpotlightCategories />
 
-      {/* PROFESSIONAL SERVICES SECTION */}
+      {/* SERVICES GRID */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
               <Briefcase className="h-6 w-6 text-blue-600" /> Business <span className="text-primary">Services</span>
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Verified Corporate Registry</p>
@@ -201,25 +179,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* AIR CONDITIONERS ROW */}
+      {/* SPORTS GRID */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Cooling Solutions</h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Inverter AC Registry</p>
-          </div>
-          <Link href="/listings" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {airConditioners.map((item) => <ListingCard key={item.id} {...item} />)}
-        </div>
-      </section>
-
-      {/* SPORTS SECTION */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="mb-8 flex justify-between items-end">
-          <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
               <Dumbbell className="h-6 w-6 text-red-600" /> Sports & <span className="text-primary">Fitness</span>
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Professional Athletics Registry</p>
@@ -231,7 +195,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* NEWSLETTER NODE */}
+      {/* NEWSLETTER SECTION */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="bg-secondary rounded-none overflow-hidden flex flex-col md:flex-row border-t-4 border-primary">
           <div className="flex-1 p-12 md:p-20 space-y-8 text-white">
@@ -260,11 +224,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* REAL ESTATE ROW */}
+      {/* REAL ESTATE GRID */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Premium <span className="text-primary">Properties</span></h2>
+            <h2 className="text-3xl font-black uppercase tracking-tighter italic">Premium <span className="text-primary">Properties</span></h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Accra Real Estate Registry</p>
           </div>
           <Link href="/listings?category=Property" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View all</Link>
