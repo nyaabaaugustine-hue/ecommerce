@@ -209,6 +209,38 @@ export const LISTINGS: Listing[] = [
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's7', name: 'Abu Bakar', type: 'Individual', rating: 4.2, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: '11',
+    title: 'Samsung Galaxy S23 Ultra - 512GB',
+    price: 8200,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Spintex Road, Accra',
+    postedAt: '15m ago',
+    postedTimestamp: Date.now() - 900000,
+    imageUrl: 'https://images.unsplash.com/photo-1678911820864-e2c567c655d7?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Phantom Black, like new condition. All accessories included.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's8', name: 'TechHub Spintex', type: 'Business Vendor', rating: 4.6, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: '12',
+    title: 'Executive Desk & Ergonomic Chair',
+    price: 3200,
+    isNegotiable: true,
+    category: 'Home & Furniture',
+    location: 'Osu, Accra',
+    postedAt: '3h ago',
+    postedTimestamp: Date.now() - 10800000,
+    imageUrl: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v4',
+    description: 'Modern office setup. High-quality wood desk and mesh breathable chair.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   }
 ];
 

@@ -23,188 +23,174 @@ import {
   TrendingUp,
   Clock,
   Shirt,
-  UserCheck
+  Star,
+  Tv,
+  Gamepad2,
+  Refrigerator
 } from 'lucide-react';
 import { LISTINGS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
 const MARKET_CATEGORIES = [
-  { name: 'Vehicles', icon: Car, color: 'bg-blue-500/10 text-blue-400', count: '1,240+' },
-  { name: 'Property', icon: Home, color: 'bg-green-500/10 text-green-400', count: '850+' },
-  { name: 'Electronics', icon: Smartphone, color: 'bg-purple-500/10 text-purple-400', count: '3,100+' },
-  { name: 'Home', icon: Armchair, color: 'bg-orange-500/10 text-orange-400', count: '1,100+' },
-  { name: 'Fashion', icon: Shirt, color: 'bg-pink-500/10 text-pink-400', count: '2,400+' },
-  { name: 'Jobs', icon: Briefcase, color: 'bg-cyan-500/10 text-cyan-400', count: '420+' },
-  { name: 'Services', icon: Sparkles, color: 'bg-yellow-500/10 text-yellow-400', count: '680+' },
-  { name: 'Agriculture', icon: Leaf, color: 'bg-emerald-500/10 text-emerald-400', count: '350+' },
+  { name: 'Vehicles', icon: Car, color: 'text-blue-400', href: '/listings?category=Vehicles' },
+  { name: 'Property', icon: Home, color: 'text-green-400', href: '/listings?category=Property' },
+  { name: 'Electronics', icon: Smartphone, color: 'text-purple-400', href: '/listings?category=Electronics' },
+  { name: 'Furniture', icon: Armchair, color: 'text-orange-400', href: '/listings?category=Home & Furniture' },
+  { name: 'Fashion', icon: Shirt, color: 'text-pink-400', href: '/listings?category=Fashion' },
+  { name: 'Jobs', icon: Briefcase, color: 'text-cyan-400', href: '/listings?category=Jobs' },
+  { name: 'Services', icon: Sparkles, color: 'text-yellow-400', href: '/listings?category=Services' },
+  { name: 'Agriculture', icon: Leaf, color: 'text-emerald-400', href: '/listings?category=Agriculture' },
 ];
 
 export default function HomePage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  
   const freshListings = useMemo(() => {
-    return [...LISTINGS].sort((a, b) => b.postedTimestamp - a.postedTimestamp);
+    return [...LISTINGS].sort((a, b) => b.postedTimestamp - a.postedTimestamp).slice(0, 5);
+  }, []);
+
+  const vehicleListings = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Vehicles').slice(0, 5);
+  }, []);
+
+  const electronicListings = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Electronics').slice(0, 5);
   }, []);
 
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20">
-      {/* SEARCH-DRIVEN HERO GATEWAY (OLX STYLE) */}
-      <section className="relative bg-secondary overflow-hidden py-12 md:py-24 border-b border-white/5">
-        <div className="absolute inset-0 opacity-10">
-          <Image 
-            src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?q=80&w=1600&auto=format&fit=crop" 
-            alt="Accra Market" 
-            fill 
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full mb-2">
-              <Badge className="bg-primary text-secondary font-black uppercase text-[8px] tracking-widest px-3">
-                ACCRA'S PREMIER SECURE MARKETPLACE
-              </Badge>
-            </div>
-            
-            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase leading-tight italic">
-              Buy. Sell. <br /> <span className="text-primary not-italic">Find Anything in Ghana.</span>
-            </h1>
-            
-            <p className="text-white/60 text-sm md:text-lg font-medium uppercase tracking-[0.2em] max-w-2xl mx-auto">
-              Phones, cars, land, rentals, services — all protected by our Sovereign Escrow Protocol.
-            </p>
-
-            {/* MASTER SEARCH COMMAND BAR */}
-            <div className="bg-white p-2 md:p-3 shadow-2xl flex flex-col md:flex-row items-stretch gap-2 mt-12 border-4 border-primary/20">
-              <div className="flex-1 flex items-center px-4 gap-3 border-b md:border-b-0 md:border-r border-muted min-h-[60px]">
-                <Search className="h-5 w-5 text-primary" />
-                <input 
-                  placeholder="What are you looking for?" 
-                  className="w-full bg-transparent outline-none text-secondary text-sm font-black uppercase placeholder:text-muted-foreground"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-              <div className="flex-[0.6] flex items-center px-4 gap-3 border-b md:border-b-0 md:border-r border-muted min-h-[60px]">
-                <LayoutGrid className="h-5 w-5 text-primary/40" />
-                <select className="w-full bg-transparent outline-none text-secondary text-[10px] font-black uppercase cursor-pointer">
-                  <option>All Categories</option>
-                  {MARKET_CATEGORIES.map(c => <option key={c.name}>{c.name}</option>)}
-                </select>
-              </div>
-              <div className="flex-[0.6] flex items-center px-4 gap-3 min-h-[60px]">
-                <MapPin className="h-5 w-5 text-primary/40" />
-                <select className="w-full bg-transparent outline-none text-secondary text-[10px] font-black uppercase cursor-pointer">
-                  <option>Accra</option>
-                  <option>Tema</option>
-                  <option>Kumasi</option>
-                  <option>East Legon</option>
-                  <option>Kasoa</option>
-                </select>
-              </div>
-              <Button className="h-[60px] md:h-auto px-12 bg-secondary text-white font-black uppercase tracking-widest text-xs rounded-none hover:bg-primary hover:text-secondary transition-all">
-                Search
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-6 mt-10">
-              <Link href="/listings">
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 font-black uppercase text-[10px] tracking-widest h-14 px-10 rounded-[7%]">
-                  Browse Listings
-                </Button>
-              </Link>
-              <Link href="/listings/create">
-                <Button className="bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.2em] h-14 px-10 rounded-[7%] shadow-2xl animate-pulse">
-                  + Post Ad Now
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* QUICK ICONIC CATEGORY BAR (OLX BR STYLE) */}
-      <section className="container mx-auto px-4 py-8 border-b border-white/5">
-        <div className="flex overflow-x-auto no-scrollbar gap-4 md:gap-8 pb-4">
-          {MARKET_CATEGORIES.map((cat) => (
-            <Link 
-              key={cat.name} 
-              href={`/listings?category=${cat.name}`}
-              className="flex flex-col items-center gap-3 min-w-[100px] group"
-            >
-              <div className={cn("h-16 w-16 md:h-20 md:w-20 flex items-center justify-center rounded-none border border-white/5 bg-secondary group-hover:border-primary/40 group-hover:bg-primary/5 transition-all shadow-sm")}>
-                <cat.icon className="h-6 w-6 md:h-8 md:w-8 text-white/60 group-hover:text-primary transition-colors" />
-              </div>
-              <div className="text-center">
-                <span className="text-[10px] font-black uppercase tracking-widest text-white/40 group-hover:text-primary transition-colors block">
+      {/* 1. ICONIC CATEGORY BAR (OLX STYLE) */}
+      <section className="bg-secondary border-b border-white/5 py-4 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between overflow-x-auto no-scrollbar gap-8">
+            {MARKET_CATEGORIES.map((cat) => (
+              <Link 
+                key={cat.name} 
+                href={cat.href}
+                className="flex flex-col items-center gap-2 min-w-[80px] group"
+              >
+                <div className="h-12 w-12 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-primary/10 transition-all border border-transparent group-hover:border-primary/20">
+                  <cat.icon className={cn("h-5 w-5", cat.color)} />
+                </div>
+                <span className="text-[9px] font-black uppercase tracking-widest text-white/40 group-hover:text-primary transition-colors whitespace-nowrap">
                   {cat.name}
                 </span>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* LIVE MARKET FEED */}
-      <section className="container mx-auto px-4 py-12">
-        <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
-          <div className="flex items-center gap-4">
-            <div className="h-10 w-10 bg-primary/10 flex items-center justify-center text-primary">
-              <Clock className="h-5 w-5" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-black uppercase tracking-tighter text-white">Fresh Listings</h3>
-              <p className="text-[9px] font-bold text-white/40 uppercase tracking-[0.3em]">Updated just now across Ghana</p>
+      {/* 2. INSTITUTIONAL CAROUSEL HERO */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="relative h-[250px] md:h-[400px] w-full bg-secondary overflow-hidden border-b-4 border-primary shadow-2xl">
+          <Image 
+            src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?q=80&w=1600&auto=format&fit=crop" 
+            alt="Accra Marketplace" 
+            fill 
+            sizes="100vw"
+            className="object-cover opacity-40 contrast-125"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/20 to-transparent p-10 md:p-20 flex flex-col justify-center">
+            <Badge className="w-fit bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.3em] mb-6 rounded-none px-4 py-1.5">
+              Limited Institutional Offers
+            </Badge>
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none italic mb-6">
+              iPhone & Samsung <br /> <span className="text-primary not-italic">Up to 40% Off.</span>
+            </h1>
+            <div className="flex gap-4">
+              <Button className="bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.2em] h-14 px-10 rounded-[7%] shadow-2xl">
+                Explore Deals
+              </Button>
             </div>
           </div>
-          <Link href="/listings" className="flex items-center gap-2 text-[10px] font-black text-primary uppercase hover:underline tracking-widest">
-            View All Ads <ChevronRight className="h-3 w-3" />
+        </div>
+      </section>
+
+      {/* 3. FRESH LISTINGS ROW */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+          <div className="flex items-center gap-3">
+            <Zap className="h-5 w-5 text-primary" />
+            <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white italic">Fresh Listings</h2>
+          </div>
+          <Link href="/listings" className="text-[10px] font-black text-primary uppercase hover:underline tracking-widest flex items-center gap-2">
+            View All <ChevronRight className="h-3 w-3" />
           </Link>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {freshListings.map(item => (
             <ListingCard key={item.id} {...item} />
           ))}
         </div>
+      </section>
 
-        <div className="mt-20 text-center">
-          <Button variant="outline" className="border-primary/20 text-white hover:bg-primary/5 h-16 px-16 font-black uppercase text-xs tracking-[0.3em] rounded-none">
-            Load More Listings
+      {/* 4. HERITAGE ACCENT STRIPE */}
+      <div className="h-1.5 w-full relative overflow-hidden my-8">
+        <Image 
+          src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
+          alt="Heritage Stripe" 
+          fill 
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+
+      {/* 5. SOVEREIGN VEHICLES SECTION */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+          <div className="flex items-center gap-3">
+            <Car className="h-5 w-5 text-primary" />
+            <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white italic">Sovereign Vehicles</h2>
+          </div>
+          <Link href="/listings?category=Vehicles" className="text-[10px] font-black text-primary uppercase hover:underline tracking-widest flex items-center gap-2">
+            Explore Autos <ChevronRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          {vehicleListings.map(item => (
+            <ListingCard key={item.id} {...item} />
+          ))}
+        </div>
+      </section>
+
+      {/* 6. TRUST PROTOCOL BANNER */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="bg-secondary p-8 md:p-16 border-l-8 border-primary relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 -mr-32 -mt-32 rounded-full blur-3xl" />
+          <div className="relative z-10 space-y-4 max-w-2xl text-center md:text-left">
+            <div className="inline-flex items-center gap-2 bg-primary/10 px-3 py-1 border border-primary/20">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              <span className="text-[9px] font-black uppercase tracking-widest text-primary">Escrow Protocol Active</span>
+            </div>
+            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white leading-none">
+              Trade Safely. <br /> <span className="text-primary italic">Pay Institutional.</span>
+            </h3>
+            <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest leading-relaxed">
+              Every GHS transaction is secured. Funds are only released to vendors after your verified physical inspection. 48-hour SLA guaranteed.
+            </p>
+          </div>
+          <Button className="relative z-10 h-16 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-[11px] tracking-[0.3em] rounded-none shadow-xl transition-all">
+            How Escrow Works
           </Button>
         </div>
       </section>
 
-      {/* ESCROW TRUST LAYER */}
-      <section className="container mx-auto px-4 mt-12 pb-20">
-        <div className="bg-primary p-10 md:p-20 text-secondary relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 -mr-48 -mt-48 rounded-full blur-3xl" />
-          <div className="relative z-10 space-y-6 max-w-2xl text-center md:text-left">
-            <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-1.5 border border-secondary/20">
-              <ShieldCheck className="h-4 w-4 text-secondary" />
-              <span className="text-[9px] font-black uppercase tracking-widest text-secondary">Institutional Trust Active</span>
-            </div>
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none italic">
-              Trade with <br /> <span className="text-white bg-secondary px-4 not-italic">Total Safety.</span>
-            </h3>
-            <p className="text-secondary/70 text-sm font-bold uppercase tracking-widest leading-relaxed">
-              Every GHS transaction is secured through our 48-hour escrow protocol. Inspect before you release.
-            </p>
+      {/* 7. ELITE ELECTRONICS SECTION */}
+      <section className="container mx-auto px-4 py-12 pb-24">
+        <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+          <div className="flex items-center gap-3">
+            <Smartphone className="h-5 w-5 text-primary" />
+            <h2 className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white italic">Elite Electronics</h2>
           </div>
-          <div className="relative z-10 flex flex-col gap-4 w-full md:w-auto">
-            <Button className="bg-secondary text-primary hover:bg-white hover:text-secondary font-black uppercase text-xs tracking-widest h-16 px-12 rounded-[7%] shadow-2xl">
-              How Escrow Works
-            </Button>
-            <Link href="/listings/create" className="w-full">
-              <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white font-black uppercase text-xs tracking-widest h-16 px-12 rounded-[7%] w-full">
-                Post Your First Ad
-              </Button>
-            </Link>
-          </div>
+          <Link href="/listings?category=Electronics" className="text-[10px] font-black text-primary uppercase hover:underline tracking-widest flex items-center gap-2">
+            View Gadgets <ChevronRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          {electronicListings.map(item => (
+            <ListingCard key={item.id} {...item} />
+          ))}
         </div>
       </section>
     </div>
