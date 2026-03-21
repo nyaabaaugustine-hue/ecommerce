@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -59,7 +60,7 @@ export default function HomePage() {
       <PromotionPopup />
       <NewsletterPopup />
 
-      {/* Jumia Style Hero Node (Triple Column) */}
+      {/* NODE 1: Jumia Style Hero Registry (Triple Column) */}
       <section className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           
@@ -151,7 +152,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Jumia Style Flash Sales Bar */}
+      {/* NODE 2: Reverted Sovereign Hero Registry (Full Width) */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="relative h-[400px] md:h-[600px] w-full rounded-none overflow-hidden group shadow-2xl border-4 border-primary/10">
+           <Image 
+             src={hero.imageUrl} 
+             alt="Hero" 
+             fill 
+             className="object-cover group-hover:scale-105 transition-transform duration-700" 
+             priority 
+           />
+           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent flex flex-col justify-center p-8 md:p-20 space-y-8">
+              <Badge className="w-fit bg-primary text-secondary font-black px-6 py-2 rounded-none uppercase text-[10px] tracking-[0.4em]">
+                {hero.badge}
+              </Badge>
+              <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none max-w-4xl">
+                {hero.title}
+              </h2>
+              <p className="text-white/60 text-lg md:text-xl font-medium uppercase tracking-widest max-w-2xl leading-relaxed">
+                {hero.description}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 pt-4">
+                <Button className="h-16 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest rounded-none shadow-2xl transition-all">
+                  {hero.primaryCta} <ArrowRight className="ml-3 h-6 w-6" />
+                </Button>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* Flash Sales Node */}
       <section className="container mx-auto px-4 pb-6">
          <div className="bg-[#e61601] p-4 flex flex-col sm:flex-row items-center justify-between text-white border-b-4 border-accent">
             <div className="flex items-center gap-6">
@@ -170,7 +200,7 @@ export default function HomePage() {
          </div>
       </section>
 
-      {/* Weekly Velocity Section (Faster Scrolling) */}
+      {/* Weekly Velocity Section (High Kinetic Speed) */}
       <section className="bg-primary py-12 overflow-hidden border-y border-accent/20">
         <div className="container mx-auto px-4 mb-8">
           <div className="flex items-center gap-4">

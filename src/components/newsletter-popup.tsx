@@ -1,7 +1,8 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
-import { X, ShieldCheck, Truck, RotateCcw, Zap, Mail } from 'lucide-react';
+import { X, ShieldCheck, Truck, RotateCcw, Zap, Mail, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -9,8 +10,7 @@ import { Badge } from '@/components/ui/badge';
 
 /**
  * @fileOverview Sovereign Newsletter Registry Popup
- * Styled after elite marketplace welcome modals.
- * Features a split layout with institutional benefits and subscription node.
+ * Styled after elite marketplace welcome modals with 50% opacity overlays.
  */
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,6 @@ export function NewsletterPopup() {
     const dismissed = localStorage.getItem('vault_newsletter_dismissed');
     if (dismissed) return;
 
-    // Show after 5 seconds of session start
     const timer = setTimeout(() => {
       setIsOpen(true);
     }, 5000);
@@ -37,9 +36,6 @@ export function NewsletterPopup() {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !agreed) return;
-    
-    // Simulate registry enrollment
-    console.log("Subscribing to registry:", email);
     handleDismiss();
   };
 
@@ -49,16 +45,20 @@ export function NewsletterPopup() {
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-500">
       <div className="relative w-full max-w-4xl bg-white shadow-2xl flex flex-col md:flex-row rounded-none overflow-hidden animate-in zoom-in-95 duration-500 border-t-4 border-t-accent">
         
-        {/* Left Side: Institutional Promises (50% Opacity Style) */}
-        <div className="w-full md:w-[40%] bg-accent/50 p-8 md:p-12 text-secondary space-y-10 flex flex-col justify-center relative">
-          <div className="space-y-8 relative z-10">
-            <div className="flex items-start gap-5">
-              <div className="h-10 w-10 bg-secondary text-white flex items-center justify-center font-black text-xl shrink-0">1</div>
-              <p className="text-xs font-black uppercase tracking-widest leading-snug pt-1">Authorized for quickest escrow processing.</p>
-            </div>
-            <div className="flex items-start gap-5">
-              <div className="h-10 w-10 bg-secondary text-white flex items-center justify-center font-black text-xl shrink-0">2</div>
-              <p className="text-xs font-black uppercase tracking-widest leading-snug pt-1">Elite access to "Gold Standard" reviews.</p>
+        {/* Left Side: Institutional Promises (50% Opacity Overlay) */}
+        <div className="w-full md:w-[40%] bg-accent p-8 md:p-12 text-secondary space-y-10 flex flex-col justify-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-white/50 pointer-events-none" />
+          
+          <div className="space-y-10 relative z-10">
+            <div className="space-y-6">
+              <div className="flex items-start gap-5 group">
+                <div className="h-10 w-10 bg-secondary text-white flex items-center justify-center font-black text-xl shrink-0 group-hover:scale-110 transition-transform">1</div>
+                <p className="text-xs font-black uppercase tracking-widest leading-snug pt-1">Authorized for quickest escrow processing.</p>
+              </div>
+              <div className="flex items-start gap-5 group">
+                <div className="h-10 w-10 bg-secondary text-white flex items-center justify-center font-black text-xl shrink-0 group-hover:scale-110 transition-transform">2</div>
+                <p className="text-xs font-black uppercase tracking-widest leading-snug pt-1">Elite access to "Gold Standard" reviews.</p>
+              </div>
             </div>
 
             <div className="pt-8 space-y-8">
@@ -67,26 +67,26 @@ export function NewsletterPopup() {
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary">Our Promises</span>
               </div>
               <div className="grid grid-cols-2 gap-8">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center">
+                <div className="flex flex-col items-center text-center gap-3 group">
+                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
                     <ShieldCheck className="h-6 w-6 text-secondary" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-tighter">Verified Trust</span>
                 </div>
-                <div className="flex flex-col items-center text-center gap-3">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center">
+                <div className="flex flex-col items-center text-center gap-3 group">
+                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
                     <RotateCcw className="h-6 w-6 text-secondary" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-tighter">Quick Refund</span>
                 </div>
-                <div className="flex flex-col items-center text-center gap-3">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center">
+                <div className="flex flex-col items-center text-center gap-3 group">
+                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
                     <Zap className="h-6 w-6 text-secondary" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-tighter">Pay on Node</span>
                 </div>
-                <div className="flex flex-col items-center text-center gap-3">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center">
+                <div className="flex flex-col items-center text-center gap-3 group">
+                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
                     <Truck className="h-6 w-6 text-secondary" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-tighter">Fast Dispatch</span>
@@ -115,9 +115,9 @@ export function NewsletterPopup() {
             </div>
 
             <form onSubmit={handleSubscribe} className="space-y-8">
-              <div className="space-y-6 text-left">
+              <div className="space-y-6 text-left bg-muted/20 p-6 border-l-4 border-accent">
                 <p className="text-[9px] font-bold text-muted-foreground uppercase leading-relaxed">
-                  To subscribe to our node, you must first read and agree to our <span className="text-accent underline cursor-pointer">Sovereign Legal Terms</span>.
+                  To subscribe to our node, you must first read and agree to our <span className="text-accent underline cursor-pointer font-black">Sovereign Legal Terms</span>.
                 </p>
                 <div className="flex items-start gap-4">
                   <Checkbox 
@@ -147,9 +147,9 @@ export function NewsletterPopup() {
               <Button 
                 type="submit" 
                 disabled={!agreed || !email}
-                className="w-full h-16 bg-secondary text-white font-black text-lg uppercase tracking-[0.3em] transition-all rounded-none shadow-2xl hover:bg-primary"
+                className="w-full h-16 bg-secondary text-white font-black text-sm md:text-lg uppercase tracking-[0.3em] transition-all rounded-none shadow-2xl hover:bg-primary gap-3"
               >
-                AUTHORIZE SUBSCRIBE
+                AUTHORIZE SUBSCRIBE <ArrowRight className="h-5 w-5 text-accent" />
               </Button>
             </form>
           </div>
