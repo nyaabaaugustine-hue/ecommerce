@@ -1,14 +1,44 @@
-
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
-const MAIN_CATEGORIES = [
-  "Cell phones and telephony",
-  "Furniture",
-  "Apartments",
-  "Children's items",
-  "Jewelry, watches and..."
+const CATEGORY_COLUMNS = [
+  [
+    "Cell phones and telephony",
+    "Used and Pre-Owned Cars",
+    "Motorcycles",
+    "Computers and Accessories",
+    "Houses"
+  ],
+  [
+    "Furniture",
+    "Home appliances",
+    "Video games",
+    "Audio, TV, Video and Photography",
+    "Dogs and Accessories"
+  ],
+  [
+    "Apartments",
+    "Auto Parts",
+    "Job Openings",
+    "Services",
+    "Building and garden materials"
+  ],
+  [
+    "Children's items",
+    "Land and plots",
+    "Clothing and footwear",
+    "Sports and gymnastics",
+    "Beauty and personal care"
+  ],
+  [
+    "Jewelry, watches and accessories",
+    "Household items",
+    "Musical instruments",
+    "Motorcycle parts",
+    "Decorative objects"
+  ]
 ];
 
 /**
@@ -41,25 +71,30 @@ export function FooterTabs() {
           </TabsTrigger>
         </TabsList>
         
-        <TabsContent value="main" className="mt-0">
-          <div className="flex flex-wrap gap-x-12 gap-y-4">
-            {MAIN_CATEGORIES.map((cat) => (
-              <a 
-                key={cat} 
-                href="/listings" 
-                className="text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
-              >
-                {cat}
-              </a>
+        <TabsContent value="main" className="mt-0 animate-in fade-in duration-500">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {CATEGORY_COLUMNS.map((column, colIdx) => (
+              <ul key={colIdx} className="space-y-3">
+                {column.map((cat) => (
+                  <li key={cat}>
+                    <a 
+                      href="/listings" 
+                      className="text-[13px] font-medium text-muted-foreground hover:text-primary transition-colors block leading-tight"
+                    >
+                      {cat}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             ))}
           </div>
         </TabsContent>
         
-        <TabsContent value="popular">
+        <TabsContent value="popular" className="animate-in fade-in duration-500">
           <p className="text-[13px] font-medium text-muted-foreground">Rent trends in Accra, Vehicle value index Ghana, Electronics market reports.</p>
         </TabsContent>
         
-        <TabsContent value="links">
+        <TabsContent value="links" className="animate-in fade-in duration-500">
           <div className="flex flex-wrap gap-8">
             <a href="/about" className="text-[13px] font-medium text-muted-foreground hover:text-primary underline">Escrow Guide</a>
             <a href="/contact" className="text-[13px] font-medium text-muted-foreground hover:text-primary underline">Safety Tips</a>

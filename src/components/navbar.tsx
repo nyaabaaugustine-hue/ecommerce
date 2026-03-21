@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -13,10 +12,19 @@ import {
   Briefcase,
   LayoutGrid,
   ChevronDown,
+  Palette
 } from 'lucide-react';
-import { useAuth, useContent } from '@/components/providers';
+import { useAuth, useContent, useTheme, type PrimaryTheme } from '@/components/providers';
 import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 /**
  * @fileOverview Master Header Command Hub
@@ -27,11 +35,21 @@ import { AuthDialog } from '@/components/auth-dialog';
 export function Navbar() {
   const { user } = useAuth();
   const { content } = useContent();
+  const { theme, setTheme } = useTheme();
   const [showAuth, setShowAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const themes: { id: PrimaryTheme; name: string; color: string }[] = [
+    { id: 'sovereign', name: 'Sovereign', color: 'bg-slate-900' },
+    { id: 'midnight', name: 'Midnight', color: 'bg-black' },
+    { id: 'cobalt', name: 'Cobalt', color: 'bg-blue-900' },
+    { id: 'royal', name: 'Royal', color: 'bg-purple-900' },
+    { id: 'crimson', name: 'Crimson', color: 'bg-red-900' },
+    { id: 'cold-white', name: 'Cold White', color: 'bg-white border' },
+  ];
+
   return (
-    <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm animate-in fade-in slide-in-from-top-2 duration-500">
+    <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-500">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4 md:gap-8">
@@ -56,7 +74,7 @@ export function Navbar() {
         <div className="hidden lg:flex flex-1 max-w-2xl items-center h-12 border-2 border-muted-foreground/20 rounded-md overflow-hidden bg-muted/10 focus-within:border-primary transition-all duration-300">
           <div className="flex-1 flex items-center px-4 gap-3 border-r border-muted-foreground/20">
             <input 
-              placeholder='Buscar "C"' 
+              placeholder='Search products...' 
               className="w-full bg-transparent outline-none text-foreground text-[14px] font-medium placeholder:text-muted-foreground/60"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -75,13 +93,33 @@ export function Navbar() {
         {/* UTILITY ACTIONS ROW */}
         <div className="flex items-center gap-4 md:gap-6">
           <div className="hidden xl:flex items-center gap-5">
+            {/* THEME TOGGLE NODE */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
+                  <Palette className="h-5 w-5" />
+                  <span className="text-[10px] font-bold uppercase tracking-tight">Theme</span>
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-48 rounded-none border-t-4 border-t-primary">
+                <DropdownMenuLabel className="text-[10px] uppercase font-black tracking-widest text-muted-foreground">Select Protocol</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {themes.map((t) => (
+                  <DropdownMenuItem 
+                    key={t.id} 
+                    onClick={() => setTheme(t.id)}
+                    className="flex items-center justify-between cursor-pointer py-3"
+                  >
+                    <span className={cn("text-[11px] font-black uppercase tracking-widest", theme === t.id && "text-primary")}>{t.name}</span>
+                    <div className={cn("h-3 w-3 rounded-full", t.color)} />
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <Link href="/dashboard" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all group">
               <Briefcase className="h-5 w-5" />
               <span className="text-[10px] font-bold uppercase tracking-tight">Professional</span>
-            </Link>
-            <Link href="/dashboard" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all group">
-              <LayoutGrid className="h-5 w-5" />
-              <span className="text-[10px] font-bold uppercase tracking-tight">My Ads</span>
             </Link>
             <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
               <MessageSquare className="h-5 w-5" />
@@ -106,7 +144,7 @@ export function Navbar() {
                 variant="ghost" 
                 className="text-foreground font-black text-[12px] uppercase tracking-widest px-6 h-12 hover:bg-muted rounded-[2rem] border border-muted-foreground/20 transition-all"
               >
-                To enter
+                Login
               </Button>
             )}
 
@@ -123,4 +161,8 @@ export function Navbar() {
       </div>
     </header>
   );
+}
+
+function cn(...classes: (string | boolean | undefined)[]) {
+  return classes.filter(Boolean).join(' ');
 }

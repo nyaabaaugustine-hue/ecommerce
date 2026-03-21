@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    /* LIGHT MODE (OLX CLONE) */
+    /* LIGHT MODE (DEFAULT) */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 45 100% 50%; /* Gold preserved for heritage elements */
+    --primary: 45 100% 50%;
     --primary-foreground: 222 47% 11%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222 47% 11%;
@@ -27,44 +27,108 @@
     --radius: 0px;
     --burgundy: 0 100% 27%;
     --gold: 45 100% 50%;
-    
-    /* OLX Specific Badges */
-    --olx-purple: 262 83% 58%;
-    --olx-pink: 322 81% 55%;
   }
 
-  .dark {
-    /* DARK MODE (SOVEREIGN HERITAGE) */
+  /* THEME DEFINITIONS */
+  [data-theme='sovereign'] {
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
     --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
     --primary: 45 100% 50%;
     --primary-foreground: 222 47% 11%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 45 100% 50%;
-    --accent-foreground: 222 47% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
     --ring: 45 100% 50%;
-    --gold: 45 100% 50%;
+  }
+
+  [data-theme='midnight'] {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --border: 0 0% 15%;
+    --ring: 0 0% 100%;
+  }
+
+  [data-theme='cobalt'] {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 222 47% 20%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 47% 25%;
+    --muted-foreground: 215 20% 65%;
+    --border: 222 47% 25%;
+    --ring: 217 91% 60%;
+  }
+
+  [data-theme='royal'] {
+    --background: 273 67% 10%;
+    --foreground: 273 20% 98%;
+    --card: 273 67% 15%;
+    --card-foreground: 273 20% 98%;
+    --primary: 45 100% 50%;
+    --primary-foreground: 273 67% 10%;
+    --secondary: 273 67% 20%;
+    --secondary-foreground: 273 20% 98%;
+    --muted: 273 67% 25%;
+    --muted-foreground: 273 20% 65%;
+    --border: 273 67% 25%;
+    --ring: 45 100% 50%;
+  }
+
+  [data-theme='crimson'] {
+    --background: 346 100% 10%;
+    --foreground: 346 20% 98%;
+    --card: 346 100% 15%;
+    --card-foreground: 346 20% 98%;
+    --primary: 346 80% 50%;
+    --primary-foreground: 346 20% 98%;
+    --secondary: 346 100% 20%;
+    --secondary-foreground: 346 20% 98%;
+    --muted: 346 100% 25%;
+    --muted-foreground: 346 20% 65%;
+    --border: 346 100% 25%;
+    --ring: 346 80% 50%;
+  }
+
+  [data-theme='cold-white'] {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border transition-all duration-300 ease-in-out;
+    @apply border-border transition-colors duration-500 ease-in-out;
   }
   body {
     @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
     letter-spacing: -0.01em;
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
   
   img {

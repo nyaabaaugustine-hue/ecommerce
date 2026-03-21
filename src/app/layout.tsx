@@ -9,6 +9,7 @@ import { WhatsAppButton } from '@/components/whatsapp-button';
 import { PostAdButton } from '@/components/post-ad-button';
 import { ShoppingAssistant } from '@/components/shopping-assistant';
 import { OnboardingTour } from '@/components/onboarding-tour';
+import { Facebook, Youtube, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -27,73 +28,45 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <ShoppingAssistant />
       <OnboardingTour />
 
-      <footer className="bg-secondary text-white pt-12 pb-8 border-t border-primary/40">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-            <div className="lg:col-span-1 space-y-4">
-               <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 font-headline font-black text-xl text-white">
-                    <div className="relative h-8 w-8 overflow-hidden rounded-none border border-primary/30 shadow-sm">
-                      <Image 
-                        src={content.settings.logoUrl} 
-                        alt="Logo" 
-                        fill 
-                        sizes="32px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="tracking-tighter uppercase">
-                      <span className="text-primary animate-v-glow">{content.settings.siteName.charAt(0)}</span>{content.settings.siteName.slice(1)}
-                    </span>
-                  </div>
-                  <p className="text-white/50 text-[10px] leading-relaxed max-w-xs font-medium uppercase tracking-widest">
-                    The most trusted multi-vendor marketplace in Accra. Protected by multi-method escrow systems.
-                  </p>
-               </div>
-               <div className="space-y-1">
-                  <p className="text-[8px] font-black uppercase tracking-widest text-primary">Support Center</p>
-                  <p className="text-base font-black text-white">{content.settings.supportPhone}</p>
-               </div>
-            </div>
-            
-            <div>
-              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Marketplace</h4>
-              <ul className="space-y-2 text-white/50 text-[9px] font-bold uppercase tracking-widest">
-                <li className="hover:text-primary transition-colors cursor-pointer">Vehicles & Cars</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Property & Land</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Jobs & Services</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Help & Safety</h4>
-              <ul className="space-y-2 text-white/50 text-[9px] font-bold uppercase tracking-widest">
-                <li className="hover:text-primary transition-colors cursor-pointer">Escrow Protection</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Buyer Guarantee</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Dispute Center</li>
-              </ul>
-            </div>
-
-            <div className="lg:col-span-2 space-y-6">
-              <h4 className="font-black text-xs uppercase tracking-widest text-primary">Authorized Payments</h4>
-              <div className="bg-white/5 p-4 border border-white/10 rounded-none inline-block">
-                <Image 
-                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059424/Screenshot_319_zlvuyf.png" 
-                  alt="Payment Methods" 
-                  width={300} 
-                  height={60} 
-                  className="h-auto w-full max-w-[280px] object-contain opacity-80 hover:opacity-100 transition-opacity"
-                  unoptimized
-                />
-              </div>
-              <p className="text-[8px] text-white/30 uppercase font-black tracking-widest leading-relaxed">
-                Secure local and international checkout nodes active.
-              </p>
-            </div>
+      <footer className="bg-white dark:bg-background text-foreground pt-12 pb-8 border-t">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Horizontal Link Registry */}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-12 text-[13px] font-bold text-muted-foreground uppercase tracking-tight">
+            <a href="#" className="hover:text-primary">Help</a>
+            <a href="#" className="hover:text-primary">Safety tips</a>
+            <a href="#" className="hover:text-primary">Terms of use</a>
+            <a href="#" className="hover:text-primary">Privacy Policy</a>
+            <a href="#" className="hover:text-primary">Intellectual property</a>
+            <a href="#" className="hover:text-primary">Site map</a>
+            <a href="#" className="hover:text-primary">Work with us</a>
+            <a href="#" className="hover:text-primary">Vault Group</a>
+            <a href="#" className="hover:text-primary">Institutional real estate</a>
+            <a href="#" className="hover:text-primary">Live Real</a>
           </div>
-          
-          <div className="pt-6 border-t border-white/5 text-center text-white/30 text-[8px] font-black uppercase tracking-[0.4em]" suppressHydrationWarning>
-            {content.settings.footerCopyright}
+
+          <div className="pt-12 border-t flex flex-col items-center gap-8">
+            <p className="text-[12px] font-medium text-muted-foreground text-center italic opacity-60">
+              © 2026 Ecommerce Inc. Registry Node: Airport Residential Area, Accra, Ghana Node - 00233-GH-ACC
+            </p>
+
+            {/* Social Protocol Registry */}
+            <div className="flex items-center gap-6">
+              <a href="#" className="h-10 w-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary transition-all text-muted-foreground hover:text-white">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="h-10 w-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary transition-all text-muted-foreground hover:text-white">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="h-10 w-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary transition-all text-muted-foreground hover:text-white">
+                <Youtube className="h-5 w-5" />
+              </a>
+              <a href="#" className="h-10 w-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary transition-all text-muted-foreground hover:text-white">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="#" className="h-10 w-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary transition-all text-muted-foreground hover:text-white">
+                <MessageCircle className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
