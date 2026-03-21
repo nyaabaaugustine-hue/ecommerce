@@ -53,7 +53,7 @@ export const MOCK_USERS: User[] = [
 ];
 
 export const LISTINGS: Listing[] = [
-  // SPONSORED ADS (TOP PRIORITY CLONE)
+  // SPONSORED ADS
   {
     id: 'sp1',
     title: 'Excellent plot/land for SALE or EXCHANGE in East Legon',
@@ -141,7 +141,90 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // ELECTRONICS (CELL PHONES ROW)
+  // REAL ESTATE ROW
+  {
+    id: 're1',
+    title: 'Apartment-style house in Airport Residential',
+    price: 450000,
+    isNegotiable: true,
+    category: 'Property',
+    location: 'Airport Residential',
+    postedAt: 'Today, 3:15',
+    postedTimestamp: Date.now() - 1000000,
+    imageUrl: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v2',
+    description: 'Modern duplex with high-end finishes.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's11', name: 'Prime Estate', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 're2',
+    title: 'House for rent in a gated community',
+    price: 8500,
+    isNegotiable: false,
+    category: 'Property',
+    location: 'Cantonments, Accra',
+    postedAt: 'Today, 2:45',
+    postedTimestamp: Date.now() - 2000000,
+    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v2',
+    description: 'Spacious family home with pool.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's11', name: 'Prime Estate', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 're3',
+    title: 'Apartment for rent in Vila Node',
+    price: 3500,
+    isNegotiable: true,
+    category: 'Property',
+    location: 'Ridge, Accra',
+    postedAt: 'Today, 1:30',
+    postedTimestamp: Date.now() - 5000000,
+    imageUrl: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v2',
+    description: 'Cozy apartment perfect for professionals.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's11', name: 'Prime Estate', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 're4',
+    title: 'House for Rent in Aleixo Hub',
+    price: 5200,
+    isNegotiable: false,
+    category: 'Property',
+    location: 'East Legon',
+    postedAt: 'Today, 0:50',
+    postedTimestamp: Date.now() - 8000000,
+    imageUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v2',
+    description: 'Classic residential home with large garden.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's11', name: 'Prime Estate', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 're5',
+    title: 'Want to live in the best Ridge node?',
+    price: 1200000,
+    isNegotiable: true,
+    category: 'Property',
+    location: 'Ridge, Accra',
+    postedAt: 'Just Now',
+    postedTimestamp: Date.now() - 60000,
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v2',
+    description: 'Ultra-luxury penthouse with skyline views.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isEmphasis: true,
+    seller: { id: 's11', name: 'Prime Estate', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
+  },
+
+  // ELECTRONICS
   {
     id: 'e1',
     title: 'iPhone 15 Pro Max 256GB - Natural Titanium',
@@ -233,7 +316,7 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // FURNITURE (CABINETS ROW)
+  // FURNITURE
   {
     id: 'f1',
     title: 'Antique Family Chest',
@@ -319,7 +402,7 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // AIR CONDITIONERS ROW (5 ITEMS)
+  // AIR CONDITIONERS
   {
     id: 'ac1',
     title: 'Philco 12000 BTU Eco Inverter',
@@ -406,7 +489,7 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // GAME BOY TRENDING (5 ITEMS)
+  // GAME BOY
   {
     id: 'gb1',
     title: 'Nintendo Game Boy Advance SP',
@@ -494,7 +577,7 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // SOVEREIGN VEHICLES NODE (5 ITEMS)
+  // VEHICLES
   {
     id: 'v_h1',
     title: 'Hyundai HB20X Style 1.6 Flex 16V Aut. 2015',

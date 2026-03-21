@@ -3,6 +3,7 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ListingCard } from '@/components/listing-card';
 import { CategoryBar } from '@/components/category-bar';
 import { HeroCarousel } from '@/components/hero-carousel';
@@ -48,6 +49,18 @@ export function HomePage() {
     return LISTINGS.filter(l => l.id.startsWith('v_')).slice(0, 5);
   }, []);
 
+  const realEstate = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Property' && l.id.startsWith('re')).slice(0, 5);
+  }, []);
+
+  const REAL_ESTATE_SPOTLIGHT = [
+    { title: "New properties for sale", imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop" },
+    { title: "Apartments for sale", imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" },
+    { title: "Apartments for rent", imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" },
+    { title: "Houses for sale", imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" },
+    { title: "Houses for rent", imageUrl: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=800&auto=format&fit=crop" },
+  ];
+
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20 overflow-x-hidden">
       {/* CATEGORY REGISTRY */}
@@ -89,6 +102,61 @@ export function HomePage() {
 
       {/* CLONE SECTION: Category Spotlight */}
       <SpotlightCategories />
+
+      {/* CLONE SECTION: Buy or Rent Spotlight (5 Columns) */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8">
+          <h2 className="text-2xl font-medium text-foreground tracking-tight">
+            Buy or rent
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {REAL_ESTATE_SPOTLIGHT.map((item, idx) => (
+            <Link 
+              key={item.title} 
+              href="/listings?category=Property"
+              className={cn(
+                "group relative flex flex-col bg-white border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
+                `animate-in slide-in-from-bottom-4 delay-${idx * 100}`
+              )}
+            >
+              <div className="relative aspect-square w-full overflow-hidden">
+                <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              </div>
+              <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
+                <p className="text-center font-bold text-[13px] text-foreground/80 group-hover:text-primary uppercase tracking-tight">
+                  {item.title}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* CLONE ROW: Real Estate Registry */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-medium text-foreground tracking-tight">
+            Most searched in <span className="font-bold">Real Estate</span>
+          </h2>
+          <Link href="/listings?category=Property" className="text-sm font-bold text-primary hover:underline">
+            View all
+          </Link>
+        </div>
+        
+        <div className="relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {realEstate.map((item, idx) => (
+              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
+                <ListingCard {...item} />
+              </div>
+            ))}
+          </div>
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
+      </section>
 
       {/* CLONE ROW: Prices have dropped */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group">
