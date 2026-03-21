@@ -9,7 +9,7 @@ const SPOTLIGHTS = [
   {
     title: "Cell phones",
     href: "/listings?category=Electronics",
-    imageUrl: "https://picsum.photos/seed/gh-spot-phone/800/600",
+    imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png",
     imageHint: "ghanaian smartphone"
   },
   {
@@ -21,7 +21,7 @@ const SPOTLIGHTS = [
   {
     title: "Computers",
     href: "/listings?category=Electronics",
-    imageUrl: "https://picsum.photos/seed/gh-spot-pc/800/600",
+    imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png",
     imageHint: "office computer"
   },
   {
@@ -67,6 +67,7 @@ export function SpotlightCategories() {
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, 300px"
                 data-ai-hint={item.imageHint}
+                unoptimized
               />
             </div>
             <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo } from 'react';
@@ -55,7 +56,7 @@ export function HomePage() {
         <HeroCarousel />
       </div>
 
-      {/* COMPACT HUB: LAPTOPS */}
+      {/* (Most popular laptops) */}
       <section className="w-full py-6 bg-muted/5 overflow-hidden border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-4 mb-4 flex items-end justify-between">
           <div className="space-y-0.5">
@@ -80,7 +81,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SMART COMMUNICATION */}
+      {/* (Most searched for mobiles) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>
@@ -98,7 +99,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* PREMIUM AUTOS */}
+      {/* (Most searched for vehicles) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 bg-muted/5">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>
@@ -116,7 +117,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* INDUSTRIAL AGRO-BUSINESS */}
+      {/* (Most searched for agriculture) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>
@@ -132,7 +133,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* DESIGNER LIFESTYLE */}
+      {/* (Most popular fashion) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 bg-muted/5">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>
@@ -150,7 +151,7 @@ export function HomePage() {
 
       <SpotlightCategories />
 
-      {/* PROFESSIONAL SOLUTIONS */}
+      {/* (Most popular services) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>
@@ -166,14 +167,14 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* PERFORMANCE ATHLETICS */}
+      {/* (Most searched for sports) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 bg-muted/5">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most searched for sports)
             </h2>
-            <p className="text-[9px] md:text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Elite Fitness & Sporting Hardware</p>
+            <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Elite Fitness & Sporting Hardware</p>
           </div>
           <Link href="/listings?category=Sports" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
@@ -182,7 +183,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* ELITE ESTATES */}
+      {/* (Most popular property) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 border-b">
         <div className="mb-6 md:mb-8 flex justify-between items-end">
           <div>

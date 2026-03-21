@@ -53,6 +53,9 @@ export function Navbar() {
     { name: 'About Us', href: '/about', icon: Info },
     { name: 'Vendors', href: '/vendors', icon: ShieldCheck },
     { name: 'Contact', href: '/contact', icon: Phone },
+  ];
+
+  const UTILITY_LINKS = [
     { name: 'Help', href: '/help', icon: HelpCircle },
   ];
 
@@ -64,7 +67,7 @@ export function Navbar() {
       <div className="bg-muted/50 border-b border-dashed hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 h-7 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            {NAV_LINKS.slice(1).map((link) => (
+            {UTILITY_LINKS.map((link) => (
               <Link key={link.name} href={link.href} className="text-[8px] font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors flex items-center gap-1">
                 <link.icon className="h-2.5 w-2.5" /> {link.name}
               </Link>
