@@ -65,6 +65,6 @@ export const INITIAL_CONTENT = {
     supportPhone: "(+233) 05419 88 383",
     supportEmail: "Cybertechgh@gmail.com",
     footerCopyright: "© 2026 Ecommerce. All rights reserved by Cyber.",
-    defaultTheme: "sovereign" as const
+    defaultTheme: "cold-white" as const
   }
 };
