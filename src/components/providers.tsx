@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -33,6 +32,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem('vault_theme') as PrimaryTheme;
+    // Master Default Force: Cold-White
     if (stored) {
       setTheme(stored);
     } else {
