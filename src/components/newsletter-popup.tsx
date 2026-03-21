@@ -1,15 +1,16 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { X, ShieldCheck, Truck, RotateCcw, Zap, Mail, ArrowRight, ShieldAlert } from 'lucide-react';
+import { X, ShieldCheck, Truck, RotateCcw, Zap, Mail, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
 /**
  * @fileOverview Sovereign Newsletter Registry Popup
  * Styled after elite marketplace welcome modals with 50% opacity overlays.
+ * Features institutional promises and GHS-Accra authorization nodes.
  */
 export function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,11 +45,19 @@ export function NewsletterPopup() {
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-500">
       <div className="relative w-full max-w-4xl bg-white shadow-2xl flex flex-col md:flex-row rounded-none overflow-hidden animate-in zoom-in-95 duration-500 border-t-4 border-t-accent">
         
-        {/* Left Side: Institutional Promises (50% Opacity Overlay) */}
-        <div className="w-full md:w-[40%] bg-accent p-8 md:p-12 text-secondary space-y-10 flex flex-col justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-white/50 pointer-events-none" />
+        {/* Left Side: Institutional Image & Promises (50% Opacity Overlay) */}
+        <div className="w-full md:w-[45%] relative bg-secondary text-white min-h-[400px]">
+          <Image 
+            src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057741/cx_n0ltnr.jpg" 
+            alt="Institutional Protocol" 
+            fill 
+            className="object-cover"
+            priority
+          />
+          {/* 50% Opacity Accent Overlay */}
+          <div className="absolute inset-0 bg-accent/50 pointer-events-none" />
           
-          <div className="space-y-10 relative z-10">
+          <div className="relative z-10 p-8 md:p-12 flex flex-col justify-center h-full space-y-10 text-secondary">
             <div className="space-y-6">
               <div className="flex items-start gap-5 group">
                 <div className="h-10 w-10 bg-secondary text-white flex items-center justify-center font-black text-xl shrink-0 group-hover:scale-110 transition-transform">1</div>
@@ -60,42 +69,34 @@ export function NewsletterPopup() {
               </div>
             </div>
 
-            <div className="pt-8 space-y-8">
+            <div className="pt-4 space-y-6">
               <div className="flex items-center gap-3">
                 <div className="h-[2px] w-8 bg-secondary" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary">Our Promises</span>
               </div>
-              <div className="grid grid-cols-2 gap-8">
-                <div className="flex flex-col items-center text-center gap-3 group">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
-                    <ShieldCheck className="h-6 w-6 text-secondary" />
-                  </div>
-                  <span className="text-[9px] font-black uppercase tracking-tighter">Verified Trust</span>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="flex items-center gap-3 group">
+                   <ShieldCheck className="h-4 w-4 text-secondary group-hover:scale-110 transition-transform" />
+                   <span className="text-[9px] font-black uppercase tracking-tighter">Verified Trust</span>
                 </div>
-                <div className="flex flex-col items-center text-center gap-3 group">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
-                    <RotateCcw className="h-6 w-6 text-secondary" />
-                  </div>
-                  <span className="text-[9px] font-black uppercase tracking-tighter">Quick Refund</span>
+                <div className="flex items-center gap-3 group">
+                   <RotateCcw className="h-4 w-4 text-secondary group-hover:scale-110 transition-transform" />
+                   <span className="text-[9px] font-black uppercase tracking-tighter">Quick Refund</span>
                 </div>
-                <div className="flex flex-col items-center text-center gap-3 group">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
-                    <Zap className="h-6 w-6 text-secondary" />
-                  </div>
-                  <span className="text-[9px] font-black uppercase tracking-tighter">Pay on Node</span>
+                <div className="flex items-center gap-3 group">
+                   <Zap className="h-4 w-4 text-secondary group-hover:scale-110 transition-transform" />
+                   <span className="text-[9px] font-black uppercase tracking-tighter">Pay on Node</span>
                 </div>
-                <div className="flex flex-col items-center text-center gap-3 group">
-                  <div className="h-12 w-12 rounded-full border-2 border-secondary/20 flex items-center justify-center group-hover:border-secondary transition-colors">
-                    <Truck className="h-6 w-6 text-secondary" />
-                  </div>
-                  <span className="text-[9px] font-black uppercase tracking-tighter">Fast Dispatch</span>
+                <div className="flex items-center gap-3 group">
+                   <Truck className="h-4 w-4 text-secondary group-hover:scale-110 transition-transform" />
+                   <span className="text-[9px] font-black uppercase tracking-tighter">Fast Dispatch</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Side: Subscription Form */}
+        {/* Right Side: Subscription Form Node */}
         <div className="flex-1 p-8 md:p-16 flex flex-col justify-center relative bg-white">
           <button 
             onClick={handleDismiss}
