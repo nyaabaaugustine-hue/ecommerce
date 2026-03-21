@@ -105,7 +105,7 @@ export function AdminSidebar() {
         <Link href="/" className="flex items-center gap-3 group px-1">
           <div className="relative h-10 w-10 overflow-hidden rounded-[var(--radius)] border border-primary/30 shrink-0">
             <Image 
-              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg" 
+              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057903/ai-removebg-preview_ikywpe.png" 
               alt="Ecommerce" 
               fill 
               className="object-cover"

@@ -61,7 +61,7 @@ export const INITIAL_CONTENT = {
   settings: {
     siteName: "Ecommerce",
     siteTagline: "The Gold Standard",
-    logoUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg",
+    logoUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057903/ai-removebg-preview_ikywpe.png",
     supportPhone: "(+233) 05419 88 383",
     supportEmail: "Cybertechgh@gmail.com",
     footerCopyright: "© 2026 Ecommerce. All rights reserved by Cyber.",
