@@ -28,13 +28,14 @@ import { Sparkles, Loader2, Plus, X, ShieldCheck, Info, Calculator, ArrowRightLe
 import { generateListingDescription } from '@/ai/flows/ai-generated-listing-description-flow';
 import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
+import Image from 'next/image';
 
 const formSchema = z.object({
-  title: z.string().min(5, "Institutional title must be at least 5 characters"),
-  category: z.string().min(1, "Please select an institutional sector"),
-  price: z.string().min(1, "Please enter a registry price"),
-  description: z.string().min(20, "Protocol description must be at least 20 characters"),
-  location: z.string().min(3, "Please enter a verified market location"),
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  category: z.string().min(1, "Please select a category"),
+  price: z.string().min(1, "Please enter a price"),
+  description: z.string().min(20, "Description must be at least 20 characters"),
+  location: z.string().min(3, "Please enter a location"),
 });
 
 export function ListingCreateForm() {
@@ -70,8 +71,8 @@ export function ListingCreateForm() {
 
     if (!title || !category) {
       toast({
-        title: "Metadata Incomplete",
-        description: "Please provide a title and sector first to initiate AI node.",
+        title: "Information Incomplete",
+        description: "Please provide a title and category first to initiate AI Assistant.",
         variant: "destructive",
       });
       return;
@@ -82,19 +83,19 @@ export function ListingCreateForm() {
       const result = await generateListingDescription({
         title,
         category,
-        keyFeatures: keyFeatures.length > 0 ? keyFeatures : ["Sovereign Warranty", "Verified Registry Member", "Vault Secured"],
+        keyFeatures: keyFeatures.length > 0 ? keyFeatures : ["Full Warranty", "Verified Seller", "Escrow Secured"],
         length: 'medium',
         tone: 'professional'
       });
       form.setValue('description', result.description);
       toast({
         title: "AI Synthesis Successful",
-        description: "Registry description has been optimized for GHS marketplace.",
+        description: "Product description has been optimized for the marketplace.",
       });
     } catch (error) {
       toast({
-        title: "AI Node Temporarily Paused",
-        description: "Focusing on manual protocol input. AI optimizations are currently offline.",
+        title: "AI Assistant Temporarily Offline",
+        description: "Please provide a manual description. AI optimizations are currently unavailable.",
         variant: "destructive",
       });
     } finally {
@@ -117,7 +118,7 @@ export function ListingCreateForm() {
     console.log(values);
     toast({
       title: "Listing Authorized",
-      description: "Asset is now live in the global registry with multisig escrow protection.",
+      description: "Item is now live in the marketplace with escrow protection.",
     });
   }
 
@@ -130,9 +131,9 @@ export function ListingCreateForm() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Asset Title</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Product Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Executive Corporate Suite - Ridge" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
+                  <Input placeholder="e.g. Executive Laptop - Core i9" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -144,18 +145,18 @@ export function ListingCreateForm() {
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Market Sector</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Market Category</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger className="rounded-none h-14 border-2 focus:border-accent">
-                      <SelectValue placeholder="Select Institutional Sector" />
+                      <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="rounded-none">
                     <SelectItem value="Electronics">Electronics & Tech</SelectItem>
                     <SelectItem value="Real Estate">Real Estate & Property</SelectItem>
                     <SelectItem value="Education">Educational Services</SelectItem>
-                    <SelectItem value="Professional Services">Professional Advisory</SelectItem>
+                    <SelectItem value="Professional Services">Professional Services</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -168,7 +169,7 @@ export function ListingCreateForm() {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Registry Value (GH₵)</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Price (GH₵)</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <span className="absolute left-5 top-1/2 -translate-y-1/2 font-black text-primary">GH₵</span>
@@ -185,9 +186,9 @@ export function ListingCreateForm() {
             name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Verified Location</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Delivery Location</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Airport Residential Area, Accra" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
+                  <Input placeholder="e.g. East Legon, Accra" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -200,21 +201,21 @@ export function ListingCreateForm() {
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-6">
                 <Calculator className="h-5 w-5 text-accent" />
-                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-primary">Settlement Protocol Breakdown</h4>
+                <h4 className="text-xs font-black uppercase tracking-[0.2em] text-primary">Escrow Settlement Breakdown</h4>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Gross Asset Value</span>
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Gross Sale Value</span>
                   <p className="text-2xl font-black text-secondary">GH₵{parseFloat(watchPrice).toLocaleString()}</p>
                 </div>
                 <div className="space-y-2">
                   <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-                    Treasury Lock Fee (2.5%) <Info className="h-3.5 w-3.5" />
+                    Service Lock Fee (2.5%) <Info className="h-3.5 w-3.5" />
                   </span>
                   <p className="text-2xl font-black text-destructive">-GH₵{payoutStats.treasuryFee.toFixed(2)}</p>
                 </div>
                 <div className="space-y-2 bg-primary/5 p-5 border-l-4 border-accent">
-                  <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Net Vendor Settlement</span>
+                  <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Net Seller Payout</span>
                   <p className="text-3xl font-black text-primary">GH₵{payoutStats.netEarnings.toLocaleString()}</p>
                 </div>
               </div>
@@ -224,14 +225,14 @@ export function ListingCreateForm() {
 
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Institutional Features</FormLabel>
-            <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest">Optimizes Registry Visibility</span>
+            <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Key Features</FormLabel>
+            <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest">Increases Marketplace Visibility</span>
           </div>
           <div className="flex gap-3">
             <Input 
               value={featureInput}
               onChange={(e) => setFeatureInput(e.target.value)}
-              placeholder="e.g. Accredited Ownership, Multisig Authorized..."
+              placeholder="e.g. 1 Year Warranty, Fast Delivery..."
               className="rounded-none h-14 border-2 focus:border-accent"
               onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
             />
@@ -257,7 +258,7 @@ export function ListingCreateForm() {
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center justify-between mb-3">
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Asset Specifications</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Full Description</FormLabel>
                 <Button 
                   type="button" 
                   size="sm" 
@@ -266,12 +267,12 @@ export function ListingCreateForm() {
                   disabled={isGenerating}
                 >
                   {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                  AI Registry Assistant
+                  AI Optimization
                 </Button>
               </div>
               <FormControl>
                 <Textarea 
-                  placeholder="Provide comprehensive institutional overview and protocol requirements..." 
+                  placeholder="Provide comprehensive details and shipping requirements..." 
                   className="min-h-[250px] rounded-none leading-relaxed border-2 focus:border-accent transition-colors bg-background p-6 font-medium" 
                   {...field} 
                 />
@@ -286,20 +287,30 @@ export function ListingCreateForm() {
           <div className="bg-white/5 p-6 rounded-none backdrop-blur-md border border-white/10 shadow-inner">
             <ShieldCheck className="h-12 w-12 text-accent" />
           </div>
-          <div className="flex-1 space-y-3">
-            <h4 className="font-black text-2xl mb-2 flex items-center gap-4 tracking-tighter uppercase">
+          <div className="flex-1 space-y-4">
+            <h4 className="font-black text-2xl flex items-center gap-4 tracking-tighter uppercase">
               <ArrowRightLeft className="h-6 w-6 text-accent" />
-              Sovereign Escrow Protection
+              Secure Payment Protection
             </h4>
-            <p className="text-sm text-white/50 leading-relaxed font-medium">
-              VaultCommerce enforces high-trust institutional trade in Ghana. Upon authorization, funds are restricted via Paystack until the recipient certifies the fidelity audit. All disbursements follow automated treasury split-logic.
+            <p className="text-sm text-white/50 leading-relaxed font-medium uppercase tracking-widest">
+              Ecommerce enforces high-trust trade in Ghana. All payments are restricted via our secure multi-method gateway until the buyer certifies quality inspection.
             </p>
+            <div className="pt-2">
+              <Image 
+                src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059424/Screenshot_319_zlvuyf.png" 
+                alt="Authorized Payments" 
+                width={240} 
+                height={40} 
+                className="h-8 object-contain opacity-80"
+                unoptimized
+              />
+            </div>
           </div>
         </div>
 
         <div className="flex justify-end pt-12 pb-8">
           <Button type="submit" size="lg" className="px-20 bg-primary text-white hover:bg-accent hover:text-secondary rounded-none font-black h-16 shadow-2xl text-[11px] uppercase tracking-[0.3em] border-2 border-primary">
-            Publish To Global Registry
+            Publish To Marketplace
           </Button>
         </div>
       </form>

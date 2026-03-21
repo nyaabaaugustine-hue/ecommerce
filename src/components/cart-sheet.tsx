@@ -24,10 +24,10 @@ export function CartSheet() {
   const handleCheckout = () => {
     setIsCheckingOut(true);
     const steps = [
-      "Connecting to Escrow Node...",
-      "Syncing GHS Treasury...",
-      "Authorizing Vault Lock...",
-      "Finalizing Protocol..."
+      "Connecting to Escrow System...",
+      "Syncing Payment Center...",
+      "Authorizing Secure Lock...",
+      "Finalizing Transaction..."
     ];
 
     let current = 0;
@@ -93,9 +93,9 @@ export function CartSheet() {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="font-black text-burgundy text-xs">{formatPrice(item.price)}</span>
-                      <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)} className="h-7 w-7 rounded-none hover:bg-red-50 hover:text-red-500">
+                      <button onClick={() => removeItem(item.id)} className="text-muted-foreground hover:text-red-500 transition-colors">
                         <Trash2 className="h-3.5 w-3.5" />
-                      </Button>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export function CartSheet() {
             <div className="p-6 bg-muted/20 border-t space-y-6">
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-[10px] font-black text-muted-foreground uppercase tracking-widest">
-                  <span>Subtotal Registry</span>
+                  <span>Subtotal</span>
                   <span className="text-burgundy">{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between items-center">
@@ -116,11 +116,24 @@ export function CartSheet() {
                 </div>
               </div>
               
-              <div className="bg-primary/5 p-4 rounded-none border border-primary/20 flex gap-3">
-                <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
-                <p className="text-[9px] text-secondary/70 font-black uppercase tracking-tight leading-tight">
-                  Funds protected via Paystack Escrow. They only release to vendors after your fidelity audit.
-                </p>
+              <div className="space-y-4">
+                <div className="bg-primary/5 p-4 rounded-none border border-primary/20 flex gap-3">
+                  <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
+                  <p className="text-[9px] text-secondary/70 font-black uppercase tracking-tight leading-tight">
+                    Funds protected via Secure Payment Escrow. Released to vendors only after your inspection.
+                  </p>
+                </div>
+                
+                <div className="flex justify-center">
+                  <Image 
+                    src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059424/Screenshot_319_zlvuyf.png" 
+                    alt="Authorized Payments" 
+                    width={240} 
+                    height={40} 
+                    className="h-8 object-contain"
+                    unoptimized
+                  />
+                </div>
               </div>
 
               <Button 
@@ -148,8 +161,8 @@ export function CartSheet() {
       <Dialog open={isCheckingOut}>
         <DialogContent className="sm:max-w-md border-none bg-secondary text-white text-center p-10 rounded-none shadow-2xl">
           <DialogHeader className="sr-only">
-             <DialogTitle>Escrow Authorization</DialogTitle>
-             <DialogDescription>Securing funds in the sovereign vault node.</DialogDescription>
+             <DialogTitle>Payment Authorization</DialogTitle>
+             <DialogDescription>Securing funds in the escrow system.</DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center gap-8 py-4">
             <div className="relative">
@@ -159,10 +172,10 @@ export function CartSheet() {
               <div className="absolute inset-0 h-24 w-24 rounded-none border-4 border-primary border-t-transparent animate-spin" />
             </div>
             <div className="space-y-4 w-full">
-              <h3 className="text-xl font-black text-white tracking-tighter uppercase">Escrow Authorization</h3>
+              <h3 className="text-xl font-black text-white tracking-tighter uppercase">Securing Escrow</h3>
               <div className="space-y-2">
                 <p className="text-primary/80 text-[10px] font-black uppercase tracking-widest animate-pulse">
-                  {["Connecting Node...", "Syncing Treasury...", "Authorizing Vault...", "Securing Protocol..."][checkoutStep]}
+                  {["Connecting...", "Syncing Payment...", "Authorizing...", "Securing System..."][checkoutStep]}
                 </p>
                 <Progress value={(checkoutStep + 1) * 25} className="h-1.5 bg-white/10" />
               </div>
@@ -175,9 +188,9 @@ export function CartSheet() {
       <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
         <DialogContent className="sm:max-w-md rounded-none p-10 border-t-4 border-t-primary shadow-2xl">
           <DialogHeader>
-             <DialogTitle className="text-2xl font-black text-secondary tracking-tighter uppercase text-center">Protocol Locked!</DialogTitle>
+             <DialogTitle className="text-2xl font-black text-secondary tracking-tighter uppercase text-center">Payment Secured!</DialogTitle>
              <DialogDescription className="text-[10px] font-black text-muted-foreground uppercase tracking-widest text-center mt-2">
-                {formatPrice(total)} successfully restricted in Escrow.
+                {formatPrice(total)} successfully held in Escrow.
              </DialogDescription>
           </DialogHeader>
           <div className="text-center space-y-6 pt-4">
@@ -188,19 +201,19 @@ export function CartSheet() {
             <div className="bg-muted p-6 rounded-none border border-dashed">
               <div className="flex items-center justify-center gap-3 text-secondary font-black">
                 <CheckCircle2 className="h-6 w-6 text-primary" />
-                <span className="text-2xl font-black tracking-tighter">Orders Verified</span>
+                <span className="text-2xl font-black tracking-tighter">Authorized</span>
               </div>
               <p className="text-[9px] uppercase font-black text-muted-foreground mt-2 tracking-widest">
-                Syncing with Vendor Nodes
+                Syncing with Order Center
               </p>
             </div>
 
             <Button onClick={handleGoToDashboard} className="w-full h-14 bg-secondary text-white rounded-none font-black gap-2 text-[10px] uppercase tracking-widest hover:bg-secondary/90 shadow-2xl">
-              Go to Dashboard <ArrowRight className="h-4 w-4" />
+              View My Account <ArrowRight className="h-4 w-4" />
             </Button>
             
             <p className="text-[8px] text-muted-foreground font-black uppercase tracking-[0.3em]">
-              Authorization SMS sent to your verified node
+              Confirmation SMS sent to your verified phone
             </p>
           </div>
         </DialogContent>

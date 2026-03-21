@@ -33,7 +33,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             <div className="lg:col-span-1 space-y-4">
                <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 font-headline font-black text-xl text-white">
-                    <div className="relative h-8 w-8 overflow-hidden rounded-none border border-primary/30">
+                    <div className="relative h-8 w-8 overflow-hidden rounded-none border border-primary/30 shadow-sm">
                       <Image 
                         src={content.settings.logoUrl} 
                         alt="Logo" 
@@ -45,54 +45,49 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                       <span className="text-primary animate-v-glow">{content.settings.siteName.charAt(0)}</span>{content.settings.siteName.slice(1)}
                     </span>
                   </div>
-                  <p className="text-white/50 text-[10px] leading-relaxed max-w-xs font-medium">
-                    The Gold Standard for secure trade in Ghana. Institutionally powered by multisig escrow systems.
+                  <p className="text-white/50 text-[10px] leading-relaxed max-w-xs font-medium uppercase tracking-widest">
+                    The Gold Standard for secure trade in Ghana. Powered by multi-method escrow systems.
                   </p>
                </div>
                <div className="space-y-1">
-                  <p className="text-[8px] font-black uppercase tracking-widest text-primary">Protocol Support</p>
+                  <p className="text-[8px] font-black uppercase tracking-widest text-primary">Support Center</p>
                   <p className="text-base font-black text-white">{content.settings.supportPhone}</p>
                </div>
             </div>
             
             <div>
-              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Marketplace Registry</h4>
+              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Marketplace</h4>
               <ul className="space-y-2 text-white/50 text-[9px] font-bold uppercase tracking-widest">
-                <li className="hover:text-primary transition-colors cursor-pointer">Global Inventory</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Elite Favorites</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Treasury Settlement</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">All Products</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Best Sellers</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">New Arrivals</li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Vendor Registry</h4>
+              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Help & Safety</h4>
               <ul className="space-y-2 text-white/50 text-[9px] font-bold uppercase tracking-widest">
-                <li className="hover:text-primary transition-colors cursor-pointer">Fidelity Security</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Escrow Systems</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Mediation Center</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Escrow Protection</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Buyer Guarantee</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Dispute Center</li>
               </ul>
             </div>
 
-            <div>
-              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Anti-Fraud Engine</h4>
-              <ul className="space-y-2 text-white/50 text-[9px] font-bold uppercase tracking-widest">
-                <li className="hover:text-primary transition-colors cursor-pointer">Identity System</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Mobile App</h4>
-              <p className="text-white/50 text-[9px] mb-4 font-medium leading-relaxed">Manage your shopping on the go.</p>
-              <div className="flex flex-col gap-2">
+            <div className="lg:col-span-2 space-y-6">
+              <h4 className="font-black text-xs uppercase tracking-widest text-primary">Authorized Payments</h4>
+              <div className="bg-white/5 p-4 border border-white/10 rounded-none inline-block">
                 <Image 
-                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774019348/download_yztyla.png" 
-                  alt="Download" 
-                  width={160} 
-                  height={48} 
-                  className="rounded-none cursor-pointer hover:brightness-110 shadow-xl" 
-                  unoptimized 
+                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059424/Screenshot_319_zlvuyf.png" 
+                  alt="Payment Methods" 
+                  width={300} 
+                  height={60} 
+                  className="h-auto w-full max-w-[280px] object-contain opacity-80 hover:opacity-100 transition-opacity"
+                  unoptimized
                 />
               </div>
+              <p className="text-[8px] text-white/30 uppercase font-black tracking-widest leading-relaxed">
+                Secure local and international checkout nodes active.
+              </p>
             </div>
           </div>
           
