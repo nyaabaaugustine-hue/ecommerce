@@ -1,8 +1,9 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ShieldCheck, ShoppingBag, User, Zap, X } from 'lucide-react';
+import { ShieldCheck, ShoppingBag, User, Zap, X, Shield } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -14,7 +15,7 @@ const ACTIVITIES = [
     id: 1, 
     type: 'purchase', 
     text: 'Someone in Accra just secured a MacBook Pro in the Vault.', 
-    time: '2 mins ago', 
+    time: '2 MINS AGO', 
     icon: ShieldCheck,
     image: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png'
   },
@@ -22,7 +23,7 @@ const ACTIVITIES = [
     id: 2, 
     type: 'listing', 
     text: 'Melcom Digital Hub updated their global inventory.', 
-    time: '5 mins ago', 
+    time: '5 MINS AGO', 
     icon: Zap,
     image: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png'
   },
@@ -30,7 +31,7 @@ const ACTIVITIES = [
     id: 3, 
     type: 'escrow', 
     text: 'GH₵8,500 deposit authorized for a Samsung QLED TV.', 
-    time: 'Just now', 
+    time: 'JUST NOW', 
     icon: ShoppingBag,
     image: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png'
   },
@@ -38,7 +39,7 @@ const ACTIVITIES = [
     id: 4, 
     type: 'trust', 
     text: 'New institutional vendor "PrimeRentals GH" verified.', 
-    time: '12 mins ago', 
+    time: '12 MINS AGO', 
     icon: User,
     image: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg'
   },
@@ -51,14 +52,12 @@ export function LiveActivityFeed() {
   const [hasDismissedAd, setHasDismissedAd] = useState(false);
 
   useEffect(() => {
-    // Check localStorage for dismissal
     const dismissed = localStorage.getItem('vault_ad_dismissed');
     if (dismissed) {
       setHasDismissedAd(true);
       return;
     }
 
-    // Initial delay then repeat every 10 seconds
     const initialDelay = setTimeout(() => {
       if (!pathname?.startsWith('/dashboard')) {
         setIsVisible(true);
@@ -86,54 +85,54 @@ export function LiveActivityFeed() {
 
   const activity = ACTIVITIES[currentIndex];
 
-  // Hide the feed if dismissed, on a dashboard page, or manually hidden
   if (hasDismissedAd || pathname?.startsWith('/dashboard')) return null;
 
   return (
-    <div className="fixed bottom-8 left-8 z-[60] w-full max-w-[340px] pointer-events-none">
+    <div className="fixed bottom-8 left-8 z-[60] w-full max-w-[380px] pointer-events-none">
       <div className={cn(
         "transition-all duration-700 ease-in-out transform",
-        isVisible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
       )}>
-        <Card className="bg-secondary text-white border-primary/20 shadow-2xl rounded-none overflow-hidden pointer-events-auto relative">
+        <Card className="bg-secondary text-white border-2 border-[#f68b1e]/30 shadow-2xl rounded-none overflow-hidden pointer-events-auto relative">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-[#f68b1e]" />
           <Button 
             variant="ghost" 
             size="icon" 
             onClick={handleClose}
-            className="absolute top-1 right-1 h-6 w-6 text-white/40 hover:text-primary rounded-none hover:bg-white/5"
+            className="absolute top-1 right-1 h-6 w-6 text-white/40 hover:text-accent rounded-none hover:bg-white/5"
           >
             <X className="h-3 w-3" />
           </Button>
 
-          <CardContent className="p-4 flex gap-4 items-center">
-            <div className="relative h-14 w-14 bg-white/5 border border-white/10 shrink-0">
+          <CardContent className="p-5 flex gap-5 items-center">
+            <div className="relative h-16 w-16 bg-white overflow-hidden shrink-0 shadow-lg">
               <Image 
                 src={activity.image} 
                 alt="Activity" 
                 fill 
-                className="object-cover opacity-80" 
+                className="object-cover" 
                 unoptimized
               />
-              <div className="absolute -bottom-1 -right-1 h-6 w-6 bg-primary flex items-center justify-center shadow-lg">
-                <activity.icon className="h-3 w-3 text-secondary" />
+              <div className="absolute bottom-0 right-0 h-6 w-6 bg-[#f68b1e] flex items-center justify-center">
+                <Shield className="h-3 w-3 text-secondary fill-secondary" />
               </div>
             </div>
-            <div className="space-y-1 flex-1 pr-4">
-              <div className="flex items-center gap-2 mb-1">
-                <Badge className="bg-primary text-secondary text-[7px] font-black uppercase tracking-widest px-1.5 h-3.5 rounded-none border-none">
-                  REGISTRY SYNC
-                </Badge>
-                <span className="text-[8px] text-white/40 font-bold uppercase">{activity.time}</span>
-              </div>
-              <p className="text-[10px] font-bold text-white/90 leading-tight">
+            <div className="space-y-1.5 flex-1 pr-4">
+              <p className="text-[11px] font-black text-white/90 leading-tight uppercase tracking-tight">
                 {activity.text}
               </p>
+              <div className="flex items-center gap-3">
+                <Badge className="bg-[#f68b1e] text-secondary text-[8px] font-black uppercase tracking-widest px-2 h-4 rounded-none border-none">
+                  REGISTRY SYNC
+                </Badge>
+                <span className="text-[9px] text-white/40 font-black uppercase tracking-widest">{activity.time}</span>
+              </div>
             </div>
           </CardContent>
-          <div className="h-1 w-full bg-primary/20">
+          <div className="h-1 w-full bg-white/5">
              <div 
                className={cn(
-                 "h-full bg-primary transition-all duration-7000 linear",
+                 "h-full bg-[#f68b1e] transition-all linear",
                  isVisible ? "w-full" : "w-0"
                )} 
                style={{ transitionDuration: '10000ms' }}

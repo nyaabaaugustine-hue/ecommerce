@@ -21,7 +21,9 @@ import {
   ShoppingBag,
   Truck,
   Phone,
-  ShieldAlert
+  ShieldAlert,
+  ShieldCheck,
+  Lock
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -60,11 +62,9 @@ export default function HomePage() {
       <PromotionPopup />
       <NewsletterPopup />
 
-      {/* NODE 1: Jumia Style Hero Registry (Triple Column) */}
+      {/* NODE 1: Jumia Style Hero Registry */}
       <section className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          
-          {/* Left Node: Category Sidebar */}
           <div className="hidden lg:flex lg:col-span-3 bg-white flex-col border shadow-sm">
             <div className="p-4 border-b bg-muted/20">
                <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary flex items-center gap-2">
@@ -85,36 +85,31 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Center Node: Hero Slider */}
-          <div className="lg:col-span-6 relative bg-white border shadow-sm overflow-hidden h-[400px] md:h-auto group min-h-[400px]">
+          <div className="lg:col-span-6 relative bg-white border shadow-sm overflow-hidden min-h-[400px]">
             <Image 
               src={hero.imageUrl} 
               alt="Hero" 
               fill 
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center p-8 md:p-12 space-y-6">
                <div className="bg-primary w-fit px-4 py-1">
-                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">{hero.badge}</p>
+                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">Verified Escrow Protocol</p>
                </div>
                <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none max-w-md">
-                  {hero.title}
+                  ACCRA'S SOVEREIGN TRADE GATEWAY
                </h2>
-               <p className="text-white/70 text-sm font-medium uppercase tracking-widest max-w-sm hidden md:block">
-                  {hero.description}
-               </p>
                <Button className="w-fit h-14 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest rounded-none shadow-2xl">
-                  {hero.primaryCta} <ArrowRight className="ml-3 h-5 w-5" />
+                  Enter Marketplace <ArrowRight className="ml-3 h-5 w-5" />
                </Button>
             </div>
           </div>
 
-          {/* Right Node: Utility Widgets Stacked */}
           <div className="lg:col-span-3 flex flex-col gap-4">
-            <div className="flex-1 bg-white border p-6 flex flex-col justify-center gap-6 shadow-sm group hover:border-primary transition-all cursor-pointer">
+            <div className="flex-1 bg-white border p-6 flex flex-col justify-center gap-6 shadow-sm">
                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center">
                      <Phone className="h-5 w-5" />
                   </div>
                   <div>
@@ -123,7 +118,7 @@ export default function HomePage() {
                   </div>
                </div>
                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center">
                      <Store className="h-5 w-5" />
                   </div>
                   <div>
@@ -131,19 +126,10 @@ export default function HomePage() {
                      <p className="text-sm font-black text-secondary">Apply for node</p>
                   </div>
                </div>
-               <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
-                     <Truck className="h-5 w-5" />
-                  </div>
-                  <div>
-                     <p className="text-[9px] font-black uppercase text-muted-foreground">Track Order</p>
-                     <p className="text-sm font-black text-secondary">Fidelity Sync</p>
-                  </div>
-               </div>
             </div>
             
-            <div className="h-40 relative border shadow-sm group overflow-hidden">
-               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Clearance" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+            <div className="h-40 relative border shadow-sm overflow-hidden">
+               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Clearance" fill className="object-cover" />
                <div className="absolute inset-0 bg-primary/40 flex items-center justify-center">
                   <h3 className="text-white font-black uppercase italic tracking-tighter text-2xl">CLEARANCE SALE</h3>
                </div>
@@ -152,60 +138,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NODE 2: Full Width Sovereign Hero (Restored as 2nd Section) */}
+      {/* NODE 2: Institutional Registry Section (Screenshot Style) */}
       <section className="container mx-auto px-4 py-8">
-        <div className="relative h-[400px] md:h-[600px] w-full rounded-none overflow-hidden group shadow-2xl border-4 border-primary/10">
-           <Image 
-             src={hero.imageUrl} 
-             alt="Full Hero" 
-             fill 
-             className="object-cover group-hover:scale-105 transition-transform duration-700" 
-             priority 
-           />
-           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent flex flex-col justify-center p-8 md:p-20 space-y-8">
-              <Badge className="w-fit bg-primary text-secondary font-black px-6 py-2 rounded-none uppercase text-[10px] tracking-[0.4em]">
-                {hero.badge}
-              </Badge>
-              <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none max-w-4xl">
-                {hero.title}
-              </h2>
-              <p className="text-white/60 text-lg md:text-xl font-medium uppercase tracking-widest max-w-2xl leading-relaxed">
-                {hero.description}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 pt-4">
-                <Button className="h-16 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest rounded-none shadow-2xl transition-all">
-                  {hero.primaryCta} <ArrowRight className="ml-3 h-6 w-6" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Main Triple Node Left */}
+          <div className="lg:col-span-8 relative bg-secondary overflow-hidden h-[500px] border-4 border-white shadow-2xl">
+             <Image 
+               src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
+               alt="Kerrygold" 
+               fill 
+               className="object-cover opacity-90 contrast-125" 
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-12 flex flex-col justify-center">
+                <Badge className="w-fit bg-[#f68b1e] text-secondary font-black px-4 py-1.5 rounded-none uppercase text-[10px] tracking-widest mb-6">
+                  Verified Escrow Protocol
+                </Badge>
+                <h2 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85] max-w-2xl mb-8">
+                  ACCRA'S <br /> <span className="text-accent">GOLD</span> <br /> STANDARD
+                </h2>
+                <p className="text-white/70 text-sm md:text-lg font-bold uppercase tracking-widest max-w-xl leading-relaxed mb-10">
+                  The ultimate high-trust retail aggregator. Secure your GHS with total institutional confidence.
+                </p>
+                <Button className="w-fit h-16 px-12 bg-accent text-secondary hover:bg-white font-black uppercase text-xs tracking-[0.2em] rounded-none shadow-2xl transition-all">
+                  Explore the Vault <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
-              </div>
-           </div>
+             </div>
+          </div>
+
+          {/* Right Vertical Stack */}
+          <div className="lg:col-span-4 flex flex-col gap-6">
+             <div className="relative h-[238px] bg-[#f68b1e] overflow-hidden border-4 border-white shadow-xl">
+                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Seara" fill className="object-cover" />
+             </div>
+             <div className="relative h-[238px] bg-white overflow-hidden border-4 border-white shadow-xl group">
+                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" alt="Milkana" fill className="object-cover opacity-80" />
+                <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl group-hover:scale-110 transition-transform">
+                   <div className="h-8 w-8 bg-accent/20 flex items-center justify-center mb-2">
+                      <ShoppingBag className="h-4 w-4 text-accent" />
+                   </div>
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">Vault: 0</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">GHC0</span>
+                </div>
+                <div className="absolute bottom-6 left-6">
+                   <span className="text-secondary font-black uppercase text-xs bg-white px-4 py-1.5 shadow-lg tracking-widest">Shop Now</span>
+                </div>
+             </div>
+          </div>
         </div>
       </section>
 
-      {/* Flash Sales Node */}
-      <section className="container mx-auto px-4 pb-6">
-         <div className="bg-[#e61601] p-4 flex flex-col sm:flex-row items-center justify-between text-white border-b-4 border-accent">
-            <div className="flex items-center gap-6">
-               <div className="flex items-center gap-3">
-                  <Zap className="h-6 w-6 text-accent animate-pulse" />
-                  <h3 className="text-xl font-black uppercase italic tracking-tighter">Flash Sales</h3>
-               </div>
-               <div className="hidden md:flex items-center gap-4 text-[11px] font-black uppercase tracking-widest">
-                  <span className="opacity-70">Time Left:</span>
-                  <div className="bg-white text-[#e61601] px-3 py-1 font-black">10h : 30m : 51s</div>
-               </div>
-            </div>
-            <Link href="/listings" className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2 hover:underline">
-               See All <ChevronRight className="h-4 w-4" />
-            </Link>
-         </div>
-      </section>
-
-      {/* Weekly Velocity Section (High Kinetic Speed: 25s) - MASSIVE CARDS (630px) */}
+      {/* Weekly Velocity Section */}
       <section className="bg-primary py-16 overflow-hidden border-y border-accent/20">
         <div className="container mx-auto px-4 mb-8">
           <div className="flex items-center gap-4">
              <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
-             <h2 className="text-2xl font-black text-white uppercase tracking-0.2em">Weekly Velocity: Best Selling Nodes</h2>
+             <h2 className="text-2xl font-black text-white uppercase tracking-widest">Weekly Velocity: Best Selling Nodes</h2>
           </div>
         </div>
         <div className="animate-marquee gap-10 py-6 [animation-duration:25s]">
@@ -242,13 +229,13 @@ export default function HomePage() {
             <div className="space-y-2">
               <div className="flex items-center gap-3 mb-2">
                  <Activity className="h-5 w-5 text-accent" />
-                 <span className="text-[10px] font-black uppercase tracking-0.4em text-primary">{highlights.badge}</span>
+                 <span className="text-[10px] font-black uppercase tracking-widest text-primary">Live Institutional Feed</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-secondary tracking-tighter uppercase">{highlights.title}</h2>
               <p className="text-muted-foreground font-medium text-xs md:text-sm uppercase tracking-widest">{highlights.subtitle}</p>
             </div>
             <Link href="/listings">
-              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white h-12 px-10 font-black rounded-none transition-all gap-3 text-[10px] uppercase tracking-0.2em">
+              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white h-12 px-10 font-black rounded-none transition-all gap-3 text-[10px] uppercase tracking-widest">
                 View All Assets <ChevronRight className="h-5 w-5" />
               </Button>
             </Link>
@@ -262,17 +249,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust Section */}
+      {/* Vendor Registry */}
       <section className="bg-background py-16 overflow-hidden border-b border-muted">
         <div className="container mx-auto px-4 mb-10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
-            <span className="text-accent font-black uppercase tracking-0.5em text-[10px] mb-2 block">{trust.subtitle}</span>
+            <span className="text-accent font-black uppercase tracking-widest text-[10px] mb-2 block">Our Trusted Partners</span>
             <h2 className="text-3xl md:text-4xl font-black text-secondary tracking-tighter uppercase">{trust.title}</h2>
           </div>
           
           <Dialog open={showVendorModal} onOpenChange={setShowVendorModal}>
             <DialogTrigger asChild>
-              <Button className="bg-primary text-white hover:bg-accent hover:text-secondary font-black rounded-none px-10 h-14 uppercase text-[11px] tracking-0.2em gap-3 shadow-xl">
+              <Button className="bg-primary text-white hover:bg-accent hover:text-secondary font-black rounded-none px-10 h-14 uppercase text-[11px] tracking-widest gap-3 shadow-xl">
                 <Store className="h-5 w-5" />
                 Partner With Us
               </Button>
@@ -354,20 +341,20 @@ export default function HomePage() {
           </div>
           <div className="space-y-6">
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-none">
-              {cta.title}
+              SECURE YOUR NEXT ASSET
             </h2>
-            <p className="text-white/50 font-black uppercase tracking-0.5em text-[10px] md:text-sm max-w-3xl mx-auto">
-              {cta.subtitle}
+            <p className="text-white/50 font-black uppercase tracking-[0.4em] text-[10px] md:text-sm max-w-3xl mx-auto">
+              Escrow Protection Protocol Active for all GHS Transactions.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Link href="/listings" className="w-full sm:w-auto">
               <Button size="lg" className="w-full bg-accent text-secondary hover:bg-white hover:text-secondary rounded-none px-14 h-16 font-black shadow-2xl transition-all text-xs uppercase tracking-widest border-2 border-accent">
-                {cta.primaryButton} <ChevronRight className="h-6 w-6 ml-3" />
+                Open Institutional Vault <ChevronRight className="h-6 w-6 ml-3" />
               </Button>
             </Link>
             <Button size="lg" className="bg-primary text-white hover:bg-primary/90 rounded-none px-14 h-16 font-black transition-all text-xs uppercase tracking-widest shadow-xl border-2 border-primary">
-              {cta.secondaryButton}
+              Learn Protocol Workflow
             </Button>
           </div>
         </div>
