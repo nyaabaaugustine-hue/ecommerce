@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -72,12 +73,12 @@ export function MegaMenu() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" className="h-full px-6 flex flex-col items-center justify-center rounded-none hover:bg-muted group transition-all gap-1">
+        <Button variant="ghost" className="h-full px-4 flex flex-col items-center justify-center rounded-none hover:bg-muted group transition-all gap-1">
           <span className="text-[8px] uppercase tracking-[0.4em] text-muted-foreground font-black group-hover:text-primary transition-colors">Global Directory</span>
-          <span className="font-black text-foreground text-xs md:text-sm group-hover:text-primary transition-colors uppercase tracking-tighter">Shop Categories</span>
+          <span className="font-black text-foreground text-[11px] group-hover:text-primary transition-colors uppercase tracking-tighter">Shop Categories</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[95vw] max-w-7xl mx-auto p-0 border-x-0 border-t-4 border-t-primary shadow-2xl rounded-none bg-background overflow-hidden transition-colors duration-300" align="center" sideOffset={0}>
+      <PopoverContent className="w-[95vw] max-w-7xl mx-auto p-0 border-x-0 border-t-4 border-t-primary shadow-2xl rounded-none bg-background overflow-hidden transition-colors duration-300" align="center" sideOffset={10}>
         <div className="grid grid-cols-1 lg:grid-cols-12">
           {/* Main Categories */}
           <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-3 divide-x border-b lg:border-b-0 border-border">
@@ -85,7 +86,7 @@ export function MegaMenu() {
               <div key={idx} className="flex flex-col">
                 <div className="relative h-24 w-full overflow-hidden border-b border-border bg-muted/20">
                   <Image src={sector.bgImage} alt={sector.title} fill sizes="400px" className="object-cover opacity-20 contrast-125" />
-                  <div className="absolute inset-0 p-8 flex items-center gap-4">
+                  <div className="absolute inset-0 p-6 flex items-center gap-4">
                     <div className="h-10 w-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                       <sector.icon className="h-5 w-5" />
                     </div>
@@ -99,8 +100,8 @@ export function MegaMenu() {
                   </div>
                 </div>
                 
-                <div className="p-8 md:p-10 space-y-8">
-                  <ul className="space-y-6">
+                <div className="p-6 md:p-8 space-y-6">
+                  <ul className="space-y-4">
                     {sector.items.map((item, i) => (
                       <li key={i}>
                         <Link 
@@ -127,15 +128,15 @@ export function MegaMenu() {
           </div>
 
           {/* Featured Spotlight */}
-          <div className="lg:col-span-3 bg-card border-l border-border p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-3 bg-card border-l border-border p-8 flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 -mr-32 -mt-32 rounded-none blur-3xl pointer-events-none" />
             
-            <div className="relative z-10 space-y-10">
+            <div className="relative z-10 space-y-8">
               <div className="space-y-3">
                 <Badge className="bg-primary text-primary-foreground font-black rounded-none uppercase text-[8px] tracking-[0.3em] px-3 py-1 border-none">
-                  Institutional Partner
+                  Partner Spotlight
                 </Badge>
-                <h3 className="text-2xl md:text-3xl font-black tracking-tighter leading-none uppercase text-foreground">
+                <h3 className="text-xl md:text-2xl font-black tracking-tighter leading-none uppercase text-foreground">
                   OPEN <span className="text-primary">VENDOR</span> <br /> NETWORK
                 </h3>
                 <p className="text-muted-foreground text-[10px] font-medium leading-relaxed uppercase tracking-widest">
@@ -169,8 +170,8 @@ export function MegaMenu() {
               </div>
             </div>
 
-            <Link href="/vendors" className="mt-12 relative z-10">
-              <Button className="w-full bg-primary text-primary-foreground hover:opacity-90 font-black rounded-none h-14 uppercase text-[10px] tracking-[0.3em] gap-3 shadow-2xl transition-all">
+            <Link href="/vendors" className="mt-8 relative z-10">
+              <Button className="w-full bg-primary text-primary-foreground hover:opacity-90 font-black rounded-none h-12 uppercase text-[10px] tracking-[0.3em] gap-3 shadow-2xl transition-all">
                 Browse Full Directory <Store className="h-4 w-4" />
               </Button>
             </Link>

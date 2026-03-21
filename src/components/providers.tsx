@@ -16,14 +16,13 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // MASTER DIRECTIVE: Default to clinical cold-white light mode (Forced Default)
+  // MASTER DIRECTIVE: Default to clinical cold-white light mode
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
     setThemeState(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     
-    // Institutional Logic: Manage dark class based on theme profile
     if (newTheme !== 'cold-white') {
       document.documentElement.classList.add('dark');
     } else {

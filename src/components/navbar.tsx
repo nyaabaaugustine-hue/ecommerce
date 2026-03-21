@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -30,8 +31,7 @@ import { cn } from '@/lib/utils';
 
 /**
  * @fileOverview Compact Institutional Navbar
- * Reduced height (h-18) and streamlined layout for professional density.
- * Strictly rectangular (rounded-none).
+ * Strictly rectangular (rounded-none). Optimized for density and zero overlap.
  */
 export function Navbar() {
   const { user } = useAuth();
@@ -95,8 +95,8 @@ export function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden lg:block h-full py-4">
-            <div className="h-full w-px bg-border mx-1" />
+          <div className="hidden lg:flex items-center h-full">
+            <div className="h-8 w-px bg-border mx-2" />
             <MegaMenu />
           </div>
         </div>
@@ -105,7 +105,7 @@ export function Navbar() {
         <div className="hidden lg:flex flex-1 max-w-lg items-center h-11 border border-border rounded-none overflow-hidden bg-muted/10 focus-within:border-primary/40 focus-within:bg-background transition-all duration-300">
           <div className="flex-1 flex items-center px-4 gap-3 border-r border-border">
             <input 
-              placeholder='Search listings...' 
+              placeholder='Search verified listings...' 
               className="w-full bg-transparent outline-none text-foreground text-[13px] font-bold placeholder:text-muted-foreground/40 uppercase tracking-tight"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

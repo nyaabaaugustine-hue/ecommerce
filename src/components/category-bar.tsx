@@ -41,7 +41,6 @@ const CATEGORIES = [
 /**
  * @fileOverview Compact Monochromatic Category Registry
  * Precision spacing (py-3) and monochromatic chips for professional noise reduction.
- * Now supports photographic nodes starting with Photography/Categories.
  */
 export function CategoryBar() {
   return (
