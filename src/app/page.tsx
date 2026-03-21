@@ -10,6 +10,8 @@ import { HeroCarousel } from '@/components/hero-carousel';
 import { BenefitsSection } from '@/components/benefits-section';
 import { PrivacyPopup } from '@/components/privacy-popup';
 import { SpotlightCategories } from '@/components/spotlight-categories';
+import { TipsSection } from '@/components/tips-section';
+import { FooterTabs } from '@/components/footer-tabs';
 import { LISTINGS } from '@/lib/mock-data';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -353,6 +355,12 @@ export function HomePage() {
 
       {/* INSTITUTIONAL BENEFITS NODE */}
       <BenefitsSection />
+
+      {/* MARKETPLACE TIPS SECTION */}
+      <TipsSection />
+
+      {/* FOOTER DIRECTORY TABS */}
+      <FooterTabs />
 
       <PrivacyPopup />
     </div>
