@@ -35,6 +35,7 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
+    letter-spacing: -0.01em;
   }
   
   img {
@@ -44,6 +45,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline tracking-tighter;
+    letter-spacing: -0.03em;
   }
 }
 
