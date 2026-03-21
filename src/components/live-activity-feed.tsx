@@ -14,7 +14,7 @@ const ACTIVITIES = [
   { 
     id: 1, 
     type: 'purchase', 
-    text: 'Someone in Accra just secured a MacBook Pro in the Vault.', 
+    text: 'Someone in Accra just secured a MacBook Pro in the Escrow.', 
     time: '2 MINS AGO', 
     icon: ShieldCheck,
     image: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png'
@@ -93,8 +93,17 @@ export function LiveActivityFeed() {
         "transition-all duration-700 ease-in-out transform",
         isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
       )}>
-        <Card className="bg-secondary text-white border-2 border-[#f68b1e]/30 shadow-2xl rounded-none overflow-hidden pointer-events-auto relative">
-          <div className="absolute top-0 left-0 w-1.5 h-full bg-[#f68b1e]" />
+        <Card className="bg-secondary text-white border-2 border-white/10 shadow-2xl rounded-none overflow-hidden pointer-events-auto relative">
+          {/* Heritage Accent Strip */}
+          <div className="absolute top-0 left-0 w-1.5 h-full relative overflow-hidden shrink-0">
+            <Image 
+              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
+              alt="Heritage Strip" 
+              fill 
+              className="object-cover"
+            />
+          </div>
+          
           <Button 
             variant="ghost" 
             size="icon" 
@@ -104,7 +113,7 @@ export function LiveActivityFeed() {
             <X className="h-3 w-3" />
           </Button>
 
-          <CardContent className="p-5 flex gap-5 items-center">
+          <CardContent className="p-5 pl-7 flex gap-5 items-center">
             <div className="relative h-16 w-16 bg-white overflow-hidden shrink-0 shadow-lg">
               <Image 
                 src={activity.image} 
@@ -113,8 +122,8 @@ export function LiveActivityFeed() {
                 className="object-cover" 
                 unoptimized
               />
-              <div className="absolute bottom-0 right-0 h-6 w-6 bg-[#f68b1e] flex items-center justify-center">
-                <Shield className="h-3 w-3 text-secondary fill-secondary" />
+              <div className="absolute bottom-0 right-0 h-6 w-6 bg-secondary flex items-center justify-center border border-white/10">
+                <Shield className="h-3 w-3 text-primary fill-primary" />
               </div>
             </div>
             <div className="space-y-1.5 flex-1 pr-4">
@@ -122,8 +131,8 @@ export function LiveActivityFeed() {
                 {activity.text}
               </p>
               <div className="flex items-center gap-3">
-                <Badge className="bg-[#f68b1e] text-secondary text-[8px] font-black uppercase tracking-widest px-2 h-4 rounded-none border-none">
-                  REGISTRY SYNC
+                <Badge className="bg-primary text-secondary text-[8px] font-black uppercase tracking-widest px-2 h-4 rounded-none border-none">
+                  SYSTEM SYNC
                 </Badge>
                 <span className="text-[9px] text-white/40 font-black uppercase tracking-widest">{activity.time}</span>
               </div>
@@ -132,7 +141,7 @@ export function LiveActivityFeed() {
           <div className="h-1 w-full bg-white/5">
              <div 
                className={cn(
-                 "h-full bg-[#f68b1e] transition-all linear",
+                 "h-full bg-primary transition-all linear",
                  isVisible ? "w-full" : "w-0"
                )} 
                style={{ transitionDuration: '10000ms' }}

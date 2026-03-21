@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -86,6 +87,16 @@ export function Navbar() {
     <header className="w-full flex flex-col sticky top-0 z-50 shadow-sm">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
+      {/* Heritage Accent Strip */}
+      <div className="h-1.5 w-full relative overflow-hidden">
+        <Image 
+          src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
+          alt="Kente Accent" 
+          fill 
+          className="object-cover"
+        />
+      </div>
+
       {/* News Ticker */}
       <div className="bg-primary text-primary-foreground overflow-hidden py-1 border-b border-accent/10">
         <div className="animate-marquee whitespace-nowrap flex gap-12 items-center">
@@ -192,7 +203,7 @@ export function Navbar() {
                    <DropdownMenuTrigger asChild>
                      <div className="flex items-center gap-3 cursor-pointer group">
                         <div className="text-right flex flex-col">
-                           <span className="text-[7px] text-muted-foreground uppercase font-black tracking-widest">Welcome</span>
+                           <span className="text-[7px] text-muted-foreground uppercase font-black tracking-widest">Logged in as</span>
                            <span className="text-xs font-black text-secondary uppercase tracking-tight group-hover:text-primary transition-colors">{user.name}</span>
                         </div>
                         <User className="h-5 w-5 text-secondary group-hover:text-primary transition-colors" />
