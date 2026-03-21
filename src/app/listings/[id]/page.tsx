@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -102,6 +103,7 @@ export default function ListingDetails() {
               src={listing.imageUrl} 
               alt={listing.title} 
               fill 
+              sizes="(max-width: 1200px) 100vw, 1000px"
               className="object-cover"
             />
             <div className="absolute top-4 md:top-6 left-4 md:left-6 flex flex-wrap gap-2">

@@ -24,7 +24,7 @@ import { useAuth, useCart, useCurrency, useTheme, useContent, type CurrencyCode,
 import { useState, useEffect, useRef } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 import { LISTINGS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
@@ -99,6 +99,7 @@ export function Navbar() {
           src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
           alt="Kente Accent" 
           fill 
+          sizes="100vw"
           className="object-cover"
         />
       </div>
@@ -154,19 +155,23 @@ export function Navbar() {
                 </SheetTrigger>
                 <SheetContent side="left" className="w-[300px] p-0 flex flex-col border-r-4 border-primary">
                   <div className="bg-secondary p-6 text-white flex flex-col gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="relative h-10 w-10 bg-white p-1 rounded-none border border-primary/30">
-                        <Image src={content.settings.logoUrl} alt="Logo" fill className="object-contain" />
+                    <SheetHeader>
+                      <div className="flex items-center gap-3">
+                        <div className="relative h-10 w-10 bg-white p-1 rounded-none border border-primary/30">
+                          <Image src={content.settings.logoUrl} alt="Logo" fill sizes="40px" className="object-contain" />
+                        </div>
+                        <SheetTitle className="font-black text-xl tracking-tighter uppercase text-white">{content.settings.siteName}</SheetTitle>
                       </div>
-                      <span className="font-black text-xl tracking-tighter uppercase">{content.settings.siteName}</span>
-                    </div>
-                    <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-none">The Gold Standard</p>
+                      <SheetDescription className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-none text-left">
+                        The Gold Standard
+                      </SheetDescription>
+                    </SheetHeader>
                   </div>
                   
                   <div className="flex-1 overflow-y-auto p-6 no-scrollbar">
                     <nav className="space-y-8">
                       <div className="space-y-4">
-                        <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">Navigation Nodes</p>
+                        <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">Navigation nodes</p>
                         <ul className="space-y-4">
                           {NAV_LINKS.map(link => (
                             <li key={link.name}>
@@ -246,7 +251,7 @@ export function Navbar() {
 
               <Link href="/" className="flex items-center gap-2 group shrink-0">
                 <div className="relative h-8 w-8 md:h-9 md:w-9 overflow-hidden rounded-none border border-primary/20 shadow-sm">
-                  <Image src={content.settings.logoUrl} alt="Logo" fill className="object-cover" />
+                  <Image src={content.settings.logoUrl} alt="Logo" fill sizes="(max-width: 768px) 32px, 36px" className="object-cover" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-headline font-black text-lg md:text-xl text-secondary tracking-tighter uppercase leading-none">
@@ -304,7 +309,7 @@ export function Navbar() {
                     className="flex items-center gap-4 p-3 hover:bg-muted/30 transition-colors border-b last:border-0"
                   >
                     <div className="relative h-8 w-8 bg-muted shrink-0 rounded-none">
-                      <Image src={s.imageUrl} alt={s.title} fill className="object-cover" />
+                      <Image src={s.imageUrl} alt={s.title} fill sizes="32px" className="object-cover" />
                     </div>
                     <div className="flex-1">
                       <p className="text-[10px] font-black text-secondary uppercase truncate">{s.title}</p>

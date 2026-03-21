@@ -69,7 +69,7 @@ export default function HomePage() {
           <div className="hidden lg:flex lg:col-span-3 bg-white flex-col border shadow-sm rounded-none">
             <div className="p-4 border-b bg-muted/20">
                <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary flex items-center gap-2">
-                  <Activity className="h-4 w-4 text-primary" /> Product Categories
+                  <Activity className="h-4 w-4 text-primary" /> Marketplace Categories
                </h3>
             </div>
             <div className="flex-1 py-2">
@@ -91,6 +91,7 @@ export default function HomePage() {
               src={hero.imageUrl} 
               alt="Hero" 
               fill 
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
               className="object-cover"
               priority
             />
@@ -130,7 +131,13 @@ export default function HomePage() {
             </div>
             
             <div className="h-40 relative border shadow-sm overflow-hidden rounded-none">
-               <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Clearance" fill className="object-cover" />
+               <Image 
+                 src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
+                 alt="Clearance" 
+                 fill 
+                 sizes="(max-width: 768px) 100vw, 400px"
+                 className="object-cover" 
+               />
                <div className="absolute inset-0 bg-primary/40 flex items-center justify-center">
                   <h3 className="text-white font-black uppercase italic tracking-tighter text-2xl">CLEARANCE SALE</h3>
                </div>
@@ -147,6 +154,7 @@ export default function HomePage() {
                src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
                alt="Marketplace Selection" 
                fill 
+               sizes="(max-width: 1200px) 100vw, 1000px"
                className="object-cover opacity-90 contrast-125" 
              />
              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-12 flex flex-col justify-center">
@@ -167,14 +175,26 @@ export default function HomePage() {
 
           <div className="lg:col-span-4 flex flex-col gap-6">
              <div className="relative h-[238px] bg-[#f68b1e] overflow-hidden border-4 border-white shadow-xl rounded-none">
-                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Partner Deal" fill className="object-cover" />
+                <Image 
+                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
+                  alt="Partner Deal" 
+                  fill 
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  className="object-cover" 
+                />
                 <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl rounded-none">
                    <span className="text-[10px] font-black text-white uppercase tracking-widest">ESCROW ACTIVE</span>
                    <span className="text-[10px] font-black text-accent uppercase tracking-widest">GH₵ 4.2M</span>
                 </div>
              </div>
              <div className="relative h-[238px] bg-white overflow-hidden border-4 border-white shadow-xl group rounded-none">
-                <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" alt="Partner Selection" fill className="object-cover opacity-80" />
+                <Image 
+                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
+                  alt="Partner Selection" 
+                  fill 
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  className="object-cover opacity-80" 
+                />
                 <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl group-hover:scale-110 transition-transform rounded-none">
                    <div className="h-8 w-8 bg-accent/20 flex items-center justify-center mb-2 rounded-none">
                       <ShoppingBag className="h-4 w-4 text-accent" />
@@ -203,7 +223,13 @@ export default function HomePage() {
             <Link key={`${listing.id}-${idx}`} href={`/listings/${listing.id}`} className="w-[630px] shrink-0 block group">
                <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-8 flex gap-8 group-hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer h-full">
                   <div className="relative h-48 w-48 bg-white overflow-hidden shrink-0 shadow-xl border border-white/10 rounded-none">
-                     <Image src={listing.imageUrl} alt={listing.title} fill className="object-cover group-hover:scale-110 transition-transform" />
+                     <Image 
+                       src={listing.imageUrl} 
+                       alt={listing.title} 
+                       fill 
+                       sizes="192px"
+                       className="object-cover group-hover:scale-110 transition-transform" 
+                     />
                   </div>
                   <div className="flex-1 flex flex-col justify-center overflow-hidden">
                      <div className="flex items-center gap-2 mb-2">
@@ -274,16 +300,17 @@ export default function HomePage() {
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-accent shadow-2xl">
-              <DialogHeader className="sr-only">
-                <DialogTitle>Partner Application</DialogTitle>
-                <DialogDescription>Become a verified partner in our marketplace hub.</DialogDescription>
+              <DialogHeader className="p-10 md:p-14 pb-0">
+                <DialogTitle className="text-4xl font-black tracking-tighter uppercase leading-none">Become a Partner</DialogTitle>
+                <DialogDescription className="text-secondary/60 text-sm font-medium leading-relaxed mt-4">
+                  {trust.description}
+                </DialogDescription>
               </DialogHeader>
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="bg-secondary p-10 md:p-14 text-white space-y-10">
                   <div className="space-y-6">
                     <Badge className="bg-accent text-secondary font-black rounded-none uppercase text-[10px] tracking-widest px-4 py-1">Join The System</Badge>
-                    <h3 className="text-4xl font-black tracking-tighter uppercase leading-none">Become a Partner</h3>
-                    <p className="text-white/60 text-sm font-medium leading-relaxed">{trust.description}</p>
+                    <p className="text-white/60 text-sm font-medium leading-relaxed">Expand your reach through Ghana's most secure escrow-powered registry.</p>
                   </div>
                 </div>
                 <div className="p-10 md:p-14 bg-white flex flex-col justify-center space-y-8">
@@ -307,11 +334,17 @@ export default function HomePage() {
             {[...VENDORS, ...VENDORS].map((vendor, idx) => (
               <div key={`${vendor.id}-${idx}`} className="w-[350px] md:w-[480px] shrink-0 px-3">
                 <Card className="border-none shadow-2xl hover:border-accent transition-all duration-500 h-[240px] md:h-[320px] bg-secondary group rounded-none relative overflow-hidden border-t-2 border-t-transparent hover:border-t-accent">
-                  <Image src={vendor.bgUrl} alt={vendor.name} fill className="object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
+                  <Image 
+                    src={vendor.bgUrl} 
+                    alt={vendor.name} 
+                    fill 
+                    sizes="(max-width: 768px) 350px, 480px"
+                    className="object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-transparent p-8 md:p-10 flex flex-col justify-end">
                     <div className="flex items-center gap-4 md:gap-5 mb-4">
                       <div className="h-14 w-14 md:h-16 md:w-16 bg-white p-2 rounded-none shadow-2xl relative shrink-0">
-                        <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
+                        <Image src={vendor.logoUrl} alt={vendor.name} fill sizes="64px" className="object-contain p-1" unoptimized />
                       </div>
                       <div>
                         <h4 className="font-black text-lg md:text-2xl text-white tracking-tight leading-none mb-2">{vendor.name}</h4>
@@ -342,6 +375,7 @@ export default function HomePage() {
             src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
             alt="Background" 
             fill 
+            sizes="100vw"
             className="object-cover"
             priority
           />

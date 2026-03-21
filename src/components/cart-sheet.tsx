@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ShoppingBag, X, Trash2, ShieldCheck, ArrowRight, Loader2, Lock, Key, CheckCircle2 } from 'lucide-react';
 import { useCart, useCurrency } from '@/components/providers';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -70,6 +70,9 @@ export function CartSheet() {
                 <ShoppingBag className="h-6 w-6 text-primary" />
                 Secure Cart
               </SheetTitle>
+              <SheetDescription className="text-[10px] font-bold uppercase tracking-widest">
+                Review your items before authorizing escrow deposit.
+              </SheetDescription>
             </SheetHeader>
           </div>
 
@@ -85,7 +88,7 @@ export function CartSheet() {
               items.map((item) => (
                 <div key={item.id} className="flex gap-4 p-3 bg-white border border-border/50 hover:border-primary/20 transition-all">
                   <div className="relative h-16 w-16 rounded-none overflow-hidden shrink-0 border bg-muted">
-                    <Image src={item.imageUrl} alt={item.title} fill className="object-cover" />
+                    <Image src={item.imageUrl} alt={item.title} fill sizes="64px" className="object-cover" />
                   </div>
                   <div className="flex-1 flex flex-col justify-between">
                     <div>

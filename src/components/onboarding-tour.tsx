@@ -71,6 +71,7 @@ export function OnboardingTour() {
             src={current.bgImage} 
             alt={current.title} 
             fill 
+            sizes="(max-width: 768px) 100vw, 448px"
             className="object-cover transition-transform duration-1000 scale-110" 
           />
           <div className="absolute inset-0 bg-secondary/60 backdrop-blur-[2px]" />
@@ -80,7 +81,7 @@ export function OnboardingTour() {
           </div>
           <div className="relative z-10 text-center space-y-2 px-6">
             <h3 className="text-2xl font-black uppercase tracking-tighter drop-shadow-md">{current.title}</h3>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary bg-white/10 px-3 py-1 inline-block">{current.badge}</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gold bg-white/10 px-3 py-1 inline-block">{current.badge}</p>
           </div>
         </div>
 
@@ -107,6 +108,7 @@ export function OnboardingTour() {
               src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
               alt="Kente Background" 
               fill 
+              sizes="(max-width: 768px) 100vw, 448px"
               className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-secondary/40 group-hover:bg-secondary/20 transition-colors" />
