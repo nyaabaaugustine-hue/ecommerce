@@ -3,57 +3,63 @@
   "placeholderImages": [
     {
       "id": "electronics",
-      "description": "Quantum Precision MacBook Pro",
-      "imageUrl": "https://picsum.photos/seed/elec1/800/600",
-      "imageHint": "laptop computer"
+      "description": "Premium MacBook Pro - Accra Tech Hub",
+      "imageUrl": "https://picsum.photos/seed/gh-elec/800/600",
+      "imageHint": "ghanaian electronics store"
     },
     {
       "id": "appliances",
-      "description": "Sovereign Series Refrigerator",
-      "imageUrl": "https://picsum.photos/seed/app1/800/600",
-      "imageHint": "modern fridge"
+      "description": "Sovereign Series Refrigerator - Melcom Grade",
+      "imageUrl": "https://picsum.photos/seed/gh-app/800/600",
+      "imageHint": "modern kitchen ghana"
     },
     {
       "id": "supermarket",
       "description": "Makola Select Supermarket Registry",
-      "imageUrl": "https://picsum.photos/seed/sup1/800/600",
-      "imageHint": "grocery bundle"
+      "imageUrl": "https://picsum.photos/seed/gh-market/800/600",
+      "imageHint": "african grocery store"
     },
     {
       "id": "furniture",
-      "description": "Elite Heritage Sofa",
-      "imageUrl": "https://picsum.photos/seed/fur1/800/600",
-      "imageHint": "luxury sofa"
+      "description": "Elite Heritage Sofa - Kumasi Crafted",
+      "imageUrl": "https://picsum.photos/seed/gh-furniture/800/600",
+      "imageHint": "luxury african living room"
     },
     {
       "id": "beauty",
       "description": "Royal Orchid Beauty Protocol",
-      "imageUrl": "https://picsum.photos/seed/beau1/800/600",
-      "imageHint": "beauty set"
+      "imageUrl": "https://picsum.photos/seed/gh-beauty/800/600",
+      "imageHint": "ghanaian shea butter products"
     },
     {
       "id": "audio-visual",
       "description": "Sovereign 4K OLED Hub",
-      "imageUrl": "https://picsum.photos/seed/av1/800/600",
-      "imageHint": "smart tv"
+      "imageUrl": "https://picsum.photos/seed/gh-tv/800/600",
+      "imageHint": "smart tv showroom accra"
     },
     {
       "id": "mobile",
-      "description": "Titanium iPhone 15 Pro",
-      "imageUrl": "https://picsum.photos/seed/mob1/800/600",
-      "imageHint": "iphone titanium"
+      "description": "Titanium iPhone 15 Pro - Cantonments Stock",
+      "imageUrl": "https://picsum.photos/seed/gh-phone/800/600",
+      "imageHint": "smartphone store ghana"
     },
     {
       "id": "home-living",
       "description": "Elite Heritage Living Suite",
-      "imageUrl": "https://picsum.photos/seed/home1/800/600",
-      "imageHint": "interior decor"
+      "imageUrl": "https://picsum.photos/seed/gh-home/800/600",
+      "imageHint": "modern accra apartment"
     },
     {
       "id": "vehicle",
-      "description": "Premium Sovereign Auto",
-      "imageUrl": "https://picsum.photos/seed/car1/800/600",
-      "imageHint": "luxury car"
+      "description": "Premium Sovereign Auto - East Legon Showroom",
+      "imageUrl": "https://picsum.photos/seed/gh-car/800/600",
+      "imageHint": "luxury car accra"
+    },
+    {
+      "id": "agriculture",
+      "description": "Industrial Agro-Business Hub",
+      "imageUrl": "https://picsum.photos/seed/gh-farm/800/600",
+      "imageHint": "ghanaian cocoa farm"
     }
   ]
 }
