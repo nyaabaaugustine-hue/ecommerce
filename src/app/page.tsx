@@ -15,50 +15,49 @@ import { TipsSection } from '@/components/tips-section';
 import { FooterTabs } from '@/components/footer-tabs';
 import { NewsletterPopup } from '@/components/newsletter-popup';
 import { LISTINGS } from '@/lib/mock-data';
-import { ChevronRight, Sparkles, ArrowRight, Mail, ShieldCheck, Briefcase, ShoppingBag, Shirt, Sprout, Dumbbell, Smartphone, Refrigerator } from 'lucide-react';
+import { ChevronRight, Sparkles, ArrowRight, Mail, ShieldCheck, Briefcase, ShoppingBag, Shirt, Sprout, Dumbbell, Smartphone, Refrigerator, Home, Key } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 /**
  * @fileOverview Marketplace Home Hub
  * Saturated grid architecture with exactly 5 listings per row.
- * Zero-whitespace, high-density professional environment.
+ * Zero-whitespace, high-density professional environment with Elite Headings.
  */
 export function HomePage() {
-  const highFidelityLaptops = useMemo(() => {
+  const eliteComputing = useMemo(() => {
     return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 5);
   }, []);
 
-  const autosRegistry = useMemo(() => {
+  const premiumAutos = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Vehicles').slice(0, 5);
   }, []);
 
-  const phonesRegistry = useMemo(() => {
+  const smartCommunication = useMemo(() => {
     return LISTINGS.filter(l => l.subcategory === 'Mobiles').slice(0, 5);
   }, []);
 
-  const agricultureRegistry = useMemo(() => {
+  const industrialAgro = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Agriculture').slice(0, 5);
   }, []);
 
-  const fashionRegistry = useMemo(() => {
+  const designerLifestyle = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Fashion').slice(0, 5);
   }, []);
 
-  const servicesRegistry = useMemo(() => {
+  const professionalSolutions = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Services').slice(0, 5);
   }, []);
 
-  const sportsRegistry = useMemo(() => {
+  const performanceAthletics = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Sports').slice(0, 5);
   }, []);
 
-  const realEstateRegistry = useMemo(() => {
+  const eliteEstates = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Property').slice(0, 5);
   }, []);
 
-  const acRegistry = useMemo(() => {
+  const climateControl = useMemo(() => {
     return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
   }, []);
 
@@ -70,23 +69,23 @@ export function HomePage() {
         <HeroCarousel />
       </div>
 
-      {/* FORCE REDUCED COMPUTING SECTION (35% REDUCTION) */}
+      {/* FORCE REDUCED ELITE COMPUTING HUB (35% REDUCTION) */}
       <section className="w-full py-6 bg-muted/5 overflow-hidden border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-4 mb-4 flex items-end justify-between">
           <div className="space-y-0.5">
-            <h2 className="text-xl md:text-2xl font-black text-foreground tracking-tighter uppercase leading-none flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-primary" /> Most Popular Laptops
+            <h2 className="text-xl md:text-2xl font-black tracking-tighter uppercase leading-none flex items-center gap-2 italic heading-gradient">
+              <Sparkles className="h-4 w-4 text-primary" /> Elite Computing Hub
             </h2>
-            <p className="text-[8px] font-black text-muted-foreground uppercase tracking-[0.3em]">Premium Computing Hub • ACCRA</p>
+            <p className="text-[8px] font-black text-muted-foreground uppercase tracking-[0.3em]">Premium Hardware Registry • ACCRA</p>
           </div>
           <Link href="/listings?category=Electronics" className="text-[9px] font-black text-primary hover:underline uppercase tracking-widest">
-            View All Laptops
+            View Full Registry
           </Link>
         </div>
         
         <div className="relative group">
           <div className="animate-marquee hover:pause flex gap-4 px-4">
-            {[...highFidelityLaptops, ...highFidelityLaptops, ...highFidelityLaptops].map((item, idx) => (
+            {[...eliteComputing, ...eliteComputing, ...eliteComputing].map((item, idx) => (
               <div key={`${item.id}-${idx}`} className="w-[200px] shrink-0 transform scale-95 origin-center">
                 <HighFidelityListingCard {...item} />
               </div>
@@ -95,133 +94,135 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* PHONES - EXTRACTED REGISTRY */}
+      {/* SMART COMMUNICATION - iPHONE REGISTRY */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic flex items-center gap-3">
-              <Smartphone className="h-6 w-6 text-primary" /> Elite <span className="text-primary">Mobiles</span>
+              <Smartphone className="h-6 w-6 text-primary" /> Smart <span className="heading-gradient">Communication</span>
             </h2>
-            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Extracted iPhone Registry • Accra Hub</p>
+            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified iPhone & Smartphone Node</p>
           </div>
-          <Link href="/listings?category=Electronics" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+          <Link href="/listings?category=Electronics" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">Full Registry</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {phonesRegistry.map((item) => (
+          {smartCommunication.map((item) => (
             <ListingCard key={item.id} {...item} />
           ))}
         </div>
       </section>
 
-      {/* AUTOS GRID */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group">
+      {/* PREMIUM AUTOS */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic">Premium Autos</h2>
-            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified Vehicle Registry</p>
+            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic heading-gradient">Premium Autos</h2>
+            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified High-Value Vehicle Registry</p>
           </div>
           <Link href="/listings?category=Vehicles" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {autosRegistry.map((item) => (
+          {premiumAutos.map((item) => (
             <ListingCard key={item.id} {...item} />
           ))}
         </div>
       </section>
 
-      {/* AGRICULTURE GRID */}
+      {/* INDUSTRIAL AGRO-BUSINESS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Sprout className="h-6 w-6 text-green-600" /> Agri-Business <span className="text-primary">Hub</span>
+              <Sprout className="h-6 w-6 text-green-600" /> Industrial <span className="heading-gradient">Agro-Business</span>
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Industrial Farming Registry</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Heavy Machinery & Farming Assets</p>
           </div>
           <Link href="/listings?category=Agriculture" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {agricultureRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+          {industrialAgro.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
-      {/* FASHION GRID */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+      {/* DESIGNER LIFESTYLE */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Shirt className="h-6 w-6 text-pink-500" /> Designer <span className="text-primary">Registry</span>
+              <Shirt className="h-6 w-6 text-accent" /> Designer <span className="heading-gradient">Lifestyle</span>
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Apparel & Accessories</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Apparel & High-End Timepieces</p>
           </div>
           <Link href="/listings?category=Fashion" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {fashionRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+          {designerLifestyle.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
       <SpotlightCategories />
 
-      {/* SERVICES GRID */}
+      {/* PROFESSIONAL SOLUTIONS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Briefcase className="h-6 w-6 text-blue-600" /> Business <span className="text-primary">Services</span>
+              <Briefcase className="h-6 w-6 text-blue-600" /> Professional <span className="heading-gradient">Solutions</span>
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Verified Corporate Registry</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Corporate Services & Technical Audits</p>
           </div>
           <Link href="/listings?category=Services" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {servicesRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+          {professionalSolutions.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
-      {/* SPORTS GRID */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+      {/* PERFORMANCE ATHLETICS */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Dumbbell className="h-6 w-6 text-red-600" /> Sports & <span className="text-primary">Fitness</span>
+              <Dumbbell className="h-6 w-6 text-red-600" /> Performance <span className="heading-gradient">Athletics</span>
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Professional Athletics Registry</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Elite Fitness & Sporting Hardware</p>
           </div>
           <Link href="/listings?category=Sports" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {sportsRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+          {performanceAthletics.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
-      {/* AIR CONDITIONERS GRID */}
+      {/* CLIMATE CONTROL & APPLIANCES */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Refrigerator className="h-6 w-6 text-blue-400" /> Home <span className="text-primary">Comfort</span>
+              <Refrigerator className="h-6 w-6 text-blue-400" /> Climate <span className="heading-gradient">Control</span>
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Premium AC & Appliances</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Premium AC & Smart Appliances</p>
           </div>
           <Link href="/listings?category=Electronics" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {acRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+          {climateControl.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
-      {/* REAL ESTATE GRID */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+      {/* ELITE ESTATES */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12 bg-muted/5 border-b">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black uppercase tracking-tighter italic">Elite <span className="text-primary">Properties</span></h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Accra Real Estate Registry</p>
+            <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+               <Home className="h-6 w-6 text-primary" /> Elite <span className="heading-gradient">Estates</span>
+            </h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Residential & Commercial Real Estate</p>
           </div>
           <Link href="/listings?category=Property" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View all</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {realEstateRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+          {eliteEstates.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Truck, ShieldCheck, Lock } from 'lucide-react';
+import { Heart, Truck, Lock } from 'lucide-react';
 import { useCurrency } from '@/components/providers';
 import type { Listing } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
@@ -13,24 +13,25 @@ import { cn } from '@/lib/utils';
 /**
  * @fileOverview High-Fidelity Marketplace Listing Card
  * Updated with specific 7% border-radius protocol strictly for listings.
+ * Uses blended theme colors for visual depth.
  */
 export function ListingCard(props: Listing) {
   const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isFreeShipping, isEmphasis } = props;
   const { formatPrice } = useCurrency();
 
   return (
-    <Card className="group overflow-hidden bg-card border-none shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-[7%] animate-in fade-in zoom-in-95">
+    <Card className="group overflow-hidden bg-card border border-border/40 shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-[7%] animate-in fade-in zoom-in-95">
       {/* EMPHASIS NODE */}
       {isEmphasis && (
         <div className="absolute top-3 left-3 z-10">
-          <Badge className="bg-purple-600 text-white hover:bg-purple-700 text-[9px] font-black px-2.5 py-1 rounded-none border-none shadow-xl uppercase tracking-widest">
+          <Badge className="bg-gradient-to-r from-accent to-primary text-white hover:opacity-90 text-[9px] font-black px-2.5 py-1 rounded-none border-none shadow-xl uppercase tracking-widest">
             Priority
           </Badge>
         </div>
       )}
 
       {/* FAVORITE TRIGGER */}
-      <button className="absolute top-3 right-3 z-10 h-10 w-10 bg-white/95 dark:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-muted-foreground hover:text-red-500 shadow-xl transition-all active:scale-90 border border-white/10">
+      <button className="absolute top-3 right-3 z-10 h-10 w-10 bg-background/95 dark:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-muted-foreground hover:text-primary shadow-xl transition-all active:scale-90 border border-border">
         <Heart className="h-5 w-5" />
       </button>
 
@@ -43,7 +44,7 @@ export function ListingCard(props: Listing) {
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 20vw, 300px"
           className="object-cover transition-all duration-700 group-hover:scale-110 contrast-[1.02] saturate-[1.1]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </Link>
 
       <CardContent className="p-5 flex flex-col flex-1 gap-3">
@@ -55,17 +56,12 @@ export function ListingCard(props: Listing) {
 
         <div className="flex flex-wrap gap-2">
           {isFreeShipping && (
-            <Badge className="bg-green-100/10 text-green-500 hover:bg-green-100/20 text-[9px] font-black px-2 py-0.5 rounded-none border-none shadow-none flex items-center gap-1.5 uppercase tracking-tighter">
+            <Badge className="bg-green-100/10 text-green-500 text-[9px] font-black px-2 py-0.5 rounded-none border-none uppercase tracking-tighter">
               <Truck className="h-3 w-3" /> free shipping
             </Badge>
           )}
-          {isEasyDelivery && (
-            <Badge className="bg-blue-100/10 text-blue-500 hover:bg-blue-100/20 text-[9px] font-black px-2 py-0.5 rounded-none border-none shadow-none uppercase tracking-tighter">
-              Easy Delivery
-            </Badge>
-          )}
           {isEscrowProtected && (
-            <Badge className="bg-primary/10 text-primary hover:bg-primary/20 text-[9px] font-black px-2 py-0.5 rounded-none border-none shadow-none uppercase tracking-tighter flex items-center gap-1.5">
+            <Badge className="bg-primary/10 text-primary text-[9px] font-black px-2 py-0.5 rounded-none border-none uppercase flex items-center gap-1.5">
               <Lock className="h-2.5 w-2.5" /> Vault Guarantee
             </Badge>
           )}
@@ -77,7 +73,7 @@ export function ListingCard(props: Listing) {
               {formatPrice(oldPrice)}
             </p>
           )}
-          <span className="text-2xl font-black text-foreground tracking-tighter">
+          <span className="text-2xl font-black text-foreground tracking-tighter heading-gradient">
             {formatPrice(price)}
           </span>
         </div>

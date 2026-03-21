@@ -1,18 +1,20 @@
+
 "use client";
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart, MapPin, Share2, CheckCircle2 } from 'lucide-react';
+import { Heart, MapPin, CheckCircle2 } from 'lucide-react';
 import { useCurrency } from '@/components/providers';
 import type { Listing } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 /**
- * @fileOverview High-Fidelity Marketplace Listing Card (Masonry Style)
+ * @fileOverview High-Fidelity Marketplace Listing Card (Compact Hub Style)
  * Optimized for force-reduced height marquee contexts.
+ * Uses blended theme colors for a premium finish.
  */
 export function HighFidelityListingCard(props: Listing) {
   const { id, title, price, location, imageUrl, category, subcategory, specs, seller, isNegotiable } = props;
@@ -30,7 +32,7 @@ export function HighFidelityListingCard(props: Listing) {
           className="object-cover transition-all duration-700 group-hover:scale-105"
         />
         
-        {/* Floating Seller Avatar (Scaled Down) */}
+        {/* Floating Seller Avatar */}
         <div className="absolute bottom-2 right-2 z-10 scale-75 origin-bottom-right">
           <div className="relative">
             <Avatar className="h-8 w-8 border-2 border-white shadow-lg">
@@ -39,15 +41,15 @@ export function HighFidelityListingCard(props: Listing) {
             </Avatar>
             {seller.isVerified && (
               <div className="absolute -top-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
-                <CheckCircle2 className="h-2.5 w-2.5 text-green-500 fill-green-500 text-white" />
+                <CheckCircle2 className="h-2.5 w-2.5 text-green-500 fill-green-500" />
               </div>
             )}
           </div>
         </div>
       </Link>
 
-      <CardContent className="p-3 flex flex-col flex-1 gap-1.5">
-        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-tight truncate">
+      <CardContent className="p-3 flex flex-col flex-1 gap-1.5 bg-gradient-to-b from-card to-muted/5">
+        <p className="text-[8px] font-bold text-primary uppercase tracking-tight truncate">
           {category} {subcategory && `> ${subcategory}`}
         </p>
 
@@ -73,9 +75,9 @@ export function HighFidelityListingCard(props: Listing) {
           <span className="truncate">{location}</span>
         </div>
 
-        <div className="mt-auto pt-2 border-t border-dashed flex items-center justify-between">
+        <div className="mt-auto pt-2 border-t border-dashed border-border/50 flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-sm font-black text-foreground tracking-tighter">
+            <span className="text-sm font-black text-foreground tracking-tighter heading-gradient">
               {formatPrice(price)}
             </span>
             {isNegotiable && (
