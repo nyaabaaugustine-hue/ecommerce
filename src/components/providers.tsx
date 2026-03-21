@@ -5,7 +5,7 @@ import { User, MOCK_USERS, Listing } from '@/lib/mock-data';
 import { INITIAL_CONTENT } from '@/lib/initial-content';
 
 // --- Theme Context ---
-export type PrimaryTheme = 'sovereign' | 'deep' | 'royal' | 'midnight' | 'cobalt' | 'cold-white' | 'crimson';
+export type PrimaryTheme = 'sovereign' | 'midnight' | 'cobalt' | 'royal' | 'crimson' | 'cold-white';
 
 interface ThemeContextType {
   theme: PrimaryTheme;
@@ -21,8 +21,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setThemeState(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     
-    // Explicitly manage the 'dark' class for Sovereign vs Cold-White
-    if (newTheme === 'sovereign') {
+    // Manage 'dark' class for proper ShadCN and Tailwind dark mode compatibility
+    if (newTheme !== 'cold-white') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -36,7 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (stored) {
       setTheme(stored);
     } else {
-      setTheme('sovereign'); // Revert back to Sovereign (Dark) as default
+      setTheme('sovereign'); 
     }
   }, []);
 
