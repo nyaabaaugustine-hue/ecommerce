@@ -15,7 +15,6 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // FORCE DEFAULT: Always start with cold-white (Clinical Light)
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
@@ -168,6 +167,29 @@ export const useAuth = () => {
   return context;
 };
 
+// --- Search Context ---
+interface SearchContextType {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+}
+
+const SearchContext = createContext<SearchContextType | undefined>(undefined);
+
+export function SearchProvider({ children }: { children: React.ReactNode }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  return (
+    <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
+      {children}
+    </SearchContext.Provider>
+  );
+}
+
+export const useSearch = () => {
+  const context = useContext(SearchContext);
+  if (!context) throw new Error("useSearch must be used within SearchProvider");
+  return context;
+};
+
 // --- Currency Context ---
 export type CurrencyCode = 'GHS' | 'USD' | 'EUR' | 'GBP';
 
@@ -262,11 +284,13 @@ export function AuthProviderWrapper({ children }: { children: React.ReactNode })
     <ThemeProvider>
       <ContentProvider>
         <AuthProvider>
-          <CurrencyProvider>
-            <CartProvider>
-              {children}
-            </CartProvider>
-          </CurrencyProvider>
+          <SearchProvider>
+            <CurrencyProvider>
+              <CartProvider>
+                {children}
+              </CartProvider>
+            </CurrencyProvider>
+          </SearchProvider>
         </AuthProvider>
       </ContentProvider>
     </ThemeProvider>

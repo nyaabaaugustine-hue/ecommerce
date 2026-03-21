@@ -1,24 +1,31 @@
-
 "use client";
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart, MapPin, CheckCircle2 } from 'lucide-react';
-import { useCurrency } from '@/components/providers';
+import { Heart, MapPin, CheckCircle2, ShoppingBag } from 'lucide-react';
+import { useCurrency, useCart } from '@/components/providers';
 import type { Listing } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
-/**
- * @fileOverview High-Fidelity Marketplace Listing Card (Compact Hub Style)
- * Optimized for force-reduced height marquee contexts.
- * Uses blended theme colors for a premium finish.
- */
 export function HighFidelityListingCard(props: Listing) {
   const { id, title, price, location, imageUrl, imageHint, category, subcategory, specs, seller, isNegotiable } = props;
   const { formatPrice } = useCurrency();
+  const { addItem } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem(props);
+    toast({
+      title: "Asset Authorized",
+      description: `${title} added to escrow tray.`,
+    });
+  };
 
   return (
     <Card className="group overflow-hidden bg-card border border-border/40 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full rounded-[7%]">
@@ -76,23 +83,33 @@ export function HighFidelityListingCard(props: Listing) {
           <span className="truncate">{location}</span>
         </div>
 
-        <div className="mt-auto pt-2 border-t border-dashed border-border/50 flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-sm font-black text-foreground tracking-tighter heading-gradient">
-              {formatPrice(price)}
-            </span>
-            {isNegotiable && (
-              <span className="text-[7px] font-black text-muted-foreground uppercase tracking-widest -mt-0.5">
-                Negotiable
+        <div className="mt-auto pt-2 border-t border-dashed border-border/50 flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-sm font-black text-foreground tracking-tighter heading-gradient">
+                {formatPrice(price)}
               </span>
-            )}
+              {isNegotiable && (
+                <span className="text-[7px] font-black text-muted-foreground uppercase tracking-widest -mt-0.5">
+                  Negotiable
+                </span>
+              )}
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <button className="text-muted-foreground hover:text-red-500 transition-colors">
+                <Heart className="h-3 w-3" />
+              </button>
+            </div>
           </div>
           
-          <div className="flex items-center gap-2">
-            <button className="text-muted-foreground hover:text-red-500 transition-colors">
-              <Heart className="h-3 w-3" />
-            </button>
-          </div>
+          <Button 
+            onClick={handleAddToCart}
+            size="sm"
+            className="w-full h-8 bg-secondary text-white font-black uppercase text-[8px] tracking-widest rounded-none shadow-lg gap-2 hover:bg-primary transition-all opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
+          >
+            <ShoppingBag className="h-2.5 w-2.5 text-primary" /> Buy
+          </Button>
         </div>
       </CardContent>
     </Card>

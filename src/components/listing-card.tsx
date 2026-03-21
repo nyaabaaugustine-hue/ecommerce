@@ -1,18 +1,30 @@
-
 "use client";
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Truck, Lock } from 'lucide-react';
-import { useCurrency } from '@/components/providers';
+import { Heart, Truck, Lock, ShoppingBag } from 'lucide-react';
+import { useCurrency, useCart } from '@/components/providers';
 import type { Listing } from '@/lib/mock-data';
-import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 export function ListingCard(props: Listing) {
   const { id, title, price, oldPrice, location, postedAt, imageUrl, imageHint, isEscrowProtected, isFreeShipping, isEmphasis } = props;
   const { formatPrice } = useCurrency();
+  const { addItem } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem(props);
+    toast({
+      title: "Asset Secured in Cart",
+      description: `${title} is now in your escrow tray.`,
+    });
+  };
 
   return (
     <Card className="group overflow-hidden bg-card border border-border/40 shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-[7%] animate-in fade-in zoom-in-95">
@@ -74,12 +86,21 @@ export function ListingCard(props: Listing) {
           </span>
         </div>
 
-        <div className="pt-2 md:pt-4 flex flex-col text-[8px] md:text-[10px] text-muted-foreground font-black border-t border-dashed border-border/50 uppercase tracking-[0.1em]">
-          <span className="truncate flex items-center gap-1.5 md:gap-2">
-            <span className="text-primary/60">{postedAt}</span>
-            <span className="h-0.5 w-0.5 md:h-1 md:w-1 bg-muted-foreground/30 rounded-full" />
-            <span className="truncate">{location}</span>
-          </span>
+        <div className="pt-2 md:pt-4 border-t border-dashed border-border/50 space-y-3">
+          <div className="flex flex-col text-[8px] md:text-[10px] text-muted-foreground font-black uppercase tracking-[0.1em]">
+            <span className="truncate flex items-center gap-1.5 md:gap-2">
+              <span className="text-primary/60">{postedAt}</span>
+              <span className="h-0.5 w-0.5 md:h-1 md:w-1 bg-muted-foreground/30 rounded-full" />
+              <span className="truncate">{location}</span>
+            </span>
+          </div>
+          
+          <Button 
+            onClick={handleAddToCart}
+            className="w-full h-9 md:h-10 bg-secondary text-white font-black uppercase text-[8px] md:text-[9px] tracking-widest rounded-none shadow-xl gap-2 hover:bg-primary transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
+          >
+            <ShoppingBag className="h-3 w-3 text-primary" /> Quick Buy
+          </Button>
         </div>
       </CardContent>
     </Card>
