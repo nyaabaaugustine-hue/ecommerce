@@ -102,10 +102,10 @@ export function AdminSidebar() {
     <Sidebar collapsible="icon" className="border-r border-primary/20 bg-secondary text-white">
       <SidebarHeader className="p-4 bg-secondary">
         <Link href="/" className="flex items-center gap-3 group px-1">
-          <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/30 shrink-0">
+          <div className="relative h-10 w-10 overflow-hidden rounded-[var(--radius)] border border-primary/30 shrink-0">
             <Image 
-              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
-              alt="VaultCommerce" 
+              src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg" 
+              alt="Ecommerce" 
               fill 
               className="object-cover"
             />
@@ -113,7 +113,7 @@ export function AdminSidebar() {
           {state !== "collapsed" && (
             <div className="flex flex-col overflow-hidden">
                <span className="font-black text-sm uppercase tracking-tighter text-white truncate">
-                  <span className="text-primary animate-v-glow">V</span>ault<span className="text-primary">Admin</span>
+                  <span className="text-primary animate-v-glow">E</span>com<span className="text-primary">Admin</span>
                </span>
                <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em] truncate">Sovereign Backend</span>
             </div>

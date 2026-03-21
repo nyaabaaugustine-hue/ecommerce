@@ -30,7 +30,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             <div className="lg:col-span-1 space-y-4">
                <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 font-headline font-black text-xl text-white">
-                    <div className="relative h-8 w-8 overflow-hidden rounded-none border border-primary/30">
+                    <div className="relative h-8 w-8 overflow-hidden rounded-[var(--radius)] border border-primary/30">
                       <Image 
                         src={content.settings.logoUrl} 
                         alt="Logo" 
@@ -86,7 +86,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                   alt="Download" 
                   width={160} 
                   height={48} 
-                  className="rounded-none cursor-pointer hover:brightness-110 shadow-xl" 
+                  className="rounded-[var(--radius)] cursor-pointer hover:brightness-110 shadow-xl" 
                   unoptimized 
                 />
               </div>
@@ -110,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link rel="icon" href="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg" />
       </head>
       <AuthProviderWrapper>
         <LayoutContent>{children}</LayoutContent>

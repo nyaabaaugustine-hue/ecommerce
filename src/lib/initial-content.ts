@@ -53,7 +53,7 @@ export const INITIAL_CONTENT = {
         support: {
           title: "GET IN TOUCH",
           description: "Our support node is active 24/7 to assist with registry inquiries and escrow mediation.",
-          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg"
+          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg"
         }
       }
     }
@@ -61,7 +61,7 @@ export const INITIAL_CONTENT = {
   settings: {
     siteName: "Ecommerce",
     siteTagline: "The Gold Standard",
-    logoUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg",
+    logoUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg",
     supportPhone: "(+233) 05419 88 383",
     supportEmail: "Cybertechgh@gmail.com",
     footerCopyright: "© 2026 Ecommerce. All rights reserved by Cyber.",
