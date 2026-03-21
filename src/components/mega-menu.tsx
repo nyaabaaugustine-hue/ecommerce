@@ -10,7 +10,6 @@ import {
   Home, 
   ShoppingBag, 
   ShieldCheck, 
-  ArrowRight,
   Monitor,
   Smartphone,
   Tv,
@@ -37,7 +36,9 @@ import { cn } from "@/lib/utils";
 const SECTORS = [
   {
     title: "Electronics & Tech",
+    subtitle: "Verified Nodes",
     icon: Cpu,
+    bgImage: "https://picsum.photos/seed/tech-clouds/600/200",
     items: [
       { name: "Laptops & Computers", href: "/listings?category=Computing %26 Laptops", icon: Monitor, desc: "MacBook & Workstations" },
       { name: "Phones & Tablets", href: "/listings?category=Mobile Ecosystem", icon: Smartphone, desc: "iPhone & Android Nodes" },
@@ -47,7 +48,9 @@ const SECTORS = [
   },
   {
     title: "Property & Real Estate",
+    subtitle: "Verified Nodes",
     icon: Home,
+    bgImage: "https://picsum.photos/seed/realestate-clouds/600/200",
     items: [
       { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2, desc: "Ridge & Airport Offices" },
       { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key, desc: "Elite Gated Villas" },
@@ -56,7 +59,9 @@ const SECTORS = [
   },
   {
     title: "Lifestyle & Home",
+    subtitle: "Verified Nodes",
     icon: ShoppingBag,
+    bgImage: "https://picsum.photos/seed/lifestyle-clouds/600/200",
     items: [
       { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair, desc: "Luxury Living Suites" },
       { name: "Groceries & Kitchen", href: "/listings?category=Supermarket Registry", icon: Utensils, desc: "Makola Select Bundles" },
@@ -79,38 +84,46 @@ export function MegaMenu() {
           {/* Main Categories */}
           <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-3 divide-x border-b lg:border-b-0">
             {SECTORS.map((sector, idx) => (
-              <div key={idx} className="p-8 md:p-12 space-y-10">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 bg-primary/5 border border-primary/10 flex items-center justify-center text-primary">
-                    <sector.icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-black text-secondary uppercase tracking-[0.2em] text-xs">{sector.title}</h3>
-                    <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Verified Nodes</p>
+              <div key={idx} className="flex flex-col">
+                <div className="relative h-24 w-full overflow-hidden border-b bg-muted/20">
+                  <Image src={sector.bgImage} alt={sector.title} fill className="object-cover opacity-40 mix-blend-overlay contrast-125" data-ai-hint="clouds sky" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent p-8 flex items-center gap-4">
+                    <div className="h-10 w-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                      <sector.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-black text-secondary uppercase tracking-[0.15em] text-[10px] leading-tight">{sector.title}</h3>
+                      <p className="text-[7px] text-primary font-black uppercase tracking-[0.3em] mt-0.5 flex items-center gap-1.5">
+                        <ShieldCheck className="h-2 w-2" />
+                        {sector.subtitle}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 
-                <ul className="space-y-8">
-                  {sector.items.map((item, i) => (
-                    <li key={i}>
-                      <Link 
-                        href={item.href} 
-                        className="group flex items-start gap-4 text-muted-foreground hover:text-primary transition-all"
-                      >
-                        <div className="mt-0.5 p-2 bg-muted rounded-none group-hover:bg-primary/10 transition-colors">
-                          <item.icon className="h-4 w-4 opacity-70 group-hover:opacity-100 group-hover:text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between">
-                            <span className="text-[11px] font-black uppercase tracking-tight text-secondary group-hover:text-primary transition-colors">{item.name}</span>
-                            <ChevronRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
+                <div className="p-8 md:p-10 space-y-8">
+                  <ul className="space-y-6">
+                    {sector.items.map((item, i) => (
+                      <li key={i}>
+                        <Link 
+                          href={item.href} 
+                          className="group flex items-start gap-4 text-muted-foreground hover:text-primary transition-all"
+                        >
+                          <div className="mt-0.5 p-2 bg-muted rounded-none group-hover:bg-primary/10 transition-colors shrink-0">
+                            <item.icon className="h-3.5 w-3.5 opacity-70 group-hover:opacity-100 group-hover:text-primary" />
                           </div>
-                          <p className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-0.5">{item.desc}</p>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[10px] font-black uppercase tracking-tight text-secondary group-hover:text-primary transition-colors">{item.name}</span>
+                              <ChevronRight className="h-2.5 w-2.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
+                            </div>
+                            <p className="text-[8px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-0.5">{item.desc}</p>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>

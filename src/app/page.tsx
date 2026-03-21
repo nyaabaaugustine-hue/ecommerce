@@ -16,7 +16,9 @@ import {
   Star,
   Activity,
   Plus,
-  Rocket
+  Rocket,
+  TrendingUp,
+  Zap
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -31,10 +33,11 @@ import {
   DialogTrigger 
 } from '@/components/ui/dialog';
 import { PromotionPopup } from '@/components/promotion-popup';
-import { useContent } from '@/components/providers';
+import { useContent, useCurrency } from '@/components/providers';
 
 export default function HomePage() {
   const { content } = useContent();
+  const { formatPrice } = useCurrency();
   const { hero, highlights, trust, cta } = content.pages.home.sections;
   const [isSliding, setIsSliding] = useState(false);
   const [showVendorModal, setShowVendorModal] = useState(false);
@@ -127,8 +130,42 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Innovation: Weekly Best Sellers Scrolling Section */}
+      <section className="bg-primary py-12 overflow-hidden border-y border-accent/20">
+        <div className="container mx-auto px-4 mb-8">
+          <div className="flex items-center gap-4">
+             <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
+             <h2 className="text-xl font-black text-white uppercase tracking-[0.2em]">Weekly Velocity: Best Selling Nodes</h2>
+          </div>
+        </div>
+        <div className="animate-marquee gap-8 py-4 [animation-duration:60s]">
+          {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
+            <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
+               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-4 flex gap-4 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer">
+                  <div className="relative h-16 w-16 bg-white overflow-hidden shrink-0">
+                     <Image src={listing.imageUrl} alt={listing.title} fill className="object-cover group-hover:scale-110 transition-transform" />
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center overflow-hidden">
+                     <h4 className="text-[10px] font-black text-white uppercase tracking-tighter truncate mb-1">{listing.title}</h4>
+                     <div className="flex items-center justify-between">
+                        <span className="text-[9px] font-black text-accent">{formatPrice(listing.price)}</span>
+                        <div className="flex items-center gap-1">
+                           <Star className="h-2.5 w-2.5 fill-accent text-accent" />
+                           <span className="text-[8px] font-bold text-white/60">{listing.rating}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="flex items-center opacity-0 group-hover:opacity-100 transition-all">
+                     <ArrowRight className="h-4 w-4 text-accent" />
+                  </div>
+               </Card>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Trust Section */}
-      <section className="bg-background py-16 overflow-hidden border-y border-muted">
+      <section className="bg-background py-16 overflow-hidden border-b border-muted">
         <div className="container mx-auto px-4 mb-10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
             <span className="text-accent font-black uppercase tracking-[0.5em] text-[10px] mb-2 block">{trust.subtitle}</span>
