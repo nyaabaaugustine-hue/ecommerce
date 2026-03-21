@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -33,7 +32,6 @@ export function Navbar() {
 
   const toggleTheme = () => {
     setTheme(theme === 'cold-white' ? 'sovereign' : 'cold-white');
-    document.documentElement.classList.toggle('dark');
   };
 
   return (

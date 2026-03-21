@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -21,6 +20,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const setTheme = (newTheme: PrimaryTheme) => {
     setThemeState(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Explicitly manage the 'dark' class for Sovereign vs Cold-White
+    if (newTheme === 'sovereign') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
     localStorage.setItem('vault_theme', newTheme);
   };
 
@@ -28,6 +35,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const stored = localStorage.getItem('vault_theme') as PrimaryTheme;
     if (stored) {
       setTheme(stored);
+    } else {
+      setTheme('sovereign'); // Revert back to Sovereign (Dark) as default
     }
   }, []);
 
