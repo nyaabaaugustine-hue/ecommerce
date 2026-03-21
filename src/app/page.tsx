@@ -45,11 +45,11 @@ export function HomePage() {
     return LISTINGS.filter(l => l.id.startsWith('gb')).slice(0, 5);
   }, []);
 
-  const vehicles = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('v_')).slice(0, 5);
+  const vehiclesMostSearched = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Vehicles').slice(0, 5);
   }, []);
 
-  const realEstate = useMemo(() => {
+  const realEstateRegistry = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Property' && l.id.startsWith('re')).slice(0, 5);
   }, []);
 
@@ -59,6 +59,13 @@ export function HomePage() {
     { title: "Apartments for rent", imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" },
     { title: "Houses for sale", imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" },
     { title: "Houses for rent", imageUrl: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=800&auto=format&fit=crop" },
+  ];
+
+  const AUTOS_SPOTLIGHT = [
+    { title: "Cars", imageUrl: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop" },
+    { title: "Trucks", imageUrl: "https://images.unsplash.com/photo-1586191582151-f73872dfd183?q=80&w=800&auto=format&fit=crop" },
+    { title: "Motorcycles", imageUrl: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=800&auto=format&fit=crop" },
+    { title: "Bus", imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop" },
   ];
 
   return (
@@ -88,19 +95,70 @@ export function HomePage() {
               </div>
             ))}
           </div>
-          
           <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
       </section>
 
-      {/* Institutional Separator */}
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="h-[1px] w-full bg-border/50" />
-      </div>
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
-      {/* CLONE SECTION: Category Spotlight */}
+      {/* CLONE SECTION: Autos Spotlight (4 Columns as per reference) */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8">
+          <h2 className="text-3xl font-medium text-foreground tracking-tight">Autos</h2>
+          <p className="text-sm text-muted-foreground font-medium mt-1">The best vehicles</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {AUTOS_SPOTLIGHT.map((item, idx) => (
+            <Link 
+              key={item.title} 
+              href={`/listings?category=Vehicles`}
+              className={cn(
+                "group relative flex flex-col bg-white border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
+                `animate-in slide-in-from-bottom-4 delay-${idx * 100}`
+              )}
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+              </div>
+              <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
+                <p className="text-center font-bold text-[13px] text-foreground/80 group-hover:text-primary uppercase tracking-tight">
+                  {item.title}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* CLONE ROW: Most searched in Autos */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-medium text-foreground tracking-tight">
+            Most searched in <span className="font-bold">Autos</span>
+          </h2>
+          <Link href="/listings?category=Vehicles" className="text-sm font-bold text-primary hover:underline">
+            View all
+          </Link>
+        </div>
+        
+        <div className="relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {vehiclesMostSearched.map((item, idx) => (
+              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
+                <ListingCard {...item} />
+              </div>
+            ))}
+          </div>
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
+
       <SpotlightCategories />
 
       {/* CLONE SECTION: Buy or Rent Spotlight (5 Columns) */}
@@ -146,7 +204,7 @@ export function HomePage() {
         
         <div className="relative">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {realEstate.map((item, idx) => (
+            {realEstateRegistry.map((item, idx) => (
               <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
                 <ListingCard {...item} />
               </div>
@@ -181,10 +239,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Institutional Separator */}
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="h-[1px] w-full bg-border/50" />
-      </div>
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
       {/* CLONE ROW: Cell Phones Registry */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
@@ -212,10 +267,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Institutional Separator */}
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="h-[1px] w-full bg-border/50" />
-      </div>
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
       {/* CLONE ROW: Cabinets and Wardrobes */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
@@ -243,10 +295,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Institutional Separator */}
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="h-[1px] w-full bg-border/50" />
-      </div>
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
       {/* CLONE ROW: Air Conditioners */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
@@ -274,10 +323,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Institutional Separator */}
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="h-[1px] w-full bg-border/50" />
-      </div>
+      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
       {/* CLONE ROW: Trending Heading & Game Boy Grid */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
@@ -307,37 +353,6 @@ export function HomePage() {
 
       {/* INSTITUTIONAL BENEFITS NODE */}
       <BenefitsSection />
-
-      {/* Institutional Separator */}
-      <div className="max-w-7xl mx-auto w-full px-4">
-        <div className="h-[1px] w-full bg-border/50" />
-      </div>
-
-      {/* CLONE ROW: Sovereign Vehicles */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Sovereign <span className="font-bold">Vehicles Node</span>
-          </h2>
-          <Link href="/listings?category=Vehicles" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {vehicles.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
-        </div>
-      </section>
 
       <PrivacyPopup />
     </div>
