@@ -1,3 +1,4 @@
+
 "use client";
 
 import { PlusCircle } from 'lucide-react';
@@ -7,8 +8,8 @@ import { AuthDialog } from '@/components/auth-dialog';
 
 /**
  * @fileOverview Master Post Ad Action Node
- * Updated to use standard professional radii per the "listings-only" 7% directive.
- * Floating command position for maximum marketplace engagement.
+ * Scaled-down floating trigger with specific 6% rectangular geometry.
+ * reduced by 14% in overall mass for elite visual balance.
  */
 export function PostAdButton() {
   const [showAuth, setShowAuth] = useState(false);
@@ -19,10 +20,10 @@ export function PostAdButton() {
       <div className="fixed right-6 bottom-6 z-50 group">
         <Button 
           onClick={() => setShowAuth(true)}
-          className="h-16 px-10 bg-primary text-secondary hover:bg-white shadow-[0_20px_50px_rgba(45,45,45,0.3)] flex items-center gap-3 rounded-full border-4 border-white/10 transition-all active:scale-95 animate-in fade-in slide-in-from-bottom-10 duration-1000"
+          className="h-[55px] px-[34px] bg-primary text-secondary hover:bg-white shadow-[0_30px_60px_rgba(0,0,0,0.4)] flex items-center gap-3 rounded-[6%] border-4 border-white/10 transition-all active:scale-95 animate-in fade-in slide-in-from-bottom-10 duration-1000"
         >
-          <PlusCircle className="h-6 w-6 animate-pulse" />
-          <span className="font-black uppercase text-sm tracking-[0.2em]">Post Ad</span>
+          <PlusCircle className="h-5 w-5 animate-pulse" />
+          <span className="font-black uppercase text-[12px] tracking-[0.2em]">Post Ad</span>
         </Button>
       </div>
     </>
