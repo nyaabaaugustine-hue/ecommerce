@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,6 +26,7 @@
     --radius: 0px;
     --burgundy: 0 100% 27%; /* #8B0000 High-Contrast Burgundy */
     --milky-white: 210 20% 98%;
+    --gold: 45 100% 50%; /* Institutional Gold */
   }
 
   /* Institutional Theme Registry - 7 Tiers */
@@ -69,6 +69,14 @@
 
 .text-milky {
   color: hsl(var(--milky-white)) !important;
+}
+
+.text-gold {
+  color: hsl(var(--gold)) !important;
+}
+
+.fill-gold {
+  fill: hsl(var(--gold)) !important;
 }
 
 /* Custom Product Card Image Radius */

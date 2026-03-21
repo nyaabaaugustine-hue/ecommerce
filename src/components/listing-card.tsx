@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { EscrowBadge } from '@/components/escrow-badge';
-import { Star, Plus, Users, ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Star, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart, useCurrency } from '@/components/providers';
 import { useToast } from '@/hooks/use-toast';
@@ -80,7 +79,7 @@ export function ListingCard(props: ListingProps) {
             {category}
           </Link>
           <div className="flex items-center gap-1.5">
-            <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+            <Star className="h-3.5 w-3.5 fill-gold text-gold" />
             <span className="text-[11px] font-black text-secondary">{rating}</span>
           </div>
         </div>

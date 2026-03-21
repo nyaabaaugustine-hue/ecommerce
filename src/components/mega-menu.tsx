@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -22,7 +21,8 @@ import {
   Sparkles,
   Zap,
   ShieldAlert,
-  Store
+  Store,
+  Star
 } from "lucide-react";
 import { 
   Popover, 
@@ -31,7 +31,6 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 const SECTORS = [
   {
@@ -86,7 +85,7 @@ export function MegaMenu() {
             {SECTORS.map((sector, idx) => (
               <div key={idx} className="flex flex-col">
                 <div className="relative h-24 w-full overflow-hidden border-b bg-muted/20">
-                  <Image src={sector.bgImage} alt={sector.title} fill className="object-cover opacity-40 mix-blend-overlay contrast-125" data-ai-hint="clouds sky" />
+                  <Image src={sector.bgImage} alt={sector.title} fill className="object-cover opacity-40 mix-blend-overlay contrast-125" />
                   <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent p-8 flex items-center gap-4">
                     <div className="h-10 w-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                       <sector.icon className="h-5 w-5" />
@@ -160,7 +159,10 @@ export function MegaMenu() {
                     </div>
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">Melcom Digital</p>
-                      <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9 Rating</p>
+                      <div className="flex items-center gap-1">
+                        <Star className="h-2 w-2 fill-gold text-gold" />
+                        <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9 Rating</p>
+                      </div>
                     </div>
                   </Link>
                   

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -12,11 +12,7 @@ import {
   Star, 
   MapPin, 
   ShieldCheck, 
-  Info, 
-  Gavel, 
-  CheckCircle2, 
   Lock, 
-  Loader2, 
   ShieldAlert,
   ArrowRight,
   Timer,
@@ -24,7 +20,6 @@ import {
   Key,
   Users,
   Activity,
-  ChevronRight,
   Wallet
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -127,7 +122,7 @@ export default function ListingDetails() {
                     <span className="text-[10px] md:text-sm font-bold uppercase tracking-widest">{listing.location}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-primary text-primary" />
+                    <Star className="h-4 w-4 fill-gold text-gold" />
                     <span className="text-[10px] md:text-sm font-black text-secondary">{listing.rating}</span>
                   </div>
                   <div className="bg-secondary/10 px-3 py-1 flex items-center gap-2 border border-secondary/20">
@@ -160,9 +155,6 @@ export default function ListingDetails() {
                         <p className="text-[8px] font-black uppercase tracking-tighter leading-none">{step.label}</p>
                         <p className="text-[7px] text-muted-foreground font-bold uppercase hidden md:block">{step.desc}</p>
                       </div>
-                      {idx < ESCROW_STEPS.length - 1 && (
-                        <div className="hidden sm:block absolute mt-6 ml-24 h-[2px] w-12 bg-border group-hover:bg-primary/30 transition-colors" />
-                      )}
                    </div>
                  ))}
                </div>
@@ -177,7 +169,7 @@ export default function ListingDetails() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3 p-4 bg-primary/5 border border-primary/20 rounded-none">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                <ShieldCheck className="h-5 w-5 text-primary shrink-0" />
                 <span className="text-[10px] font-black uppercase tracking-widest">100% Protection Policy</span>
               </div>
               <div className="flex items-center gap-3 p-4 bg-secondary/5 border border-secondary/20 rounded-none">

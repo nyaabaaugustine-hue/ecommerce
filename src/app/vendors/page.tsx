@@ -1,26 +1,19 @@
-
 "use client";
 
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
-  ShieldCheck, 
   Search, 
   Star, 
-  Users, 
   Activity, 
   ArrowUpRight, 
-  Lock, 
   Zap, 
   CheckCircle2,
-  TrendingUp,
-  Store,
-  Globe,
   Filter
 } from 'lucide-react';
 import { VENDORS } from '@/lib/mock-data';
@@ -137,7 +130,7 @@ export default function VendorRegistry() {
                 <div className="space-y-1">
                    <p className="text-[8px] font-black text-muted-foreground uppercase tracking-widest">Market Trust</p>
                    <div className="flex items-center gap-1.5">
-                      <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                      <Star className="h-3.5 w-3.5 fill-gold text-gold" />
                       <span className="text-lg font-black text-secondary">{vendor.rating}</span>
                    </div>
                 </div>

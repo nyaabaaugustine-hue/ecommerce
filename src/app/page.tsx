@@ -1,17 +1,13 @@
-
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ListingCard } from '@/components/listing-card';
 import { 
-  ShieldCheck, 
   ChevronRight, 
   ArrowRight, 
-  Lock,
-  ShieldAlert,
   Store,
   Star,
   Activity,
@@ -22,20 +18,18 @@ import {
   Smartphone,
   Home,
   ShoppingBag,
-  HelpCircle,
   Truck,
-  Phone
+  Phone,
+  ShieldAlert
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { LISTINGS, VENDORS } from '@/lib/mock-data';
-import { cn } from '@/lib/utils';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
-  DialogDescription,
   DialogTrigger 
 } from '@/components/ui/dialog';
 import { PromotionPopup } from '@/components/promotion-popup';
@@ -196,7 +190,7 @@ export default function HomePage() {
                      <div className="flex items-center justify-between">
                         <span className="text-[9px] font-black text-accent">{formatPrice(listing.price)}</span>
                         <div className="flex items-center gap-1">
-                           <Star className="h-2.5 w-2.5 fill-accent text-accent" />
+                           <Star className="h-2.5 w-2.5 fill-gold text-gold" />
                            <span className="text-[8px] font-bold text-white/60">{listing.rating}</span>
                         </div>
                      </div>
@@ -293,7 +287,7 @@ export default function HomePage() {
                         <div className="flex items-center gap-3">
                            <Badge className="bg-accent text-secondary font-black rounded-none text-[9px] uppercase tracking-tighter px-3 py-0.5">{vendor.category}</Badge>
                            <div className="flex items-center gap-1.5">
-                             <Star className="h-4 w-4 fill-accent text-accent" />
+                             <Star className="h-4 w-4 fill-gold text-gold" />
                              <span className="text-[11px] font-black text-white">{vendor.rating}</span>
                            </div>
                         </div>
