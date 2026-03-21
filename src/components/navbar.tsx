@@ -46,6 +46,16 @@ const NAV_LINKS = [
   { name: 'Contact Us', href: '/contact' }
 ];
 
+const THEMES: { label: string; value: PrimaryTheme }[] = [
+  { label: "Sovereign Navy", value: "sovereign" },
+  { label: "Deep Registry", value: "deep" },
+  { label: "Royal Node", value: "royal" },
+  { label: "Midnight", value: "midnight" },
+  { label: "Cobalt Hub", value: "cobalt" },
+  { label: "Silver Node", value: "cold-white" },
+  { label: "Crimson Red", value: "crimson" },
+];
+
 export function Navbar() {
   const { user, logout } = useAuth();
   const { items } = useCart();
@@ -89,7 +99,7 @@ export function Navbar() {
          </div>
       </div>
 
-      {/* Jumia Style Secondary Bar */}
+      {/* Jumia Style Secondary Bar with Theme Toggle */}
       <div className="bg-[#f1f1f2] py-2 px-4 md:px-10 hidden sm:flex justify-between items-center text-[9px] font-black text-secondary/60 uppercase tracking-widest">
          <div className="flex items-center gap-6">
             <Link href="/vendors" className="flex items-center gap-2 hover:text-accent transition-colors">
@@ -101,6 +111,22 @@ export function Navbar() {
             <span className="flex items-center gap-2 cursor-pointer hover:text-accent transition-colors">
                <Zap className="h-3 w-3 text-primary" /> VAULT DELIVERY
             </span>
+            <Separator orientation="vertical" className="h-4 mx-2" />
+            <div className="flex items-center gap-3">
+               <Palette className="h-3 w-3 text-primary" />
+               <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
+                  <SelectTrigger className="h-7 rounded-none border-primary/20 bg-white text-[8px] font-black uppercase tracking-[0.2em] w-[140px]">
+                     <SelectValue placeholder="Institutional Theme" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-none border-t-4 border-primary">
+                    {THEMES.map((t) => (
+                      <SelectItem key={t.value} value={t.value} className="text-[9px] font-black uppercase tracking-widest">
+                        {t.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+               </Select>
+            </div>
          </div>
          <div className="flex items-center gap-6">
             <Link href="/about" className="hover:text-primary">Our Story</Link>
