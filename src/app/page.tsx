@@ -15,14 +15,14 @@ import { TipsSection } from '@/components/tips-section';
 import { FooterTabs } from '@/components/footer-tabs';
 import { NewsletterPopup } from '@/components/newsletter-popup';
 import { LISTINGS } from '@/lib/mock-data';
-import { ChevronRight, Sparkles, ArrowRight, Mail, ShieldCheck } from 'lucide-react';
+import { ChevronRight, Sparkles, ArrowRight, Mail, ShieldCheck, Briefcase, ShoppingBag, Shirt, Sprout, Dumbbell } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 /**
  * @fileOverview Marketplace Home Hub
- * High-density architecture with exactly 5 listings per row.
+ * Industrial architecture with exactly 5 saturated listings per row.
  */
 export function HomePage() {
   const highFidelityLaptops = useMemo(() => {
@@ -41,8 +41,20 @@ export function HomePage() {
     return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
   }, []);
 
-  const gameBoys = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('gb')).slice(0, 5);
+  const agricultureRegistry = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Agriculture').slice(0, 5);
+  }, []);
+
+  const fashionRegistry = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Fashion').slice(0, 5);
+  }, []);
+
+  const servicesRegistry = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Services').slice(0, 5);
+  }, []);
+
+  const sportsRegistry = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Sports').slice(0, 5);
   }, []);
 
   const realEstateRegistry = useMemo(() => {
@@ -54,6 +66,7 @@ export function HomePage() {
     { title: "Trucks", imageUrl: "https://images.unsplash.com/photo-1586191582151-f73872dfd183?q=80&w=800&auto=format&fit=crop" },
     { title: "Motorcycles", imageUrl: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=800&auto=format&fit=crop" },
     { title: "Bus", imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop" },
+    { title: "Heavy Duty", imageUrl: "https://images.unsplash.com/photo-1501700493788-fa1a4fc9fe62?q=80&w=800&auto=format&fit=crop" },
   ];
 
   return (
@@ -107,13 +120,29 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* AUTOS SPOTLIGHT (4 COLS) */}
+      {/* AGRICULTURE SECTION */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+              <Sprout className="h-6 w-6 text-green-600" /> Agri-Business <span className="text-primary">Hub</span>
+            </h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Industrial Farming Registry</p>
+          </div>
+          <Link href="/listings?category=Agriculture" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {agricultureRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+        </div>
+      </section>
+
+      {/* AUTOS SPOTLIGHT (5 COLS) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8">
           <h2 className="text-3xl font-black uppercase tracking-tighter italic">Auto Categories</h2>
           <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.3em] mt-1">Verified Logistics Nodes</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {AUTOS_SPOTLIGHT.map((item) => (
             <Link key={item.title} href="/listings?category=Vehicles" className="group relative flex flex-col bg-card border rounded-none overflow-hidden hover:shadow-2xl transition-all duration-500">
               <div className="relative aspect-[4/3] w-full">
@@ -124,6 +153,22 @@ export function HomePage() {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* FASHION SECTION */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+              <Shirt className="h-6 w-6 text-pink-500" /> Designer <span className="text-primary">Registry</span>
+            </h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Apparel & Accessories</p>
+          </div>
+          <Link href="/listings?category=Fashion" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {fashionRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
@@ -140,6 +185,22 @@ export function HomePage() {
 
       <SpotlightCategories />
 
+      {/* PROFESSIONAL SERVICES SECTION */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+              <Briefcase className="h-6 w-6 text-blue-600" /> Business <span className="text-primary">Services</span>
+            </h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Verified Corporate Registry</p>
+          </div>
+          <Link href="/listings?category=Services" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {servicesRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
+        </div>
+      </section>
+
       {/* AIR CONDITIONERS ROW */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
@@ -151,6 +212,22 @@ export function HomePage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {airConditioners.map((item) => <ListingCard key={item.id} {...item} />)}
+        </div>
+      </section>
+
+      {/* SPORTS SECTION */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic flex items-center gap-3">
+              <Dumbbell className="h-6 w-6 text-red-600" /> Sports & <span className="text-primary">Fitness</span>
+            </h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Professional Athletics Registry</p>
+          </div>
+          <Link href="/listings?category=Sports" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {sportsRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
@@ -180,20 +257,6 @@ export function HomePage() {
             <Image src="https://images.unsplash.com/photo-1556740734-7f1a0297ba16?q=80&w=800&auto=format&fit=crop" alt="Newsletter" fill className="object-cover contrast-125 saturate-0 opacity-40" />
             <div className="absolute inset-0 bg-gradient-to-r from-secondary to-transparent" />
           </div>
-        </div>
-      </section>
-
-      {/* GAME BOYS ROW */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="mb-8 flex justify-between items-end">
-          <div>
-            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Retro Gaming</h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Handheld Collector Registry</p>
-          </div>
-          <Link href="/listings" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {gameBoys.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
