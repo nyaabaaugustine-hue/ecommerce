@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -21,19 +22,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setThemeState(newTheme);
     if (typeof window !== 'undefined') {
       document.documentElement.setAttribute('data-theme', newTheme);
-      
       if (newTheme !== 'cold-white') {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
-      
       localStorage.setItem('vault_theme', newTheme);
     }
   };
 
   useEffect(() => {
-    // FORCE WHITE ON EVERY FRESH LOAD: Absolute Clinical Protocol
+    // ABSOLUTE CLINICAL FORCE-LOCK: Incinerate legacy data on every fresh load
     if (typeof window !== 'undefined') {
       localStorage.removeItem('vault_theme');
       document.documentElement.classList.remove('dark');
