@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -16,10 +17,13 @@ import {
   Menu,
   Home as HomeIcon,
   Phone,
-  User as UserIcon
+  User as UserIcon,
+  Activity,
+  Zap,
+  Lock
 } from 'lucide-react';
 import { useAuth, useContent, useTheme, useSearch, type PrimaryTheme } from '@/components/providers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
 import { MegaMenu } from '@/components/mega-menu';
 import {
@@ -39,6 +43,11 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const { searchQuery, setSearchQuery } = useSearch();
   const [showAuth, setShowAuth] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const themes: { id: PrimaryTheme; name: string; color: string; desc: string }[] = [
     { id: 'cold-white', name: 'Clinical Light', color: 'bg-white border', desc: 'Standard Default' },
@@ -56,25 +65,37 @@ export function Navbar() {
     { name: 'Contact', href: '/contact', icon: Phone },
   ];
 
-  const UTILITY_LINKS = [
-    { name: 'Help', href: '/help', icon: HelpCircle },
-  ];
-
   return (
     <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-300">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      <div className="bg-muted/50 border-b border-dashed hidden sm:block">
-        <div className="max-w-7xl mx-auto px-4 h-7 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            {UTILITY_LINKS.map((link) => (
-              <Link key={link.name} href={link.href} className="text-[8px] font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors flex items-center gap-1">
-                <link.icon className="h-2.5 w-2.5" /> {link.name}
-              </Link>
-            ))}
+      {/* SOVEREIGN PROTOCOL TICKER */}
+      <div className="bg-secondary text-white overflow-hidden h-8 flex items-center border-b border-white/5">
+        <div className="flex animate-marquee whitespace-nowrap items-center gap-12 px-4">
+          <div className="flex items-center gap-2">
+            <Activity className="h-3 w-3 text-primary animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Network Health: 99.98%</span>
           </div>
-          <div className="hidden md:flex items-center gap-4">
-            <span className="text-[7px] font-bold text-primary uppercase tracking-[0.4em]">SECURE ESCROW ACTIVE • ACCRA HUB</span>
+          <div className="flex items-center gap-2">
+            <Zap className="h-3 w-3 text-primary" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Active Escrow: GH₵4,240,950</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Lock className="h-3 w-3 text-primary" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Settlement Speed: 1.4h Average</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-3 w-3 text-primary" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Registry Status: ACCRA HUB ONLINE</span>
+          </div>
+          {/* Duplicate for seamless loop */}
+          <div className="flex items-center gap-2">
+            <Activity className="h-3 w-3 text-primary animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Network Health: 99.98%</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Zap className="h-3 w-3 text-primary" />
+            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Active Escrow: GH₵4,240,950</span>
           </div>
         </div>
       </div>
@@ -155,10 +176,10 @@ export function Navbar() {
                       onClick={() => setTheme(t.id)}
                       className={cn(
                         "flex items-center justify-between cursor-pointer py-2 px-3 transition-all hover:bg-muted rounded-none",
-                        theme === t.id && "bg-primary/10 border-l-2 border-primary"
+                        mounted && theme === t.id && "bg-primary/10 border-l-2 border-primary"
                       )}
                     >
-                      <span className={cn("text-[10px] font-black uppercase tracking-widest", theme === t.id ? "text-primary" : "text-foreground")}>{t.name}</span>
+                      <span className={cn("text-[10px] font-black uppercase tracking-widest", mounted && theme === t.id ? "text-primary" : "text-foreground")}>{t.name}</span>
                       <div className={cn("h-3 w-3 rounded-none", t.color)} />
                     </DropdownMenuItem>
                   ))}

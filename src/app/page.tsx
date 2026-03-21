@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo } from 'react';
@@ -14,6 +15,8 @@ import { FooterTabs } from '@/components/footer-tabs';
 import { NewsletterPopup } from '@/components/newsletter-popup';
 import { LISTINGS } from '@/lib/mock-data';
 import { useSearch } from '@/components/providers';
+import { Badge } from '@/components/ui/badge';
+import { ShieldCheck, Activity, Zap, Lock } from 'lucide-react';
 
 export function HomePage() {
   const { searchQuery } = useSearch();
@@ -60,12 +63,44 @@ export function HomePage() {
   }, [filteredListings]);
 
   return (
-    <div className="flex flex-col bg-background min-h-screen pb-20 overflow-x-hidden">
+    <div className="flex flex-col bg-background min-h-screen pb-20 overflow-x-hidden transition-colors duration-500">
       <CategoryBar />
       
       <div className="max-w-7xl mx-auto w-full px-4 mb-8 md:mb-12 mt-4 md:mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <HeroCarousel />
       </div>
+
+      {/* REGISTRY STATS TICKER */}
+      <section className="max-w-7xl mx-auto w-full px-4 mb-12">
+        <div className="bg-secondary text-white p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-10 border-b-4 border-primary shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 -mr-32 -mt-32 blur-3xl rounded-full" />
+          <div className="flex flex-col items-center md:items-start gap-3 relative z-10">
+            <Badge className="bg-primary text-secondary font-black rounded-none uppercase text-[8px] tracking-[0.4em] px-4">Network Monitoring</Badge>
+            <h2 className="text-2xl md:text-4xl font-black tracking-tighter uppercase italic">Sovereign Protocol Hub</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 w-full md:w-auto relative z-10">
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Total Locked</p>
+              <p className="text-xl md:text-2xl font-black tracking-tighter">GH₵4.2M</p>
+            </div>
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Active Nodes</p>
+              <p className="text-xl md:text-2xl font-black tracking-tighter">1,248</p>
+            </div>
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Fulfillment</p>
+              <p className="text-xl md:text-2xl font-black tracking-tighter">99.4%</p>
+            </div>
+            <div className="text-center md:text-left space-y-1">
+              <p className="text-[8px] font-black text-primary uppercase tracking-[0.3em]">Uptime</p>
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                <p className="text-xl md:text-2xl font-black tracking-tighter">LIVE</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* (Most popular laptops) */}
       {eliteComputing.length > 0 && (
@@ -134,6 +169,8 @@ export function HomePage() {
         </section>
       )}
 
+      <SpotlightCategories />
+
       {/* (Most searched for agriculture) */}
       {industrialAgro.length > 0 && (
         <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
@@ -169,8 +206,6 @@ export function HomePage() {
           </div>
         </section>
       )}
-
-      <SpotlightCategories />
 
       {/* (Most popular services) */}
       {professionalSolutions.length > 0 && (
