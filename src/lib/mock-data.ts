@@ -6,6 +6,7 @@ export interface User {
   email: string;
   role: Role;
   avatar?: string;
+  fidelityScore?: number; // Added: Customer Fidelity Score
 }
 
 export interface Vendor {
@@ -20,6 +21,8 @@ export interface Vendor {
   logoUrl: string;
   bgUrl: string;
   description: string;
+  fidelityScore: number; // Added: Vendor Fidelity Score (1-100)
+  settlementSpeed: string; // Added: Average time to release funds
 }
 
 export interface Listing {
@@ -35,6 +38,7 @@ export interface Listing {
   discount?: string;
   salesCount: number;
   inventoryStatus?: 'In Stock' | 'Limited Stock' | 'Sold Out';
+  requiresMultisig?: boolean; // Added: High-value flag
 }
 
 export const VENDORS: Vendor[] = [
@@ -49,7 +53,9 @@ export const VENDORS: Vendor[] = [
     icon: 'M',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg',
-    description: "Ghana's largest electronics and appliance department, powered by Melcom."
+    description: "Ghana's largest electronics and appliance department, powered by Melcom.",
+    fidelityScore: 98,
+    settlementSpeed: '1.2h'
   },
   {
     id: 'v2',
@@ -62,7 +68,9 @@ export const VENDORS: Vendor[] = [
     icon: 'P',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
-    description: 'Curating the finest residential and commercial properties across East Legon.'
+    description: 'Curating the finest residential and commercial properties across East Legon.',
+    fidelityScore: 94,
+    settlementSpeed: '2.4h'
   },
   {
     id: 'v3',
@@ -75,7 +83,9 @@ export const VENDORS: Vendor[] = [
     icon: 'H',
     logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
     bgUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
-    description: 'Premium furniture and interior decor with secure delivery across Ghana.'
+    description: 'Premium furniture and interior decor with secure delivery across Ghana.',
+    fidelityScore: 99,
+    settlementSpeed: '0.8h'
   }
 ];
 
@@ -142,7 +152,8 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     rating: 4.9,
     salesCount: 12,
-    inventoryStatus: 'Limited Stock'
+    inventoryStatus: 'Limited Stock',
+    requiresMultisig: true
   },
   {
     id: '8',
@@ -154,7 +165,8 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     rating: 5.0,
     salesCount: 5,
-    inventoryStatus: 'In Stock'
+    inventoryStatus: 'In Stock',
+    requiresMultisig: true
   },
   {
     id: '9',
@@ -233,8 +245,8 @@ export const LISTINGS: Listing[] = [
 ];
 
 export const MOCK_USERS: User[] = [
-  { id: 'u1', name: 'Platform Admin', email: 'admin@vault.com', role: 'HIGH_ADMIN' },
-  { id: 'u2', name: 'Store Owner', email: 'owner@melcom.com', role: 'VENDOR_ADMIN' },
-  { id: 'u3', name: 'Store Staff', email: 'staff@melcom.com', role: 'VENDOR_STAFF' },
-  { id: 'u4', name: 'John Buyer', email: 'user@example.com', role: 'CUSTOMER' }
+  { id: 'u1', name: 'Platform Admin', email: 'admin@vault.com', role: 'HIGH_ADMIN', fidelityScore: 100 },
+  { id: 'u2', name: 'Store Owner', email: 'owner@melcom.com', role: 'VENDOR_ADMIN', fidelityScore: 98 },
+  { id: 'u3', name: 'Store Staff', email: 'staff@melcom.com', role: 'VENDOR_STAFF', fidelityScore: 95 },
+  { id: 'u4', name: 'John Buyer', email: 'user@example.com', role: 'CUSTOMER', fidelityScore: 92 }
 ];

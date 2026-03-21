@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -6,7 +5,6 @@ import { useParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Checkbox } from '@/components/ui/checkbox';
 import { 
   ShieldCheck, 
@@ -22,19 +20,13 @@ import {
   Zap,
   Info,
   ShieldAlert,
-  Wallet
+  Wallet,
+  MessageSquare
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { useCurrency } from '@/components/providers';
-
-const ESCROW_STEPS = [
-  { id: 1, label: "Payment Received", desc: "Funds in Escrow", icon: Wallet, status: 'complete' },
-  { id: 2, label: "Safe Hold", desc: "Securely Locked", icon: Lock, status: 'complete' },
-  { id: 3, label: "Shipping", desc: "In Transit", icon: Truck, status: 'active' },
-  { id: 4, label: "Quality Check", desc: "Customer Inspection", icon: ShieldCheck, status: 'pending' },
-  { id: 5, label: "Final Payment", desc: "Seller Payout", icon: Key, status: 'pending' },
-];
+import { EscrowProgress } from '@/components/escrow-progress';
 
 export default function OrderLifecycle() {
   const { id } = useParams();
@@ -82,6 +74,12 @@ export default function OrderLifecycle() {
     router.push('/dashboard');
   };
 
+  const handleMediation = () => {
+    const orderId = id as string;
+    const message = encodeURIComponent(`I need mediation for Order ${orderId}. There is an issue with the quality check.`);
+    window.open(`https://wa.me/233541988383?text=${message}`, '_blank');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 md:py-16 max-w-6xl">
       <Button variant="ghost" onClick={() => router.back()} className="mb-8 rounded-none gap-2 font-black text-[10px] uppercase tracking-widest border px-6">
@@ -109,48 +107,8 @@ export default function OrderLifecycle() {
             </div>
           </div>
 
-          {/* Interactive Lifecycle Stepper */}
-          <Card className="rounded-none border shadow-xl bg-white overflow-hidden">
-            <CardHeader className="bg-muted/30 border-b">
-               <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
-                 <Activity className="h-4 w-4 text-primary" />
-                 Escrow Journey
-               </CardTitle>
-            </CardHeader>
-            <CardContent className="p-8 md:p-12">
-               <div className="relative">
-                 {/* Track Line */}
-                 <div className="absolute top-10 left-0 w-full h-1 bg-muted hidden md:block">
-                   <div className="h-full bg-primary w-[50%]" />
-                 </div>
-                 
-                 <div className="grid grid-cols-1 md:grid-cols-5 gap-10 relative z-10">
-                   {ESCROW_STEPS.map((step) => (
-                     <div key={step.id} className="flex flex-col items-center gap-4 group">
-                        <div className={cn(
-                          "h-20 w-20 flex items-center justify-center border-4 transition-all duration-500 rounded-none bg-white",
-                          step.status === 'complete' ? "border-primary text-primary" : 
-                          step.status === 'active' ? "border-primary bg-primary text-secondary shadow-2xl scale-110" : 
-                          "border-muted text-muted-foreground opacity-50"
-                        )}>
-                          <step.icon className="h-8 w-8" />
-                        </div>
-                        <div className="text-center space-y-1">
-                          <p className={cn(
-                            "text-[10px] font-black uppercase tracking-widest",
-                            step.status === 'pending' ? "text-muted-foreground" : "text-secondary"
-                          )}>{step.label}</p>
-                          <p className="text-[8px] text-muted-foreground font-bold uppercase tracking-tighter">{step.desc}</p>
-                        </div>
-                        {step.status === 'complete' && (
-                          <CheckCircle2 className="h-4 w-4 text-primary mt-2" />
-                        )}
-                     </div>
-                   ))}
-                 </div>
-               </div>
-            </CardContent>
-          </Card>
+          {/* Interactive Escrow Flow Visualization */}
+          <EscrowProgress currentStatus="inspection" />
 
           {/* Inspection Hub */}
           <Card className="rounded-none border-t-4 border-t-primary shadow-2xl bg-white">
@@ -158,7 +116,7 @@ export default function OrderLifecycle() {
                <div className="flex items-center gap-4 mb-2">
                   <ShieldCheck className="h-8 w-8 text-primary" />
                   <div>
-                    <CardTitle className="text-2xl font-black text-secondary uppercase tracking-tighter">Quality Inspection</CardTitle>
+                    <CardTitle className="text-2xl font-black text-secondary uppercase tracking-tighter">Quality Check</CardTitle>
                     <CardDescription className="text-[10px] font-black uppercase tracking-widest mt-1">Verify your item to release the payment to the seller.</CardDescription>
                   </div>
                </div>
@@ -239,7 +197,7 @@ export default function OrderLifecycle() {
               <div className="bg-white/5 p-6 border-t border-white/5">
                  <div className="flex items-center gap-3">
                     <Activity className="h-4 w-4 text-primary animate-pulse" />
-                    <p className="text-[9px] font-black uppercase tracking-widest opacity-60">Real-time Safety Status: ACTIVE</p>
+                    <p className="text-[9px] font-black uppercase tracking-widest opacity-60">Protection Status: ACTIVE</p>
                  </div>
               </div>
            </Card>
@@ -251,14 +209,14 @@ export default function OrderLifecycle() {
                     <div className="h-10 w-10 bg-muted flex items-center justify-center font-black">M</div>
                     <div>
                        <p className="text-[10px] font-black uppercase text-secondary">Melcom Digital Hub</p>
-                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Verified Seller</p>
+                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Fidelity Score: 98%</p>
                     </div>
                  </div>
                  <div className="flex gap-4 items-center">
                     <div className="h-10 w-10 bg-primary/10 flex items-center justify-center font-black text-primary">SL</div>
                     <div>
                        <p className="text-[10px] font-black uppercase text-secondary">Secure Logistics</p>
-                       <p className="text-[8px] font-bold text-muted-foreground uppercase">Delivery Partner</p>
+                       <p className="text-[8px] font-bold text-muted-foreground uppercase">SLA Compliance: 100%</p>
                     </div>
                  </div>
               </div>
@@ -266,11 +224,17 @@ export default function OrderLifecycle() {
 
            <Card className="rounded-none border shadow-sm p-8 bg-muted/20 border-dashed">
               <div className="flex items-center gap-3 mb-4">
-                 <Info className="h-4 w-4 text-primary" />
+                 <MessageSquare className="h-4 w-4 text-primary" />
                  <h5 className="text-[10px] font-black uppercase tracking-widest">Support Center</h5>
               </div>
-              <p className="text-[9px] font-medium text-muted-foreground leading-relaxed uppercase mb-4">If you have any issues with your order, you can open a dispute to freeze the payment and request help.</p>
-              <Button variant="outline" className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 border-primary/20">Help / Dispute</Button>
+              <p className="text-[9px] font-medium text-muted-foreground leading-relaxed uppercase mb-4">Need help with your inspection? Connect with an agent for immediate mediation.</p>
+              <Button 
+                variant="outline" 
+                onClick={handleMediation}
+                className="w-full rounded-none font-black text-[9px] uppercase tracking-widest h-10 border-primary/20 gap-2"
+              >
+                <MessageSquare className="h-3.5 w-3.5" /> Open Mediation Case
+              </Button>
            </Card>
         </div>
       </div>

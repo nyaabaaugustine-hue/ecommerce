@@ -75,13 +75,13 @@ export function ListingCard(props: ListingProps) {
          </Badge>
       </div>
 
-      {/* Image Section with Reveal Animation */}
+      {/* Image Section with Reveal & Zoom Animation */}
       <Link href={`/listings/${id}`} className="relative h-56 w-full overflow-hidden block image-reveal bg-background product-card-image-wrap rounded-none">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
-          className="object-cover"
+          className="object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-1"
         />
         <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </Link>
@@ -104,7 +104,7 @@ export function ListingCard(props: ListingProps) {
         <div className="flex items-center gap-2 mt-1">
           <div className="bg-background border-2 border-border px-3 py-1 flex items-center gap-2 shadow-sm rounded-none">
             <Users className="h-4 w-4 text-accent" />
-            <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Verified Buyers</span>
+            <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Buyers</span>
           </div>
         </div>
         

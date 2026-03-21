@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -20,7 +19,9 @@ import {
   Settings as SettingsIcon,
   ChevronRight,
   Database,
-  FileText
+  FileText,
+  Key,
+  AlertTriangle
 } from "lucide-react";
 import { 
   ChartConfig, 
@@ -29,7 +30,7 @@ import {
   ChartTooltipContent 
 } from "@/components/ui/chart";
 import { Line, LineChart as ReLineChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { VENDORS } from "@/lib/mock-data";
+import { VENDORS, LISTINGS } from "@/lib/mock-data";
 
 const chartData = [
   { month: "Jan", volume: 450000 },
@@ -49,29 +50,75 @@ const chartConfig = {
 
 export default function AdminDashboard() {
   const stats = [
-    { label: "Total Registry Volume", val: "GH₵4.2M", icon: TrendingUp, change: "+12.4%", status: "up" },
-    { label: "Active Escrow Locks", val: "142", icon: Lock, change: "+5", status: "up" },
+    { label: "Total Sales Volume", val: "GH₵4.2M", icon: TrendingUp, change: "+12.4%", status: "up" },
+    { label: "Active Escrow Holds", val: "142", icon: Lock, change: "+5", status: "up" },
     { label: "Verified Vendors", val: VENDORS.length.toString(), icon: ShieldCheck, change: "Stable", status: "neutral" },
-    { label: "Total Global Users", val: "1,248", icon: Users, change: "+24", status: "up" },
+    { label: "Global User Base", val: "1,248", icon: Users, change: "+24", status: "up" },
   ];
+
+  const multisigQueue = LISTINGS.filter(l => l.requiresMultisig);
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-20">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-black text-secondary uppercase tracking-tighter">Sovereign Control</h1>
-          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-1">Platform-wide oversight and registry management node.</p>
+          <h1 className="text-3xl font-black text-secondary uppercase tracking-tighter">Control Center</h1>
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mt-1">Platform-wide oversight and system management.</p>
         </div>
         <div className="flex items-center gap-3">
-           <Badge className="bg-primary text-secondary rounded-none font-black text-[9px] px-3 h-8 uppercase tracking-widest">Global Master</Badge>
+           <Badge className="bg-primary text-secondary rounded-none font-black text-[9px] px-3 h-8 uppercase tracking-widest">Global Admin</Badge>
            <div className="bg-white border p-2 rounded-none flex items-center gap-2 shadow-sm">
               <Activity className="h-4 w-4 text-green-500" />
-              <span className="text-[9px] font-black text-secondary uppercase tracking-widest">Real-time Feed Active</span>
+              <span className="text-[9px] font-black text-secondary uppercase tracking-widest">System Online</span>
            </div>
         </div>
       </div>
 
-      {/* PRIMARY COMMAND NODES - HOMEPAGE MANAGER */}
+      {/* High-Value Multisig Authorization Queue */}
+      <Card className="rounded-none border-t-4 border-t-burgundy shadow-xl bg-white overflow-hidden">
+        <CardHeader className="bg-burgundy/5 border-b p-8">
+          <div className="flex items-center gap-4">
+             <Key className="h-8 w-8 text-burgundy" />
+             <div>
+               <CardTitle className="text-2xl font-black text-secondary uppercase tracking-tighter">Multisig Payout Queue</CardTitle>
+               <CardDescription className="text-[10px] font-black uppercase tracking-widest mt-1">Institutional authorization required for transactions above GH₵50,000.</CardDescription>
+             </div>
+          </div>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="divide-y">
+            {multisigQueue.map((item) => (
+              <div key={item.id} className="flex flex-col sm:flex-row items-center justify-between p-6 md:p-8 hover:bg-muted/10 transition-colors gap-6">
+                <div className="flex gap-6 items-center flex-1">
+                   <div className="h-16 w-16 bg-muted relative rounded-none shrink-0 border">
+                      <img src={item.imageUrl} alt={item.title} className="object-cover h-full w-full" />
+                   </div>
+                   <div>
+                      <p className="text-[10px] font-black text-burgundy uppercase tracking-widest mb-1">HIGH-VALUE TRANSACTION</p>
+                      <h4 className="font-black text-secondary uppercase text-lg leading-tight tracking-tight">{item.title}</h4>
+                      <p className="text-[9px] font-bold text-muted-foreground uppercase mt-1">Vendor: {item.vendorId === 'v1' ? 'Melcom Hub' : 'PrimeRentals GH'}</p>
+                   </div>
+                </div>
+                <div className="text-right flex items-center gap-8 w-full sm:w-auto">
+                   <div>
+                      <p className="text-[9px] font-black text-muted-foreground uppercase tracking-widest">Pending Payout</p>
+                      <p className="text-xl font-black text-burgundy tracking-tighter">GH₵{item.price.toLocaleString()}</p>
+                   </div>
+                   <Button className="h-14 px-10 bg-secondary text-white font-black uppercase text-[10px] tracking-widest rounded-none shadow-xl gap-3">
+                      Authorize Payout <Key className="h-4 w-4 text-primary" />
+                   </Button>
+                </div>
+              </div>
+            ))}
+            {multisigQueue.length === 0 && (
+              <div className="p-12 text-center text-muted-foreground uppercase font-black text-[10px] tracking-widest">
+                No pending high-value authorizations.
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="rounded-none border-4 border-primary shadow-2xl bg-secondary text-white overflow-hidden relative group">
           <div className="absolute top-0 right-0 p-12">
@@ -79,14 +126,14 @@ export default function AdminDashboard() {
           </div>
           <CardContent className="p-10 space-y-8 relative z-10">
              <div className="space-y-2">
-                <Badge className="bg-primary text-secondary rounded-none font-black text-[8px] uppercase tracking-[0.3em]">Institutional SCMS</Badge>
-                <h2 className="text-3xl font-black uppercase tracking-tighter text-milky">Homepage Registry Manager</h2>
-                <p className="text-xs font-medium text-white/50 uppercase tracking-widest max-w-md leading-relaxed">Authorize real-time modifications to text, imagery, and institutional headlines on the primary marketplace gateway.</p>
+                <Badge className="bg-primary text-secondary rounded-none font-black text-[8px] uppercase tracking-[0.3em]">CMS Management</Badge>
+                <h2 className="text-3xl font-black uppercase tracking-tighter text-milky">Home Content Manager</h2>
+                <p className="text-xs font-medium text-white/50 uppercase tracking-widest max-w-md leading-relaxed">Authorize modifications to text, imagery, and headlines on the primary marketplace gateway.</p>
              </div>
              <Link href="/admin/pages/home" className="block">
                <Button className="w-full sm:w-auto bg-primary text-secondary hover:bg-white hover:text-secondary font-black rounded-none h-16 px-12 uppercase text-[11px] tracking-[0.3em] gap-3 shadow-2xl">
                   <Edit3 className="h-5 w-5" />
-                  Enter Homepage Node
+                  Enter CMS Hub
                </Button>
              </Link>
           </CardContent>
@@ -95,14 +142,14 @@ export default function AdminDashboard() {
         <Card className="rounded-none border-4 border-primary/20 shadow-2xl bg-white overflow-hidden relative group">
           <CardContent className="p-10 space-y-8 relative z-10">
              <div className="space-y-2">
-                <Badge variant="outline" className="border-primary/20 text-primary rounded-none font-black text-[8px] uppercase tracking-[0.3em]">Global Protocols</Badge>
-                <h2 className="text-3xl font-black uppercase tracking-tighter text-secondary">Platform Master Settings</h2>
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest max-w-md leading-relaxed">Configure institutional branding, support metadata, and global financial parameters including escrow fees.</p>
+                <Badge variant="outline" className="border-primary/20 text-primary rounded-none font-black text-[8px] uppercase tracking-[0.3em]">Global System</Badge>
+                <h2 className="text-3xl font-black uppercase tracking-tighter text-secondary">Platform Settings</h2>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest max-w-md leading-relaxed">Configure branding, support metadata, and global financial parameters including escrow fees.</p>
              </div>
              <Link href="/admin/settings" className="block">
                <Button variant="outline" className="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary hover:text-white font-black rounded-none h-16 px-12 uppercase text-[11px] tracking-[0.3em] gap-3 shadow-xl">
                   <SettingsIcon className="h-5 w-5" />
-                  Manage Global Protocols
+                  Manage Settings
                </Button>
              </Link>
           </CardContent>
@@ -133,9 +180,9 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
               <BarChart3 className="h-4 w-4 text-primary" />
-              Registry Liquidity Velocity
+              Marketplace Liquidity
             </CardTitle>
-            <CardDescription className="text-[10px] font-bold uppercase">Aggregated GHS flow through the platform escrow node.</CardDescription>
+            <CardDescription className="text-[10px] font-bold uppercase">Aggregated GHS flow through the escrow system.</CardDescription>
           </CardHeader>
           <CardContent className="h-[350px]">
             <ChartContainer config={chartConfig} className="h-full w-full">
@@ -173,7 +220,7 @@ export default function AdminDashboard() {
             <CardHeader>
               <CardTitle className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                 <ShieldAlert className="h-4 w-4 text-burgundy" />
-                Protocol Alerts
+                Escrow Alerts
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -197,16 +244,16 @@ export default function AdminDashboard() {
             <CardHeader>
               <CardTitle className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                 <Database className="h-4 w-4 text-primary" />
-                Registry Nodes
+                System Registries
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
                <Link href="/admin/pages" className="flex items-center justify-between p-3 bg-muted/20 hover:bg-muted/50 transition-colors">
-                  <span className="text-[10px] font-black uppercase tracking-widest">Page Registry</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest">Page Manager</span>
                   <ChevronRight className="h-3 w-3 text-primary" />
                </Link>
                <Link href="/admin/listings" className="flex items-center justify-between p-3 bg-muted/20 hover:bg-muted/50 transition-colors">
-                  <span className="text-[10px] font-black uppercase tracking-widest">Asset Registry</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest">Inventory List</span>
                   <ChevronRight className="h-3 w-3 text-primary" />
                </Link>
             </CardContent>
