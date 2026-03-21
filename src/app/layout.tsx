@@ -1,10 +1,9 @@
-
 "use client";
 
 import './globals.css';
 import { Navbar } from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
-import { AuthProviderWrapper, useContent } from '@/components/providers';
+import { AuthProviderWrapper } from '@/components/providers';
 import { LiveActivityFeed } from '@/components/live-activity-feed';
 import { WhatsAppButton } from '@/components/whatsapp-button';
 import { PostAdButton } from '@/components/post-ad-button';
@@ -18,7 +17,6 @@ function Footer() {
   return (
     <footer className="bg-white dark:bg-background text-foreground pt-12 pb-8 border-t">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Horizontal Link Registry */}
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-12 text-[11px] font-black text-muted-foreground uppercase tracking-widest">
           <Link href="/help" className="hover:text-primary">Help Node</Link>
           <Link href="/safety" className="hover:text-primary">Safety Protocols</Link>
@@ -34,7 +32,6 @@ function Footer() {
             © 2026 Ecommerce Inc. Registry Node: Airport Residential Area, Accra, Ghana Node - 00233-GH-ACC
           </p>
 
-          {/* Social Protocol Registry */}
           <div className="flex items-center gap-6">
             <a href="#" className="h-10 w-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary transition-all text-muted-foreground hover:text-white">
               <Facebook className="h-5 w-5" />
@@ -67,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
         <link rel="icon" href="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057903/ai-removebg-preview_ikywpe.png" />
       </head>
-      <body className="font-body antialiased bg-background min-h-screen flex flex-col text-secondary m-0 p-0" suppressHydrationWarning>
+      <body className="antialiased bg-background min-h-screen flex flex-col text-secondary m-0 p-0" suppressHydrationWarning>
         <AuthProviderWrapper>
           <Navbar />
           <main className="flex-1">

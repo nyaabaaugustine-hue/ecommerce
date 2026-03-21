@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    /* CLINICAL INSTITUTIONAL LIGHT (DEFAULT) */
+    /* CLINICAL INSTITUTIONAL LIGHT (FORCE DEFAULT) */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 221 83% 53%; /* Blended Royal Blue */
+    --primary: 221 83% 53%; /* Royal Blue */
     --primary-foreground: 210 40% 98%;
     --secondary: 215 25% 27%; /* Slate Gray */
     --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 221 83% 53%; /* Match primary for clinical look */
+    --accent: 221 83% 53%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -43,7 +43,7 @@
     --secondary-foreground: 180 10% 98%;
     --muted: 225 60% 8%;
     --muted-foreground: 180 10% 60%;
-    --accent: 262 83% 58%; /* Deep Indigo Blend */
+    --accent: 262 83% 58%; /* Deep Indigo */
     --border: 225 60% 12%;
     --ring: 178 90% 49%;
   }
@@ -60,7 +60,7 @@
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 8%;
     --muted-foreground: 0 0% 60%;
-    --accent: 215 25% 27%; /* Slate Graphite Blend */
+    --accent: 215 25% 27%; /* Slate Graphite */
     --border: 0 0% 10%;
     --ring: 190 90% 50%;
   }
@@ -114,7 +114,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
+    @apply bg-background text-foreground antialiased selection:bg-primary/30;
+    font-family: "Plus Jakarta Sans", sans-serif;
     letter-spacing: -0.01em;
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -148,7 +149,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Image reveal protocol */
 .image-reveal {
   animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
