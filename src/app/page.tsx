@@ -24,13 +24,12 @@ export function HomePage() {
     return LISTINGS.filter(l => l.id.startsWith('sp')).slice(0, 5);
   }, []);
 
-  const cellPhones = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Electronics' && l.id.startsWith('e')).slice(0, 5);
+  const priceDropItems = useMemo(() => {
+    return LISTINGS.filter(l => l.oldPrice && l.category === 'Electronics').slice(0, 5);
   }, []);
 
-  const priceDropItems = useMemo(() => {
-    // Select items that have an oldPrice (signifying a drop)
-    return LISTINGS.filter(l => l.oldPrice && l.category === 'Electronics').slice(0, 5);
+  const cellPhones = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Electronics' && l.id.startsWith('e')).slice(0, 5);
   }, []);
 
   const cabinets = useMemo(() => {
@@ -38,7 +37,7 @@ export function HomePage() {
   }, []);
 
   const airConditioners = useMemo(() => {
-    return LISTINGS.filter(l => l.id.includes('ac')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
   }, []);
 
   const gameBoys = useMemo(() => {
@@ -46,7 +45,7 @@ export function HomePage() {
   }, []);
 
   const vehicles = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Vehicles').slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('v_')).slice(0, 5);
   }, []);
 
   return (
@@ -88,10 +87,10 @@ export function HomePage() {
         <div className="h-[1px] w-full bg-border/50" />
       </div>
 
-      {/* CLONE SECTION: Category Spotlight (New Image Reference) */}
+      {/* CLONE SECTION: Category Spotlight */}
       <SpotlightCategories />
 
-      {/* CLONE ROW: Prices have dropped (New Image Reference) */}
+      {/* CLONE ROW: Prices have dropped */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group">
         <div className="mb-8">
           <h2 className="text-2xl font-medium text-foreground tracking-tight leading-none">
@@ -238,7 +237,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* INSTITUTIONAL BENEFITS NODE (As per reference) */}
+      {/* INSTITUTIONAL BENEFITS NODE */}
       <BenefitsSection />
 
       {/* Institutional Separator */}
