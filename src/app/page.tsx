@@ -16,209 +16,200 @@ import {
   ChevronRight,
   Leaf,
   ShieldCheck,
-  TrendingUp,
+  Search,
+  MapPin,
+  LayoutGrid,
   Zap,
-  Star
+  TrendingUp,
+  Clock
 } from 'lucide-react';
 import { LISTINGS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Badge } from '@/components/ui/badge';
 
 const MARKET_CATEGORIES = [
   { name: 'Vehicles', icon: Car, color: 'bg-blue-500/10 text-blue-400', count: '1,240+' },
   { name: 'Property', icon: Home, color: 'bg-green-500/10 text-green-400', count: '850+' },
   { name: 'Electronics', icon: Smartphone, color: 'bg-purple-500/10 text-purple-400', count: '3,100+' },
-  { name: 'Home & Furniture', icon: Armchair, color: 'bg-orange-500/10 text-orange-400', count: '1,100+' },
+  { name: 'Home & Living', icon: Armchair, color: 'bg-orange-500/10 text-orange-400', count: '1,100+' },
   { name: 'Fashion', icon: ShoppingBag, color: 'bg-pink-500/10 text-pink-400', count: '2,400+' },
   { name: 'Jobs', icon: Briefcase, color: 'bg-cyan-500/10 text-cyan-400', count: '420+' },
   { name: 'Services', icon: Sparkles, color: 'bg-yellow-500/10 text-yellow-400', count: '680+' },
   { name: 'Agriculture', icon: Leaf, color: 'bg-emerald-500/10 text-emerald-400', count: '350+' },
 ];
 
-const HERO_SLIDES = [
-  {
-    title: "iPhone or Samsung",
-    subtitle: "Up to 80% OFF",
-    cta: "Shop Now",
-    image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg",
-    color: "from-purple-900/80 to-transparent"
-  },
-  {
-    title: "Elite Real Estate",
-    subtitle: "Verified Postings",
-    cta: "Browse Property",
-    image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg",
-    color: "from-blue-900/80 to-transparent"
-  }
-];
-
 export default function HomePage() {
-  const electronics = useMemo(() => LISTINGS.filter(l => l.category === 'Electronics'), []);
-  const vehicles = useMemo(() => LISTINGS.filter(l => l.category === 'Vehicles'), []);
-  const property = useMemo(() => LISTINGS.filter(l => l.category === 'Property'), []);
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  const freshListings = useMemo(() => {
+    return [...LISTINGS].sort((a, b) => b.postedTimestamp - a.postedTimestamp);
+  }, []);
 
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20">
-      {/* ADVANCED HERO CAROUSEL */}
-      <section className="container mx-auto px-4 py-6">
-        <Carousel className="w-full">
-          <CarouselContent>
-            {HERO_SLIDES.map((slide, i) => (
-              <CarouselItem key={i}>
-                <div className="relative h-[250px] md:h-[450px] w-full overflow-hidden border-4 border-white/5">
-                  <Image 
-                    src={slide.image} 
-                    alt={slide.title} 
-                    fill 
-                    sizes="100vw"
-                    className="object-cover"
-                    priority
-                  />
-                  <div className={cn("absolute inset-0 bg-gradient-to-r p-10 md:p-24 flex flex-col justify-center gap-4", slide.color)}>
-                    <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none italic">
-                      {slide.title} <br /> <span className="text-primary">{slide.subtitle}</span>
-                    </h2>
-                    <Button className="w-fit bg-primary text-secondary font-black uppercase text-xs tracking-widest h-14 px-10 rounded-[7%] shadow-2xl">
-                      {slide.cta}
-                    </Button>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-4 bg-white/10 border-white/20 text-white" />
-          <CarouselNext className="right-4 bg-white/10 border-white/20 text-white" />
-        </Carousel>
+      {/* SEARCH-CENTRIC HERO ENGINE */}
+      <section className="relative bg-secondary overflow-hidden py-16 md:py-24 border-b border-white/5">
+        <div className="absolute inset-0 opacity-10">
+          <Image 
+            src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?q=80&w=1600&auto=format&fit=crop" 
+            alt="Accra Cityscape" 
+            fill 
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <div className="inline-flex items-center gap-3 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full mb-2">
+              <Badge className="bg-primary text-secondary font-black uppercase text-[8px] tracking-widest px-3">
+                ACCRA'S PREMIER SECURE MARKETPLACE
+              </Badge>
+            </div>
+            
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase leading-tight italic">
+              Buy. Sell. <br /> <span className="text-primary not-italic">Find Anything in Ghana.</span>
+            </h1>
+            
+            <p className="text-white/60 text-sm md:text-lg font-medium uppercase tracking-[0.2em] max-w-2xl mx-auto">
+              Phones, cars, land, rentals, services — all protected by our Sovereign Escrow Protocol.
+            </p>
+
+            {/* THE MASTER SEARCH BAR */}
+            <div className="bg-white p-2 md:p-3 shadow-2xl flex flex-col md:flex-row items-stretch gap-2 mt-12 border-4 border-primary/20">
+              <div className="flex-1 flex items-center px-4 gap-3 border-b md:border-b-0 md:border-r border-muted min-h-[60px]">
+                <Search className="h-5 w-5 text-primary" />
+                <input 
+                  placeholder="What are you looking for?" 
+                  className="w-full bg-transparent outline-none text-secondary text-sm font-black uppercase placeholder:text-muted-foreground"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <div className="flex-[0.6] flex items-center px-4 gap-3 border-b md:border-b-0 md:border-r border-muted min-h-[60px]">
+                <LayoutGrid className="h-5 w-5 text-primary/40" />
+                <select className="w-full bg-transparent outline-none text-secondary text-[10px] font-black uppercase cursor-pointer">
+                  <option>All Categories</option>
+                  {MARKET_CATEGORIES.map(c => <option key={c.name}>{c.name}</option>)}
+                </select>
+              </div>
+              <div className="flex-[0.6] flex items-center px-4 gap-3 min-h-[60px]">
+                <MapPin className="h-5 w-5 text-primary/40" />
+                <select className="w-full bg-transparent outline-none text-secondary text-[10px] font-black uppercase cursor-pointer">
+                  <option>Accra</option>
+                  <option>Tema</option>
+                  <option>Kumasi</option>
+                  <option>East Legon</option>
+                  <option>Kasoa</option>
+                </select>
+              </div>
+              <Button className="h-[60px] md:h-auto px-12 bg-secondary text-white font-black uppercase tracking-widest text-xs rounded-none hover:bg-primary hover:text-secondary transition-all">
+                Search
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-6 mt-10">
+              <Link href="/listings">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 font-black uppercase text-[10px] tracking-widest h-14 px-10 rounded-[7%]">
+                  Browse Listings
+                </Button>
+              </Link>
+              <Link href="/listings/create">
+                <Button className="bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.2em] h-14 px-10 rounded-[7%] shadow-2xl animate-pulse">
+                  + Post Ad Now
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* QUICK CATEGORY REGISTRY */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4">
+      <section className="container mx-auto px-4 py-12">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="h-8 w-1 bg-primary" />
+          <h2 className="text-xl font-black uppercase tracking-tighter text-white">Popular Categories</h2>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
           {MARKET_CATEGORIES.map((cat) => (
             <Link 
               key={cat.name} 
               href={`/listings?category=${cat.name}`}
-              className="flex flex-col items-center gap-3 min-w-[100px] group"
+              className="flex flex-col items-center gap-4 p-6 bg-secondary border border-white/5 hover:border-primary/40 transition-all group"
             >
-              <div className={cn("h-16 w-16 flex items-center justify-center rounded-full transition-all group-hover:scale-110", cat.color)}>
-                <cat.icon className="h-7 w-7" />
+              <div className={cn("h-14 w-14 flex items-center justify-center rounded-full transition-all group-hover:scale-110", cat.color)}>
+                <cat.icon className="h-6 w-6" />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors text-center whitespace-nowrap">
-                {cat.name}
-              </span>
+              <div className="text-center space-y-1">
+                <span className="text-[9px] font-black uppercase tracking-widest text-white group-hover:text-primary transition-colors block">
+                  {cat.name}
+                </span>
+                <span className="text-[7px] font-bold text-muted-foreground uppercase">{cat.count} Ads</span>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* SECTOR ROWS: DENSITY PASS */}
-      <div className="space-y-16 mt-8">
-        {/* TOP IN ELECTRONICS */}
-        <section className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
-            <div className="flex items-center gap-4">
-              <div className="h-10 w-10 bg-primary/10 flex items-center justify-center text-primary">
-                <Smartphone className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter text-white">Popular in Electronics</h3>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">High-velocity technology nodes</p>
-              </div>
+      {/* LIQUID MARKETPLACE FEED */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
+          <div className="flex items-center gap-4">
+            <div className="h-10 w-10 bg-primary/10 flex items-center justify-center text-primary">
+              <Clock className="h-5 w-5" />
             </div>
-            <Link href="/listings?category=Electronics" className="flex items-center gap-2 text-[10px] font-black text-primary uppercase hover:underline">
-              View All <ChevronRight className="h-3 w-3" />
-            </Link>
+            <div>
+              <h3 className="text-2xl font-black uppercase tracking-tighter text-white">Fresh Listings</h3>
+              <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-[0.3em]">Live activity from across Ghana</p>
+            </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {electronics.slice(0, 5).map(item => (
-              <ListingCard key={item.id} {...item} />
-            ))}
-          </div>
-        </section>
-
-        {/* HERITAGE STRIP SEPARATOR */}
-        <div className="h-1.5 w-full relative overflow-hidden opacity-40">
-          <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" alt="Separator" fill sizes="100vw" className="object-cover" />
+          <Link href="/listings" className="flex items-center gap-2 text-[10px] font-black text-primary uppercase hover:underline tracking-widest">
+            View All Ads <ChevronRight className="h-3 w-3" />
+          </Link>
         </div>
 
-        {/* TOP IN VEHICLES */}
-        <section className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
-            <div className="flex items-center gap-4">
-              <div className="h-10 w-10 bg-primary/10 flex items-center justify-center text-primary">
-                <Car className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter text-white">Top in Vehicles</h3>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Verified automotive registry</p>
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {freshListings.map(item => (
+            <ListingCard key={item.id} {...item} />
+          ))}
+        </div>
+
+        <div className="mt-20 text-center">
+          <Button variant="outline" className="border-primary/20 text-white hover:bg-primary/5 h-16 px-16 font-black uppercase text-xs tracking-[0.3em] rounded-none">
+            Load More Listings
+          </Button>
+        </div>
+      </section>
+
+      {/* TRUST CTA: THE ESCROW ADVANTAGE */}
+      <section className="container mx-auto px-4 mt-12 pb-20">
+        <div className="bg-primary p-10 md:p-20 text-secondary relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 -mr-48 -mt-48 rounded-full blur-3xl" />
+          <div className="relative z-10 space-y-6 max-w-2xl">
+            <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-1.5 border border-secondary/20">
+              <ShieldCheck className="h-4 w-4 text-secondary" />
+              <span className="text-[9px] font-black uppercase tracking-widest text-secondary">Institutional Trust Active</span>
             </div>
-            <Link href="/listings?category=Vehicles" className="flex items-center gap-2 text-[10px] font-black text-primary uppercase hover:underline">
-              View All <ChevronRight className="h-3 w-3" />
+            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none italic">
+              Trade with <br /> <span className="text-white bg-secondary px-4 not-italic">Total Safety.</span>
+            </h3>
+            <p className="text-secondary/70 text-sm font-bold uppercase tracking-widest leading-relaxed">
+              Unlike generic classifieds, we secure every GHS transaction through our 48-hour escrow protocol. No more payment risks.
+            </p>
+          </div>
+          <div className="relative z-10 flex flex-col gap-4 w-full md:w-auto">
+            <Button className="bg-secondary text-primary hover:bg-white hover:text-secondary font-black uppercase text-xs tracking-widest h-16 px-12 rounded-[7%] shadow-2xl">
+              How Escrow Works
+            </Button>
+            <Link href="/listings/create">
+              <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white font-black uppercase text-xs tracking-widest h-16 px-12 rounded-[7%] w-full">
+                Post Your First Ad
+              </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {vehicles.slice(0, 5).map(item => (
-              <ListingCard key={item.id} {...item} />
-            ))}
-          </div>
-        </section>
-
-        {/* INSTITUTIONAL TRUST CTA */}
-        <section className="container mx-auto px-4">
-          <div className="bg-primary p-10 md:p-20 text-secondary relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
-            <div className="relative z-10 space-y-6 max-w-2xl">
-              <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-1.5 border border-secondary/20">
-                <ShieldCheck className="h-4 w-4 text-secondary animate-pulse" />
-                <span className="text-[9px] font-black uppercase tracking-widest">Sovereign Protection Active</span>
-              </div>
-              <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
-                Trade with <br /> <span className="text-white bg-secondary px-4 italic">Total Safety.</span>
-              </h3>
-              <p className="text-secondary/70 text-sm font-bold uppercase tracking-widest leading-relaxed">
-                VaultCommerce eliminates marketplace risk through our 48-hour escrow settlement node.
-              </p>
-            </div>
-            <div className="relative z-10 flex flex-col gap-4 w-full md:w-auto">
-              <Button className="bg-secondary text-primary hover:bg-white hover:text-secondary font-black uppercase text-xs tracking-widest h-16 px-12 rounded-[7%] shadow-2xl">
-                How Escrow Works
-              </Button>
-              <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white font-black uppercase text-xs tracking-widest h-16 px-12 rounded-[7%]">
-                Register as Vendor
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* TOP IN PROPERTY */}
-        <section className="container mx-auto px-4 pb-20">
-          <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
-            <div className="flex items-center gap-4">
-              <div className="h-10 w-10 bg-primary/10 flex items-center justify-center text-primary">
-                <Home className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter text-white">Elite Property</h3>
-                <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Residential and Commercial Nodes</p>
-              </div>
-            </div>
-            <Link href="/listings?category=Property" className="flex items-center gap-2 text-[10px] font-black text-primary uppercase hover:underline">
-              View All <ChevronRight className="h-3 w-3" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {property.slice(0, 5).map(item => (
-              <ListingCard key={item.id} {...item} />
-            ))}
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

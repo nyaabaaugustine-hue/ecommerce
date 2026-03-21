@@ -18,19 +18,8 @@ export interface SellerIdentity {
   rating: number;
   isVerified: boolean;
   joinDate: string;
-}
-
-export interface Vendor {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  logoUrl: string;
-  bgUrl: string;
-  rating: number;
-  itemsCount: number;
-  fidelityScore: number;
-  joinedYear: string;
+  phone?: string;
+  whatsapp?: string;
 }
 
 export interface Listing {
@@ -41,6 +30,7 @@ export interface Listing {
   category: ListingCategory;
   location: string;
   postedAt: string;
+  postedTimestamp: number; // For sorting
   imageUrl: string;
   seller: SellerIdentity;
   vendorId: string;
@@ -58,21 +48,6 @@ export const MOCK_USERS: User[] = [
   { id: 'u4', name: 'John Buyer', email: 'user@example.com', role: 'CUSTOMER', fidelityScore: 92 }
 ];
 
-export const VENDORS: Vendor[] = [
-  {
-    id: 'v1',
-    name: 'Melcom Digital Hub',
-    category: 'Electronics',
-    description: 'Ghana\'s leading multi-category retailer.',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
-    bgUrl: 'https://images.unsplash.com/photo-1556740734-7f1a0297ba16?q=80&w=800&auto=format&fit=crop',
-    rating: 4.9,
-    itemsCount: 1240,
-    fidelityScore: 98,
-    joinedYear: '2018'
-  }
-];
-
 export const LISTINGS: Listing[] = [
   {
     id: '1',
@@ -80,105 +55,187 @@ export const LISTINGS: Listing[] = [
     price: 1250000,
     isNegotiable: false,
     category: 'Vehicles',
-    location: 'Airport Residential',
+    location: 'Airport Residential, Accra',
     postedAt: '2h ago',
+    postedTimestamp: Date.now() - 7200000,
     imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v3',
     requiresMultisig: true,
-    description: 'Full option, pristine condition.',
+    description: 'Pristine condition, full option, only 5,000km driven. Institutional sale.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's1', name: 'AutoTrust', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021' }
+    seller: { id: 's1', name: 'AutoTrust Motors', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '2',
-    title: 'MacBook Pro M3 Max 16-inch',
-    price: 45000,
+    title: 'iPhone 15 Pro Max 256GB - Natural Titanium',
+    price: 14500,
     isNegotiable: true,
     category: 'Electronics',
-    location: 'East Legon',
-    postedAt: '1h ago',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
+    location: 'East Legon, Accra',
+    postedAt: '45m ago',
+    postedTimestamp: Date.now() - 2700000,
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
     vendorId: 'v1',
-    description: 'Institutional hardware.',
+    description: 'Brand new in box, global warranty. Verified node stock.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
   },
   {
     id: '3',
-    title: 'Modern 4-Bedroom Villa with Pool',
+    title: 'Modern 4-Bedroom Villa with Private Pool',
     price: 3450000,
     isNegotiable: true,
     category: 'Property',
-    location: 'East Legon',
+    location: 'East Legon, Accra',
     postedAt: '5h ago',
+    postedTimestamp: Date.now() - 18000000,
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     vendorId: 'v2',
     requiresMultisig: true,
-    description: 'Luxury living.',
+    description: 'Executive luxury villa in the heart of East Legon. Fully furnished options available.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's2', name: 'PrimeRentals', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
+    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
   },
   {
     id: '4',
+    title: 'MacBook Pro M3 Max 16-inch 1TB',
+    price: 42000,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Tema Community 25',
+    postedAt: '3h ago',
+    postedTimestamp: Date.now() - 10800000,
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
+    vendorId: 'v1',
+    description: 'Unopened, standard institutional hardware.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+  },
+  {
+    id: '5',
+    title: 'Elite Heritage Sofa Suite - 7 Seater',
+    price: 8500,
+    isNegotiable: true,
+    category: 'Home & Furniture',
+    location: 'Spintex, Accra',
+    postedAt: 'Yesterday',
+    postedTimestamp: Date.now() - 86400000,
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
+    vendorId: 'v4',
+    description: 'High-fidelity fabrics, custom wood frame. Heritage series.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021' }
+  },
+  {
+    id: '6',
     title: 'Samsung 65" QLED 4K Smart TV',
     price: 12500,
     isNegotiable: false,
     category: 'Electronics',
-    location: 'Tema',
-    postedAt: '3h ago',
+    location: 'Kumasi, Adum',
+    postedAt: 'Just Now',
+    postedTimestamp: Date.now() - 60000,
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
     vendorId: 'v1',
-    description: '4K OLED Hub.',
+    description: 'Crystal clear 4K hub. Authorized dealer warranty.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
-  },
-  {
-    id: '5',
-    title: 'Elite Heritage Sofa Suite',
-    price: 8500,
-    isNegotiable: true,
-    category: 'Home & Furniture',
-    location: 'Spintex',
-    postedAt: 'Yesterday',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
-    vendorId: 'v4',
-    description: 'Luxury furniture.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's4', name: 'HomeLiving', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021' }
-  },
-  {
-    id: '6',
-    title: 'iPhone 15 Pro Titanium',
-    price: 14800,
-    isNegotiable: false,
-    category: 'Electronics',
-    location: 'Accra',
-    postedAt: '30m ago',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
-    vendorId: 'v1',
-    description: 'Titanium phone.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022' }
   },
   {
     id: '7',
-    title: '2018 Honda Civic Full Spec',
+    title: '2018 Honda Civic - Full Spec',
     price: 85000,
     isNegotiable: true,
     category: 'Vehicles',
-    location: 'Kumasi',
-    postedAt: '4h ago',
+    location: 'Tema, Harbour Area',
+    postedAt: '1h ago',
+    postedTimestamp: Date.now() - 3600000,
     imageUrl: 'https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v3',
-    description: 'Clean title.',
+    description: 'Very clean title, sunroof, leather seats. Reliable daily node.',
     status: 'Active',
     isEscrowProtected: true,
-    seller: { id: 's1', name: 'AutoTrust', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021' }
+    seller: { id: 's5', name: 'Kwame Mensah', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023' }
+  },
+  {
+    id: '8',
+    title: 'Land for Sale - 2 Plots in Kasoa',
+    price: 120000,
+    isNegotiable: false,
+    category: 'Property',
+    location: 'Kasoa, Millenium City',
+    postedAt: '6h ago',
+    postedTimestamp: Date.now() - 21600000,
+    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v2',
+    description: 'Litigation-free land with registered title. Ready for building.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
+  },
+  {
+    id: '9',
+    title: 'Professional Home Cleaning Services',
+    price: 250,
+    isNegotiable: true,
+    category: 'Services',
+    location: 'Accra Metropolitan',
+    postedAt: '4h ago',
+    postedTimestamp: Date.now() - 14400000,
+    imageUrl: 'https://images.unsplash.com/photo-1581578731548-c64695ce6958?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v5',
+    description: 'Deep cleaning for offices and homes. 24/7 node availability.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's6', name: 'CleanNode Pro', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2022' }
+  },
+  {
+    id: '10',
+    title: '2015 Toyota Corolla - Registered',
+    price: 45000,
+    isNegotiable: true,
+    category: 'Vehicles',
+    location: 'Tamale, Central',
+    postedAt: '12h ago',
+    postedTimestamp: Date.now() - 43200000,
+    imageUrl: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v3',
+    description: 'Used Corolla in excellent engine condition. AC works perfectly.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's7', name: 'Abu Bakar', type: 'Individual', rating: 4.2, isVerified: true, joinDate: '2021' }
+  }
+];
+
+export const VENDORS = [
+  {
+    id: 'v1',
+    name: 'Melcom Digital',
+    category: 'Electronics',
+    description: "Ghana's leading electronics and lifestyle node.",
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+    bgUrl: 'https://images.unsplash.com/photo-1556740734-7f1a0297ba16?q=80&w=800&auto=format&fit=crop',
+    rating: 4.9,
+    itemsCount: 1240,
+    fidelityScore: 98,
+    joinedYear: '2018'
+  },
+  {
+    id: 'v2',
+    name: 'PrimeRentals GH',
+    category: 'Property',
+    description: 'Luxury real estate and commercial asset management.',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png',
+    bgUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop',
+    rating: 5.0,
+    itemsCount: 85,
+    fidelityScore: 100,
+    joinedYear: '2020'
   }
 ];
