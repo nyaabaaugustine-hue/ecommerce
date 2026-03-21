@@ -28,6 +28,7 @@ import { Sparkles, Loader2, Plus, X, ShieldCheck, Info, Calculator, ArrowRightLe
 import { generateListingDescription } from '@/ai/flows/ai-generated-listing-description-flow';
 import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 const formSchema = z.object({
@@ -162,7 +163,7 @@ export function ListingCreateForm() {
                    <p className="text-[10px] font-black uppercase tracking-widest">Add Media File</p>
                 </div>
               </div>
-              <Button type="button" onClick={() => setStep(2)} className="w-full h-16 bg-primary text-white font-black uppercase tracking-[0.2em] rounded-[7%] shadow-2xl">
+              <Button type="button" onClick={() => setStep(2)} className="w-full h-16 bg-primary text-white font-black uppercase tracking-[0.2em] shadow-2xl">
                 Continue to Details
               </Button>
             </div>
@@ -268,8 +269,8 @@ export function ListingCreateForm() {
               />
 
               <div className="flex gap-4">
-                <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 h-16 rounded-[7%] font-black uppercase tracking-widest border-2">Back</Button>
-                <Button type="button" onClick={() => setStep(3)} className="flex-[2] h-16 bg-primary text-white font-black uppercase tracking-[0.2em] rounded-[7%] shadow-2xl">Finalize Listing</Button>
+                <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 h-16 font-black uppercase tracking-widest border-2">Back</Button>
+                <Button type="button" onClick={() => setStep(3)} className="flex-[2] h-16 bg-primary text-white font-black uppercase tracking-[0.2em] shadow-2xl">Finalize Listing</Button>
               </div>
             </div>
           )}
@@ -311,8 +312,8 @@ export function ListingCreateForm() {
               </Card>
 
               <div className="flex gap-4">
-                <Button type="button" variant="outline" onClick={() => setStep(2)} className="flex-1 h-16 rounded-[7%] font-black uppercase tracking-widest border-2">Review</Button>
-                <Button type="submit" className="flex-[2] h-16 bg-accent text-secondary hover:bg-white font-black uppercase tracking-[0.2em] rounded-[7%] shadow-2xl text-lg">
+                <Button type="button" variant="outline" onClick={() => setStep(2)} className="flex-1 h-16 font-black uppercase tracking-widest border-2">Review</Button>
+                <Button type="submit" className="flex-[2] h-16 bg-accent text-secondary hover:bg-white font-black uppercase tracking-[0.2em] shadow-2xl text-lg">
                   Publish To Marketplace
                 </Button>
               </div>

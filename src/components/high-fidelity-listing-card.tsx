@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -15,13 +14,14 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
  * @fileOverview High-Fidelity Marketplace Listing Card (Jiji Style)
  * Replicates the specific staggered/masonry visual signature from the provided image.
  * Features: Breadcrumbs, Floating Avatars, Technical Specs, and Detailed Metadata.
+ * Updated with specific 7% border-radius protocol.
  */
 export function HighFidelityListingCard(props: Listing) {
   const { id, title, price, location, postedAt, imageUrl, category, subcategory, specs, seller, isNegotiable } = props;
   const { formatPrice } = useCurrency();
 
   return (
-    <Card className="group overflow-hidden bg-white border border-border/40 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full rounded-md">
+    <Card className="group overflow-hidden bg-white border border-border/40 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full rounded-[7%]">
       {/* VISUAL ASSET */}
       <Link href={`/listings/${id}`} className="relative aspect-[4/5] w-full overflow-hidden block bg-muted">
         <Image 

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -46,7 +45,7 @@ export function PrivacyPopup() {
           </Button>
           <Button 
             onClick={handleAccept}
-            className="flex-1 bg-primary text-secondary font-black text-[10px] uppercase tracking-widest rounded-[7%] shadow-xl"
+            className="flex-1 bg-primary text-secondary font-black text-[10px] uppercase tracking-widest shadow-xl"
           >
             To accept
           </Button>

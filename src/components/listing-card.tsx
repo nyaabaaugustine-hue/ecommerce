@@ -13,13 +13,14 @@ import { cn } from '@/lib/utils';
  * @fileOverview High-Fidelity Marketplace Listing Card
  * Enhanced for visibility across all themes. Uses dynamic color variables
  * and refined typographic weighting for institutional metadata.
+ * Updated with specific 7% border-radius protocol.
  */
 export function ListingCard(props: Listing) {
   const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isFreeShipping, isEmphasis } = props;
   const { formatPrice } = useCurrency();
 
   return (
-    <Card className="group overflow-hidden bg-card border-none shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-md animate-in fade-in zoom-in-95">
+    <Card className="group overflow-hidden bg-card border-none shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-[7%] animate-in fade-in zoom-in-95">
       {/* EMPHASIS NODE */}
       {isEmphasis && (
         <div className="absolute top-3 left-3 z-10">

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { MessageSquare, Heart, TrendingUp, CircleDollarSign } from 'lucide-react';
@@ -10,8 +9,8 @@ import { AuthDialog } from '@/components/auth-dialog';
 
 /**
  * @fileOverview Institutional Benefits Command Node
- * 1:1 functional clone of the OLX "Create account" benefit block.
- * Uses the strict 7% border-radius protocol for the primary CTA.
+ * Standardized radii to align with global UI polish.
+ * Reverted CTA radius to standard rounded-md.
  */
 export function BenefitsSection() {
   const { user } = useAuth();
@@ -69,7 +68,7 @@ export function BenefitsSection() {
           <div className="pt-4">
             <Button 
               onClick={() => setShowAuth(true)}
-              className="h-14 px-10 bg-primary text-secondary hover:bg-primary/90 font-black text-sm uppercase tracking-tight rounded-[7%] shadow-lg border-2 border-white/10"
+              className="h-14 px-10 bg-primary text-secondary hover:bg-primary/90 font-black text-sm uppercase tracking-tight shadow-lg border-2 border-white/10"
             >
               Create a free account
             </Button>
