@@ -8,8 +8,8 @@ import { AuthDialog } from '@/components/auth-dialog';
 
 /**
  * @fileOverview Master Post Ad Action Node
- * Scaled-down floating trigger with specific 6% rectangular geometry.
- * reduced by 14% in overall mass for elite visual balance.
+ * Rectangular command node with 6% border-radius logic.
+ * Scaled-down by 14% for elite visual balance.
  */
 export function PostAdButton() {
   const [showAuth, setShowAuth] = useState(false);

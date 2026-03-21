@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,7 +38,7 @@
     --card-foreground: 180 10% 98%;
     --popover: 225 60% 5%;
     --popover-foreground: 180 10% 98%;
-    --primary: 178 90% 49%; /* Electric Aqua */
+    --primary: 178 90% 49%; /* Electric Aqua - Hyper Visible */
     --primary-foreground: 225 60% 3%;
     --secondary: 225 60% 8%;
     --secondary-foreground: 180 10% 98%;
@@ -53,7 +54,7 @@
     --foreground: 0 0% 100%;
     --card: 0 0% 2%;
     --card-foreground: 0 0% 100%;
-    --primary: 82 100% 54%; /* Neon Lime */
+    --primary: 82 100% 54%; /* Neon Lime - Max Contrast */
     --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 5%;
     --secondary-foreground: 0 0% 100%;
