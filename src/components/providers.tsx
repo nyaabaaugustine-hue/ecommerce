@@ -36,7 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // FORCE WHITE ON EVERY FRESH LOAD: Absolute Clinical Protocol
-    // Wiping any legacy dark-mode or session theme data
+    // Wiping any legacy dark-mode or session theme data to ensure 100% consistency
     if (typeof window !== 'undefined') {
       localStorage.removeItem('vault_theme');
       document.documentElement.classList.remove('dark');
