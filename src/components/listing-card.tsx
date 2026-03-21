@@ -14,8 +14,9 @@ import { cn } from '@/lib/utils';
  * @fileOverview High-Fidelity Marketplace Listing Card
  * 1:1 structural clone of the OLX card architecture using ShadCN styling.
  * Supports "Emphasis" status and dual-badge logic (Easy Delivery + Vault Guarantee).
+ * Force clone: Perfectly fits the 5-column grid.
  */
-export function ListingCard(props: Listing & { isEmphasis?: boolean }) {
+export function ListingCard(props: Listing) {
   const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isEmphasis } = props;
   const { formatPrice } = useCurrency();
 
