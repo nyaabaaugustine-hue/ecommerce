@@ -19,6 +19,10 @@ import { cn } from '@/lib/utils';
  * Force clone: 5 items per row to fit the project alignment.
  */
 export function HomePage() {
+  const sponsoredAds = useMemo(() => {
+    return LISTINGS.filter(l => l.id.startsWith('sp')).slice(0, 5);
+  }, []);
+
   const cellPhones = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Electronics' && l.id.startsWith('e')).slice(0, 5);
   }, []);
@@ -47,6 +51,35 @@ export function HomePage() {
       {/* HERO COMMAND CENTER */}
       <div className="max-w-7xl mx-auto w-full px-4 mb-12 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <HeroCarousel />
+      </div>
+
+      {/* CLONE ROW: Sponsored Ads Registry */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
+        <div className="mb-6">
+          <h2 className="text-2xl font-medium text-foreground tracking-tight">
+            Sponsored ads
+          </h2>
+          <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest mt-1">Exclusive to Diamond Highlights</p>
+        </div>
+        
+        <div className="relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {sponsoredAds.map((item, idx) => (
+              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
+                <ListingCard {...item} />
+              </div>
+            ))}
+          </div>
+          
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
+      </section>
+
+      {/* Institutional Separator */}
+      <div className="max-w-7xl mx-auto w-full px-4">
+        <div className="h-[1px] w-full bg-border/50" />
       </div>
 
       {/* CLONE ROW: Cell Phones Registry */}

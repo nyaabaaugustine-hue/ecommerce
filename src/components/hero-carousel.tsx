@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -19,12 +20,12 @@ const SLIDES = [
     id: 1,
     leftBg: "bg-[#6e0ad6]",
     rightBg: "bg-[#f2eafa]",
-    title: "O maior inventário de autos do Brasil. ",
-    highlight: "Mais de 800 mil opções pra escolher.",
-    cta: "Ver ofertas",
+    title: "Ghana's largest vehicle inventory. ",
+    highlight: "Over 800 thousand options to choose from.",
+    cta: "View offers",
     mainImage: "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?q=80&w=1600&auto=format&fit=crop",
     sideTitle: "Toyota Corolla GLI",
-    sideDesc: "Ano 2024, 22.300 km e motor 2.0 Flex",
+    sideDesc: "Year 2024, 22,300 km and 2.0 Flex engine",
     accentColor: "text-[#6e0ad6]"
   },
   {
@@ -32,11 +33,11 @@ const SLIDES = [
     leftBg: "bg-[#d60a91]",
     rightBg: "bg-[#fbeaf5]",
     title: "Sovereign Electronics Center. ",
-    highlight: "Os melhores smartphones de GHS-Accra.",
+    highlight: "The best smartphones in GHS-Accra.",
     cta: "Shop now",
     mainImage: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png",
     sideTitle: "iPhone 15 Pro",
-    sideDesc: "Titanium Blue, 256GB. Condição de Vault.",
+    sideDesc: "Titanium Blue, 256GB. Vault condition.",
     accentColor: "text-[#d60a91]"
   }
 ];
@@ -44,6 +45,7 @@ const SLIDES = [
 /**
  * @fileOverview High-Fidelity Marketplace Carousel
  * Exact structural clone of the 3-pane OLX hero layout.
+ * Localized to English for the Ghanaian market.
  */
 export function HeroCarousel() {
   const [api, setApi] = React.useState<CarouselApi>();
