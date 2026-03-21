@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* CLINICAL INSTITUTIONAL LIGHT (FORCE DEFAULT) */
+    /* CLINICAL INSTITUTIONAL LIGHT (MASTER DEFAULT) */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
@@ -30,13 +29,65 @@
     --gold: 45 93% 47%;
   }
 
+  /* ELITE SOVEREIGN - Space Blue Blend */
   [data-theme='sovereign'] {
     --background: 222 47% 4%;
     --foreground: 210 40% 98%;
-    --primary: 190 90% 50%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
+    --primary: 190 90% 50%; /* Electric Cyan */
     --primary-foreground: 222 47% 4%;
+    --secondary: 222 47% 12%;
+    --border: 222 47% 15%;
+    --muted: 222 47% 10%;
     --accent: 262 83% 58%;
-    --border: 222 47% 12%;
+  }
+
+  /* MIDNIGHT OLED - Slate Blue Blend */
+  [data-theme='midnight'] {
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
+    --card: 0 0% 2%;
+    --card-foreground: 210 40% 98%;
+    --primary: 210 100% 50%; /* Pure Blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --border: 0 0% 15%;
+    --muted: 0 0% 5%;
+    --accent: 0 0% 100%;
+  }
+
+  /* ENTERPRISE COBALT - Corporate Blue */
+  [data-theme='cobalt'] {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 13%;
+    --primary: 217 91% 60%;
+    --secondary: 222 47% 20%;
+    --border: 222 47% 25%;
+    --accent: 199 89% 48%;
+  }
+
+  /* ROYAL MAJESTY - Indigo Blend */
+  [data-theme='royal'] {
+    --background: 273 67% 4%;
+    --foreground: 210 40% 98%;
+    --card: 273 67% 7%;
+    --primary: 273 67% 60%;
+    --secondary: 273 67% 15%;
+    --border: 273 67% 20%;
+    --accent: 45 93% 47%; /* Gold Accent */
+  }
+
+  /* POWER CRIMSON - Heat Blend */
+  [data-theme='crimson'] {
+    --background: 0 72% 4%;
+    --foreground: 210 40% 98%;
+    --card: 0 72% 7%;
+    --primary: 0 72% 51%;
+    --secondary: 0 72% 15%;
+    --border: 0 72% 20%;
+    --accent: 0 0% 100%;
   }
 }
 
