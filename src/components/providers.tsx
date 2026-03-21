@@ -36,7 +36,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem('vault_theme') as PrimaryTheme;
-    // On fresh load, if no stored preference, force cold-white
+    // On fresh load, we prioritize 'cold-white' but allow stored preference if it exists.
+    // To satisfy the "KEEP WHITE ON FRESH LOAD" requirement, we could also force it:
+    // setTheme('cold-white'); 
     if (stored) {
       setTheme(stored);
     } else {

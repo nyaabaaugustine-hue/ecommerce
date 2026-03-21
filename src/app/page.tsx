@@ -82,6 +82,8 @@ export function HomePage() {
         </div>
       </section>
 
+      <SpotlightCategories />
+
       {/* CATEGORY REGISTRIES */}
       {eliteComputing.length > 0 && (
         <section className="w-full py-12 bg-muted/5 overflow-hidden border-y border-primary/10">
@@ -190,8 +192,6 @@ export function HomePage() {
           </div>
         </section>
       )}
-
-      <SpotlightCategories />
 
       {industrialAgro.length > 0 && (
         <section className="max-w-7xl mx-auto w-full px-4 py-24 md:py-32 border-t border-dashed">
