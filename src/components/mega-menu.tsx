@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -5,20 +6,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { 
   ChevronRight, 
-  Cpu, 
   Home, 
   ShoppingBag, 
   ShieldCheck, 
   Monitor,
-  Smartphone,
-  Tv,
-  Refrigerator,
   Building2,
   Key,
   Briefcase,
-  Utensils,
   Armchair,
-  Sparkles,
   Zap,
   ShieldAlert,
   Store,
@@ -26,7 +21,9 @@ import {
   Car,
   Truck,
   Wrench,
-  Stethoscope
+  Smartphone,
+  Tv,
+  Refrigerator
 } from "lucide-react";
 import { 
   Popover, 
@@ -43,31 +40,31 @@ const SECTORS = [
     icon: Car,
     bgImage: "https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=600&auto=format&fit=crop",
     items: [
-      { name: "Cars & SUVs", href: "/listings?category=Automotive", icon: Car, desc: "Luxury & Pre-owned" },
-      { name: "Commercial Trucks", href: "/listings?category=Automotive", icon: Truck, desc: "Logistics Assets" },
-      { name: "Auto Parts", href: "/listings?category=Automotive", icon: Wrench, desc: "Verified Spares" },
+      { name: "Cars & SUVs", href: "/listings?category=Vehicles", icon: Car, desc: "Luxury & Pre-owned" },
+      { name: "Commercial Trucks", href: "/listings?category=Vehicles", icon: Truck, desc: "Logistics Assets" },
+      { name: "Auto Parts", href: "/listings?category=Vehicles", icon: Wrench, desc: "Verified Spares" },
     ]
   },
   {
     title: "Property & Services",
     subtitle: "Verified Nodes",
     icon: Home,
-    bgImage: "https://picsum.photos/seed/realestate-clouds/600/200",
+    bgImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600&auto=format&fit=crop",
     items: [
-      { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key, desc: "Residential Assets" },
-      { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2, desc: "Ridge & Osu Nodes" },
-      { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase, desc: "Legal & IT Audit" },
+      { name: "Houses & Land", href: "/listings?category=Property", icon: Key, desc: "Residential Assets" },
+      { name: "Commercial Space", href: "/listings?category=Property", icon: Building2, desc: "Ridge & Osu Nodes" },
+      { name: "Professional Services", href: "/listings?category=Services", icon: Briefcase, desc: "Legal & IT Audit" },
     ]
   },
   {
     title: "Electronics & Home",
     subtitle: "Verified Nodes",
     icon: ShoppingBag,
-    bgImage: "https://picsum.photos/seed/tech-clouds/600/200",
+    bgImage: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=600&auto=format&fit=crop",
     items: [
-      { name: "Laptops & Tech", href: "/listings?category=Computing", icon: Monitor, desc: "Institutional Hardware" },
-      { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair, desc: "Luxury Suites" },
-      { name: "Kitchen & Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator, desc: "Smart Home Nodes" },
+      { name: "Laptops & Tech", href: "/listings?category=Electronics", icon: Monitor, desc: "Institutional Hardware" },
+      { name: "Furniture & Decor", href: "/listings?category=Home & Furniture", icon: Armchair, desc: "Luxury Suites" },
+      { name: "Kitchen & Appliances", href: "/listings?category=Electronics", icon: Refrigerator, desc: "Smart Home Nodes" },
     ]
   }
 ];
@@ -130,7 +127,7 @@ export function MegaMenu() {
             ))}
           </div>
 
-          {/* Featured Spotlight - 25% of the Menu */}
+          {/* Featured Spotlight */}
           <div className="lg:col-span-3 bg-secondary p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 -mr-32 -mt-32 rounded-none blur-3xl pointer-events-none" />
             
@@ -169,16 +166,6 @@ export function MegaMenu() {
                       </div>
                     </div>
                   </Link>
-                  
-                  <Link href="/vendors" className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
-                    <div className="h-10 w-10 bg-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
-                      <Car className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">AutoTrust Motors</p>
-                      <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Automotive Node</p>
-                    </div>
-                  </Link>
                 </div>
               </div>
             </div>
@@ -191,7 +178,6 @@ export function MegaMenu() {
           </div>
         </div>
 
-        {/* Global Institutional Trust Bar */}
         <div className="bg-muted/30 py-4 px-10 flex flex-col md:flex-row justify-between items-center border-t border-dashed gap-4">
           <div className="flex flex-wrap justify-center gap-8 md:gap-12">
             <div className="flex items-center gap-3">
@@ -200,18 +186,12 @@ export function MegaMenu() {
             </div>
             <div className="flex items-center gap-3">
               <ShieldAlert className="h-4 w-4 text-primary" />
-              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.2em]">Multisig Escrow Protection Active</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Key className="h-4 w-4 text-primary" />
-              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.2em]">Institutional Treasury Node: GHS-Accra</span>
+              <span className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.2em]">Multisig Escrow Active</span>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="rounded-none border-primary/20 text-[8px] font-black px-3 py-1 uppercase tracking-widest text-primary bg-primary/5">
-              Sovereign Certified
-            </Badge>
-          </div>
+          <Badge variant="outline" className="rounded-none border-primary/20 text-[8px] font-black px-3 py-1 uppercase tracking-widest text-primary bg-primary/5">
+            Sovereign Certified
+          </Badge>
         </div>
       </PopoverContent>
     </Popover>

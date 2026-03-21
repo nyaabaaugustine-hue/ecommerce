@@ -1,3 +1,4 @@
+
 "use client";
 
 import './globals.css';
@@ -10,7 +11,7 @@ import { PostAdButton } from '@/components/post-ad-button';
 import { ShoppingAssistant } from '@/components/shopping-assistant';
 import { OnboardingTour } from '@/components/onboarding-tour';
 import { Facebook, Youtube, Instagram, Linkedin, MessageCircle } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { content } = useContent();
@@ -31,21 +32,18 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <footer className="bg-white dark:bg-background text-foreground pt-12 pb-8 border-t">
         <div className="max-w-7xl mx-auto px-4">
           {/* Horizontal Link Registry */}
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-12 text-[13px] font-bold text-muted-foreground uppercase tracking-tight">
-            <a href="#" className="hover:text-primary">Help</a>
-            <a href="#" className="hover:text-primary">Safety tips</a>
-            <a href="#" className="hover:text-primary">Terms of use</a>
-            <a href="#" className="hover:text-primary">Privacy Policy</a>
-            <a href="#" className="hover:text-primary">Intellectual property</a>
-            <a href="#" className="hover:text-primary">Site map</a>
-            <a href="#" className="hover:text-primary">Work with us</a>
-            <a href="#" className="hover:text-primary">Vault Group</a>
-            <a href="#" className="hover:text-primary">Institutional real estate</a>
-            <a href="#" className="hover:text-primary">Live Real</a>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-12 text-[11px] font-black text-muted-foreground uppercase tracking-widest">
+            <Link href="/help" className="hover:text-primary">Help Node</Link>
+            <Link href="/safety" className="hover:text-primary">Safety Protocols</Link>
+            <Link href="/terms" className="hover:text-primary">Terms of use</Link>
+            <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
+            <Link href="/about" className="hover:text-primary">About Vault</Link>
+            <Link href="/vendors" className="hover:text-primary">Vendor Registry</Link>
+            <Link href="/contact" className="hover:text-primary">Contact Registry</Link>
           </div>
 
           <div className="pt-12 border-t flex flex-col items-center gap-8">
-            <p className="text-[12px] font-medium text-muted-foreground text-center italic opacity-60">
+            <p className="text-[10px] font-black text-muted-foreground text-center uppercase tracking-widest opacity-60">
               © 2026 Ecommerce Inc. Registry Node: Airport Residential Area, Accra, Ghana Node - 00233-GH-ACC
             </p>
 

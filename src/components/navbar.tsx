@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -8,15 +9,16 @@ import {
   MapPin, 
   MessageSquare, 
   Bell, 
-  User, 
-  Briefcase,
-  LayoutGrid,
+  Palette,
   ChevronDown,
-  Palette
+  Info,
+  ShieldCheck,
+  HelpCircle
 } from 'lucide-react';
 import { useAuth, useContent, useTheme, type PrimaryTheme } from '@/components/providers';
 import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
+import { MegaMenu } from '@/components/mega-menu';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,13 +27,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from '@/lib/utils';
 
-/**
- * @fileOverview Master Header Command Hub
- * Exact 1:1 structural clone of the OLX header interaction logic.
- * Aligned to the 1280px (max-w-7xl) project grid.
- * Post Ad action uses the strict 7% box rectangle protocol.
- */
 export function Navbar() {
   const { user } = useAuth();
   const { content } = useContent();
@@ -52,29 +49,57 @@ export function Navbar() {
     <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-500">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4 md:gap-8">
-        {/* LOGO NODE */}
-        <Link href="/" className="flex items-center gap-3 shrink-0 group">
-          <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/30 p-1 bg-white shadow-sm group-hover:scale-105 transition-transform">
-            <Image 
-              src={content.settings.logoUrl} 
-              alt="Logo" 
-              fill 
-              sizes="40px" 
-              className="object-contain" 
-              priority 
-            />
+      {/* Top Utility Nav */}
+      <div className="bg-secondary/5 border-b border-dashed">
+        <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <Link href="/about" className="text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
+              <Info className="h-3 w-3" /> Institutional About
+            </Link>
+            <Link href="/vendors" className="text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
+              <ShieldCheck className="h-3 w-3" /> Verified Vendors
+            </Link>
+            <Link href="/help" className="text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
+              <HelpCircle className="h-3 w-3" /> Help Center
+            </Link>
           </div>
-          <span className="font-headline font-black text-2xl text-foreground tracking-tighter uppercase hidden xl:block">
-            {content.settings.siteName}
-          </span>
-        </Link>
+          <div className="flex items-center gap-4">
+            <span className="text-[8px] font-bold text-primary uppercase tracking-[0.2em]">Escrow Active: GHS-ACCRA</span>
+          </div>
+        </div>
+      </div>
 
-        {/* INTEGRATED SEARCH & LOCATION HUB */}
-        <div className="hidden lg:flex flex-1 max-w-2xl items-center h-12 border-2 border-muted-foreground/20 rounded-md overflow-hidden bg-muted/10 focus-within:border-primary transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4 md:gap-8">
+        <div className="flex items-center gap-8 h-full">
+          {/* LOGO NODE */}
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/30 p-1 bg-white shadow-sm group-hover:scale-105 transition-transform">
+              <Image 
+                src={content.settings.logoUrl} 
+                alt="Logo" 
+                fill 
+                sizes="40px" 
+                className="object-contain" 
+                priority 
+              />
+            </div>
+            <span className="font-headline font-black text-2xl text-foreground tracking-tighter uppercase hidden xl:block">
+              {content.settings.siteName}
+            </span>
+          </Link>
+
+          {/* Mega Menu Trigger */}
+          <div className="hidden lg:block h-full py-4">
+            <div className="h-full w-px bg-border mx-2" />
+            <MegaMenu />
+          </div>
+        </div>
+
+        {/* SEARCH HUB */}
+        <div className="hidden lg:flex flex-1 max-w-xl items-center h-12 border-2 border-muted-foreground/20 rounded-md overflow-hidden bg-muted/10 focus-within:border-primary transition-all duration-300">
           <div className="flex-1 flex items-center px-4 gap-3 border-r border-muted-foreground/20">
             <input 
-              placeholder='Search products...' 
+              placeholder='Search verified inventory...' 
               className="w-full bg-transparent outline-none text-foreground text-[14px] font-medium placeholder:text-muted-foreground/60"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -93,7 +118,7 @@ export function Navbar() {
         {/* UTILITY ACTIONS ROW */}
         <div className="flex items-center gap-4 md:gap-6">
           <div className="hidden xl:flex items-center gap-5">
-            {/* THEME TOGGLE NODE */}
+            {/* THEME TOGGLE */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
@@ -117,10 +142,6 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/dashboard" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all group">
-              <Briefcase className="h-5 w-5" />
-              <span className="text-[10px] font-bold uppercase tracking-tight">Professional</span>
-            </Link>
             <div className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
               <MessageSquare className="h-5 w-5" />
               <span className="text-[10px] font-bold uppercase tracking-tight">Chat</span>
@@ -161,8 +182,4 @@ export function Navbar() {
       </div>
     </header>
   );
-}
-
-function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(' ');
 }
