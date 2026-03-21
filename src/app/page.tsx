@@ -32,7 +32,7 @@ export function HomePage() {
     );
   }, [searchQuery]);
 
-  // Satiation Node Logic: Extract 5 items per category for homepage industrial grid
+  // Satiation Node Logic: Strictly exactly 5 items per category for homepage industrial grid
   const eliteComputing = useMemo(() => filteredListings.filter(l => l.subcategory === 'Laptops').slice(0, 5), [filteredListings]);
   const smartCommunication = useMemo(() => filteredListings.filter(l => l.subcategory === 'Mobiles').slice(0, 5), [filteredListings]);
   const premiumAutos = useMemo(() => filteredListings.filter(l => l.category === 'Vehicles').slice(0, 5), [filteredListings]);
@@ -84,7 +84,7 @@ export function HomePage() {
 
       <SpotlightCategories />
 
-      {/* CATEGORY REGISTRIES - 8 SECTORS SATURATED WITH 5 ITEMS EACH */}
+      {/* CATEGORY REGISTRIES - 8 SECTORS SATURATED WITH EXACTLY 5 ITEMS EACH */}
       {eliteComputing.length > 0 && (
         <section className="w-full py-12 bg-muted/5 overflow-hidden border-y border-primary/10">
           <div className="max-w-7xl mx-auto px-4 mb-8 flex items-end justify-between">

@@ -16,7 +16,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // MASTER DEFAULT: cold-white (Clinical Light)
+  // MASTER DEFAULT: Strictly initialized to cold-white
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
@@ -35,8 +35,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    // FORCE WHITE ON FRESH LOAD: Ignore localStorage preference to satisfy "KEEP WHITE ON FRESH LOAD"
-    setTheme('cold-white');
+    // FORCE WHITE ON EVERY FRESH LOAD: Absolute Clinical Protocol
+    // Wiping any legacy dark-mode or session theme data
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('vault_theme');
+      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'cold-white');
+      setThemeState('cold-white');
+    }
   }, []);
 
   return (
@@ -176,15 +182,17 @@ export const useAuth = () => {
 // --- Search Context ---
 interface SearchContextType {
   searchQuery: string;
-  setSearchQuery: (query: string) => void;
+  setQuery: (query: string) => void;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export function SearchProvider({ children }: { children: React.ReactNode }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const setQuery = (query: string) => setSearchQuery(query);
+  
   return (
-    <SearchContext.Provider value={{ searchQuery, setSearchQuery }}>
+    <SearchContext.Provider value={{ searchQuery, setQuery }}>
       {children}
     </SearchContext.Provider>
   );
