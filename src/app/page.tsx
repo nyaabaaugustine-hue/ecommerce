@@ -138,7 +138,8 @@ export default function HomePage() {
              <h2 className="text-xl font-black text-white uppercase tracking-[0.2em]">Weekly Velocity: Best Selling Nodes</h2>
           </div>
         </div>
-        <div className="animate-marquee gap-8 py-4 [animation-duration:60s]">
+        {/* Speed increased by 50% (from 60s to 40s) */}
+        <div className="animate-marquee gap-8 py-4 [animation-duration:40s]">
           {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
             <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
                <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-4 flex gap-4 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer">
@@ -205,7 +206,8 @@ export default function HomePage() {
         </div>
         
         <div className="relative">
-          <div className="animate-marquee-reverse gap-8 py-6 [animation-duration:100s]">
+          {/* Speed increased by 50% (from 100s to 66s) */}
+          <div className="animate-marquee-reverse gap-8 py-6 [animation-duration:66s]">
             {[...VENDORS, ...VENDORS].map((vendor, idx) => (
               <div key={`${vendor.id}-${idx}`} className="w-[350px] md:w-[480px] shrink-0 px-3">
                 <Card className="border-none shadow-2xl hover:border-accent transition-all duration-500 h-[240px] md:h-[320px] bg-secondary group rounded-none relative overflow-hidden border-t-2 border-t-transparent hover:border-t-accent">
@@ -263,9 +265,11 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-            <Button size="lg" className="bg-accent text-secondary hover:bg-white hover:text-secondary rounded-none px-14 h-16 font-black shadow-2xl transition-all text-xs uppercase tracking-widest border-2 border-accent">
-              {cta.primaryButton} <ChevronRight className="h-6 w-6 ml-3" />
-            </Button>
+            <Link href="/listings" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full bg-accent text-secondary hover:bg-white hover:text-secondary rounded-none px-14 h-16 font-black shadow-2xl transition-all text-xs uppercase tracking-widest border-2 border-accent">
+                {cta.primaryButton} <ChevronRight className="h-6 w-6 ml-3" />
+              </Button>
+            </Link>
             <Button size="lg" className="bg-primary text-white hover:bg-primary/90 rounded-none px-14 h-16 font-black transition-all text-xs uppercase tracking-widest shadow-xl border-2 border-primary">
               {cta.secondaryButton}
             </Button>
