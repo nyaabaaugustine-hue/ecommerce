@@ -1,3 +1,4 @@
+
 "use client";
 
 import './globals.css';
@@ -10,6 +11,7 @@ import { PostAdButton } from '@/components/post-ad-button';
 import { ShoppingAssistant } from '@/components/shopping-assistant';
 import { OnboardingTour } from '@/components/onboarding-tour';
 import { PromotionPopup } from '@/components/promotion-popup';
+import { GlobalCheckoutSimulation } from '@/components/global-checkout-simulation';
 import { Facebook, Youtube, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -77,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ShoppingAssistant />
           <OnboardingTour />
           <PromotionPopup />
+          <GlobalCheckoutSimulation />
           <Footer />
           <Toaster />
         </AuthProviderWrapper>

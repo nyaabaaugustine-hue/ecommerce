@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -241,12 +242,21 @@ interface CartContextType {
   removeItem: (id: string) => void;
   clearCart: () => void;
   total: number;
+  // Forced Checkout Simulation Node
+  isCheckingOut: boolean;
+  checkoutStep: number;
+  showSuccess: boolean;
+  startCheckoutSim: () => void;
+  closeSuccess: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutStep, setCheckoutStep] = useState(0);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const addItem = (item: Listing) => {
     setItems(prev => {
@@ -258,6 +268,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const startCheckoutSim = () => {
+    if (isCheckingOut) return;
+    setIsCheckingOut(true);
+    setCheckoutStep(0);
+    
+    let current = 0;
+    const interval = setInterval(() => {
+      if (current < 3) {
+        current++;
+        setCheckoutStep(current);
+      } else {
+        clearInterval(interval);
+        setIsCheckingOut(false);
+        setShowSuccess(true);
+        setItems([]); // Clear cart upon successful simulation
+      }
+    }, 1000);
+  };
+
+  const closeSuccess = () => setShowSuccess(false);
+
   const removeItem = (id: string) => {
     setItems(prev => prev.filter(i => i.id !== id));
   };
@@ -267,7 +298,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, clearCart, total }}>
+    <CartContext.Provider value={{ 
+      items, addItem, removeItem, clearCart, total,
+      isCheckingOut, checkoutStep, showSuccess, startCheckoutSim, closeSuccess
+    }}>
       {children}
     </CartContext.Provider>
   );

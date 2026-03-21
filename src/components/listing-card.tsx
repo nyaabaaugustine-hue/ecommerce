@@ -14,24 +14,24 @@ import { useToast } from '@/hooks/use-toast';
 export function ListingCard(props: Listing) {
   const { id, title, price, oldPrice, location, postedAt, imageUrl, imageHint, isEscrowProtected, isFreeShipping, isEmphasis, seller } = props;
   const { formatPrice } = useCurrency();
-  const { addItem } = useCart();
+  const { addItem, startCheckoutSim } = useCart();
   const { toast } = useToast();
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleForcedAcquisition = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addItem(props);
+    // Force the global buying process
+    startCheckoutSim();
     toast({
-      title: "Asset Secured in Cart",
-      description: `${title} is now in your escrow tray. Launching acquisition flow...`,
+      title: "Initiating Protocol",
+      description: `Authorizing GHS acquisition for ${title}...`,
     });
-    const cartTrigger = document.querySelector('[data-cart-trigger]') as HTMLElement;
-    if (cartTrigger) cartTrigger.click();
   };
 
   return (
     <Card className="group overflow-hidden bg-card border border-border/40 shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-[7%] animate-in fade-in zoom-in-95">
-      {/* VISUAL ASSET - Increased to aspect-[3/4] to fill the card more effectively */}
+      {/* VISUAL ASSET - Vertical 3:4 ratio */}
       <Link href={`/listings/${id}`} className="relative aspect-[3/4] w-full overflow-hidden block bg-muted">
         <Image 
           src={imageUrl} 
@@ -57,7 +57,7 @@ export function ListingCard(props: Listing) {
           <Heart className="h-5 w-5" />
         </button>
 
-        {/* PRICE OVERLAY - Now very prominent on the image */}
+        {/* PRICE OVERLAY - Prominent on image */}
         <div className="absolute bottom-4 left-4 z-10 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
            <div className="bg-white/95 backdrop-blur-md px-4 py-2 shadow-2xl border-l-4 border-primary">
               <p className="text-[14px] font-black text-secondary tracking-tighter leading-none">{formatPrice(price)}</p>
@@ -96,10 +96,10 @@ export function ListingCard(props: Listing) {
 
         <div className="pt-4 border-t border-dashed border-border/50">
           <Button 
-            onClick={handleAddToCart}
+            onClick={handleForcedAcquisition}
             className="w-full h-11 bg-secondary text-white font-black uppercase text-[9px] tracking-widest rounded-none shadow-2xl gap-3 hover:bg-primary transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
           >
-            <ShoppingBag className="h-4 w-4 text-primary" /> Acquisition Node
+            <ShoppingBag className="h-4 w-4 text-primary" /> Authorize Buy
           </Button>
         </div>
       </CardContent>

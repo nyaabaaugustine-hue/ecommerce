@@ -16,23 +16,23 @@ import { useToast } from '@/hooks/use-toast';
 export function HighFidelityListingCard(props: Listing) {
   const { id, title, price, location, imageUrl, imageHint, category, subcategory, specs, seller, isNegotiable } = props;
   const { formatPrice } = useCurrency();
-  const { addItem } = useCart();
+  const { addItem, startCheckoutSim } = useCart();
   const { toast } = useToast();
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleForcedAcquisition = (e: React.MouseEvent) => {
     e.preventDefault();
     addItem(props);
+    // Immediately trigger the global simulated buying process
+    startCheckoutSim();
     toast({
-      title: "Asset Authorized",
-      description: `${title} added to escrow tray. Initiating protocol...`,
+      title: "Protocol Initialized",
+      description: `Syncing treasury node for ${title}...`,
     });
-    const cartTrigger = document.querySelector('[data-cart-trigger]') as HTMLElement;
-    if (cartTrigger) cartTrigger.click();
   };
 
   return (
     <Card className="group overflow-hidden bg-card border border-border/40 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full rounded-[7%]">
-      {/* VISUAL ASSET - Increased Aspect Ratio to fill more card space */}
+      {/* VISUAL ASSET - Elite 2:3 vertical ratio */}
       <Link href={`/listings/${id}`} className="relative aspect-[2/3] w-full overflow-hidden block bg-muted">
         <Image 
           src={imageUrl} 
@@ -58,7 +58,7 @@ export function HighFidelityListingCard(props: Listing) {
           </div>
         </div>
 
-        {/* Pricing Overlay for maximum impact */}
+        {/* Pricing Overlay */}
         <div className="absolute top-3 left-3">
            <Badge className="bg-secondary/90 backdrop-blur-md text-white border-none font-black text-[10px] px-3 py-1.5 rounded-none shadow-2xl uppercase tracking-widest">
               {formatPrice(price)}
@@ -96,7 +96,7 @@ export function HighFidelityListingCard(props: Listing) {
 
         <div className="mt-auto pt-3 border-t border-dashed border-border/50 flex flex-col gap-3">
           <Button 
-            onClick={handleAddToCart}
+            onClick={handleForcedAcquisition}
             className="w-full h-10 bg-secondary text-white font-black uppercase text-[9px] tracking-[0.2em] rounded-none shadow-xl gap-2 hover:bg-primary transition-all active:scale-95"
           >
             <ShoppingBag className="h-3 w-3 text-primary" /> Authorize Buy
