@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ListingCard } from '@/components/listing-card';
 import { CategoryBar } from '@/components/category-bar';
 import { HeroCarousel } from '@/components/hero-carousel';
+import { BenefitsSection } from '@/components/benefits-section';
 import { PrivacyPopup } from '@/components/privacy-popup';
 import { LISTINGS } from '@/lib/mock-data';
 import { ChevronRight } from 'lucide-react';
@@ -44,7 +45,7 @@ export function HomePage() {
       <CategoryBar />
       
       {/* HERO COMMAND CENTER */}
-      <div className="max-w-7xl mx-auto w-full px-4 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="max-w-7xl mx-auto w-full px-4 mb-12 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <HeroCarousel />
       </div>
 
@@ -166,6 +167,9 @@ export function HomePage() {
           </button>
         </div>
       </section>
+
+      {/* INSTITUTIONAL BENEFITS NODE (As per reference) */}
+      <BenefitsSection />
 
       {/* Institutional Separator */}
       <div className="max-w-7xl mx-auto w-full px-4">
