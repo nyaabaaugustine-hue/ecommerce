@@ -96,13 +96,13 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center p-8 md:p-12 space-y-6">
                <div className="bg-primary w-fit px-4 py-1 rounded-none">
-                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">Secure Escrow Protection</p>
+                  <p className="text-white font-black text-[10px] uppercase tracking-widest italic">{hero.badge}</p>
                </div>
                <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none max-w-md">
-                  ACCRA'S PRIMARY TRADE GATEWAY
+                  {hero.title}
                </h2>
                <Button className="w-fit h-14 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest shadow-2xl">
-                  Start Shopping <ArrowRight className="ml-3 h-5 w-5" />
+                  {hero.primaryCta} <ArrowRight className="ml-3 h-5 w-5" />
                </Button>
             </div>
           </div>
@@ -153,11 +153,11 @@ export default function HomePage() {
                 <Badge className="w-fit bg-[#f68b1e] text-secondary font-black px-4 py-1.5 rounded-none uppercase text-[10px] tracking-widest mb-6">
                   Verified Escrow System
                 </Badge>
-                <h2 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85] max-w-2xl mb-8">
-                  ACCRA'S <br /> <span className="text-accent">GOLD</span> <br /> STANDARD
+                <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-tight max-w-2xl mb-8">
+                  {trust.title}
                 </h2>
                 <p className="text-white/70 text-sm md:text-lg font-bold uppercase tracking-widest max-w-xl leading-relaxed mb-10">
-                  The ultimate high-trust retail aggregator. Secure your next purchase with total confidence.
+                  {trust.description}
                 </p>
                 <Button className="w-fit h-16 px-12 bg-accent text-secondary hover:bg-white font-black uppercase text-xs tracking-[0.2em] shadow-2xl transition-all">
                   Explore Security <ArrowRight className="ml-3 h-6 w-6" />
@@ -354,20 +354,20 @@ export default function HomePage() {
           </div>
           <div className="space-y-6">
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-none">
-              SECURE YOUR NEXT PURCHASE
+              {cta.title}
             </h2>
             <p className="text-white/50 font-black uppercase tracking-[0.4em] text-[10px] md:text-sm max-w-3xl mx-auto">
-              Escrow Protection System Active for all GHS Transactions.
+              {cta.subtitle}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Link href="/listings" className="w-full sm:w-auto">
               <Button size="lg" className="w-full bg-accent text-secondary hover:bg-white hover:text-secondary px-14 h-16 font-black shadow-2xl transition-all text-xs uppercase tracking-widest border-2 border-accent">
-                Browse Marketplace <ChevronRight className="h-6 w-6 ml-3" />
+                {cta.primaryButton} <ChevronRight className="h-6 w-6 ml-3" />
               </Button>
             </Link>
             <Button size="lg" className="bg-primary text-white hover:bg-primary/90 px-14 h-16 font-black transition-all text-xs uppercase tracking-widest shadow-xl border-2 border-primary">
-              How Escrow Works
+              {cta.secondaryButton}
             </Button>
           </div>
         </div>
