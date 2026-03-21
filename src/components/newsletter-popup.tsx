@@ -1,8 +1,7 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
-import { X, ShieldCheck, Truck, RotateCcw, Zap, Mail, ArrowRight } from 'lucide-react';
+import { X, ShieldCheck, Truck, RotateCcw, Zap, Mail, ArrowRight, ShieldAlert } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';

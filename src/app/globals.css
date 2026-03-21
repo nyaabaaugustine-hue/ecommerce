@@ -47,15 +47,13 @@
     @apply bg-background text-foreground font-body antialiased;
   }
   
-  /* Global Image Contrast Boost Protocol */
   img {
     filter: contrast(1.15) brightness(1.02) saturate(1.05);
     transition: filter 0.5s ease-in-out;
   }
 
-  /* Dark Background Contrast Protocol: Forces Milky White on dark bg components */
   .bg-primary, .bg-secondary, .bg-burgundy, .bg-midnight {
-    @apply text-white/95; /* Ensuring Milky White foregrounds */
+    @apply text-white/95;
   }
   
   .bg-primary *, .bg-secondary *, .bg-burgundy * {
@@ -79,19 +77,6 @@
   fill: hsl(var(--gold)) !important;
 }
 
-/* Custom Product Card Image Radius */
-.product-card-image-wrap {
-  border-radius: 4px !important;
-  overflow: hidden;
-}
-
-.bg-subtle-pattern {
-  background-color: #f0f2f5;
-  background-image: radial-gradient(#d1d5db 0.5px, transparent 0.5px);
-  background-size: 24px 24px;
-}
-
-/* Animations */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -113,7 +98,6 @@
   }
 }
 
-/* HIGH VELOCITY SPEED: Increased by 50% (40s -> 25s, 66s -> 40s) */
 .animate-marquee {
   display: flex;
   width: max-content;

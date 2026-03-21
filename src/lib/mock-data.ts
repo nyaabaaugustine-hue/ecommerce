@@ -1,4 +1,3 @@
-
 export type Role = 'HIGH_ADMIN' | 'VENDOR_ADMIN' | 'VENDOR_STAFF' | 'CUSTOMER';
 
 export interface User {
@@ -35,6 +34,7 @@ export interface Listing {
   rating: number;
   discount?: string;
   salesCount: number;
+  inventoryStatus?: 'In Stock' | 'Limited Stock' | 'Sold Out';
 }
 
 export const VENDORS: Vendor[] = [
@@ -80,7 +80,6 @@ export const VENDORS: Vendor[] = [
 ];
 
 export const LISTINGS: Listing[] = [
-  // Vendor 1: Melcom Digital Hub (4 Items)
   {
     id: '1',
     title: 'Quantum Precision MacBook Pro M3 Max',
@@ -92,7 +91,8 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
     rating: 4.9,
     discount: '17% OFF',
-    salesCount: 124
+    salesCount: 124,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '2',
@@ -105,7 +105,8 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png',
     rating: 4.8,
     discount: '10% OFF',
-    salesCount: 86
+    salesCount: 86,
+    inventoryStatus: 'Limited Stock'
   },
   {
     id: '5',
@@ -116,7 +117,8 @@ export const LISTINGS: Listing[] = [
     location: 'Airport Residential',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
     rating: 4.9,
-    salesCount: 412
+    salesCount: 412,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '6',
@@ -127,10 +129,9 @@ export const LISTINGS: Listing[] = [
     location: 'Osu, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
     rating: 4.8,
-    salesCount: 32
+    salesCount: 32,
+    inventoryStatus: 'In Stock'
   },
-
-  // Vendor 2: PrimeRentals GH (4 Items)
   {
     id: '7',
     title: 'Apex Ridge Commercial Executive Suite',
@@ -140,7 +141,8 @@ export const LISTINGS: Listing[] = [
     location: 'Ridge Financial District',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     rating: 4.9,
-    salesCount: 12
+    salesCount: 12,
+    inventoryStatus: 'Limited Stock'
   },
   {
     id: '8',
@@ -151,7 +153,8 @@ export const LISTINGS: Listing[] = [
     location: 'East Legon, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     rating: 5.0,
-    salesCount: 5
+    salesCount: 5,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '9',
@@ -162,7 +165,8 @@ export const LISTINGS: Listing[] = [
     location: 'Cantonments, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.9,
-    salesCount: 245
+    salesCount: 245,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '11',
@@ -173,10 +177,9 @@ export const LISTINGS: Listing[] = [
     location: 'Accra Central',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
     rating: 4.8,
-    salesCount: 178
+    salesCount: 178,
+    inventoryStatus: 'In Stock'
   },
-
-  // Vendor 3: HomeLiving Furniture (4 Items)
   {
     id: '3',
     title: 'Elite Heritage L-Shaped Sectional Sofa',
@@ -186,7 +189,8 @@ export const LISTINGS: Listing[] = [
     location: 'Spintex Road, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     rating: 5.0,
-    salesCount: 45
+    salesCount: 45,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '12',
@@ -197,7 +201,8 @@ export const LISTINGS: Listing[] = [
     location: 'Spintex',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     rating: 4.9,
-    salesCount: 18
+    salesCount: 18,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '10',
@@ -208,7 +213,8 @@ export const LISTINGS: Listing[] = [
     location: 'Labone, Accra',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
     rating: 4.7,
-    salesCount: 320
+    salesCount: 320,
+    inventoryStatus: 'In Stock'
   },
   {
     id: '13',
@@ -221,7 +227,8 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
     rating: 4.7,
     discount: '18% OFF',
-    salesCount: 540
+    salesCount: 540,
+    inventoryStatus: 'In Stock'
   }
 ];
 

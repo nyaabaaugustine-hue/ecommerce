@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -169,6 +168,10 @@ export default function HomePage() {
           <div className="lg:col-span-4 flex flex-col gap-6">
              <div className="relative h-[238px] bg-[#f68b1e] overflow-hidden border-4 border-white shadow-xl">
                 <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" alt="Seara" fill className="object-cover" />
+                <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl">
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">VAULT: 142</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">GHC 4.2M</span>
+                </div>
              </div>
              <div className="relative h-[238px] bg-white overflow-hidden border-4 border-white shadow-xl group">
                 <Image src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" alt="Milkana" fill className="object-cover opacity-80" />
@@ -176,8 +179,8 @@ export default function HomePage() {
                    <div className="h-8 w-8 bg-accent/20 flex items-center justify-center mb-2">
                       <ShoppingBag className="h-4 w-4 text-accent" />
                    </div>
-                   <span className="text-[10px] font-black text-white uppercase tracking-widest">Vault: 0</span>
-                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">GHC0</span>
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">Registry Sync</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">Live Node</span>
                 </div>
                 <div className="absolute bottom-6 left-6">
                    <span className="text-secondary font-black uppercase text-xs bg-white px-4 py-1.5 shadow-lg tracking-widest">Shop Now</span>
@@ -195,18 +198,24 @@ export default function HomePage() {
              <h2 className="text-2xl font-black text-white uppercase tracking-widest">Weekly Velocity: Best Selling Nodes</h2>
           </div>
         </div>
-        <div className="animate-marquee gap-10 py-6 [animation-duration:25s]">
+        <div className="animate-marquee gap-10 py-6">
           {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
-            <div key={`${listing.id}-${idx}`} className="w-[630px] shrink-0">
-               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-8 flex gap-8 group hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer h-full">
+            <Link key={`${listing.id}-${idx}`} href={`/listings/${listing.id}`} className="w-[630px] shrink-0 block group">
+               <Card className="rounded-none border-none bg-white/5 backdrop-blur-md p-8 flex gap-8 group-hover:bg-white/10 transition-all border border-white/10 hover:border-accent/30 cursor-pointer h-full">
                   <div className="relative h-48 w-48 bg-white overflow-hidden shrink-0 shadow-xl border border-white/10">
                      <Image src={listing.imageUrl} alt={listing.title} fill className="object-cover group-hover:scale-110 transition-transform" />
                   </div>
                   <div className="flex-1 flex flex-col justify-center overflow-hidden">
+                     <div className="flex items-center gap-2 mb-2">
+                        <Badge className="bg-accent text-secondary text-[8px] font-black rounded-none px-2 uppercase">{listing.inventoryStatus}</Badge>
+                        <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">{listing.category}</span>
+                     </div>
                      <h4 className="text-base font-black text-white uppercase tracking-tighter truncate mb-2 leading-none">{listing.title}</h4>
-                     <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-4">{listing.category}</p>
                      <div className="flex items-center justify-between mt-auto">
-                        <span className="text-2xl font-black text-accent">{formatPrice(listing.price)}</span>
+                        <div className="flex flex-col">
+                           <span className="text-2xl font-black text-accent">{formatPrice(listing.price)}</span>
+                           <span className="text-[9px] font-black text-white/40 uppercase tracking-widest">{listing.salesCount} Verified Orders</span>
+                        </div>
                         <div className="flex items-center gap-2">
                            <Star className="h-5 w-5 fill-gold text-gold" />
                            <span className="text-xs font-bold text-white/60">{listing.rating}</span>
@@ -217,7 +226,7 @@ export default function HomePage() {
                      <ArrowRight className="h-10 w-10 text-accent" />
                   </div>
                </Card>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

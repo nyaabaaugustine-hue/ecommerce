@@ -5,10 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ShieldCheck, Star, Plus, Users } from 'lucide-react';
+import { ShieldCheck, Star, Plus, Users, Activity } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart, useCurrency } from '@/components/providers';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 interface ListingProps {
   id: string;
@@ -22,10 +23,11 @@ interface ListingProps {
   vendorId: string;
   discount?: string;
   salesCount: number;
+  inventoryStatus?: 'In Stock' | 'Limited Stock' | 'Sold Out';
 }
 
 export function ListingCard(props: ListingProps) {
-  const { id, title, category, price, oldPrice, location, imageUrl, rating, discount, salesCount } = props;
+  const { id, title, category, price, oldPrice, location, imageUrl, rating, discount, salesCount, inventoryStatus = 'In Stock' } = props;
   const router = useRouter();
   const { addItem } = useCart();
   const { formatPrice } = useCurrency();
@@ -40,7 +42,7 @@ export function ListingCard(props: ListingProps) {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addItem(props);
+    addItem(props as any);
     toast({
       title: "Registry Item Secured",
       description: "Asset added to your session for escrow authorization.",
@@ -60,6 +62,17 @@ export function ListingCard(props: ListingProps) {
            <ShieldCheck className="h-3.5 w-3.5" />
            <span className="text-[9px] font-black uppercase tracking-widest">Escrow Verified</span>
         </div>
+      </div>
+
+      <div className="absolute top-4 right-4 z-10">
+         <Badge className={cn(
+           "rounded-none text-[8px] font-black uppercase tracking-widest border-none px-2 py-0.5 shadow-sm",
+           inventoryStatus === 'In Stock' ? "bg-green-100 text-green-700" : 
+           inventoryStatus === 'Limited Stock' ? "bg-orange-100 text-orange-700" : 
+           "bg-red-100 text-red-700"
+         )}>
+           {inventoryStatus}
+         </Badge>
       </div>
 
       {/* Image Section with Reveal Animation */}
@@ -91,7 +104,7 @@ export function ListingCard(props: ListingProps) {
         <div className="flex items-center gap-2 mt-1">
           <div className="bg-background border-2 border-border px-3 py-1 flex items-center gap-2 shadow-sm">
             <Users className="h-4 w-4 text-accent" />
-            <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Secured Items</span>
+            <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Verified Buyers</span>
           </div>
         </div>
         
