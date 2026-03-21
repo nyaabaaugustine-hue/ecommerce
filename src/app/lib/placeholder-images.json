@@ -1,0 +1,59 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "electronics",
+      "description": "Quantum Precision MacBook Pro",
+      "imageUrl": "https://picsum.photos/seed/elec1/800/600",
+      "imageHint": "laptop computer"
+    },
+    {
+      "id": "appliances",
+      "description": "Sovereign Series Refrigerator",
+      "imageUrl": "https://picsum.photos/seed/app1/800/600",
+      "imageHint": "modern fridge"
+    },
+    {
+      "id": "supermarket",
+      "description": "Makola Select Supermarket Registry",
+      "imageUrl": "https://picsum.photos/seed/sup1/800/600",
+      "imageHint": "grocery bundle"
+    },
+    {
+      "id": "furniture",
+      "description": "Elite Heritage Sofa",
+      "imageUrl": "https://picsum.photos/seed/fur1/800/600",
+      "imageHint": "luxury sofa"
+    },
+    {
+      "id": "beauty",
+      "description": "Royal Orchid Beauty Protocol",
+      "imageUrl": "https://picsum.photos/seed/beau1/800/600",
+      "imageHint": "beauty set"
+    },
+    {
+      "id": "audio-visual",
+      "description": "Sovereign 4K OLED Hub",
+      "imageUrl": "https://picsum.photos/seed/av1/800/600",
+      "imageHint": "smart tv"
+    },
+    {
+      "id": "mobile",
+      "description": "Titanium iPhone 15 Pro",
+      "imageUrl": "https://picsum.photos/seed/mob1/800/600",
+      "imageHint": "iphone titanium"
+    },
+    {
+      "id": "home-living",
+      "description": "Elite Heritage Living Suite",
+      "imageUrl": "https://picsum.photos/seed/home1/800/600",
+      "imageHint": "interior decor"
+    },
+    {
+      "id": "vehicle",
+      "description": "Premium Sovereign Auto",
+      "imageUrl": "https://picsum.photos/seed/car1/800/600",
+      "imageHint": "luxury car"
+    }
+  ]
+}

@@ -13,7 +13,8 @@ import {
   Info,
   ShieldCheck,
   HelpCircle,
-  Plus
+  Plus,
+  Menu
 } from 'lucide-react';
 import { useAuth, useContent, useTheme, type PrimaryTheme } from '@/components/providers';
 import { useState } from 'react';
@@ -29,11 +30,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from '@/lib/utils';
 
-/**
- * @fileOverview Compact Institutional Navbar
- * Strictly rectangular (rounded-none). Optimized for density and zero overlap.
- * Precision height: h-18 (72px).
- */
 export function Navbar() {
   const { user } = useAuth();
   const { content } = useContent();
@@ -54,8 +50,8 @@ export function Navbar() {
     <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-300">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      {/* Precision Top Bar */}
-      <div className="bg-muted/50 border-b border-dashed">
+      {/* Precision Top Bar - Hidden on small mobile */}
+      <div className="bg-muted/50 border-b border-dashed hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 h-8 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/about" className="text-[9px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
@@ -74,11 +70,11 @@ export function Navbar() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between gap-4 md:gap-6">
-        <div className="flex items-center gap-6 h-full">
+      <div className="max-w-7xl mx-auto px-4 h-16 md:h-18 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4 md:gap-6 h-full">
           {/* COMPACT LOGO */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/20 p-1 bg-white shadow-sm group-hover:border-primary transition-colors duration-500">
+            <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-none border border-primary/20 p-1 bg-white shadow-sm group-hover:border-primary transition-colors duration-500">
               <Image 
                 src={content.settings.logoUrl} 
                 alt="Logo" 
@@ -89,7 +85,7 @@ export function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-headline font-black text-xl text-foreground tracking-tighter uppercase leading-none">
+              <span className="font-headline font-black text-lg md:text-xl text-foreground tracking-tighter uppercase leading-none">
                 {content.settings.siteName}
               </span>
               <span className="text-[7px] font-black text-primary uppercase tracking-[0.3em] mt-0.5">Marketplace</span>
@@ -102,28 +98,28 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* STREAMLINED SEARCH */}
-        <div className="hidden lg:flex flex-1 max-w-lg items-center h-11 border border-border rounded-none overflow-hidden bg-muted/10 focus-within:border-primary/40 focus-within:bg-background transition-all duration-300">
-          <div className="flex-1 flex items-center px-4 gap-3 border-r border-border">
+        {/* STREAMLINED SEARCH - Adjusted for mobile visibility */}
+        <div className="hidden sm:flex flex-1 max-w-lg items-center h-10 md:h-11 border border-border rounded-none overflow-hidden bg-muted/10 focus-within:border-primary/40 focus-within:bg-background transition-all duration-300">
+          <div className="flex-1 flex items-center px-3 md:px-4 gap-3 border-r border-border">
             <input 
               placeholder='Search verified listings...' 
-              className="w-full bg-transparent outline-none text-foreground text-[13px] font-bold placeholder:text-muted-foreground/40 uppercase tracking-tight"
+              className="w-full bg-transparent outline-none text-foreground text-[12px] md:text-[13px] font-bold placeholder:text-muted-foreground/40 uppercase tracking-tight"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <div className="px-4 flex items-center gap-2 shrink-0 cursor-pointer hover:bg-muted h-full transition-colors group">
+          <div className="hidden md:flex px-4 items-center gap-2 shrink-0 cursor-pointer hover:bg-muted h-full transition-colors group">
             <MapPin className="h-3.5 w-3.5 text-primary/60" />
             <span className="text-[10px] font-black text-foreground uppercase tracking-widest">Accra</span>
             <ChevronDown className="h-2.5 w-2.5 text-muted-foreground" />
           </div>
-          <button className="h-full px-5 bg-primary text-primary-foreground hover:opacity-90 transition-all group">
+          <button className="h-full px-4 md:px-5 bg-primary text-primary-foreground hover:opacity-90 transition-all group">
             <Search className="h-4 w-4" />
           </button>
         </div>
 
         {/* COMPACT ACTIONS */}
-        <div className="flex items-center gap-3 md:gap-5">
+        <div className="flex items-center gap-2 md:gap-5">
           <div className="hidden xl:flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -163,7 +159,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             {user ? (
               <Link href="/dashboard">
-                <Button variant="outline" className="text-foreground font-black text-[9px] uppercase tracking-widest px-4 h-9 hover:bg-muted border-2 transition-all">
+                <Button variant="outline" className="text-foreground font-black text-[9px] uppercase tracking-widest px-3 md:px-4 h-8 md:h-9 hover:bg-muted border-2 transition-all">
                   Dashboard
                 </Button>
               </Link>
@@ -171,20 +167,25 @@ export function Navbar() {
               <Button 
                 onClick={() => setShowAuth(true)}
                 variant="ghost" 
-                className="text-foreground font-black text-[9px] uppercase tracking-widest px-5 h-9 hover:bg-muted border-2 transition-all"
+                className="text-foreground font-black text-[9px] uppercase tracking-widest px-3 md:px-5 h-8 md:h-9 hover:bg-muted border-2 transition-all"
               >
                 Login
               </Button>
             )}
 
-            <Link href="/listings/create">
+            <Link href="/listings/create" className="hidden xs:block">
               <Button 
-                className="bg-primary text-primary-foreground hover:opacity-95 font-black text-[9px] uppercase tracking-widest h-9 px-6 shadow-md flex items-center gap-2"
+                className="bg-primary text-primary-foreground hover:opacity-95 font-black text-[9px] uppercase tracking-widest h-8 md:h-9 px-4 md:px-6 shadow-md flex items-center gap-2"
               >
                 <Plus className="h-3.5 w-3.5" />
-                Post Ad
+                <span className="hidden sm:inline">Post Ad</span>
+                <span className="sm:hidden">Post</span>
               </Button>
             </Link>
+            
+            <Button variant="ghost" size="icon" className="lg:hidden h-8 w-8">
+              <Menu className="h-5 w-5" />
+            </Button>
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ const CATEGORIES = [
   { 
     name: 'Categories', 
     icon: Shapes, 
-    imageUrl: 'https://images.unsplash.com/photo-1526170315873-3a98658c7a6a?q=80&w=100&auto=format&fit=crop',
+    imageUrl: 'https://picsum.photos/seed/cat1/100/100',
     href: '/listings' 
   },
   { name: 'Favorites', icon: Heart, href: '/dashboard' },
@@ -38,26 +38,22 @@ const CATEGORIES = [
   { name: 'Sports', icon: Briefcase, href: '/listings' },
 ];
 
-/**
- * @fileOverview Compact Monochromatic Category Registry
- * Precision spacing (py-3) and monochromatic chips for professional noise reduction.
- */
 export function CategoryBar() {
   return (
-    <section className="bg-background py-3 overflow-hidden border-b transition-colors duration-300">
+    <section className="bg-background py-2 md:py-3 overflow-hidden border-b transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 relative flex items-center group">
-        <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar w-full pb-0.5">
+        <div className="flex items-center gap-2 md:gap-2.5 overflow-x-auto no-scrollbar w-full pb-1 scroll-smooth">
           {CATEGORIES.map((cat, idx) => (
             <Link 
               key={cat.name} 
               href={cat.href}
               className={cn(
-                "flex items-center gap-2 bg-muted/20 border border-transparent hover:border-primary/30 hover:bg-muted/40 px-3.5 py-1.5 rounded-none transition-all shrink-0 group/chip animate-in fade-in slide-in-from-right-2",
-                `delay-${idx * 30}`
+                "flex items-center gap-2 bg-muted/20 border border-transparent hover:border-primary/30 hover:bg-muted/40 px-3 md:px-3.5 py-1.5 rounded-none transition-all shrink-0 group/chip animate-in fade-in slide-in-from-right-2",
+                `delay-${idx * 20}`
               )}
             >
               {cat.imageUrl ? (
-                <div className="relative h-4 w-4 overflow-hidden rounded-none">
+                <div className="relative h-3.5 w-3.5 md:h-4 md:w-4 overflow-hidden rounded-none">
                   <Image 
                     src={cat.imageUrl} 
                     alt={cat.name} 
@@ -67,9 +63,9 @@ export function CategoryBar() {
                   />
                 </div>
               ) : (
-                <cat.icon className="h-4 w-4 text-muted-foreground group-hover/chip:text-primary transition-colors" />
+                <cat.icon className="h-3.5 w-3.5 md:h-4 md:w-4 text-muted-foreground group-hover/chip:text-primary transition-colors" />
               )}
-              <span className="text-[10px] font-black text-muted-foreground group-hover/chip:text-primary whitespace-nowrap uppercase tracking-[0.1em]">
+              <span className="text-[9px] md:text-[10px] font-black text-muted-foreground group-hover/chip:text-primary whitespace-nowrap uppercase tracking-[0.1em]">
                 {cat.name}
               </span>
             </Link>
