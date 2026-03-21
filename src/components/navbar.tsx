@@ -6,14 +6,12 @@ import { Button } from '@/components/ui/button';
 import { 
   Search, 
   MapPin, 
-  MessageSquare, 
   Bell, 
   Palette,
   ChevronDown,
   Info,
   ShieldCheck,
-  HelpCircle,
-  Menu
+  HelpCircle
 } from 'lucide-react';
 import { useAuth, useContent, useTheme, type PrimaryTheme } from '@/components/providers';
 import { useState } from 'react';
@@ -46,11 +44,11 @@ export function Navbar() {
   ];
 
   return (
-    <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm">
+    <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-300">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
       {/* Top Institutional Bar */}
-      <div className="bg-secondary/30 border-b border-dashed">
+      <div className="bg-muted border-b border-dashed">
         <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/about" className="text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5">
@@ -98,8 +96,8 @@ export function Navbar() {
         </div>
 
         {/* SEARCH COMMAND CENTER */}
-        <div className="hidden lg:flex flex-1 max-w-xl items-center h-14 border-2 border-muted-foreground/20 rounded-md overflow-hidden bg-muted/5 focus-within:border-primary focus-within:bg-background transition-all duration-500 shadow-sm">
-          <div className="flex-1 flex items-center px-5 gap-3 border-r border-muted-foreground/20">
+        <div className="hidden lg:flex flex-1 max-w-xl items-center h-14 border-2 border-border rounded-md overflow-hidden bg-muted/20 focus-within:border-primary focus-within:bg-background transition-all duration-500 shadow-sm">
+          <div className="flex-1 flex items-center px-5 gap-3 border-r border-border">
             <input 
               placeholder='Search verified institutional inventory...' 
               className="w-full bg-transparent outline-none text-foreground text-[14px] font-bold placeholder:text-muted-foreground/50 uppercase tracking-tight"
@@ -112,8 +110,8 @@ export function Navbar() {
             <span className="text-[11px] font-black text-foreground uppercase tracking-widest">Accra</span>
             <ChevronDown className="h-3 w-3 text-muted-foreground" />
           </div>
-          <button className="h-full px-6 bg-primary/10 hover:bg-primary transition-colors group">
-            <Search className="h-5 w-5 text-primary group-hover:text-primary-foreground group-active:scale-90 transition-all" />
+          <button className="h-full px-6 bg-primary text-primary-foreground hover:opacity-90 transition-all group">
+            <Search className="h-5 w-5 group-hover:scale-110 transition-all" />
           </button>
         </div>
 
@@ -124,7 +122,7 @@ export function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
-                  <div className="p-2 rounded-full hover:bg-primary/5 transition-colors">
+                  <div className="p-2 rounded-full hover:bg-muted transition-colors">
                     <Palette className="h-5 w-5 group-hover:rotate-12 transition-transform" />
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-widest">Protocol</span>
@@ -140,7 +138,7 @@ export function Navbar() {
                       onClick={() => setTheme(t.id)}
                       className={cn(
                         "flex items-center justify-between cursor-pointer py-3 px-4 transition-all hover:bg-muted",
-                        theme === t.id && "bg-primary/5 border-l-2 border-primary"
+                        theme === t.id && "bg-primary/10 border-l-2 border-primary"
                       )}
                     >
                       <div className="flex flex-col">
@@ -155,7 +153,7 @@ export function Navbar() {
             </DropdownMenu>
 
             <div className="flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
-              <div className="p-2 rounded-full hover:bg-primary/5 transition-colors relative">
+              <div className="p-2 rounded-full hover:bg-muted transition-colors relative">
                 <Bell className="h-5 w-5 group-hover:scale-110 transition-transform" />
                 <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-primary rounded-full" />
               </div>
@@ -166,7 +164,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             {user ? (
               <Link href="/dashboard">
-                <Button variant="ghost" className="text-foreground font-black text-[11px] uppercase tracking-[0.2em] px-6 h-12 hover:bg-muted rounded-md border-2 border-transparent transition-all">
+                <Button variant="outline" className="text-foreground font-black text-[11px] uppercase tracking-[0.2em] px-6 h-12 hover:bg-muted rounded-md border-2 border-border transition-all">
                   Registry Node
                 </Button>
               </Link>
@@ -174,7 +172,7 @@ export function Navbar() {
               <Button 
                 onClick={() => setShowAuth(true)}
                 variant="ghost" 
-                className="text-foreground font-black text-[11px] uppercase tracking-[0.2em] px-8 h-12 hover:bg-muted rounded-[2rem] border-2 border-muted-foreground/20 transition-all"
+                className="text-foreground font-black text-[11px] uppercase tracking-[0.2em] px-8 h-12 hover:bg-muted rounded-[2rem] border-2 border-border transition-all"
               >
                 Access
               </Button>
@@ -182,7 +180,7 @@ export function Navbar() {
 
             <Link href="/listings/create">
               <Button 
-                className="bg-primary text-secondary hover:bg-white hover:text-secondary font-black text-[11px] uppercase tracking-[0.2em] h-12 px-10 rounded-[7%] shadow-[0_10px_30px_rgba(234,179,8,0.3)] border-2 border-white/10 flex items-center gap-3 active:scale-95 transition-all"
+                className="bg-primary text-primary-foreground hover:opacity-90 font-black text-[11px] uppercase tracking-[0.2em] h-12 px-10 rounded-[7%] shadow-lg border-2 border-white/10 flex items-center gap-3 active:scale-95 transition-all"
               >
                 <div className="bg-white/20 p-1.5 rounded-full"><Search className="h-3 w-3 text-white rotate-45" /></div>
                 Post Ad

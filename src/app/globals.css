@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* LIGHT MODE (INSTITUTIONAL DEFAULT) */
+    /* INSTITUTIONAL LIGHT (COLD WHITE) */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
@@ -29,18 +29,22 @@
     --gold: 45 93% 47%;
   }
 
-  /* SOVEREIGN THEME (MASTER DARK NODE) */
+  /* SOVEREIGN THEME (PRESTIGE DARK) */
   [data-theme='sovereign'] {
     --background: 222 47% 4%;
     --foreground: 210 40% 98%;
     --card: 222 47% 6%;
     --card-foreground: 210 40% 98%;
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 40% 98%;
     --primary: 45 93% 47%;
     --primary-foreground: 222 47% 4%;
     --secondary: 222 47% 12%;
     --secondary-foreground: 210 40% 98%;
     --muted: 222 47% 12%;
     --muted-foreground: 215 20.2% 65.1%;
+    --accent: 45 93% 47%;
+    --accent-foreground: 222 47% 4%;
     --border: 222 47% 12%;
     --ring: 45 93% 47%;
   }
@@ -51,6 +55,8 @@
     --foreground: 0 0% 98%;
     --card: 0 0% 2%;
     --card-foreground: 0 0% 98%;
+    --popover: 0 0% 2%;
+    --popover-foreground: 0 0% 98%;
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 8%;
@@ -108,27 +114,11 @@
     --border: 273 67% 15%;
     --ring: 273 80% 60%;
   }
-
-  /* LIGHT NODE (HIGH-CONTRAST WHITE) */
-  [data-theme='cold-white'] {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 98%;
-    --card-foreground: 222 47% 11%;
-    --primary: 222 47% 11%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-  }
 }
 
 @layer base {
   * {
-    @apply border-border transition-all duration-500 ease-in-out;
+    @apply border-border transition-colors duration-300;
   }
   body {
     @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
@@ -140,7 +130,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline tracking-tighter;
+    @apply font-headline tracking-tighter text-foreground;
     letter-spacing: -0.02em;
   }
 }
