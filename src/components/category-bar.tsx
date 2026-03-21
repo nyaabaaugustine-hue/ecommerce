@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -22,17 +23,18 @@ const CATEGORIES = [
     name: 'Categories', 
     icon: Shapes, 
     imageUrl: 'https://picsum.photos/seed/camera1/100/100',
-    href: '/listings' 
+    href: '/listings',
+    color: 'text-blue-600'
   },
-  { name: 'Favorites', icon: Heart, href: '/dashboard' },
-  { name: 'Coupons', icon: Ticket, href: '/listings' },
-  { name: 'Vehicles', icon: Car, href: '/listings?category=Vehicles' },
-  { name: 'Auto Parts', icon: Wrench, href: '/listings?category=Vehicles' },
-  { name: 'Mobiles', icon: Smartphone, href: '/listings?category=Electronics' },
-  { name: 'Property', icon: Home, href: '/listings?category=Property' },
-  { name: 'Decoration', icon: Sparkles, href: '/listings?category=Home & Furniture' },
-  { name: 'Appliances', icon: Tv, href: '/listings?category=Electronics' },
-  { name: 'Furniture', icon: Armchair, href: '/listings?category=Home & Furniture' },
+  { name: 'Favorites', icon: Heart, href: '/dashboard', color: 'text-red-500' },
+  { name: 'Coupons', icon: Ticket, href: '/listings', color: 'text-green-600' },
+  { name: 'Vehicles', icon: Car, href: '/listings?category=Vehicles', color: 'text-purple-600' },
+  { name: 'Auto Parts', icon: Wrench, href: '/listings?category=Vehicles', color: 'text-orange-600' },
+  { name: 'Mobiles', icon: Smartphone, href: '/listings?category=Electronics', color: 'text-cyan-600' },
+  { name: 'Property', icon: Home, href: '/listings?category=Property', color: 'text-indigo-600' },
+  { name: 'Decoration', icon: Sparkles, href: '/listings?category=Home & Furniture', color: 'text-amber-500' },
+  { name: 'Appliances', icon: Tv, href: '/listings?category=Electronics', color: 'text-rose-600' },
+  { name: 'Furniture', icon: Armchair, href: '/listings?category=Home & Furniture', color: 'text-stone-600' },
 ];
 
 export function CategoryBar() {
@@ -60,7 +62,7 @@ export function CategoryBar() {
                   />
                 </div>
               ) : (
-                <cat.icon className="h-3 w-3 md:h-3.5 md:w-3.5 text-secondary group-hover/chip:text-primary transition-colors" />
+                <cat.icon className={cn("h-3 w-3 md:h-3.5 md:w-3.5 transition-colors", cat.color)} />
               )}
               <span className="text-[8px] md:text-[9px] font-black text-secondary group-hover/chip:text-primary whitespace-nowrap uppercase tracking-[0.1em]">
                 {cat.name}
