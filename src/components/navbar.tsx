@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles, Palette } from 'lucide-react';
+import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles, Palette, Store } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
@@ -84,9 +84,9 @@ export function Navbar() {
       <div className="bg-secondary text-secondary-foreground py-2.5 hidden lg:block border-b border-white/5">
         <div className="container mx-auto px-4 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.2em]">
           <div className="flex items-center gap-12">
-            <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-80">
-              Institutional Partnership
-            </span>
+            <Link href="/vendors" className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-80">
+              <Store className="h-3.5 w-3.5 text-primary" /> Institutional Registry
+            </Link>
             <span className="flex items-center gap-3 hover:text-accent cursor-pointer transition-colors opacity-80">
               <Phone className="h-3.5 w-3.5" /> Support: {content.settings.supportPhone}
             </span>
@@ -148,6 +148,7 @@ export function Navbar() {
                 </SheetHeader>
                 <div className="flex flex-col py-6">
                   <Link href="/listings" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Global Marketplace</Link>
+                  <Link href="/vendors" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Vendor Directory</Link>
                   <Link href="/dashboard" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Account Dashboard</Link>
                   <Link href="/listings/create" className="px-8 py-5 font-black text-secondary hover:bg-primary/5 border-b text-xs uppercase tracking-widest">Publish Listing</Link>
                   <div className="p-8 space-y-6">

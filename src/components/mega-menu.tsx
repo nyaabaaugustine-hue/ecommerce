@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -21,7 +22,8 @@ import {
   Armchair,
   Sparkles,
   Zap,
-  ShieldAlert
+  ShieldAlert,
+  Store
 } from "lucide-react";
 import { 
   Popover, 
@@ -133,7 +135,7 @@ export function MegaMenu() {
               <div className="space-y-4">
                 <p className="text-[8px] font-black uppercase tracking-[0.4em] text-primary/60 border-b border-white/5 pb-2">Elite Registry Members</p>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
+                  <Link href="/vendors" className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
                     <div className="h-10 w-10 bg-white relative p-1 shrink-0">
                       <Image 
                         src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg" 
@@ -147,9 +149,9 @@ export function MegaMenu() {
                       <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">Melcom Digital</p>
                       <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9 Rating</p>
                     </div>
-                  </div>
+                  </Link>
                   
-                  <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
+                  <Link href="/vendors" className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
                     <div className="h-10 w-10 bg-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
                       <ShieldCheck className="h-5 w-5" />
                     </div>
@@ -157,14 +159,14 @@ export function MegaMenu() {
                       <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">PrimeRentals GH</p>
                       <p className="text-[8px] text-white/30 uppercase tracking-tighter">Sovereign Agency • Certified</p>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
 
-            <Link href="/listings" className="mt-12 relative z-10">
+            <Link href="/vendors" className="mt-12 relative z-10">
               <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-14 uppercase text-[10px] tracking-[0.3em] gap-3 shadow-2xl transition-all">
-                Browse All Registry <ArrowRight className="h-4 w-4" />
+                Browse Vendor Directory <Store className="h-4 w-4" />
               </Button>
             </Link>
           </div>
