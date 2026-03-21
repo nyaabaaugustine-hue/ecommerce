@@ -27,6 +27,7 @@ export interface Listing {
   id: string;
   title: string;
   price: number;
+  oldPrice?: number;
   isNegotiable: boolean;
   category: ListingCategory;
   location: string;
@@ -38,6 +39,7 @@ export interface Listing {
   description: string;
   status: ListingStatus;
   isEscrowProtected: boolean;
+  isEasyDelivery?: boolean;
   requiresMultisig?: boolean;
 }
 
@@ -49,6 +51,96 @@ export const MOCK_USERS: User[] = [
 ];
 
 export const LISTINGS: Listing[] = [
+  {
+    id: '2',
+    title: 'iPhone 15 Pro Max 256GB - Natural Titanium',
+    price: 14500,
+    oldPrice: 16675,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'East Legon',
+    postedAt: '45m ago',
+    postedTimestamp: Date.now() - 2700000,
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
+    vendorId: 'v1',
+    description: 'Brand new in box, global warranty. Verified node stock.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isEasyDelivery: true,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: '4',
+    title: 'MacBook Pro M3 Max 16-inch 1TB',
+    price: 42000,
+    oldPrice: 48300,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Tema Community 25',
+    postedAt: '3h ago',
+    postedTimestamp: Date.now() - 10800000,
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
+    vendorId: 'v1',
+    description: 'Unopened, standard institutional hardware.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isEasyDelivery: true,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: '6',
+    title: 'Samsung 65" QLED 4K Smart TV',
+    price: 12500,
+    oldPrice: 14375,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Kumasi',
+    postedAt: 'Just Now',
+    postedTimestamp: Date.now() - 60000,
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
+    vendorId: 'v1',
+    description: 'Crystal clear 4K hub. Authorized dealer warranty.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isEasyDelivery: true,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: '11',
+    title: 'Samsung Galaxy S23 Ultra - 512GB',
+    price: 8200,
+    oldPrice: 9430,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Spintex Road, Accra',
+    postedAt: '15m ago',
+    postedTimestamp: Date.now() - 900000,
+    imageUrl: 'https://images.unsplash.com/photo-1678911820864-e2c567c655d7?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Phantom Black, like new condition. All accessories included.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isEasyDelivery: true,
+    seller: { id: 's8', name: 'TechHub Spintex', type: 'Business Vendor', rating: 4.6, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: '13',
+    title: 'Google Pixel 8 Pro - 128GB Bay',
+    price: 7500,
+    oldPrice: 8600,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Cantonments, Accra',
+    postedAt: '1h ago',
+    postedTimestamp: Date.now() - 3600000,
+    imageUrl: 'https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Brand new Pixel 8 Pro. High-fidelity camera node.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isEasyDelivery: true,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
   {
     id: '1',
     title: '2022 Toyota Land Cruiser 300 V6',
@@ -65,22 +157,6 @@ export const LISTINGS: Listing[] = [
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's1', name: 'AutoTrust Motors', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '2',
-    title: 'iPhone 15 Pro Max 256GB - Natural Titanium',
-    price: 14500,
-    isNegotiable: true,
-    category: 'Electronics',
-    location: 'East Legon, Accra',
-    postedAt: '45m ago',
-    postedTimestamp: Date.now() - 2700000,
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
-    vendorId: 'v1',
-    description: 'Brand new in box, global warranty. Verified node stock.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '3',
@@ -100,22 +176,6 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
-    id: '4',
-    title: 'MacBook Pro M3 Max 16-inch 1TB',
-    price: 42000,
-    isNegotiable: false,
-    category: 'Electronics',
-    location: 'Tema Community 25',
-    postedAt: '3h ago',
-    postedTimestamp: Date.now() - 10800000,
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
-    vendorId: 'v1',
-    description: 'Unopened, standard institutional hardware.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
     id: '5',
     title: 'Elite Heritage 3-Door Wardrobe with Mirror',
     price: 850,
@@ -130,102 +190,6 @@ export const LISTINGS: Listing[] = [
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '6',
-    title: 'Samsung 65" QLED 4K Smart TV Hub',
-    price: 12500,
-    isNegotiable: false,
-    category: 'Electronics',
-    location: 'Kumasi, Adum',
-    postedAt: 'Just Now',
-    postedTimestamp: Date.now() - 60000,
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
-    vendorId: 'v1',
-    description: 'Crystal clear 4K hub. Authorized dealer warranty.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '7',
-    title: '2018 Honda Civic - Full Spec Black',
-    price: 85000,
-    isNegotiable: true,
-    category: 'Vehicles',
-    location: 'Tema, Harbour Area',
-    postedAt: '1h ago',
-    postedTimestamp: Date.now() - 3600000,
-    imageUrl: 'https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v3',
-    description: 'Very clean title, sunroof, leather seats. Reliable daily node.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's5', name: 'Kwame Mensah', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '8',
-    title: 'Antique Family Chest - QUICK SALE PRICE',
-    price: 730,
-    isNegotiable: false,
-    category: 'Home & Furniture',
-    location: 'Kasoa, Millenium City',
-    postedAt: '6h ago',
-    postedTimestamp: Date.now() - 21600000,
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v2',
-    description: 'Litigation-free land with registered title. Ready for building.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's2', name: 'PrimeRentals GH', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '9',
-    title: 'Comfortable 2-Door Wardrobe with Mirror',
-    price: 580,
-    isNegotiable: true,
-    category: 'Home & Furniture',
-    location: 'Accra Metropolitan',
-    postedAt: '4h ago',
-    postedTimestamp: Date.now() - 14400000,
-    imageUrl: 'https://images.unsplash.com/photo-1581578731548-c64695ce6958?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v5',
-    description: 'Deep cleaning for offices and homes. 24/7 node availability.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's6', name: 'CleanNode Pro', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '10',
-    title: 'Theo Retro 3-Door Wardrobe, Gray',
-    price: 600,
-    isNegotiable: true,
-    category: 'Home & Furniture',
-    location: 'Tamale, Central',
-    postedAt: '12h ago',
-    postedTimestamp: Date.now() - 43200000,
-    imageUrl: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v3',
-    description: 'Used Corolla in excellent engine condition. AC works perfectly.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's7', name: 'Abu Bakar', type: 'Individual', rating: 4.2, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: '11',
-    title: 'Samsung Galaxy S23 Ultra - Phantom Black',
-    price: 8200,
-    isNegotiable: true,
-    category: 'Electronics',
-    location: 'Spintex Road, Accra',
-    postedAt: '15m ago',
-    postedTimestamp: Date.now() - 900000,
-    imageUrl: 'https://images.unsplash.com/photo-1678911820864-e2c567c655d7?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v1',
-    description: 'Phantom Black, like new condition. All accessories included.',
-    status: 'Active',
-    isEscrowProtected: true,
-    seller: { id: 's8', name: 'TechHub Spintex', type: 'Business Vendor', rating: 4.6, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: '12',

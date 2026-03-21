@@ -13,15 +13,11 @@ import { cn } from '@/lib/utils';
 /**
  * @fileOverview High-Fidelity Marketplace Listing Card
  * 1:1 structural clone of the OLX card architecture using ShadCN styling.
- * Supports "Emphasis" status and dual-badge logic.
+ * Supports "Emphasis" status and dual-badge logic (Easy Delivery + Vault Guarantee).
  */
 export function ListingCard(props: Listing & { isEmphasis?: boolean }) {
-  const { id, title, price, location, postedAt, imageUrl, isEscrowProtected, isEmphasis } = props;
+  const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isEmphasis } = props;
   const { formatPrice } = useCurrency();
-
-  // Simulated "Old Price" for high-fidelity visual parity
-  const hasOldPrice = price > 500;
-  const oldPrice = price * 1.15;
 
   return (
     <Card className="group overflow-hidden bg-white dark:bg-card border-none shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-md animate-in fade-in zoom-in-95">
@@ -60,6 +56,11 @@ export function ListingCard(props: Listing & { isEmphasis?: boolean }) {
 
         {/* OLX-SPECIFIC STATUS BADGES */}
         <div className="flex flex-wrap gap-1.5 mt-1">
+          {isEasyDelivery && (
+            <Badge className="bg-[#f2eafa] text-[#6e0ad6] dark:bg-[#6e0ad6]/20 dark:text-[#a78bfa] hover:bg-[#f2eafa] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-none">
+              Easy Delivery
+            </Badge>
+          )}
           {isEscrowProtected && (
             <Badge className="bg-[#fbeaf5] text-[#d60a91] dark:bg-[#d60a91]/20 dark:text-[#f472b6] hover:bg-[#fbeaf5] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-none">
               Vault Guarantee
@@ -69,7 +70,7 @@ export function ListingCard(props: Listing & { isEmphasis?: boolean }) {
 
         {/* PRICE COMMAND NODE */}
         <div className="space-y-0.5 mt-1">
-          {hasOldPrice && (
+          {oldPrice && (
             <p className="text-[11px] text-muted-foreground line-through decoration-muted-foreground/50">
               {formatPrice(oldPrice)}
             </p>
@@ -81,7 +82,7 @@ export function ListingCard(props: Listing & { isEmphasis?: boolean }) {
 
         {/* METADATA REGISTRY FOOTER */}
         <div className="mt-auto pt-3 flex flex-col text-[11px] text-muted-foreground font-normal border-t border-border/20">
-          <span className="truncate">{postedAt} • {location.split(',')[0]}</span>
+          <span className="truncate">{postedAt} • {location}</span>
         </div>
       </CardContent>
     </Card>
