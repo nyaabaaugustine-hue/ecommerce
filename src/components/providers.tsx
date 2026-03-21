@@ -16,7 +16,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // MASTER DIRECTIVE: Default to clinical cold-white light mode
+  // MASTER DIRECTIVE: Default to clinical cold-white light mode (Forced Default)
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {

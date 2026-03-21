@@ -18,7 +18,7 @@
     --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 262 83% 58%; /* Depth Accent */
+    --accent: 221 83% 53%; /* Match primary for clinical look */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -30,7 +30,7 @@
     --gold: 45 93% 47%;
   }
 
-  /* VIBRANT SOVEREIGN (BLENDED ELITE) */
+  /* VIBRANT SOVEREIGN (ELITE BLEND) */
   [data-theme='sovereign'] {
     --background: 225 60% 3%;
     --foreground: 180 10% 98%;
@@ -44,35 +44,35 @@
     --secondary-foreground: 180 10% 98%;
     --muted: 225 60% 8%;
     --muted-foreground: 180 10% 60%;
-    --accent: 280 80% 60%; /* Vibrant Purple Blend */
+    --accent: 262 83% 58%; /* Deep Indigo Blend */
     --border: 225 60% 12%;
     --ring: 178 90% 49%;
   }
 
-  /* NEON MIDNIGHT (CYBER INDUSTRIAL) */
+  /* NEON MIDNIGHT (CYBER BLEND) */
   [data-theme='midnight'] {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
     --card: 0 0% 2%;
     --card-foreground: 0 0% 100%;
-    --primary: 82 100% 54%; /* Acid Lime */
+    --primary: 190 90% 50%; /* Laser Blue */
     --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 5%;
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 8%;
     --muted-foreground: 0 0% 60%;
-    --accent: 45 100% 50%; /* Amber Glow Blend */
+    --accent: 215 25% 27%; /* Slate Graphite Blend */
     --border: 0 0% 10%;
-    --ring: 82 100% 54%;
+    --ring: 190 90% 50%;
   }
 
   /* ELECTRIC COBALT */
   [data-theme='cobalt'] {
     --background: 222 47% 6%;
     --foreground: 210 40% 98%;
-    --primary: 217 91% 60%; /* Bright Blue */
+    --primary: 217 91% 60%; 
     --primary-foreground: 222 47% 6%;
-    --accent: 190 90% 50%; /* Cyan Blend */
+    --accent: 190 90% 50%; 
     --card: 222 47% 8%;
     --card-foreground: 210 40% 98%;
     --secondary: 222 47% 12%;
@@ -85,9 +85,9 @@
   [data-theme='royal'] {
     --background: 270 50% 4%;
     --foreground: 270 10% 98%;
-    --primary: 302 82% 56%; /* Neon Magenta */
+    --primary: 302 82% 56%; 
     --primary-foreground: 270 50% 4%;
-    --accent: 260 90% 70%; /* Lavender Blend */
+    --accent: 260 90% 70%; 
     --card: 270 50% 6%;
     --card-foreground: 270 10% 98%;
     --secondary: 270 50% 10%;
@@ -99,9 +99,9 @@
   [data-theme='crimson'] {
     --background: 350 50% 4%;
     --foreground: 350 10% 98%;
-    --primary: 0 84% 60%; /* Flash Red */
+    --primary: 0 84% 60%; 
     --primary-foreground: 350 50% 4%;
-    --accent: 25 100% 50%; /* Heat Orange Blend */
+    --accent: 25 100% 50%; 
     --card: 350 50% 6%;
     --card-foreground: 350 10% 98%;
     --secondary: 350 50% 10%;

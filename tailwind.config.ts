@@ -14,6 +14,9 @@ export default {
         headline: ['"Plus Jakarta Sans"', 'sans-serif'],
         code: ['monospace'],
       },
+      spacing: {
+        '18': '4.5rem', // 72px
+      },
       colors: {
         burgundy: 'hsl(var(--burgundy))',
         background: 'hsl(var(--background))',
