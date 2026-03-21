@@ -18,13 +18,13 @@ import { ChevronRight, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 /**
- * @fileOverview VaultCommerce Home Command Node
+ * @fileOverview Marketplace Home Hub
  * High-density architecture mirroring the elite marketplace flow.
- * Integrated new High Fidelity Laptops section following the Jiji-style visual signature.
+ * Integrated new High Fidelity Laptops section with smooth auto-scroll logic.
  */
 export function HomePage() {
   const highFidelityLaptops = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 8);
   }, []);
 
   const sponsoredAds = useMemo(() => {
@@ -36,7 +36,7 @@ export function HomePage() {
   }, []);
 
   const cellPhones = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Electronics' && l.id.startsWith('e')).slice(0, 5);
+    return LISTINGS.filter(l => l.subcategory === 'Mobiles').slice(0, 5);
   }, []);
 
   const cabinets = useMemo(() => {
@@ -76,46 +76,49 @@ export function HomePage() {
 
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20 overflow-x-hidden">
-      {/* CATEGORY REGISTRY */}
+      {/* CATEGORY NAV */}
       <CategoryBar />
       
-      {/* HERO COMMAND CENTER */}
+      {/* HERO SECTION */}
       <div className="max-w-7xl mx-auto w-full px-4 mb-12 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <HeroCarousel />
       </div>
 
-      {/* NEW: HIGH FIDELITY LAPTOPS CLONE (JIJI STYLE) */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-8">
+      {/* AUTO-SCROLLING LAPTOPS SECTION */}
+      <section className="w-full py-12 bg-muted/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 mb-8 flex items-end justify-between">
           <div className="space-y-1">
-            <h2 className="text-3xl font-black text-secondary tracking-tighter uppercase leading-none flex items-center gap-3">
+            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase leading-none flex items-center gap-3">
               <Sparkles className="h-6 w-6 text-primary" /> Most Popular Laptops
             </h2>
-            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Sovereign Computing Registry • GHS-ACCRA</p>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Premium Computing Hub • GHS-ACCRA</p>
           </div>
           <Link href="/listings?category=Electronics" className="text-xs font-black text-primary hover:underline uppercase tracking-widest">
             View All Laptops
           </Link>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {highFidelityLaptops.map((item, idx) => (
-            <div key={item.id} className={cn("animate-in fade-in slide-in-from-bottom-4 duration-500", `delay-${idx * 100}`)}>
-              <HighFidelityListingCard {...item} />
-            </div>
-          ))}
+        <div className="relative group">
+          <div className="animate-marquee hover:pause flex gap-6 px-4">
+            {/* Double the items for seamless loop */}
+            {[...highFidelityLaptops, ...highFidelityLaptops].map((item, idx) => (
+              <div key={`${item.id}-${idx}`} className="w-[300px] shrink-0">
+                <HighFidelityListingCard {...item} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
-      {/* CLONE ROW: Sponsored Ads Registry */}
+      {/* SPONSORED ADS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
             Sponsored ads
           </h2>
-          <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest mt-1">Exclusive to Diamond Highlights</p>
+          <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest mt-1">Exclusive Highlights</p>
         </div>
         
         <div className="relative">
@@ -126,7 +129,7 @@ export function HomePage() {
               </div>
             ))}
           </div>
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -134,7 +137,7 @@ export function HomePage() {
 
       <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
-      {/* CLONE SECTION: Autos Spotlight (4 Columns as per reference) */}
+      {/* AUTOS SPOTLIGHT */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8">
           <h2 className="text-3xl font-medium text-foreground tracking-tight">Autos</h2>
@@ -146,7 +149,7 @@ export function HomePage() {
               key={item.title} 
               href={`/listings?category=Vehicles`}
               className={cn(
-                "group relative flex flex-col bg-white border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
+                "group relative flex flex-col bg-card border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
                 `animate-in slide-in-from-bottom-4 delay-${idx * 100}`
               )}
             >
@@ -154,7 +157,7 @@ export function HomePage() {
                 <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
               <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
-                <p className="text-center font-bold text-[13px] text-foreground/80 group-hover:text-primary uppercase tracking-tight">
+                <p className="text-center font-bold text-[13px] text-foreground group-hover:text-primary uppercase tracking-tight">
                   {item.title}
                 </p>
               </div>
@@ -163,7 +166,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* CLONE ROW: Most searched in Autos */}
+      {/* MOST SEARCHED AUTOS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -182,7 +185,7 @@ export function HomePage() {
               </div>
             ))}
           </div>
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -192,7 +195,7 @@ export function HomePage() {
 
       <SpotlightCategories />
 
-      {/* CLONE SECTION: Buy or Rent Spotlight (5 Columns) */}
+      {/* REAL ESTATE SPOTLIGHT */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -205,7 +208,7 @@ export function HomePage() {
               key={item.title} 
               href="/listings?category=Property"
               className={cn(
-                "group relative flex flex-col bg-white border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
+                "group relative flex flex-col bg-card border border-border/50 overflow-hidden hover:shadow-xl transition-all duration-500 rounded-md",
                 `animate-in slide-in-from-bottom-4 delay-${idx * 100}`
               )}
             >
@@ -213,7 +216,7 @@ export function HomePage() {
                 <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
               <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
-                <p className="text-center font-bold text-[13px] text-foreground/80 group-hover:text-primary uppercase tracking-tight">
+                <p className="text-center font-bold text-[13px] text-foreground group-hover:text-primary uppercase tracking-tight">
                   {item.title}
                 </p>
               </div>
@@ -222,7 +225,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* CLONE ROW: Real Estate Registry */}
+      {/* MOST SEARCHED REAL ESTATE */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -241,13 +244,13 @@ export function HomePage() {
               </div>
             ))}
           </div>
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
       </section>
 
-      {/* CLONE ROW: Prices have dropped */}
+      {/* PRICE DROPS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group">
         <div className="mb-8">
           <h2 className="text-2xl font-medium text-foreground tracking-tight leading-none">
@@ -264,7 +267,7 @@ export function HomePage() {
             ))}
           </div>
           
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -272,7 +275,7 @@ export function HomePage() {
 
       <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
-      {/* CLONE ROW: Cell Phones Registry */}
+      {/* CELL PHONES (EXTRACTED RESULTS) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -292,7 +295,7 @@ export function HomePage() {
             ))}
           </div>
           
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -300,35 +303,7 @@ export function HomePage() {
 
       <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
-      {/* CLONE ROW: Cabinets and Wardrobes */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most popular items in <span className="font-bold">Cabinets and Wardrobes</span>
-          </h2>
-          <Link href="/listings?category=Home & Furniture" className="text-sm font-bold text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="relative">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {cabinets.map((item, idx) => (
-              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
-              </div>
-            ))}
-          </div>
-          
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
-            <ChevronRight className="h-6 w-6" />
-          </button>
-        </div>
-      </section>
-
-      <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
-
-      {/* CLONE ROW: Air Conditioners */}
+      {/* AIR CONDITIONERS */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -348,7 +323,7 @@ export function HomePage() {
             ))}
           </div>
           
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -356,7 +331,7 @@ export function HomePage() {
 
       <div className="max-w-7xl mx-auto w-full px-4"><div className="h-[1px] w-full bg-border/50" /></div>
 
-      {/* CLONE ROW: Trending Heading & Game Boy Grid */}
+      {/* GAME BOY TRENDING */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -376,19 +351,19 @@ export function HomePage() {
             ))}
           </div>
           
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
       </section>
 
-      {/* INSTITUTIONAL BENEFITS NODE */}
+      {/* BENEFITS */}
       <BenefitsSection />
 
-      {/* MARKETPLACE TIPS SECTION */}
+      {/* TIPS */}
       <TipsSection />
 
-      {/* FOOTER DIRECTORY TABS */}
+      {/* FOOTER TABS */}
       <FooterTabs />
 
       <PrivacyPopup />

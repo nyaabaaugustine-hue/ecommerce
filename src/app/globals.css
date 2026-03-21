@@ -148,6 +148,21 @@
   animation: v-glow 2s ease-in-out infinite;
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 60s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { @apply bg-background; }
 ::-webkit-scrollbar-thumb { @apply bg-primary/20 hover:bg-primary/40; }
