@@ -32,6 +32,7 @@ import { cn } from '@/lib/utils';
 /**
  * @fileOverview Compact Institutional Navbar
  * Strictly rectangular (rounded-none). Optimized for density and zero overlap.
+ * Precision height: h-18 (72px).
  */
 export function Navbar() {
   const { user } = useAuth();
