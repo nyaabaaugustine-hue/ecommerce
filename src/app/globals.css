@@ -1,10 +1,11 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* CLINICAL INSTITUTIONAL LIGHT (MASTER DEFAULT) */
+    /* CLINICAL INSTITUTIONAL LIGHT (MASTER DEFAULT) - PURE WHITE SYSTEM */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;

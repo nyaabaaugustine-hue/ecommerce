@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -15,24 +16,27 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  // Master Default: cold-white (Clinical Light)
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
     setThemeState(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    
-    if (newTheme !== 'cold-white') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    if (typeof window !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', newTheme);
+      
+      if (newTheme !== 'cold-white') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      
+      localStorage.setItem('vault_theme', newTheme);
     }
-    
-    localStorage.setItem('vault_theme', newTheme);
   };
 
   useEffect(() => {
     const stored = localStorage.getItem('vault_theme') as PrimaryTheme;
-    // Master Default Force: Cold-White
+    // On fresh load, if no stored preference, force cold-white
     if (stored) {
       setTheme(stored);
     } else {
@@ -79,7 +83,9 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
 
   const saveContent = (newContent: typeof INITIAL_CONTENT) => {
     setContent(newContent);
-    localStorage.setItem('vault_content', JSON.stringify(newContent));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('vault_content', JSON.stringify(newContent));
+    }
   };
 
   const updatePage = (slug: string, section: string, data: any) => {
@@ -135,13 +141,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const foundUser = MOCK_USERS.find(u => u.email === email);
     if (foundUser) {
       setUser(foundUser);
-      localStorage.setItem('vault_user', JSON.stringify(foundUser));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('vault_user', JSON.stringify(foundUser));
+      }
     }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('vault_user');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('vault_user');
+    }
   };
 
   useEffect(() => {
@@ -242,7 +252,6 @@ interface CartContextType {
   removeItem: (id: string) => void;
   clearCart: () => void;
   total: number;
-  // Forced Checkout Simulation Node
   isCheckingOut: boolean;
   checkoutStep: number;
   showSuccess: boolean;
@@ -282,7 +291,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         clearInterval(interval);
         setIsCheckingOut(false);
         setShowSuccess(true);
-        setItems([]); // Clear cart upon successful simulation
+        setItems([]); 
       }
     }, 1000);
   };
