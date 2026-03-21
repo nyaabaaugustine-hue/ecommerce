@@ -40,6 +40,7 @@ export interface Listing {
   status: ListingStatus;
   isEscrowProtected: boolean;
   isEasyDelivery?: boolean;
+  isFreeShipping?: boolean;
   requiresMultisig?: boolean;
   isEmphasis?: boolean;
 }
@@ -52,7 +53,7 @@ export const MOCK_USERS: User[] = [
 ];
 
 export const LISTINGS: Listing[] = [
-  // ELECTRONICS (5 ITEMS)
+  // ELECTRONICS (CELL PHONES ROW)
   {
     id: 'e1',
     title: 'iPhone 15 Pro Max 256GB - Natural Titanium',
@@ -144,10 +145,10 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // FURNITURE (5 ITEMS)
+  // FURNITURE (CABINETS ROW)
   {
     id: 'f1',
-    title: 'QUICK SALE PRICE - Antique Family Chest',
+    title: 'Antique Family Chest',
     price: 730,
     oldPrice: 1350,
     isNegotiable: true,
@@ -157,7 +158,7 @@ export const LISTINGS: Listing[] = [
     postedTimestamp: Date.now() - 3600000,
     imageUrl: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v4',
-    description: 'Beautiful antique wood chest. Heritage piece.',
+    description: 'Beautiful antique wood chest.',
     status: 'Active',
     isEscrowProtected: true,
     isEmphasis: true,
@@ -165,8 +166,8 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'f2',
-    title: 'Comfortable Modern Dresser',
-    price: 270,
+    title: 'Modern 3-Door Wardrobe',
+    price: 850,
     isNegotiable: false,
     category: 'Home & Furniture',
     location: 'Kumasi Central',
@@ -174,16 +175,16 @@ export const LISTINGS: Listing[] = [
     postedTimestamp: Date.now() - 7200000,
     imageUrl: 'https://images.unsplash.com/photo-1505691938895-1758d7eaa511?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v4',
-    description: 'Compact and functional dresser.',
+    description: 'Spacious wardrobe.',
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: 'f3',
-    title: '3-Door Wardrobe with Mirror',
-    price: 850,
-    oldPrice: 1320,
+    title: 'Sliding Door Wardrobe + Mirror',
+    price: 1200,
+    oldPrice: 1500,
     isNegotiable: true,
     category: 'Home & Furniture',
     location: 'Tema Node',
@@ -191,7 +192,7 @@ export const LISTINGS: Listing[] = [
     postedTimestamp: Date.now() - 86400000,
     imageUrl: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v4',
-    description: 'Spacious wardrobe with integrated mirror.',
+    description: 'Elegant bedroom storage.',
     status: 'Active',
     isEscrowProtected: true,
     isEmphasis: true,
@@ -199,7 +200,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'f4',
-    title: 'Wardrobe with 2 sliding doors + mirror',
+    title: 'Retro 2-Door Wardrobe',
     price: 580,
     isNegotiable: false,
     category: 'Home & Furniture',
@@ -208,30 +209,29 @@ export const LISTINGS: Listing[] = [
     postedTimestamp: Date.now() - 10000,
     imageUrl: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v4',
-    description: 'Modern sliding door system.',
+    description: 'Minimalist retro design.',
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
     id: 'f5',
-    title: 'Theo Retro 3-Door Wardrobe, Gray',
-    price: 600,
-    oldPrice: 800,
-    isNegotiable: false,
+    title: 'Office Cabinet Node',
+    price: 450,
+    isNegotiable: true,
     category: 'Home & Furniture',
     location: 'Osu, Accra',
     postedAt: 'Yesterday, 19:04',
     postedTimestamp: Date.now() - 90000000,
     imageUrl: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v4',
-    description: 'Retro gray finish wardrobe.',
+    description: 'Professional office storage.',
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's4', name: 'HomeLiving GH', type: 'Business Vendor', rating: 4.7, isVerified: true, joinDate: '2021', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // AIR CONDITIONERS (5 ITEMS - CLONE FROM SCREENSHOT)
+  // AIR CONDITIONERS ROW
   {
     id: 'ac1_gh',
     title: 'PHILCO 12 BTU AIR CONDITIONER',
@@ -251,41 +251,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'ac2_gh',
-    title: 'Selling a 9 BTU air conditioner.',
-    price: 600,
-    isNegotiable: true,
-    category: 'Electronics',
-    location: 'Kumasi Central',
-    postedAt: 'Mar 20, 16:12',
-    postedTimestamp: Date.now() - 100000000,
-    imageUrl: 'https://images.unsplash.com/photo-1631541119392-e700300f689c?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v1',
-    description: 'Compact 9 BTU cooling unit.',
-    status: 'Active',
-    isEscrowProtected: true,
-    isEasyDelivery: true,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: 'ac3_gh',
-    title: 'Air conditioning unit',
-    price: 500,
-    isNegotiable: false,
-    category: 'Electronics',
-    location: 'Tema Community 1',
-    postedAt: 'Today, 1:12',
-    postedTimestamp: Date.now() - 3600000,
-    imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800&auto=format&fit=crop',
-    vendorId: 'v1',
-    description: 'Wall mounted unit.',
-    status: 'Active',
-    isEscrowProtected: false,
-    isEasyDelivery: false,
-    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
-  },
-  {
-    id: 'ac4_gh',
-    title: 'Samsung Windfree 12,000 BTU air conditioner',
+    title: 'Samsung Windfree 12,000 BTU',
     price: 1799,
     isNegotiable: false,
     category: 'Electronics',
@@ -301,8 +267,8 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
   {
-    id: 'ac5_gh',
-    title: 'New Consul window air conditioner with remote...',
+    id: 'ac3_gh',
+    title: 'Consul Window AC + Remote',
     price: 1590,
     oldPrice: 1790,
     isNegotiable: false,
@@ -312,14 +278,130 @@ export const LISTINGS: Listing[] = [
     postedTimestamp: Date.now() - 7200000,
     imageUrl: 'https://images.unsplash.com/photo-1631541119392-e700300f689c?q=80&w=800&auto=format&fit=crop',
     vendorId: 'v1',
-    description: 'Includes remote and installation kit.',
+    description: 'Window unit with remote.',
     status: 'Active',
     isEscrowProtected: true,
-    isEasyDelivery: false,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'ac4_gh',
+    title: 'Selling a 9 BTU AC Unit',
+    price: 600,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Kumasi Central',
+    postedAt: 'Mar 20, 16:12',
+    postedTimestamp: Date.now() - 100000000,
+    imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Compact 9 BTU unit.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'ac5_gh',
+    title: 'Industrial AC Fan Node',
+    price: 350,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Tema Node',
+    postedAt: 'Yesterday, 10:00',
+    postedTimestamp: Date.now() - 120000000,
+    imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Powerful cooling fan.',
+    status: 'Active',
+    isEscrowProtected: false,
     seller: { id: 's3', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.8, isVerified: true, joinDate: '2022', phone: '0541988383', whatsapp: '233541988383' }
   },
 
-  // VEHICLES (5 ITEMS)
+  // GAME BOY ROW (TRENDING)
+  {
+    id: 'gb1',
+    title: 'Selling Game Boy',
+    price: 250,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Accra',
+    postedAt: 'Today, 2:31',
+    postedTimestamp: Date.now() - 3600000,
+    imageUrl: 'https://images.unsplash.com/photo-1531525645387-7f14be13bd32?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Classic Game Boy handheld.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's10', name: 'RetroGames GH', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'gb2',
+    title: 'Selling a digital Game Boy.',
+    price: 255,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Accra',
+    postedAt: 'Today, 2:25',
+    postedTimestamp: Date.now() - 7200000,
+    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Modern digital handheld console.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's10', name: 'RetroGames GH', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'gb3',
+    title: 'Game Boy Color IPS screen',
+    price: 950,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Kumasi',
+    postedAt: '20/03/2026, 22:09',
+    postedTimestamp: Date.now() - 86400000,
+    imageUrl: 'https://images.unsplash.com/photo-1529618139141-af3ea331acb4?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Modded GBC with high-res IPS screen.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isFreeShipping: true,
+    seller: { id: 's10', name: 'RetroGames GH', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'gb4',
+    title: 'Game Boy Color IPS screen',
+    price: 915,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Kumasi',
+    postedAt: '20/03/2026, 22:09',
+    postedTimestamp: Date.now() - 86400000,
+    imageUrl: 'https://images.unsplash.com/photo-1529618139141-af3ea331acb4?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Another modded GBC unit.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isFreeShipping: true,
+    seller: { id: 's10', name: 'RetroGames GH', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
+  },
+  {
+    id: 'gb5',
+    title: 'GAME BOY SUP',
+    price: 180,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Tema',
+    postedAt: '20/03/2026, 20:48',
+    postedTimestamp: Date.now() - 90000000,
+    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Retro SUP 400-in-1 console.',
+    status: 'Active',
+    isEscrowProtected: true,
+    isFreeShipping: true,
+    seller: { id: 's10', name: 'RetroGames GH', type: 'Individual', rating: 4.5, isVerified: false, joinDate: '2023', phone: '0541988383', whatsapp: '233541988383' }
+  },
+
+  // VEHICLES ROW
   {
     id: 'v1_car',
     title: '2022 Toyota Land Cruiser 300 V6',

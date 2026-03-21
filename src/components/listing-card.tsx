@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Heart } from 'lucide-react';
+import { Heart, Truck } from 'lucide-react';
 import { useCurrency } from '@/components/providers';
 import type { Listing } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
@@ -13,11 +13,11 @@ import { cn } from '@/lib/utils';
 /**
  * @fileOverview High-Fidelity Marketplace Listing Card
  * 1:1 structural clone of the OLX card architecture using ShadCN styling.
- * Supports "Emphasis" status and dual-badge logic (Easy Delivery + Vault Guarantee).
+ * Supports "Emphasis" status and localized badge logic (Easy Delivery + Vault Guarantee + Free Shipping).
  * Force clone: Perfectly fits the 5-column grid.
  */
 export function ListingCard(props: Listing) {
-  const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isEmphasis } = props;
+  const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isFreeShipping, isEmphasis } = props;
   const { formatPrice } = useCurrency();
 
   return (
@@ -57,6 +57,11 @@ export function ListingCard(props: Listing) {
 
         {/* OLX-SPECIFIC STATUS BADGES */}
         <div className="flex flex-wrap gap-1.5 mt-1">
+          {isFreeShipping && (
+            <Badge className="bg-[#e6f7ef] text-[#2ebd7f] hover:bg-[#e6f7ef] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-none flex items-center gap-1">
+              <Truck className="h-3 w-3" /> free shipping
+            </Badge>
+          )}
           {isEasyDelivery && (
             <Badge className="bg-[#f2eafa] text-[#6e0ad6] dark:bg-[#6e0ad6]/20 dark:text-[#a78bfa] hover:bg-[#f2eafa] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-none">
               Easy Delivery

@@ -22,6 +22,7 @@ import { AuthDialog } from '@/components/auth-dialog';
  * @fileOverview Master Header Command Hub
  * Exact 1:1 structural clone of the OLX header interaction logic.
  * Aligned to the 1280px (max-w-7xl) project grid.
+ * Post Ad action uses the strict 7% box rectangle protocol.
  */
 export function Navbar() {
   const { user } = useAuth();
@@ -111,7 +112,7 @@ export function Navbar() {
 
             <Link href="/listings/create">
               <Button 
-                className="bg-primary text-secondary hover:bg-primary/90 font-black text-[11px] uppercase tracking-[0.1em] h-12 px-8 rounded-[2rem] shadow-lg border-2 border-white/10 flex items-center gap-2 active:scale-95 transition-all"
+                className="bg-primary text-secondary hover:bg-primary/90 font-black text-[11px] uppercase tracking-[0.1em] h-12 px-8 rounded-[7%] shadow-lg border-2 border-white/10 flex items-center gap-2 active:scale-95 transition-all"
               >
                 <div className="bg-white/20 p-1 rounded-full"><Search className="h-3 w-3 text-white rotate-45" /></div>
                 Post Ad
