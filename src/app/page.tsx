@@ -133,7 +133,7 @@ export function HomePage() {
         </section>
       )}
 
-      {/* VERIFIED VENDOR SHOWCASE */}
+      {/* VERIFIED VENDOR SHOWCASE - SLOW MARQUEE */}
       <section className="bg-secondary py-24 text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
            <div className="grid grid-cols-12 h-full gap-4">
@@ -155,31 +155,35 @@ export function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {VENDORS.slice(0, 3).map((vendor) => (
-              <div key={vendor.id} className="bg-white/5 border border-white/10 p-8 hover:border-primary transition-all group">
-                <div className="flex justify-between items-start mb-8">
-                  <div className="h-16 w-16 bg-white relative p-2 shadow-2xl">
-                    <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
+          {/* Slow Motion Marquee Wrapper */}
+          <div className="overflow-hidden relative group">
+            <div className="flex animate-marquee-slow gap-8 py-4 whitespace-nowrap hover:[animation-play-state:paused]">
+              {/* Double items for seamless loop */}
+              {[...VENDORS, ...VENDORS].map((vendor, idx) => (
+                <div key={`${vendor.id}-${idx}`} className="bg-white/5 border border-white/10 p-8 hover:border-primary transition-all group/card min-w-[350px] md:min-w-[400px]">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="h-16 w-16 bg-white relative p-2 shadow-2xl">
+                      <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[10px] font-black text-primary uppercase tracking-widest">Fidelity Score</p>
+                      <p className="text-2xl font-black text-white">{vendor.fidelityScore}%</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-[10px] font-black text-primary uppercase tracking-widest">Fidelity Score</p>
-                    <p className="text-2xl font-black text-white">{vendor.fidelityScore}%</p>
+                  <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2 group-hover/card:text-primary transition-colors whitespace-normal">{vendor.name}</h3>
+                  <p className="text-[10px] font-medium text-white/40 uppercase tracking-widest leading-relaxed mb-8 h-12 line-clamp-3 whitespace-normal">
+                    {vendor.description}
+                  </p>
+                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                    <div className="flex items-center gap-2">
+                      <Star className="h-3 w-3 fill-primary text-primary" />
+                      <span className="text-sm font-black">{vendor.rating} Registry Rating</span>
+                    </div>
+                    <Badge variant="outline" className="border-white/20 text-white/60 rounded-none font-black text-[8px] uppercase tracking-widest">Since {vendor.joinedYear}</Badge>
                   </div>
                 </div>
-                <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2 group-hover:text-primary transition-colors">{vendor.name}</h3>
-                <p className="text-[10px] font-medium text-white/40 uppercase tracking-widest leading-relaxed mb-8 h-12 line-clamp-3">
-                  {vendor.description}
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                  <div className="flex items-center gap-2">
-                    <Star className="h-3 w-3 fill-primary text-primary" />
-                    <span className="text-sm font-black">{vendor.rating} Registry Rating</span>
-                  </div>
-                  <Badge variant="outline" className="border-white/20 text-white/60 rounded-none font-black text-[8px] uppercase tracking-widest">Since {vendor.joinedYear}</Badge>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

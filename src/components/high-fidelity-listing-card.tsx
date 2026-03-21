@@ -24,8 +24,10 @@ export function HighFidelityListingCard(props: Listing) {
     addItem(props);
     toast({
       title: "Asset Authorized",
-      description: `${title} added to escrow tray.`,
+      description: `${title} added to escrow tray. Initiating protocol...`,
     });
+    const cartTrigger = document.querySelector('[data-cart-trigger]') as HTMLElement;
+    if (cartTrigger) cartTrigger.click();
   };
 
   return (

@@ -23,8 +23,12 @@ export function ListingCard(props: Listing) {
     addItem(props);
     toast({
       title: "Asset Secured in Cart",
-      description: `${title} is now in your escrow tray.`,
+      description: `${title} is now in your escrow tray. Launching acquisition flow...`,
     });
+    // Programmatic trigger for cart sheet would usually be handled by a global state, 
+    // but the addItem logic in CartProvider can handle it or we use a custom event.
+    const cartTrigger = document.querySelector('[data-cart-trigger]') as HTMLElement;
+    if (cartTrigger) cartTrigger.click();
   };
 
   return (

@@ -56,7 +56,10 @@ export function CartSheet() {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <div className="fixed right-4 bottom-4 md:right-10 md:bottom-10 z-40 flex flex-col gap-5">
-            <div className="bg-secondary text-white p-3 md:p-5 rounded-none shadow-2xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all group border border-primary/20">
+            <div 
+              data-cart-trigger
+              className="bg-secondary text-white p-3 md:p-5 rounded-none shadow-2xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all group border border-primary/20"
+            >
                <ShoppingBag className="h-5 w-5 md:h-8 md:w-8 text-primary" />
                <span className="text-[8px] md:text-[9px] font-black mt-1 md:mt-2 tracking-widest uppercase">Cart: {items.length}</span>
                <span className="text-[8px] md:text-[9px] font-black bg-primary text-secondary px-2 md:px-3 py-0.5 rounded-none mt-1 md:mt-2">{formatPrice(total)}</span>
