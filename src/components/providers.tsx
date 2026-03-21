@@ -16,6 +16,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  // FORCE-LOCK: Initialize to 'cold-white' (Clinical Light)
   const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
@@ -32,7 +33,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    // ABSOLUTE CLINICAL FORCE-LOCK: Incinerate legacy data on every fresh load
+    // ABSOLUTE CLINICAL FORCE-LOCK: Purge session data and reset to White System on fresh load
     if (typeof window !== 'undefined') {
       localStorage.removeItem('vault_theme');
       document.documentElement.classList.remove('dark');

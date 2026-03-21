@@ -35,21 +35,11 @@ function Footer() {
           </p>
 
           <div className="flex items-center gap-6">
-            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white">
-              <Facebook className="h-5 w-5" />
-            </a>
-            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white">
-              <Instagram className="h-5 w-5" />
-            </a>
-            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white">
-              <Youtube className="h-5 w-5" />
-            </a>
-            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white">
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white">
-              <MessageCircle className="h-5 w-5" />
-            </a>
+            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white"><Facebook className="h-5 w-5" /></a>
+            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white"><Instagram className="h-5 w-5" /></a>
+            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white"><Youtube className="h-5 w-5" /></a>
+            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white"><Linkedin className="h-5 w-5" /></a>
+            <a href="#" className="h-10 w-10 bg-secondary rounded-none flex items-center justify-center hover:bg-primary transition-all text-white"><MessageCircle className="h-5 w-5" /></a>
           </div>
         </div>
       </div>
