@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo } from 'react';
@@ -72,7 +71,7 @@ export function HomePage() {
         
         <div className="relative group">
           <div className="animate-marquee hover:pause flex gap-4 px-4">
-            {[...eliteComputing, ...eliteComputing, ...eliteComputing].map((item, idx) => (
+            {[...eliteComputing, ...eliteComputing].map((item, idx) => (
               <div key={`${item.id}-${idx}`} className="w-[160px] md:w-[200px] shrink-0 transform scale-95 origin-center">
                 <HighFidelityListingCard {...item} />
               </div>
@@ -88,7 +87,7 @@ export function HomePage() {
             <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
               (Most searched for mobiles)
             </h2>
-            <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified iPhone & Smartphone Node</p>
+            <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified Smartphone Registry Node</p>
           </div>
           <Link href="/listings?category=Electronics" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">Full Registry</Link>
         </div>
