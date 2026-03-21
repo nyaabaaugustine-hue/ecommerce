@@ -1,4 +1,3 @@
-
 "use client";
 
 import './globals.css';
@@ -77,7 +76,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

@@ -15,13 +15,14 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<PrimaryTheme>('sovereign');
+  // Master Directive: Default to clinical light mode
+  const [theme, setThemeState] = useState<PrimaryTheme>('cold-white');
 
   const setTheme = (newTheme: PrimaryTheme) => {
     setThemeState(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
     
-    // Manage 'dark' class for proper ShadCN and Tailwind dark mode compatibility
+    // Institutional Logic: Manage dark class based on theme profile
     if (newTheme !== 'cold-white') {
       document.documentElement.classList.add('dark');
     } else {
@@ -36,7 +37,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (stored) {
       setTheme(stored);
     } else {
-      setTheme('sovereign'); 
+      setTheme('cold-white'); 
     }
   }, []);
 

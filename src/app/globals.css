@@ -1,24 +1,23 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* INSTITUTIONAL COLD WHITE (DYNAMIC BLEND) */
+    /* CLINICAL INSTITUTIONAL LIGHT (DEFAULT) */
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 221 83% 53%; /* Royal Blue */
+    --primary: 221 83% 53%; /* Blended Royal Blue */
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 215 25% 27%; /* Slate Gray */
+    --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 262 83% 58%; /* Blended Purple */
+    --accent: 262 83% 58%; /* Depth Accent */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -30,7 +29,7 @@
     --gold: 45 93% 47%;
   }
 
-  /* VIBRANT SOVEREIGN (ELITE BLEND) */
+  /* VIBRANT SOVEREIGN (BLENDED ELITE) */
   [data-theme='sovereign'] {
     --background: 225 60% 3%;
     --foreground: 180 10% 98%;
@@ -44,24 +43,24 @@
     --secondary-foreground: 180 10% 98%;
     --muted: 225 60% 8%;
     --muted-foreground: 180 10% 60%;
-    --accent: 280 80% 60%; /* Vivid Purple Blend */
+    --accent: 280 80% 60%; /* Vibrant Purple Blend */
     --border: 225 60% 12%;
     --ring: 178 90% 49%;
   }
 
-  /* NEON MIDNIGHT (CYBER BLEND) */
+  /* NEON MIDNIGHT (CYBER INDUSTRIAL) */
   [data-theme='midnight'] {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
     --card: 0 0% 2%;
     --card-foreground: 0 0% 100%;
-    --primary: 82 100% 54%; /* Neon Lime */
+    --primary: 82 100% 54%; /* Acid Lime */
     --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 5%;
     --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 8%;
     --muted-foreground: 0 0% 60%;
-    --accent: 45 100% 50%; /* Cyber Yellow Blend */
+    --accent: 45 100% 50%; /* Amber Glow Blend */
     --border: 0 0% 10%;
     --ring: 82 100% 54%;
   }
@@ -72,7 +71,7 @@
     --foreground: 210 40% 98%;
     --primary: 217 91% 60%; /* Bright Blue */
     --primary-foreground: 222 47% 6%;
-    --accent: 190 90% 50%; /* Sky Blue Blend */
+    --accent: 190 90% 50%; /* Cyan Blend */
     --card: 222 47% 8%;
     --card-foreground: 210 40% 98%;
     --secondary: 222 47% 12%;
@@ -99,9 +98,9 @@
   [data-theme='crimson'] {
     --background: 350 50% 4%;
     --foreground: 350 10% 98%;
-    --primary: 0 84% 60%; /* Bright Red */
+    --primary: 0 84% 60%; /* Flash Red */
     --primary-foreground: 350 50% 4%;
-    --accent: 25 100% 50%; /* Orange Flare Blend */
+    --accent: 25 100% 50%; /* Heat Orange Blend */
     --card: 350 50% 6%;
     --card-foreground: 350 10% 98%;
     --secondary: 350 50% 10%;
@@ -147,4 +146,14 @@
   background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Image reveal protocol */
+.image-reveal {
+  animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes reveal {
+  0% { transform: scale(1.1); filter: blur(10px); }
+  100% { transform: scale(1); filter: blur(0); }
 }
