@@ -28,7 +28,7 @@ export function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col bg-background min-h-screen pb-20">
+    <div className="flex flex-col bg-[#f8f9fa] min-h-screen pb-20">
       {/* CATEGORY BAR */}
       <CategoryBar />
       
@@ -41,7 +41,7 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Mais buscados em <span className="font-bold">Celulares e smartphones</span>
+            Most searched in <span className="font-bold">Cell Phones and Smartphones</span>
           </h2>
         </div>
         
@@ -52,7 +52,7 @@ export function HomePage() {
             ))}
           </div>
           
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -65,7 +65,7 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Itens mais populares em <span className="font-bold">Armários e guarda-roupas</span>
+            Most popular items in <span className="font-bold">Cabinets and Wardrobes</span>
           </h2>
         </div>
         
@@ -76,7 +76,7 @@ export function HomePage() {
             ))}
           </div>
           
-          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110">
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
@@ -86,10 +86,10 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Elite <span className="font-bold">Sovereign Vehicles</span> em Accra
+            Elite <span className="font-bold">Sovereign Vehicles</span> in Accra
           </h2>
           <Link href="/listings?category=Vehicles" className="text-sm font-bold text-primary hover:underline">
-            Ver todos
+            View all
           </Link>
         </div>
         
