@@ -9,6 +9,10 @@ import { PrivacyPopup } from '@/components/privacy-popup';
 import { LISTINGS } from '@/lib/mock-data';
 import { ChevronRight } from 'lucide-react';
 
+/**
+ * @fileOverview VaultCommerce Home Command Node
+ * High-density architecture mirroring the OLX marketplace flow.
+ */
 export default function HomePage() {
   const cellPhones = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Electronics').slice(0, 5);
@@ -24,13 +28,15 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20">
+      {/* 1:1 CLONE CATEGORY REGISTRY */}
       <CategoryBar />
       
+      {/* 1:1 CLONE HERO NODE */}
       <div className="max-w-7xl mx-auto w-full px-4 pt-6">
         <HeroCarousel />
       </div>
 
-      {/* CLONE SECTION: Cell Phones */}
+      {/* CLONE SECTION: Cell Phones Registry */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -45,17 +51,16 @@ export default function HomePage() {
             ))}
           </div>
           
-          {/* Pagination Arrow Node */}
           <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-background border shadow-xl rounded-full flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110">
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
       </section>
 
-      {/* Heritage Accent Separator */}
+      {/* Heritage Identity Separator */}
       <div className="h-[1px] w-full bg-border max-w-7xl mx-auto opacity-50" />
 
-      {/* CLONE SECTION: Cabinets and Wardrobes */}
+      {/* CLONE SECTION: Home & Furniture Registry */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -76,7 +81,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CLONE SECTION: Sovereign Vehicles */}
+      {/* CLONE SECTION: Sovereign Vehicles Registry */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">

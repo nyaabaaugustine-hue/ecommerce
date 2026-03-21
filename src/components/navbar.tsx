@@ -11,31 +11,26 @@ import {
   User, 
   Briefcase,
   LayoutGrid,
-  Sun,
-  Moon,
-  ChevronDown
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
-import { useAuth, useContent, useTheme } from '@/components/providers';
-import { useState, useEffect } from 'react';
+import { useAuth, useContent } from '@/components/providers';
+import { useState } from 'react';
 import { AuthDialog } from '@/components/auth-dialog';
-import { cn } from '@/lib/utils';
 
+/**
+ * @fileOverview Master Header Command Hub
+ * Exact 1:1 structural clone of the OLX header interaction logic.
+ * Integrated Dual-Node search, utility icon registry, and Advertise action.
+ */
 export function Navbar() {
   const { user } = useAuth();
   const { content } = useContent();
-  const { theme, setTheme } = useTheme();
   const [showAuth, setShowAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'cold-white' ? 'sovereign' : 'cold-white');
-  };
 
   return (
-    <header className="w-full flex flex-col sticky top-0 z-50 shadow-sm bg-background border-b">
+    <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
       <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-4 md:gap-8">
@@ -56,11 +51,11 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* COMBINED SEARCH & LOCATION HUB (THE CLONE CORE) */}
-        <div className="hidden lg:flex flex-1 max-w-2xl items-center h-12 border-2 border-muted-foreground/20 rounded-md overflow-hidden bg-muted/30 focus-within:border-primary transition-all">
+        {/* INTEGRATED SEARCH & LOCATION HUB */}
+        <div className="hidden lg:flex flex-1 max-w-2xl items-center h-12 border-2 border-muted-foreground/20 rounded-md overflow-hidden bg-muted/10 focus-within:border-primary transition-all">
           <div className="flex-1 flex items-center px-4 gap-3 border-r border-muted-foreground/20">
             <input 
-              placeholder='Search "Car"' 
+              placeholder='Buscar "C"' 
               className="w-full bg-transparent outline-none text-foreground text-[14px] font-medium placeholder:text-muted-foreground/60"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -77,48 +72,38 @@ export function Navbar() {
         </div>
 
         {/* UTILITY ACTIONS ROW */}
-        <div className="flex items-center gap-2 md:gap-6">
-          <div className="hidden lg:flex items-center gap-5 mr-2">
-            <Link href="/dashboard" className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition-all group">
+        <div className="flex items-center gap-4 md:gap-6">
+          <div className="hidden xl:flex items-center gap-5">
+            <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all group">
               <Briefcase className="h-5 w-5" />
-              <span className="text-[9px] font-black uppercase tracking-tighter">Professional Plan</span>
+              <span className="text-[11px] font-bold uppercase tracking-tight">Professional Plan</span>
             </Link>
-            <Link href="/dashboard" className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition-all group">
+            <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all group">
               <LayoutGrid className="h-5 w-5" />
-              <span className="text-[9px] font-black uppercase tracking-tighter">My Ads</span>
+              <span className="text-[11px] font-bold uppercase tracking-tight">My Ads</span>
             </Link>
-            <div className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
+            <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
               <MessageSquare className="h-5 w-5" />
-              <span className="text-[9px] font-black uppercase tracking-tighter">Chat</span>
+              <span className="text-[11px] font-bold uppercase tracking-tight">Chat</span>
             </div>
-            <div className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
+            <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
               <Bell className="h-5 w-5" />
-              <span className="text-[9px] font-black uppercase tracking-tighter">Notifications</span>
+              <span className="text-[11px] font-bold uppercase tracking-tight">Notifications</span>
             </div>
           </div>
 
-          <div className="h-8 w-[1px] bg-border mx-1 hidden lg:block" />
-
-          {/* THEME TOGGLE */}
-          {mounted && (
-            <Button variant="ghost" size="icon" onClick={toggleTheme} className="hidden sm:flex rounded-full text-muted-foreground hover:text-primary">
-              {theme === 'cold-white' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-            </Button>
-          )}
-
-          {/* AUTH & POST AD */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-2">
             {user ? (
               <Link href="/dashboard">
-                <div className="h-10 w-10 bg-primary/10 border border-primary/20 flex items-center justify-center rounded-[7%]">
-                  <User className="h-5 w-5 text-primary" />
-                </div>
+                <Button variant="ghost" className="text-foreground font-black text-[12px] uppercase tracking-widest px-4 hover:bg-muted rounded-md">
+                  Account
+                </Button>
               </Link>
             ) : (
               <Button 
                 onClick={() => setShowAuth(true)}
                 variant="ghost" 
-                className="text-foreground font-black text-[12px] uppercase tracking-widest px-4 hover:bg-muted rounded-md"
+                className="text-foreground font-black text-[12px] uppercase tracking-widest px-6 h-12 hover:bg-muted rounded-[2rem] border border-muted-foreground/20"
               >
                 To enter
               </Button>
@@ -126,25 +111,14 @@ export function Navbar() {
 
             <Link href="/listings/create">
               <Button 
-                className="bg-primary text-secondary hover:bg-primary/90 font-black text-[11px] uppercase tracking-[0.1em] h-11 px-6 rounded-full shadow-lg border-2 border-white/10"
+                className="bg-primary text-secondary hover:bg-primary/90 font-black text-[11px] uppercase tracking-[0.1em] h-12 px-8 rounded-[2rem] shadow-lg border-2 border-white/10 flex items-center gap-2"
               >
+                <div className="bg-white/20 p-1 rounded-full"><Search className="h-3 w-3 text-white rotate-45" /></div>
                 Advertise for free
               </Button>
             </Link>
           </div>
         </div>
-      </div>
-
-      {/* Heritage Accent (Optional signature preserved) */}
-      <div className="h-[2px] w-full relative overflow-hidden opacity-30">
-        <Image 
-          src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774059614/nnn_h9vugd.jpg" 
-          alt="Heritage Stripe" 
-          fill 
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
       </div>
     </header>
   );
