@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo } from 'react';
@@ -21,7 +22,7 @@ import { Button } from '@/components/ui/button';
 /**
  * @fileOverview Marketplace Home Hub
  * Saturated grid architecture with exactly 5 listings per row.
- * Zero-whitespace, high-density professional environment with Elite Headings.
+ * Professional, simple descriptive headings.
  */
 export function HomePage() {
   const eliteComputing = useMemo(() => {
@@ -68,12 +69,12 @@ export function HomePage() {
         <HeroCarousel />
       </div>
 
-      {/* FORCE REDUCED ELITE COMPUTING HUB (35% REDUCTION) */}
+      {/* FORCE REDUCED HUB (35% REDUCTION) */}
       <section className="w-full py-6 bg-muted/5 overflow-hidden border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-4 mb-4 flex items-end justify-between">
           <div className="space-y-0.5">
-            <h2 className="text-xl md:text-2xl font-black tracking-tighter uppercase leading-none flex items-center gap-2 italic heading-gradient">
-              <Sparkles className="h-4 w-4 text-primary" /> Elite Computing Hub
+            <h2 className="text-xl md:text-2xl font-black tracking-tighter uppercase leading-none flex items-center gap-2 italic text-foreground">
+              (Most popular laptops)
             </h2>
             <p className="text-[8px] font-black text-muted-foreground uppercase tracking-[0.3em]">Premium Hardware Registry • ACCRA</p>
           </div>
@@ -93,12 +94,12 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SMART COMMUNICATION - iPHONE REGISTRY */}
+      {/* SMART COMMUNICATION */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic flex items-center gap-3">
-              <Smartphone className="h-6 w-6 text-primary" /> Smart <span className="heading-gradient">Communication</span>
+              (Most searched for mobiles)
             </h2>
             <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified iPhone & Smartphone Node</p>
           </div>
@@ -115,7 +116,7 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto w-full px-4 py-12 relative group bg-muted/5">
         <div className="mb-8 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic heading-gradient">Premium Autos</h2>
+            <h2 className="text-3xl font-black text-foreground tracking-tighter uppercase italic">(Most searched for vehicles)</h2>
             <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified High-Value Vehicle Registry</p>
           </div>
           <Link href="/listings?category=Vehicles" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
@@ -132,7 +133,7 @@ export function HomePage() {
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Sprout className="h-6 w-6 text-green-600" /> Industrial <span className="heading-gradient">Agro-Business</span>
+              (Most searched for agriculture)
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Heavy Machinery & Farming Assets</p>
           </div>
@@ -148,7 +149,7 @@ export function HomePage() {
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Shirt className="h-6 w-6 text-accent" /> Designer <span className="heading-gradient">Lifestyle</span>
+              (Most popular fashion)
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Apparel & High-End Timepieces</p>
           </div>
@@ -166,7 +167,7 @@ export function HomePage() {
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Briefcase className="h-6 w-6 text-blue-600" /> Professional <span className="heading-gradient">Solutions</span>
+              (Most popular services)
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Corporate Services & Technical Audits</p>
           </div>
@@ -182,7 +183,7 @@ export function HomePage() {
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Dumbbell className="h-6 w-6 text-red-600" /> Performance <span className="heading-gradient">Athletics</span>
+              (Most searched for sports)
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Elite Fitness & Sporting Hardware</p>
           </div>
@@ -198,7 +199,7 @@ export function HomePage() {
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-              <Refrigerator className="h-6 w-6 text-blue-400" /> Climate <span className="heading-gradient">Control</span>
+              (Most popular appliances)
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Premium AC & Smart Appliances</p>
           </div>
@@ -214,7 +215,7 @@ export function HomePage() {
         <div className="mb-8 flex justify-between items-end">
           <div>
             <h2 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-3">
-               <Home className="h-6 w-6 text-primary" /> Elite <span className="heading-gradient">Estates</span>
+               (Most popular property)
             </h2>
             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Luxury Residential & Commercial Real Estate</p>
           </div>
