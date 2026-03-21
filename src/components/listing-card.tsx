@@ -13,9 +13,10 @@ import { cn } from '@/lib/utils';
 /**
  * @fileOverview High-Fidelity Marketplace Listing Card
  * 1:1 structural clone of the OLX card architecture using ShadCN styling.
+ * Supports "Emphasis" status and dual-badge logic.
  */
-export function ListingCard(props: Listing) {
-  const { id, title, price, location, postedAt, imageUrl, isEscrowProtected } = props;
+export function ListingCard(props: Listing & { isEmphasis?: boolean }) {
+  const { id, title, price, location, postedAt, imageUrl, isEscrowProtected, isEmphasis } = props;
   const { formatPrice } = useCurrency();
 
   // Simulated "Old Price" for high-fidelity visual parity
@@ -24,6 +25,15 @@ export function ListingCard(props: Listing) {
 
   return (
     <Card className="group overflow-hidden bg-white dark:bg-card border-none shadow-none hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-md animate-in fade-in zoom-in-95">
+      {/* EMPHASIS TAG NODE */}
+      {isEmphasis && (
+        <div className="absolute top-3 left-3 z-10">
+          <Badge className="bg-[#6e0ad6] text-white hover:bg-[#6e0ad6] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-md uppercase tracking-tighter">
+            Emphasis
+          </Badge>
+        </div>
+      )}
+
       {/* FAVORITE BUTTON NODE */}
       <button className="absolute top-3 right-3 z-10 h-9 w-9 bg-white/90 dark:bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-muted-foreground hover:text-red-500 shadow-md transition-all active:scale-90">
         <Heart className="h-5 w-5" />
@@ -50,9 +60,6 @@ export function ListingCard(props: Listing) {
 
         {/* OLX-SPECIFIC STATUS BADGES */}
         <div className="flex flex-wrap gap-1.5 mt-1">
-          <Badge className="bg-[#f2eafa] text-[#6e0ad6] dark:bg-[#6e0ad6]/20 dark:text-[#a855f7] hover:bg-[#f2eafa] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-none">
-            Easy Delivery
-          </Badge>
           {isEscrowProtected && (
             <Badge className="bg-[#fbeaf5] text-[#d60a91] dark:bg-[#d60a91]/20 dark:text-[#f472b6] hover:bg-[#fbeaf5] text-[10px] font-bold px-2 py-0.5 rounded-sm border-none shadow-none">
               Vault Guarantee

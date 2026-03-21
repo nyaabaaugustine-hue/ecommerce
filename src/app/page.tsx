@@ -21,8 +21,12 @@ export function HomePage() {
     return LISTINGS.filter(l => l.category === 'Electronics').slice(0, 5);
   }, []);
 
-  const homeLiving = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Home & Furniture').slice(0, 5);
+  const cabinets = useMemo(() => {
+    return LISTINGS.filter(l => l.title.toLowerCase().includes('wardrobe') || l.title.toLowerCase().includes('desk') || l.title.toLowerCase().includes('sofa')).slice(0, 5);
+  }, []);
+
+  const airConditioners = useMemo(() => {
+    return LISTINGS.filter(l => l.category === 'Electronics' && (l.title.toLowerCase().includes('tv') || l.title.toLowerCase().includes('samsung'))).slice(0, 5);
   }, []);
 
   const vehicles = useMemo(() => {
@@ -54,7 +58,7 @@ export function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {cellPhones.map((item, idx) => (
               <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
-                <ListingCard {...item} />
+                <ListingCard {...item} isEmphasis={idx === 0 || idx === 2} />
               </div>
             ))}
           </div>
@@ -70,7 +74,7 @@ export function HomePage() {
         <div className="h-[1px] w-full bg-border/50" />
       </div>
 
-      {/* CLONE ROW: Home & Furniture Registry */}
+      {/* CLONE ROW: Cabinets and Wardrobes (Targeted Implementation) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -83,7 +87,38 @@ export function HomePage() {
         
         <div className="relative">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {homeLiving.map((item, idx) => (
+            {cabinets.map((item, idx) => (
+              <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
+                <ListingCard {...item} isEmphasis={idx === 0 || idx === 2} />
+              </div>
+            ))}
+          </div>
+          
+          <button className="absolute -right-5 top-1/2 -translate-y-1/2 h-12 w-12 bg-white border shadow-xl rounded-full hidden md:flex items-center justify-center text-primary opacity-0 group-hover:opacity-100 transition-all z-10 hover:scale-110 active:scale-95 border-border/50">
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
+      </section>
+
+      {/* Institutional Separator */}
+      <div className="max-w-7xl mx-auto w-full px-4">
+        <div className="h-[1px] w-full bg-border/50" />
+      </div>
+
+      {/* CLONE ROW: Air Conditioners (Targeted Implementation) */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-medium text-foreground tracking-tight">
+            Most popular <span className="font-bold">air conditioners</span>
+          </h2>
+          <Link href="/listings?category=Electronics" className="text-sm font-bold text-primary hover:underline">
+            View all
+          </Link>
+        </div>
+        
+        <div className="relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {airConditioners.map((item, idx) => (
               <div key={item.id} className={cn("animate-in fade-in slide-in-from-right-4 duration-500", `delay-${idx * 100}`)}>
                 <ListingCard {...item} />
               </div>
