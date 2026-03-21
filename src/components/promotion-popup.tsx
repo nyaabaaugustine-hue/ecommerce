@@ -44,31 +44,45 @@ const ADS = [
 
 export function PromotionPopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasDismissed, setHasDismissed] = useState(true);
+  const [hasDismissed, setHasDismissed] = useState(false);
   const [currentAdIndex, setCurrentAdIndex] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
     const dismissed = localStorage.getItem('vault_promo_dismissed_v2');
-    if (!dismissed) {
-      setHasDismissed(false);
-      const initialTimer = setTimeout(() => {
-        setIsOpen(true);
-      }, 2000);
-
-      const rotationInterval = setInterval(() => {
-        setCurrentAdIndex((prev) => (prev + 1) % ADS.length);
-      }, 20000);
-
-      return () => {
-        clearTimeout(initialTimer);
-        clearInterval(rotationInterval);
-      };
+    if (dismissed) {
+      setHasDismissed(true);
+      return;
     }
-  }, []);
+
+    // Initial show
+    const initialTimer = setTimeout(() => {
+      setIsOpen(true);
+    }, 2000);
+
+    // Re-trigger every 10 seconds if closed
+    const retriggerInterval = setInterval(() => {
+      setIsOpen((prev) => {
+        if (!prev && !hasDismissed) return true;
+        return prev;
+      });
+      setCurrentAdIndex((prev) => (prev + 1) % ADS.length);
+    }, 10000);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(retriggerInterval);
+    };
+  }, [hasDismissed]);
 
   const handleDismiss = () => {
     setIsOpen(false);
+    // Note: We don't set permanent dismissal in localStorage yet to allow the "every 10 seconds" behavior requested
+  };
+
+  const handlePermanentDismiss = () => {
+    setIsOpen(false);
+    setHasDismissed(true);
     localStorage.setItem('vault_promo_dismissed_v2', 'true');
   };
 
@@ -85,7 +99,7 @@ export function PromotionPopup() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
       <div className="relative w-full max-w-[380px] group">
         <button 
-          onClick={handleDismiss}
+          onClick={handlePermanentDismiss}
           className="absolute -top-12 right-0 md:-right-12 h-10 w-10 bg-white/20 hover:bg-white/40 text-white rounded-full flex items-center justify-center transition-all z-10"
         >
           <X className="h-6 w-6" />

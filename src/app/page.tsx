@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -33,6 +32,7 @@ import {
   DialogTrigger 
 } from '@/components/ui/dialog';
 import { PromotionPopup } from '@/components/promotion-popup';
+import { NewsletterPopup } from '@/components/newsletter-popup';
 import { useContent, useCurrency } from '@/components/providers';
 
 export default function HomePage() {
@@ -45,6 +45,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col bg-background min-h-screen">
       <PromotionPopup />
+      <NewsletterPopup />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-8">
@@ -64,7 +65,7 @@ export default function HomePage() {
             
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 to-transparent flex items-center">
               <div className="px-8 md:pl-16 space-y-6 md:space-y-8 max-w-2xl">
-                <Badge className="bg-accent text-secondary font-black uppercase text-[10px] tracking-[0.2em] px-5 py-1.5 rounded-none">
+                <Badge className="bg-accent text-secondary font-black uppercase text-[10px] tracking-0.2em px-5 py-1.5 rounded-none">
                   {hero.badge}
                 </Badge>
                 <h2 className="text-4xl md:text-7xl font-black text-white leading-tight tracking-tighter uppercase">
@@ -110,13 +111,13 @@ export default function HomePage() {
             <div className="space-y-2">
               <div className="flex items-center gap-3 mb-2">
                  <Activity className="h-5 w-5 text-accent" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">{highlights.badge}</span>
+                 <span className="text-[10px] font-black uppercase tracking-0.4em text-primary">{highlights.badge}</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-secondary tracking-tighter uppercase">{highlights.title}</h2>
               <p className="text-muted-foreground font-medium text-xs md:text-sm uppercase tracking-widest">{highlights.subtitle}</p>
             </div>
             <Link href="/listings">
-              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white h-12 px-10 font-black rounded-none transition-all gap-3 text-[10px] uppercase tracking-[0.2em]">
+              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white h-12 px-10 font-black rounded-none transition-all gap-3 text-[10px] uppercase tracking-0.2em">
                 View All Assets <ChevronRight className="h-5 w-5" />
               </Button>
             </Link>
@@ -135,10 +136,9 @@ export default function HomePage() {
         <div className="container mx-auto px-4 mb-8">
           <div className="flex items-center gap-4">
              <TrendingUp className="h-6 w-6 text-accent animate-pulse" />
-             <h2 className="text-xl font-black text-white uppercase tracking-[0.2em]">Weekly Velocity: Best Selling Nodes</h2>
+             <h2 className="text-xl font-black text-white uppercase tracking-0.2em">Weekly Velocity: Best Selling Nodes</h2>
           </div>
         </div>
-        {/* Speed increased by 50% (from 60s to 40s) */}
         <div className="animate-marquee gap-8 py-4 [animation-duration:40s]">
           {[...LISTINGS, ...LISTINGS].map((listing, idx) => (
             <div key={`${listing.id}-${idx}`} className="w-[300px] shrink-0">
@@ -169,13 +169,13 @@ export default function HomePage() {
       <section className="bg-background py-16 overflow-hidden border-b border-muted">
         <div className="container mx-auto px-4 mb-10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
-            <span className="text-accent font-black uppercase tracking-[0.5em] text-[10px] mb-2 block">{trust.subtitle}</span>
+            <span className="text-accent font-black uppercase tracking-0.5em text-[10px] mb-2 block">{trust.subtitle}</span>
             <h2 className="text-3xl md:text-4xl font-black text-secondary tracking-tighter uppercase">{trust.title}</h2>
           </div>
           
           <Dialog open={showVendorModal} onOpenChange={setShowVendorModal}>
             <DialogTrigger asChild>
-              <Button className="bg-primary text-white hover:bg-accent hover:text-secondary font-black rounded-none px-10 h-14 uppercase text-[11px] tracking-[0.2em] gap-3 shadow-xl">
+              <Button className="bg-primary text-white hover:bg-accent hover:text-secondary font-black rounded-none px-10 h-14 uppercase text-[11px] tracking-0.2em gap-3 shadow-xl">
                 <Store className="h-5 w-5" />
                 Partner With Us
               </Button>
@@ -206,7 +206,6 @@ export default function HomePage() {
         </div>
         
         <div className="relative">
-          {/* Speed increased by 50% (from 100s to 66s) */}
           <div className="animate-marquee-reverse gap-8 py-6 [animation-duration:66s]">
             {[...VENDORS, ...VENDORS].map((vendor, idx) => (
               <div key={`${vendor.id}-${idx}`} className="w-[350px] md:w-[480px] shrink-0 px-3">
@@ -260,7 +259,7 @@ export default function HomePage() {
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-none">
               {cta.title}
             </h2>
-            <p className="text-white/50 font-black uppercase tracking-[0.5em] text-[10px] md:text-sm max-w-3xl mx-auto">
+            <p className="text-white/50 font-black uppercase tracking-0.5em text-[10px] md:text-sm max-w-3xl mx-auto">
               {cta.subtitle}
             </p>
           </div>
