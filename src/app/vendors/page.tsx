@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -86,11 +87,11 @@ export default function VendorRegistry() {
         ))}
       </div>
 
-      {/* Vendor Grid */}
+      {/* Vendor Grid - UPGRADED RADIUS & IMAGES */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filteredVendors.map((vendor) => (
-          <Card key={vendor.id} className="rounded-none border-2 border-border/50 hover:border-primary group transition-all duration-500 bg-white overflow-hidden shadow-sm hover:shadow-2xl">
-            <div className="relative h-48 w-full overflow-hidden bg-muted">
+          <Card key={vendor.id} className="rounded-[7%] border-2 border-border/50 hover:border-primary group transition-all duration-500 bg-white overflow-hidden shadow-sm hover:shadow-2xl flex flex-col">
+            <div className="relative h-56 w-full overflow-hidden bg-muted">
               <Image 
                 src={vendor.bgUrl} 
                 alt={vendor.name} 
@@ -98,8 +99,8 @@ export default function VendorRegistry() {
                 className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700 contrast-125" 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent" />
-              <div className="absolute bottom-6 left-6 flex items-end gap-5">
-                <div className="relative h-20 w-20 bg-white border-2 border-primary shadow-2xl p-2 rounded-none">
+              <div className="absolute bottom-6 left-8 flex items-end gap-5">
+                <div className="relative h-20 w-20 bg-white border-2 border-primary shadow-2xl p-2 rounded-[7%]">
                   <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
                 </div>
                 <div className="pb-1">
@@ -109,15 +110,15 @@ export default function VendorRegistry() {
                   <h3 className="font-black text-secondary text-xl tracking-tighter uppercase leading-none">{vendor.name}</h3>
                 </div>
               </div>
-              <div className="absolute top-6 right-6">
+              <div className="absolute top-6 right-8">
                  <div className="bg-white/95 backdrop-blur-md p-3 border-2 border-primary/20 flex flex-col items-center">
-                    <span className="text-[10px] font-black text-primary leading-none mb-1">FIDELITY</span>
-                    <span className="text-xl font-black text-secondary leading-none">98%</span>
+                    <span className="text-[10px] font-black text-primary leading-none mb-1 uppercase tracking-widest">FIDELITY</span>
+                    <span className="text-xl font-black text-secondary leading-none">{vendor.fidelityScore}%</span>
                  </div>
               </div>
             </div>
 
-            <CardContent className="p-8 space-y-8">
+            <CardContent className="p-10 space-y-8 flex-1">
               <p className="text-[11px] font-medium text-muted-foreground leading-relaxed uppercase tracking-wide h-10 line-clamp-2">
                 {vendor.description}
               </p>
@@ -137,9 +138,9 @@ export default function VendorRegistry() {
               </div>
 
               {/* Innovation: Performance Radar Node */}
-              <div className="bg-muted/30 p-5 border-l-4 border-primary space-y-4">
+              <div className="bg-muted/30 p-6 border-l-4 border-primary space-y-4">
                  <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-widest">
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center gap-2 text-secondary">
                        <Activity className="h-3 w-3 text-primary" />
                        Node Integrity
                     </span>
@@ -152,7 +153,7 @@ export default function VendorRegistry() {
                  </div>
               </div>
 
-              <div className="pt-6 border-t border-dashed flex items-center justify-between">
+              <div className="pt-8 border-t border-dashed flex items-center justify-between">
                  <div className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-primary" />
                     <span className="text-[9px] font-black uppercase tracking-widest text-secondary">Escrow Authorized</span>
@@ -170,7 +171,7 @@ export default function VendorRegistry() {
       </div>
 
       {/* Registry Footer */}
-      <div className="mt-24 bg-secondary p-12 text-white relative overflow-hidden">
+      <div className="mt-24 bg-secondary p-12 text-white relative overflow-hidden rounded-[7%]">
         <div className="absolute top-0 right-0 h-64 w-64 bg-primary/10 -mr-32 -mt-32 rounded-none blur-3xl" />
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="space-y-4 text-center md:text-left">

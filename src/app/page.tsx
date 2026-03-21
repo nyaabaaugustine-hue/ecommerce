@@ -133,7 +133,7 @@ export function HomePage() {
         </section>
       )}
 
-      {/* VERIFIED VENDOR SHOWCASE - SLOW MARQUEE */}
+      {/* VERIFIED VENDOR SHOWCASE - SLOW MARQUEE - UPGRADED IMAGES & RADIUS */}
       <section className="bg-secondary py-24 text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
            <div className="grid grid-cols-12 h-full gap-4">
@@ -155,31 +155,53 @@ export function HomePage() {
             </Link>
           </div>
 
-          {/* Slow Motion Marquee Wrapper */}
           <div className="overflow-hidden relative group">
-            <div className="flex animate-marquee-slow gap-8 py-4 whitespace-nowrap hover:[animation-play-state:paused]">
-              {/* Double items for seamless loop */}
+            <div className="flex animate-marquee-slow gap-10 py-4 whitespace-nowrap hover:[animation-play-state:paused]">
               {[...VENDORS, ...VENDORS].map((vendor, idx) => (
-                <div key={`${vendor.id}-${idx}`} className="bg-white/5 border border-white/10 p-8 hover:border-primary transition-all group/card min-w-[350px] md:min-w-[400px]">
-                  <div className="flex justify-between items-start mb-8">
-                    <div className="h-16 w-16 bg-white relative p-2 shadow-2xl">
-                      <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
+                <div key={`${vendor.id}-${idx}`} className="bg-white/5 border border-white/10 hover:border-primary transition-all duration-500 group/card min-w-[380px] md:min-w-[450px] rounded-[7%] overflow-hidden flex flex-col shadow-2xl">
+                  {/* Large Visual Header Node */}
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <Image 
+                      src={vendor.bgUrl} 
+                      alt={vendor.name} 
+                      fill 
+                      className="object-cover opacity-50 group-hover/card:scale-110 transition-transform duration-1000 contrast-[1.1]" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent" />
+                    
+                    {/* Large Logo Node with Radius Parity */}
+                    <div className="absolute bottom-6 left-8 flex items-end gap-6">
+                      <div className="relative h-20 w-20 bg-white border-2 border-primary/20 shadow-2xl p-2 rounded-[7%]">
+                        <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
+                      </div>
+                      <div className="pb-1 text-left whitespace-normal">
+                        <Badge className="bg-primary text-secondary rounded-none font-black text-[8px] uppercase tracking-widest mb-2 border-none">
+                          {vendor.category}
+                        </Badge>
+                        <h3 className="font-black text-white text-2xl tracking-tighter uppercase leading-none group-hover/card:text-primary transition-colors">{vendor.name}</h3>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-[10px] font-black text-primary uppercase tracking-widest">Fidelity Score</p>
-                      <p className="text-2xl font-black text-white">{vendor.fidelityScore}%</p>
+
+                    <div className="absolute top-6 right-8">
+                       <div className="bg-primary/90 backdrop-blur-md px-4 py-2 border-none shadow-2xl flex flex-col items-center rounded-none">
+                          <span className="text-[9px] font-black text-secondary leading-none mb-1 uppercase tracking-widest">FIDELITY</span>
+                          <span className="text-2xl font-black text-secondary leading-none">{vendor.fidelityScore}%</span>
+                       </div>
                     </div>
                   </div>
-                  <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2 group-hover/card:text-primary transition-colors whitespace-normal">{vendor.name}</h3>
-                  <p className="text-[10px] font-medium text-white/40 uppercase tracking-widest leading-relaxed mb-8 h-12 line-clamp-3 whitespace-normal">
-                    {vendor.description}
-                  </p>
-                  <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                    <div className="flex items-center gap-2">
-                      <Star className="h-3 w-3 fill-primary text-primary" />
-                      <span className="text-sm font-black">{vendor.rating} Registry Rating</span>
+
+                  <div className="p-10 space-y-10 flex-1 bg-secondary/30 backdrop-blur-sm border-t border-white/5">
+                    <p className="text-[11px] font-medium text-white/60 leading-relaxed uppercase tracking-[0.15em] h-12 line-clamp-3 whitespace-normal">
+                      {vendor.description}
+                    </p>
+                    
+                    <div className="flex items-center justify-between pt-8 border-t border-white/10">
+                      <div className="flex items-center gap-3">
+                        <Star className="h-4 w-4 fill-primary text-primary" />
+                        <span className="text-sm font-black text-white tracking-tight">{vendor.rating} Registry Rating</span>
+                      </div>
+                      <Badge variant="outline" className="border-white/20 text-white/40 rounded-none font-black text-[9px] uppercase tracking-widest px-3 py-1">Since {vendor.joinedYear}</Badge>
                     </div>
-                    <Badge variant="outline" className="border-white/20 text-white/60 rounded-none font-black text-[8px] uppercase tracking-widest">Since {vendor.joinedYear}</Badge>
                   </div>
                 </div>
               ))}
