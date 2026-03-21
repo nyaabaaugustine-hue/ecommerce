@@ -44,21 +44,21 @@ export function ListingCard(props: ListingProps) {
     e.stopPropagation();
     addItem(props as any);
     toast({
-      title: "Registry Item Secured",
-      description: "Asset added to your session for escrow authorization.",
+      title: "Item Secured",
+      description: "Added to your cart for escrow protection.",
     });
   };
 
   return (
-    <Card className="group overflow-hidden bg-white border-2 border-border/50 hover:border-accent hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-[var(--radius)]">
+    <Card className="group overflow-hidden bg-white border-2 border-border/50 hover:border-accent hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-none">
       {/* Top Badges */}
       <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
         {discount && (
-          <Badge className="bg-primary text-white text-[10px] font-black px-3 py-1 border-none rounded-[var(--radius)] shadow-xl">
+          <Badge className="bg-primary text-white text-[10px] font-black px-3 py-1 border-none rounded-none shadow-xl">
             {discount}
           </Badge>
         )}
-        <div className="flex items-center gap-1.5 bg-accent/90 text-secondary py-1 px-3 rounded-[var(--radius)] shadow-lg backdrop-blur-sm">
+        <div className="flex items-center gap-1.5 bg-accent/90 text-secondary py-1 px-3 rounded-none shadow-lg backdrop-blur-sm">
            <ShieldCheck className="h-3.5 w-3.5" />
            <span className="text-[9px] font-black uppercase tracking-widest">Escrow Verified</span>
         </div>
@@ -66,7 +66,7 @@ export function ListingCard(props: ListingProps) {
 
       <div className="absolute top-4 right-4 z-10">
          <Badge className={cn(
-           "rounded-[var(--radius)] text-[8px] font-black uppercase tracking-widest border-none px-2 py-0.5 shadow-sm",
+           "rounded-none text-[8px] font-black uppercase tracking-widest border-none px-2 py-0.5 shadow-sm",
            inventoryStatus === 'In Stock' ? "bg-green-100 text-green-700" : 
            inventoryStatus === 'Limited Stock' ? "bg-orange-100 text-orange-700" : 
            "bg-red-100 text-red-700"
@@ -76,7 +76,7 @@ export function ListingCard(props: ListingProps) {
       </div>
 
       {/* Image Section with Reveal Animation */}
-      <Link href={`/listings/${id}`} className="relative h-56 w-full overflow-hidden block image-reveal bg-background product-card-image-wrap rounded-[var(--radius)]">
+      <Link href={`/listings/${id}`} className="relative h-56 w-full overflow-hidden block image-reveal bg-background product-card-image-wrap rounded-none">
         <Image 
           src={imageUrl} 
           alt={title} 
@@ -102,7 +102,7 @@ export function ListingCard(props: ListingProps) {
         </Link>
         
         <div className="flex items-center gap-2 mt-1">
-          <div className="bg-background border-2 border-border px-3 py-1 flex items-center gap-2 shadow-sm rounded-[var(--radius)]">
+          <div className="bg-background border-2 border-border px-3 py-1 flex items-center gap-2 shadow-sm rounded-none">
             <Users className="h-4 w-4 text-accent" />
             <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Verified Buyers</span>
           </div>
@@ -119,7 +119,7 @@ export function ListingCard(props: ListingProps) {
       <CardFooter className="px-6 py-5 bg-background border-t-2 flex gap-3">
         <Button 
           onClick={handleBuyNow}
-          className="flex-1 bg-secondary text-white hover:bg-primary transition-all rounded-[var(--radius)] font-black text-[11px] uppercase tracking-[0.2em] h-12 shadow-lg"
+          className="flex-1 bg-secondary text-white hover:bg-primary transition-all font-black text-[11px] uppercase tracking-[0.2em] h-12 shadow-lg"
         >
           Secure Buy
         </Button>
@@ -127,7 +127,7 @@ export function ListingCard(props: ListingProps) {
           onClick={handleAddToCart}
           variant="outline"
           size="icon"
-          className="rounded-[var(--radius)] border-2 border-primary/20 text-primary hover:bg-accent hover:border-accent hover:text-secondary h-12 w-12 transition-all shadow-md"
+          className="border-2 border-primary/20 text-primary hover:bg-accent hover:border-accent hover:text-secondary h-12 w-12 transition-all shadow-md"
         >
           <Plus className="h-6 w-6" />
         </Button>

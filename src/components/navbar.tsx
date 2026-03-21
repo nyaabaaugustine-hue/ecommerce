@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -102,7 +101,7 @@ export function Navbar() {
       {/* Top Banner */}
       <div className="bg-secondary text-white py-1.5 px-4 md:px-10 flex items-center justify-between text-[8px] font-black uppercase tracking-widest border-b border-white/5">
          <div className="flex items-center gap-4">
-            <Badge className="bg-[#f68b1e] text-secondary rounded-[var(--radius)] font-black text-[7px] uppercase tracking-widest px-2 py-0.5">CLEARANCE SALE</Badge>
+            <Badge className="bg-[#f68b1e] text-secondary rounded-none font-black text-[7px] uppercase tracking-widest px-2 py-0.5">CLEARANCE SALE</Badge>
             <span className="text-[#f68b1e]">UP TO 60% OFF</span>
             <div className="flex items-center gap-2 border-l border-white/10 pl-4">
                <Phone className="h-2.5 w-2.5 text-primary" />
@@ -129,7 +128,7 @@ export function Navbar() {
         <div className="container mx-auto px-4 flex items-center justify-between gap-6">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2 group shrink-0">
-              <div className="relative h-8 w-8 overflow-hidden rounded-[var(--radius)] border border-primary/20 shadow-sm">
+              <div className="relative h-8 w-8 overflow-hidden rounded-none border border-primary/20 shadow-sm">
                 <Image src={content.settings.logoUrl} alt="Logo" fill className="object-cover" />
               </div>
               <div className="flex flex-col">
@@ -150,7 +149,7 @@ export function Navbar() {
           </div>
 
           <div className="flex-1 max-w-xl relative" ref={searchRef}>
-            <div className="relative w-full flex shadow-sm border border-secondary/10 overflow-hidden rounded-[var(--radius)]">
+            <div className="relative w-full flex shadow-sm border border-secondary/10 overflow-hidden rounded-none">
               <input 
                 type="text" 
                 placeholder="Search products, brands and categories..." 
@@ -159,12 +158,12 @@ export function Navbar() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setShowSuggestions(true)}
               />
-              <Button className="h-auto px-6 bg-secondary hover:bg-primary text-white font-black uppercase text-[10px] tracking-widest border-none rounded-[var(--radius)]">
+              <Button className="h-auto px-6 bg-secondary hover:bg-primary text-white font-black uppercase text-[10px] tracking-widest border-none">
                 <Search className="h-3.5 w-3.5" />
               </Button>
             </div>
             {showSuggestions && searchQuery.length > 0 && (
-              <div className="absolute top-full left-0 w-full bg-white border border-t-0 shadow-2xl z-50 rounded-[var(--radius)]">
+              <div className="absolute top-full left-0 w-full bg-white border border-t-0 shadow-2xl z-50 rounded-none">
                 {suggestions.map((s) => (
                   <Link 
                     key={s.id} 
@@ -172,7 +171,7 @@ export function Navbar() {
                     onClick={() => setShowSuggestions(false)}
                     className="flex items-center gap-4 p-3 hover:bg-muted/30 transition-colors border-b last:border-0"
                   >
-                    <div className="relative h-8 w-8 bg-muted shrink-0 rounded-[var(--radius)]">
+                    <div className="relative h-8 w-8 bg-muted shrink-0 rounded-none">
                       <Image src={s.imageUrl} alt={s.title} fill className="object-cover" />
                     </div>
                     <div className="flex-1">
@@ -199,7 +198,7 @@ export function Navbar() {
                         <User className="h-5 w-5 text-secondary group-hover:text-primary transition-colors" />
                      </div>
                    </DropdownMenuTrigger>
-                   <DropdownMenuContent align="end" className="rounded-[var(--radius)] w-48 border-t-2 border-primary">
+                   <DropdownMenuContent align="end" className="rounded-none w-48 border-t-2 border-primary">
                      <DropdownMenuItem asChild>
                         <Link href="/dashboard" className="text-[9px] font-black uppercase tracking-widest cursor-pointer">My Dashboard</Link>
                      </DropdownMenuItem>
@@ -209,7 +208,7 @@ export function Navbar() {
                ) : (
                  <Button 
                    onClick={() => setShowAuth(true)}
-                   className="bg-transparent text-secondary hover:text-accent font-black text-[10px] uppercase tracking-widest px-0 flex items-center gap-2 rounded-[var(--radius)]"
+                   className="bg-transparent text-secondary hover:text-accent font-black text-[10px] uppercase tracking-widest px-0 flex items-center gap-2"
                  >
                    <User className="h-4 w-4" />
                    Sign In
@@ -219,10 +218,10 @@ export function Navbar() {
                <div className="flex items-center gap-2 border-l border-dashed pl-6">
                  <Palette className="h-3 w-3 text-primary" />
                  <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
-                    <SelectTrigger className="h-6 rounded-[var(--radius)] border-none bg-transparent text-[8px] font-black uppercase tracking-widest w-[100px] px-0 hover:text-accent">
+                    <SelectTrigger className="h-6 rounded-none border-none bg-transparent text-[8px] font-black uppercase tracking-widest w-[100px] px-0 hover:text-accent">
                        <SelectValue placeholder="Theme" />
                     </SelectTrigger>
-                    <SelectContent className="rounded-[var(--radius)] border-t-2 border-primary">
+                    <SelectContent className="rounded-none border-t-2 border-primary">
                       {THEMES.map((t) => (
                         <SelectItem key={t.value} value={t.value} className="text-[9px] font-black uppercase tracking-widest">
                           {t.label}
@@ -232,10 +231,10 @@ export function Navbar() {
                  </Select>
                </div>
 
-               <Button variant="ghost" size="icon" className="relative group h-8 w-8 rounded-[var(--radius)] hover:bg-transparent ml-2">
+               <Button variant="ghost" size="icon" className="relative group h-8 w-8 rounded-none hover:bg-transparent ml-2">
                  <ShoppingCart className="h-5 w-5 text-secondary group-hover:text-accent transition-colors" />
                  {items.length > 0 && (
-                   <Badge className="absolute -top-1 -right-1 h-4 min-w-[16px] px-1 flex items-center justify-center bg-accent text-secondary text-[8px] font-black border border-white shadow-sm rounded-[var(--radius)]">
+                   <Badge className="absolute -top-1 -right-1 h-4 min-w-[16px] px-1 flex items-center justify-center bg-accent text-secondary text-[8px] font-black border border-white shadow-sm rounded-none">
                      {items.length}
                    </Badge>
                  )}
