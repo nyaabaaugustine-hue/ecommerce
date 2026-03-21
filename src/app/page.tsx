@@ -13,10 +13,12 @@ import { SpotlightCategories } from '@/components/spotlight-categories';
 import { TipsSection } from '@/components/tips-section';
 import { FooterTabs } from '@/components/footer-tabs';
 import { NewsletterPopup } from '@/components/newsletter-popup';
-import { LISTINGS } from '@/lib/mock-data';
+import { LISTINGS, VENDORS } from '@/lib/mock-data';
 import { useSearch } from '@/components/providers';
 import { Badge } from '@/components/ui/badge';
-import { ShieldCheck, Activity, Zap, Lock } from 'lucide-react';
+import { ShieldCheck, Activity, Zap, Lock, ArrowUpRight, Star } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 export function HomePage() {
   const { searchQuery } = useSearch();
@@ -44,22 +46,6 @@ export function HomePage() {
 
   const industrialAgro = useMemo(() => {
     return filteredListings.filter(l => l.category === 'Agriculture').slice(0, 5);
-  }, [filteredListings]);
-
-  const designerLifestyle = useMemo(() => {
-    return filteredListings.filter(l => l.category === 'Fashion').slice(0, 5);
-  }, [filteredListings]);
-
-  const professionalSolutions = useMemo(() => {
-    return filteredListings.filter(l => l.category === 'Services').slice(0, 5);
-  }, [filteredListings]);
-
-  const performanceAthletics = useMemo(() => {
-    return filteredListings.filter(l => l.category === 'Sports').slice(0, 5);
-  }, [filteredListings]);
-
-  const eliteEstates = useMemo(() => {
-    return filteredListings.filter(l => l.category === 'Property').slice(0, 5);
   }, [filteredListings]);
 
   return (
@@ -104,25 +90,23 @@ export function HomePage() {
 
       {/* (Most popular laptops) */}
       {eliteComputing.length > 0 && (
-        <section className="w-full py-6 bg-muted/5 overflow-hidden border-y border-primary/10">
-          <div className="max-w-7xl mx-auto px-4 mb-4 flex items-end justify-between">
-            <div className="space-y-0.5">
-              <h2 className="text-lg md:text-2xl font-black tracking-tighter uppercase leading-none flex items-center gap-2 italic text-foreground">
+        <section className="w-full py-12 bg-muted/5 overflow-hidden border-y border-primary/10">
+          <div className="max-w-7xl mx-auto px-4 mb-8 flex items-end justify-between">
+            <div className="space-y-1">
+              <h2 className="text-2xl md:text-4xl font-black tracking-tighter uppercase leading-none italic text-foreground">
                 (Most popular laptops)
               </h2>
-              <p className="text-[7px] md:text-[8px] font-black text-muted-foreground uppercase tracking-[0.3em]">Premium Hardware Registry • ACCRA</p>
+              <p className="text-[9px] md:text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em]">Premium Hardware Registry • ACCRA</p>
             </div>
-            <Link href="/listings?category=Electronics" className="text-[8px] md:text-[9px] font-black text-primary hover:underline uppercase tracking-widest">
+            <Link href="/listings?category=Electronics" className="text-[10px] md:text-[11px] font-black text-primary hover:underline uppercase tracking-widest">
               View Full Registry
             </Link>
           </div>
           
-          <div className="relative group">
-            <div className="animate-marquee hover:pause flex gap-4 px-4">
-              {[...eliteComputing, ...eliteComputing].map((item, idx) => (
-                <div key={`${item.id}-${idx}`} className="w-[160px] md:w-[200px] shrink-0 transform scale-95 origin-center">
-                  <HighFidelityListingCard {...item} />
-                </div>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {eliteComputing.map((item) => (
+                <HighFidelityListingCard key={item.id} {...item} />
               ))}
             </div>
           </div>
@@ -131,17 +115,17 @@ export function HomePage() {
 
       {/* (Most searched for mobiles) */}
       {smartCommunication.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
+        <section className="max-w-7xl mx-auto w-full px-4 py-16 md:py-24">
+          <div className="mb-10 flex justify-between items-end">
+            <div className="space-y-1">
+              <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter italic leading-none">
                 (Most searched for mobiles)
               </h2>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified Smartphone Registry Node</p>
+              <p className="text-[10px] md:text-[12px] text-muted-foreground font-black uppercase tracking-widest">Verified Smartphone Registry Node</p>
             </div>
-            <Link href="/listings?category=Electronics" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">Full Registry</Link>
+            <Link href="/listings?category=Electronics" className="text-[10px] md:text-[12px] font-black text-primary uppercase tracking-widest hover:underline">Full Registry</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
             {smartCommunication.map((item) => (
               <ListingCard key={item.id} {...item} />
             ))}
@@ -149,19 +133,70 @@ export function HomePage() {
         </section>
       )}
 
+      {/* VERIFIED VENDOR SHOWCASE */}
+      <section className="bg-secondary py-24 text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+           <div className="grid grid-cols-12 h-full gap-4">
+              {[...Array(12)].map((_, i) => <div key={i} className="border-r border-white h-full" />)}
+           </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+            <div className="space-y-4">
+              <Badge className="bg-primary text-secondary font-black rounded-none uppercase text-[10px] tracking-[0.4em] px-6">Institutional Directory</Badge>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none">
+                Verified <br /> <span className="text-primary italic">Partner Sellers</span>
+              </h2>
+            </div>
+            <Link href="/vendors">
+              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-secondary font-black rounded-none h-16 px-12 uppercase text-[11px] tracking-[0.3em] gap-3">
+                Enter Vendor Registry <ArrowUpRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {VENDORS.slice(0, 3).map((vendor) => (
+              <div key={vendor.id} className="bg-white/5 border border-white/10 p-8 hover:border-primary transition-all group">
+                <div className="flex justify-between items-start mb-8">
+                  <div className="h-16 w-16 bg-white relative p-2 shadow-2xl">
+                    <Image src={vendor.logoUrl} alt={vendor.name} fill className="object-contain p-1" unoptimized />
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[10px] font-black text-primary uppercase tracking-widest">Fidelity Score</p>
+                    <p className="text-2xl font-black text-white">{vendor.fidelityScore}%</p>
+                  </div>
+                </div>
+                <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2 group-hover:text-primary transition-colors">{vendor.name}</h3>
+                <p className="text-[10px] font-medium text-white/40 uppercase tracking-widest leading-relaxed mb-8 h-12 line-clamp-3">
+                  {vendor.description}
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                  <div className="flex items-center gap-2">
+                    <Star className="h-3 w-3 fill-primary text-primary" />
+                    <span className="text-sm font-black">{vendor.rating} Registry Rating</span>
+                  </div>
+                  <Badge variant="outline" className="border-white/20 text-white/60 rounded-none font-black text-[8px] uppercase tracking-widest">Since {vendor.joinedYear}</Badge>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* (Most searched for vehicles) */}
       {premiumAutos.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 bg-muted/5">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
+        <section className="max-w-7xl mx-auto w-full px-4 py-24 md:py-32">
+          <div className="mb-12 flex justify-between items-end">
+            <div className="space-y-1">
+              <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter italic leading-none">
                 (Most searched for vehicles)
               </h2>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Verified High-Value Vehicle Registry</p>
+              <p className="text-[10px] md:text-[12px] text-muted-foreground font-black uppercase tracking-widest">Verified High-Value Vehicle Registry</p>
             </div>
-            <Link href="/listings?category=Vehicles" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+            <Link href="/listings?category=Vehicles" className="text-[10px] md:text-[12px] font-black text-primary uppercase tracking-widest hover:underline">View All Registry</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-10">
             {premiumAutos.map((item) => (
               <ListingCard key={item.id} {...item} />
             ))}
@@ -173,90 +208,18 @@ export function HomePage() {
 
       {/* (Most searched for agriculture) */}
       {industrialAgro.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
+        <section className="max-w-7xl mx-auto w-full px-4 py-24 md:py-32 border-t border-dashed">
+          <div className="mb-12 flex justify-between items-end">
+            <div className="space-y-1">
+              <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tighter italic leading-none">
                 (Most searched for agriculture)
               </h2>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Heavy Machinery & Farming Assets</p>
+              <p className="text-[10px] md:text-[12px] text-muted-foreground font-black uppercase tracking-widest">Heavy Machinery & Farming Assets</p>
             </div>
-            <Link href="/listings?category=Agriculture" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+            <Link href="/listings?category=Agriculture" className="text-[10px] md:text-[12px] font-black text-primary uppercase tracking-widest hover:underline">View All Assets</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-10">
             {industrialAgro.map((item) => <ListingCard key={item.id} {...item} />)}
-          </div>
-        </section>
-      )}
-
-      {/* (Most popular fashion) */}
-      {designerLifestyle.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 bg-muted/5">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
-                (Most popular fashion)
-              </h2>
-              <p className="text-[9px] md:text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Luxury Apparel & High-End Timepieces</p>
-            </div>
-            <Link href="/listings?category=Fashion" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            {designerLifestyle.map((item) => <ListingCard key={item.id} {...item} />)}
-          </div>
-        </section>
-      )}
-
-      {/* (Most popular services) */}
-      {professionalSolutions.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
-                (Most popular services)
-              </h2>
-              <p className="text-[9px] md:text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Corporate Services & Technical Audits</p>
-            </div>
-            <Link href="/listings?category=Services" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            {professionalSolutions.map((item) => <ListingCard key={item.id} {...item} />)}
-          </div>
-        </section>
-      )}
-
-      {/* (Most searched for sports) */}
-      {performanceAthletics.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 bg-muted/5">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
-                (Most searched for sports)
-              </h2>
-              <p className="text-[9px] md:text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Elite Fitness & Sporting Hardware</p>
-            </div>
-            <Link href="/listings?category=Sports" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            {performanceAthletics.map((item) => <ListingCard key={item.id} {...item} />)}
-          </div>
-        </section>
-      )}
-
-      {/* (Most popular property) */}
-      {eliteEstates.length > 0 && (
-        <section className="max-w-7xl mx-auto w-full px-4 py-8 md:py-12 border-b">
-          <div className="mb-6 md:mb-8 flex justify-between items-end">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tighter italic leading-none">
-                 (Most popular property)
-              </h2>
-              <p className="text-[9px] md:text-[10px] font-black text-muted-foreground uppercase tracking-widest mt-1">Luxury Residential & Commercial Real Estate</p>
-            </div>
-            <Link href="/listings?category=Property" className="text-[9px] md:text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View all</Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            {eliteEstates.map((item) => <ListingCard key={item.id} {...item} />)}
           </div>
         </section>
       )}
