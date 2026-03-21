@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -13,7 +14,9 @@ import {
   ShieldCheck,
   HelpCircle,
   Plus,
-  Menu
+  Menu,
+  Home as HomeIcon,
+  Phone
 } from 'lucide-react';
 import { useAuth, useContent, useTheme, type PrimaryTheme } from '@/components/providers';
 import { useState } from 'react';
@@ -45,6 +48,14 @@ export function Navbar() {
     { id: 'crimson', name: 'Power Crimson', color: 'bg-red-900', desc: 'Heat Blend' },
   ];
 
+  const NAV_LINKS = [
+    { name: 'Home', href: '/', icon: HomeIcon },
+    { name: 'About Us', href: '/about', icon: Info },
+    { name: 'Vendors', href: '/vendors', icon: ShieldCheck },
+    { name: 'Contact', href: '/contact', icon: Phone },
+    { name: 'Help', href: '/help', icon: HelpCircle },
+  ];
+
   return (
     <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm transition-colors duration-300">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
@@ -53,15 +64,11 @@ export function Navbar() {
       <div className="bg-muted/50 border-b border-dashed hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 h-7 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/about" className="text-[8px] font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors flex items-center gap-1">
-              <Info className="h-2.5 w-2.5" /> About
-            </Link>
-            <Link href="/vendors" className="text-[8px] font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors flex items-center gap-1">
-              <ShieldCheck className="h-2.5 w-2.5" /> Verified
-            </Link>
-            <Link href="/help" className="text-[8px] font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors flex items-center gap-1">
-              <HelpCircle className="h-2.5 w-2.5" /> Help
-            </Link>
+            {NAV_LINKS.slice(1).map((link) => (
+              <Link key={link.name} href={link.href} className="text-[8px] font-black uppercase tracking-widest text-secondary hover:text-primary transition-colors flex items-center gap-1">
+                <link.icon className="h-2.5 w-2.5" /> {link.name}
+              </Link>
+            ))}
           </div>
           <div className="hidden md:flex items-center gap-4">
             <span className="text-[7px] font-bold text-primary uppercase tracking-[0.4em]">SECURE ESCROW ACTIVE • ACCRA HUB</span>
@@ -70,7 +77,7 @@ export function Navbar() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 h-14 md:h-16 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4 md:gap-6 h-full">
+        <div className="flex items-center gap-4 md:gap-8 h-full">
           {/* COMPACT LOGO */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             <div className="relative h-7 w-7 md:h-9 md:w-9 overflow-hidden rounded-none border border-primary/20 p-1 bg-white shadow-sm group-hover:border-primary transition-colors duration-500">
@@ -91,7 +98,19 @@ export function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center h-full">
+          {/* MAIN NAV LINKS */}
+          <div className="hidden lg:flex items-center h-full gap-6">
+            <div className="h-6 w-px bg-border mr-2" />
+            {NAV_LINKS.map((link) => (
+              <Link 
+                key={link.name} 
+                href={link.href}
+                className="text-[10px] font-black uppercase tracking-widest text-foreground hover:text-primary transition-all relative group/nav"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover/nav:w-full" />
+              </Link>
+            ))}
             <div className="h-6 w-px bg-border mx-2" />
             <MegaMenu />
           </div>

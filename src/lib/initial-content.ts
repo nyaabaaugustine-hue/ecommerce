@@ -10,7 +10,7 @@ export const INITIAL_CONTENT = {
           description: "Shop with total confidence across Ghana using our secure escrow system. Your funds are protected until you confirm delivery.",
           badge: "Secure Escrow Protection",
           primaryCta: "Start Shopping",
-          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg"
+          imageUrl: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?q=80&w=1600&auto=format&fit=crop"
         },
         highlights: {
           title: "Marketplace Highlights",
@@ -37,12 +37,12 @@ export const INITIAL_CONTENT = {
         mission: {
           title: "OUR MISSION",
           description: "To establish the gold standard for commerce in West Africa through transparency, safety, and escrow excellence.",
-          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg"
+          imageUrl: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop"
         },
         values: {
           title: "CORE VALUES",
           description: "Integrity, Transparency, and Security are the pillars of the Ecommerce marketplace.",
-          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg"
+          imageUrl: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1600&auto=format&fit=crop"
         }
       }
     },
@@ -53,7 +53,7 @@ export const INITIAL_CONTENT = {
         support: {
           title: "GET IN TOUCH",
           description: "Our support team is active 24/7 to assist with inquiries and escrow mediation.",
-          imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1774057991/supermarket-widget-1_cavrxq.jpg"
+          imageUrl: "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=1600&auto=format&fit=crop"
         }
       }
     }
