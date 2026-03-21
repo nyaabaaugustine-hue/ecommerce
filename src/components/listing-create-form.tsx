@@ -83,7 +83,7 @@ export function ListingCreateForm() {
       const result = await generateListingDescription({
         title,
         category,
-        keyFeatures: keyFeatures.length > 0 ? keyFeatures : ["Full Warranty", "Verified Seller", "Escrow Secured"],
+        keyFeatures: keyFeatures.length > 0 ? keyFeatures : ["Verified Item", "Escrow Secured", "Fast Delivery"],
         length: 'medium',
         tone: 'professional'
       });
@@ -131,9 +131,9 @@ export function ListingCreateForm() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Product Title</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Listing Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Executive Laptop - Core i9" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
+                  <Input placeholder="e.g. 2022 Toyota Camry or Luxury Villa" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -145,7 +145,7 @@ export function ListingCreateForm() {
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Market Category</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Listing Category</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger className="rounded-none h-14 border-2 focus:border-accent">
@@ -154,9 +154,10 @@ export function ListingCreateForm() {
                   </FormControl>
                   <SelectContent className="rounded-none">
                     <SelectItem value="Electronics">Electronics & Tech</SelectItem>
+                    <SelectItem value="Automotive">Automotive & Cars</SelectItem>
                     <SelectItem value="Real Estate">Real Estate & Property</SelectItem>
-                    <SelectItem value="Education">Educational Services</SelectItem>
                     <SelectItem value="Professional Services">Professional Services</SelectItem>
+                    <SelectItem value="Home & Living">Home & Living</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -186,7 +187,7 @@ export function ListingCreateForm() {
             name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Delivery Location</FormLabel>
+                <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Item Location</FormLabel>
                 <FormControl>
                   <Input placeholder="e.g. East Legon, Accra" className="rounded-none h-14 border-2 focus:border-accent" {...field} />
                 </FormControl>
@@ -210,12 +211,12 @@ export function ListingCreateForm() {
                 </div>
                 <div className="space-y-2">
                   <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-                    Service Lock Fee (2.5%) <Info className="h-3.5 w-3.5" />
+                    Marketplace Fee (2.5%) <Info className="h-3.5 w-3.5" />
                   </span>
                   <p className="text-2xl font-black text-destructive">-GH₵{payoutStats.treasuryFee.toFixed(2)}</p>
                 </div>
                 <div className="space-y-2 bg-primary/5 p-5 border-l-4 border-accent">
-                  <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Net Seller Payout</span>
+                  <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Net Payout to You</span>
                   <p className="text-3xl font-black text-primary">GH₵{payoutStats.netEarnings.toLocaleString()}</p>
                 </div>
               </div>
@@ -226,13 +227,13 @@ export function ListingCreateForm() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <FormLabel className="text-secondary font-black uppercase text-[10px] tracking-widest">Key Features</FormLabel>
-            <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest">Increases Marketplace Visibility</span>
+            <span className="text-[9px] text-muted-foreground font-black uppercase tracking-widest">Boosts Discovery Performance</span>
           </div>
           <div className="flex gap-3">
             <Input 
               value={featureInput}
               onChange={(e) => setFeatureInput(e.target.value)}
-              placeholder="e.g. 1 Year Warranty, Fast Delivery..."
+              placeholder="e.g. Warranty, Logbook Available, Brand New..."
               className="rounded-none h-14 border-2 focus:border-accent"
               onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
             />
@@ -267,12 +268,12 @@ export function ListingCreateForm() {
                   disabled={isGenerating}
                 >
                   {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                  AI Optimization
+                  AI Optimizer
                 </Button>
               </div>
               <FormControl>
                 <Textarea 
-                  placeholder="Provide comprehensive details and shipping requirements..." 
+                  placeholder="Provide comprehensive details for your listing..." 
                   className="min-h-[250px] rounded-none leading-relaxed border-2 focus:border-accent transition-colors bg-background p-6 font-medium" 
                   {...field} 
                 />
@@ -290,10 +291,10 @@ export function ListingCreateForm() {
           <div className="flex-1 space-y-4">
             <h4 className="font-black text-2xl flex items-center gap-4 tracking-tighter uppercase">
               <ArrowRightLeft className="h-6 w-6 text-accent" />
-              Secure Payment Protection
+              Secure Escrow Protection
             </h4>
             <p className="text-sm text-white/50 leading-relaxed font-medium uppercase tracking-widest">
-              Ecommerce enforces high-trust trade in Ghana. All payments are restricted via our secure multi-method gateway until the buyer certifies quality inspection.
+              Ecommerce ensures safe trade for all business types. Payments are held securely via our multi-method gateway until the buyer authorizes release after inspection.
             </p>
             <div className="pt-2">
               <Image 
@@ -301,6 +302,7 @@ export function ListingCreateForm() {
                 alt="Authorized Payments" 
                 width={240} 
                 height={40} 
+                sizes="240px"
                 className="h-8 object-contain opacity-80"
                 unoptimized
               />

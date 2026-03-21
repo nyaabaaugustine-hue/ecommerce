@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles, Palette, Store, HelpCircle, X } from 'lucide-react';
+import { Search, User, ShoppingCart, Phone, ChevronDown, ShieldCheck, Globe, LogOut, Menu, Zap, Sparkles, Palette, Store, HelpCircle, X, PlusCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   DropdownMenu,
@@ -26,7 +26,7 @@ import { MegaMenu } from '@/components/mega-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from '@/components/ui/sheet';
 import { LISTINGS } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const TICKER_ITEMS = [
@@ -63,6 +63,7 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const { content } = useContent();
   const pathname = usePathname();
+  const router = useRouter();
   const [showAuth, setShowAuth] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -127,7 +128,7 @@ export function Navbar() {
          </div>
          <div className="flex items-center gap-6">
             <div className="flex items-center gap-4 opacity-70">
-               <span className="hover:text-accent cursor-pointer transition-colors">Sell on Ecommerce</span>
+               <span onClick={() => setShowAuth(true)} className="hover:text-accent cursor-pointer transition-colors">Sell on Ecommerce</span>
                <span className="hover:text-accent cursor-pointer transition-colors">SAFE PAY</span>
                <span className="hover:text-accent cursor-pointer transition-colors">FAST DELIVERY</span>
             </div>
@@ -153,47 +154,48 @@ export function Navbar() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-[300px] p-0 flex flex-col border-r-4 border-primary">
-                  <div className="bg-secondary p-6 text-white flex flex-col gap-4">
+                  <div className="sr-only">
                     <SheetHeader>
-                      <div className="flex items-center gap-3">
-                        <div className="relative h-10 w-10 bg-white p-1 rounded-none border border-primary/30">
-                          <Image src={content.settings.logoUrl} alt="Logo" fill sizes="40px" className="object-contain" />
-                        </div>
-                        <SheetTitle className="font-black text-xl tracking-tighter uppercase text-white">{content.settings.siteName}</SheetTitle>
-                      </div>
-                      <SheetDescription className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-none text-left">
-                        The Gold Standard
-                      </SheetDescription>
+                      <SheetTitle>Mobile Navigation Menu</SheetTitle>
+                      <SheetDescription>Access all marketplace categories and account settings.</SheetDescription>
                     </SheetHeader>
+                  </div>
+                  <div className="bg-secondary p-6 text-white flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="relative h-10 w-10 bg-white p-1 rounded-none border border-primary/30">
+                        <Image src={content.settings.logoUrl} alt="Logo" fill sizes="40px" className="object-contain" />
+                      </div>
+                      <h2 className="font-black text-xl tracking-tighter uppercase text-white">{content.settings.siteName}</h2>
+                    </div>
+                    <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-none text-left">
+                      The Gold Standard
+                    </p>
                   </div>
                   
                   <div className="flex-1 overflow-y-auto p-6 no-scrollbar">
                     <nav className="space-y-8">
                       <div className="space-y-4">
-                        <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">Navigation nodes</p>
-                        <ul className="space-y-4">
-                          {NAV_LINKS.map(link => (
-                            <li key={link.name}>
-                              <Link href={link.href} className="text-sm font-black uppercase text-secondary hover:text-primary transition-colors flex items-center justify-between">
-                                {link.name}
-                                <ChevronDown className="h-4 w-4 -rotate-90 opacity-30" />
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
+                        <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">Quick Actions</p>
+                        <Button 
+                          onClick={() => { setShowAuth(true); setIsMobileMenuOpen(false); }}
+                          className="w-full bg-accent text-secondary font-black text-xs uppercase tracking-widest h-12 gap-2"
+                        >
+                          <PlusCircle className="h-4 w-4" /> Post An Ad
+                        </Button>
                       </div>
 
                       <Separator />
 
                       <div className="space-y-4">
-                        <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">Marketplace Registry</p>
+                        <p className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">Marketplace Categories</p>
                         <Accordion type="single" collapsible className="w-full">
                           <AccordionItem value="categories" className="border-none">
-                            <AccordionTrigger className="py-0 text-sm font-black uppercase text-secondary hover:no-underline">Shop Categories</AccordionTrigger>
+                            <AccordionTrigger className="py-0 text-sm font-black uppercase text-secondary hover:no-underline">Browse Directory</AccordionTrigger>
                             <AccordionContent className="pt-4 space-y-3">
-                              <Link href="/listings?category=Computing" className="block text-[11px] font-bold text-muted-foreground uppercase pl-4">Electronics & Tech</Link>
+                              <Link href="/listings?category=Automotive" className="block text-[11px] font-bold text-muted-foreground uppercase pl-4">Automotive & Cars</Link>
                               <Link href="/listings?category=Real Estate" className="block text-[11px] font-bold text-muted-foreground uppercase pl-4">Property & Real Estate</Link>
-                              <Link href="/listings?category=Home" className="block text-[11px] font-bold text-muted-foreground uppercase pl-4">Lifestyle & Home</Link>
+                              <Link href="/listings?category=Computing" className="block text-[11px] font-bold text-muted-foreground uppercase pl-4">Electronics & Tech</Link>
+                              <Link href="/listings?category=Professional Services" className="block text-[11px] font-bold text-muted-foreground uppercase pl-4">Professional Services</Link>
                             </AccordionContent>
                           </AccordionItem>
                         </Accordion>
@@ -214,18 +216,6 @@ export function Navbar() {
                                 {THEMES.map((t) => (
                                   <SelectItem key={t.value} value={t.value} className="text-[9px] font-black uppercase">{t.label}</SelectItem>
                                 ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div className="flex items-center justify-between bg-muted/20 p-3">
-                            <span className="text-[10px] font-black text-secondary uppercase">GHS Currency</span>
-                            <Select value={currency} onValueChange={(v) => setCurrency(v as CurrencyCode)}>
-                              <SelectTrigger className="h-8 border-none bg-transparent text-[10px] font-black uppercase tracking-widest w-[80px] px-0">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent className="rounded-none">
-                                <SelectItem value="GHS" className="text-[9px] font-black uppercase">GHS</SelectItem>
-                                <SelectItem value="USD" className="text-[9px] font-black uppercase">USD</SelectItem>
                               </SelectContent>
                             </Select>
                           </div>
@@ -256,7 +246,7 @@ export function Navbar() {
                   <span className="font-headline font-black text-lg md:text-xl text-secondary tracking-tighter uppercase leading-none">
                     {content.settings.siteName}
                   </span>
-                  <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em] hidden sm:block">Secure Escrow</span>
+                  <span className="text-[7px] font-black text-primary uppercase tracking-[0.2em] hidden sm:block">Open Marketplace</span>
                 </div>
               </Link>
             </div>
@@ -288,7 +278,7 @@ export function Navbar() {
             <div className="relative w-full flex shadow-sm border border-secondary/10 overflow-hidden rounded-none">
               <input 
                 type="text" 
-                placeholder="Search products, brands and categories..." 
+                placeholder="What are you looking for today? (e.g. Toyota, iPhone, Villa)" 
                 className="w-full bg-muted/10 py-2.5 pl-4 md:pl-6 pr-3 text-[11px] font-bold focus:bg-white focus:outline-none transition-all placeholder:text-muted-foreground/50"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -322,6 +312,14 @@ export function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-6 shrink-0">
+            <Button 
+              onClick={() => setShowAuth(true)}
+              className="bg-accent text-secondary hover:bg-white font-black text-[10px] uppercase tracking-[0.2em] px-6 h-11 flex items-center gap-2 shadow-lg border border-accent/20"
+            >
+              <PlusCircle className="h-4 w-4" />
+              Sell Now
+            </Button>
+
             <div className="flex items-center gap-4">
                {user ? (
                  <DropdownMenu>
@@ -350,22 +348,6 @@ export function Navbar() {
                    Sign In
                  </Button>
                )}
-
-               <div className="hidden lg:flex items-center gap-2 border-l border-dashed pl-6">
-                 <Palette className="h-3 w-3 text-primary" />
-                 <Select value={theme} onValueChange={(v) => setTheme(v as PrimaryTheme)}>
-                    <SelectTrigger className="h-6 rounded-none border-none bg-transparent text-[8px] font-black uppercase tracking-widest w-[100px] px-0 hover:text-accent">
-                       <SelectValue placeholder="Theme" />
-                    </SelectTrigger>
-                    <SelectContent className="rounded-none border-t-2 border-primary">
-                      {THEMES.map((t) => (
-                        <SelectItem key={t.value} value={t.value} className="text-[9px] font-black uppercase tracking-widest">
-                          {t.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                 </Select>
-               </div>
 
                <Button variant="ghost" size="icon" className="relative group h-8 w-8 rounded-none hover:bg-transparent ml-2">
                  <ShoppingCart className="h-5 w-5 text-secondary group-hover:text-accent transition-colors" />

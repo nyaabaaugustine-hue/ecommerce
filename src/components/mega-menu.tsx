@@ -22,7 +22,11 @@ import {
   Zap,
   ShieldAlert,
   Store,
-  Star
+  Star,
+  Car,
+  Truck,
+  Wrench,
+  Stethoscope
 } from "lucide-react";
 import { 
   Popover, 
@@ -34,37 +38,36 @@ import { Badge } from "@/components/ui/badge";
 
 const SECTORS = [
   {
-    title: "Electronics & Tech",
+    title: "Vehicles & Transport",
     subtitle: "Verified Nodes",
-    icon: Cpu,
-    bgImage: "https://picsum.photos/seed/tech-clouds/600/200",
+    icon: Car,
+    bgImage: "https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=600&auto=format&fit=crop",
     items: [
-      { name: "Laptops & Computers", href: "/listings?category=Computing %26 Laptops", icon: Monitor, desc: "MacBook & Workstations" },
-      { name: "Phones & Tablets", href: "/listings?category=Mobile Ecosystem", icon: Smartphone, desc: "iPhone & Android Nodes" },
-      { name: "Audio & Video", href: "/listings?category=Sovereign Audio/Visual", icon: Tv, desc: "OLED & Hi-Fi Audio" },
-      { name: "Home Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator, desc: "Inverters & Smart Kitchen" },
+      { name: "Cars & SUVs", href: "/listings?category=Automotive", icon: Car, desc: "Luxury & Pre-owned" },
+      { name: "Commercial Trucks", href: "/listings?category=Automotive", icon: Truck, desc: "Logistics Assets" },
+      { name: "Auto Parts", href: "/listings?category=Automotive", icon: Wrench, desc: "Verified Spares" },
     ]
   },
   {
-    title: "Property & Real Estate",
+    title: "Property & Services",
     subtitle: "Verified Nodes",
     icon: Home,
     bgImage: "https://picsum.photos/seed/realestate-clouds/600/200",
     items: [
-      { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2, desc: "Ridge & Airport Offices" },
-      { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key, desc: "Elite Gated Villas" },
-      { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase, desc: "Audit & Legal Registry" },
+      { name: "Houses & Land", href: "/listings?category=Residential Sales", icon: Key, desc: "Residential Assets" },
+      { name: "Commercial Space", href: "/listings?category=Commercial Rentals", icon: Building2, desc: "Ridge & Osu Nodes" },
+      { name: "Professional Services", href: "/listings?category=Professional Services", icon: Briefcase, desc: "Legal & IT Audit" },
     ]
   },
   {
-    title: "Lifestyle & Home",
+    title: "Electronics & Home",
     subtitle: "Verified Nodes",
     icon: ShoppingBag,
-    bgImage: "https://picsum.photos/seed/lifestyle-clouds/600/200",
+    bgImage: "https://picsum.photos/seed/tech-clouds/600/200",
     items: [
-      { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair, desc: "Luxury Living Suites" },
-      { name: "Groceries & Kitchen", href: "/listings?category=Supermarket Registry", icon: Utensils, desc: "Makola Select Bundles" },
-      { name: "Beauty & Health", href: "/listings?category=Beauty %26 Personal", icon: Sparkles, desc: "Elite Personal Protocols" },
+      { name: "Laptops & Tech", href: "/listings?category=Computing", icon: Monitor, desc: "Institutional Hardware" },
+      { name: "Furniture & Decor", href: "/listings?category=Heritage Furniture", icon: Armchair, desc: "Luxury Suites" },
+      { name: "Kitchen & Appliances", href: "/listings?category=Institutional Appliances", icon: Refrigerator, desc: "Smart Home Nodes" },
     ]
   }
 ];
@@ -74,7 +77,7 @@ export function MegaMenu() {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="ghost" className="h-full px-6 flex flex-col items-center justify-center rounded-none hover:bg-primary/5 group transition-all gap-1">
-          <span className="text-[8px] uppercase tracking-[0.4em] text-muted-foreground font-black group-hover:text-primary transition-colors">Global Registry</span>
+          <span className="text-[8px] uppercase tracking-[0.4em] text-muted-foreground font-black group-hover:text-primary transition-colors">Global Directory</span>
           <span className="font-black text-secondary text-xs md:text-sm group-hover:text-primary transition-colors uppercase tracking-tighter">Shop Categories</span>
         </Button>
       </PopoverTrigger>
@@ -137,15 +140,15 @@ export function MegaMenu() {
                   Institutional Partner
                 </Badge>
                 <h3 className="text-2xl md:text-3xl font-black tracking-tighter leading-none uppercase text-milky">
-                  THE <span className="text-primary">GOLD</span> <br /> STANDARD
+                  OPEN <span className="text-primary">VENDOR</span> <br /> NETWORK
                 </h3>
                 <p className="text-white/40 text-[10px] font-medium leading-relaxed uppercase tracking-widest">
-                  Secure your next high-fidelity asset from Ghana's most trusted partners.
+                  Every business can register to become a verified escrow partner.
                 </p>
               </div>
               
               <div className="space-y-4">
-                <p className="text-[8px] font-black uppercase tracking-[0.4em] text-primary/60 border-b border-white/5 pb-2">Elite Registry Members</p>
+                <p className="text-[8px] font-black uppercase tracking-[0.4em] text-primary/60 border-b border-white/5 pb-2">Top Marketplace Sellers</p>
                 <div className="space-y-3">
                   <Link href="/vendors" className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
                     <div className="h-10 w-10 bg-white relative p-1 shrink-0">
@@ -159,21 +162,21 @@ export function MegaMenu() {
                       />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">Melcom Digital</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">Melcom Hub</p>
                       <div className="flex items-center gap-1">
                         <Star className="h-2 w-2 fill-gold text-gold" />
-                        <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9 Rating</p>
+                        <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Node • 4.9</p>
                       </div>
                     </div>
                   </Link>
                   
                   <Link href="/vendors" className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer group">
                     <div className="h-10 w-10 bg-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
-                      <ShieldCheck className="h-5 w-5" />
+                      <Car className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">PrimeRentals GH</p>
-                      <p className="text-[8px] text-white/30 uppercase tracking-tighter">Sovereign Agency • Certified</p>
+                      <p className="text-[10px] font-black uppercase tracking-widest group-hover:text-primary transition-colors text-milky">AutoTrust Motors</p>
+                      <p className="text-[8px] text-white/30 uppercase tracking-tighter">Verified Automotive Node</p>
                     </div>
                   </Link>
                 </div>
@@ -182,7 +185,7 @@ export function MegaMenu() {
 
             <Link href="/vendors" className="mt-12 relative z-10">
               <Button className="w-full bg-primary text-secondary hover:bg-white font-black rounded-none h-14 uppercase text-[10px] tracking-[0.3em] gap-3 shadow-2xl transition-all">
-                Browse Vendor Directory <Store className="h-4 w-4" />
+                Browse Full Directory <Store className="h-4 w-4" />
               </Button>
             </Link>
           </div>

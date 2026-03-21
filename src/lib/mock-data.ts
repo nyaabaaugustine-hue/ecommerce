@@ -86,6 +86,36 @@ export const VENDORS: Vendor[] = [
     description: 'Premium furniture and interior decor with secure delivery across Ghana.',
     fidelityScore: 99,
     settlementSpeed: '0.8h'
+  },
+  {
+    id: 'v4',
+    name: 'AutoTrust Motors',
+    category: 'Automotive',
+    rating: 4.7,
+    itemsCount: 120,
+    joinedDate: 'Aug 2022',
+    color: 'bg-burgundy',
+    icon: 'A',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+    bgUrl: 'https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop',
+    description: 'Verified pre-owned and new vehicle listings with escrow payment protection.',
+    fidelityScore: 96,
+    settlementSpeed: '3.5h'
+  },
+  {
+    id: 'v5',
+    name: 'CyberTech Services',
+    category: 'Professional Services',
+    rating: 4.9,
+    itemsCount: 15,
+    joinedDate: 'Nov 2021',
+    color: 'bg-primary',
+    icon: 'C',
+    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
+    bgUrl: 'https://images.unsplash.com/photo-1454165833762-0265129b0021?q=80&w=800&auto=format&fit=crop',
+    description: 'Elite IT consulting and software development nodes for institutional clients.',
+    fidelityScore: 100,
+    settlementSpeed: '0.5h'
   }
 ];
 
@@ -165,6 +195,32 @@ export const LISTINGS: Listing[] = [
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
     rating: 5.0,
     salesCount: 5,
+    inventoryStatus: 'In Stock',
+    requiresMultisig: true
+  },
+  {
+    id: '14',
+    title: '2023 Mercedes-Benz GLE 450 AMG',
+    vendorId: 'v4',
+    category: 'Automotive',
+    price: 850000,
+    location: 'East Legon',
+    imageUrl: 'https://images.unsplash.com/photo-1618843479313-40f8af24b4d8?q=80&w=800&auto=format&fit=crop',
+    rating: 4.9,
+    salesCount: 2,
+    inventoryStatus: 'Limited Stock',
+    requiresMultisig: true
+  },
+  {
+    id: '15',
+    title: 'Toyota Land Cruiser 300 V6',
+    vendorId: 'v4',
+    category: 'Automotive',
+    price: 1200000,
+    location: 'Spintex Road',
+    imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
+    rating: 4.8,
+    salesCount: 4,
     inventoryStatus: 'In Stock',
     requiresMultisig: true
   },

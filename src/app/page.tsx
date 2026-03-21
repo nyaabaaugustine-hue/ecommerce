@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -23,7 +22,11 @@ import {
   Phone,
   ShieldAlert,
   ShieldCheck,
-  Lock
+  Lock,
+  Car,
+  Building2,
+  Briefcase,
+  PlusCircle
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -38,15 +41,16 @@ import {
 } from '@/components/ui/dialog';
 import { PromotionPopup } from '@/components/promotion-popup';
 import { NewsletterPopup } from '@/components/newsletter-popup';
-import { useContent, useCurrency } from '@/components/providers';
+import { useContent, useCurrency, useAuth } from '@/components/providers';
+import { AuthDialog } from '@/components/auth-dialog';
 
 const CATEGORIES = [
-  { name: 'Supermarket', icon: ShoppingBag },
-  { name: 'Phones & Tablets', icon: Smartphone },
   { name: 'Electronics', icon: Zap },
+  { name: 'Automotive', icon: Car },
+  { name: 'Real Estate', icon: Building2 },
   { name: 'Home & Office', icon: Home },
-  { name: 'Appliances', icon: Activity },
-  { name: 'Computing', icon: Smartphone },
+  { name: 'Professional Services', icon: Briefcase },
+  { name: 'Phones & Tablets', icon: Smartphone },
   { name: 'Fashion', icon: ShoppingBag },
   { name: 'Gaming', icon: Rocket },
   { name: 'Other categories', icon: Plus },
@@ -55,13 +59,16 @@ const CATEGORIES = [
 export default function HomePage() {
   const { content } = useContent();
   const { formatPrice } = useCurrency();
+  const { user } = useAuth();
   const { hero, highlights, trust, cta } = content.pages.home.sections;
   const [showVendorModal, setShowVendorModal] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
 
   return (
     <div className="flex flex-col bg-background min-h-screen">
       <PromotionPopup />
       <NewsletterPopup />
+      <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
 
       {/* SECTION 1: Gateway Navigation Hub */}
       <section className="container mx-auto px-4 py-6">
@@ -102,9 +109,19 @@ export default function HomePage() {
                <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none max-w-md">
                   {hero.title}
                </h2>
-               <Button className="w-fit h-14 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest shadow-2xl">
-                  {hero.primaryCta} <ArrowRight className="ml-3 h-5 w-5" />
-               </Button>
+               <div className="flex flex-col sm:flex-row gap-4">
+                 <Link href="/listings">
+                   <Button className="w-full sm:w-fit h-14 px-12 bg-white text-secondary hover:bg-primary hover:text-white font-black uppercase text-xs tracking-widest shadow-2xl transition-all">
+                      {hero.primaryCta} <ArrowRight className="ml-3 h-5 w-5" />
+                   </Button>
+                 </Link>
+                 <Button 
+                   onClick={() => setShowAuth(true)}
+                   className="w-full sm:w-fit h-14 px-12 bg-accent text-secondary hover:bg-white font-black uppercase text-xs tracking-widest shadow-2xl transition-all"
+                 >
+                    Sell on Marketplace <PlusCircle className="ml-3 h-5 w-5" />
+                 </Button>
+               </div>
             </div>
           </div>
 
@@ -124,8 +141,8 @@ export default function HomePage() {
                      <Store className="h-5 w-5" />
                   </div>
                   <div>
-                     <p className="text-[9px] font-black uppercase text-muted-foreground">Sell on Ecommerce</p>
-                     <p className="text-sm font-black text-secondary">Apply for account</p>
+                     <p className="text-[9px] font-black uppercase text-muted-foreground">Become a Vendor</p>
+                     <p onClick={() => setShowAuth(true)} className="text-sm font-black text-secondary cursor-pointer hover:text-primary transition-colors underline">Apply for business account</p>
                   </div>
                </div>
             </div>
@@ -159,16 +176,19 @@ export default function HomePage() {
              />
              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-12 flex flex-col justify-center">
                 <Badge className="w-fit bg-[#f68b1e] text-secondary font-black px-4 py-1.5 rounded-none uppercase text-[10px] tracking-widest mb-6">
-                  Verified Escrow System
+                  Secure Escrow Marketplace
                 </Badge>
                 <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-tight max-w-2xl mb-8">
                   {trust.title}
                 </h2>
                 <p className="text-white/70 text-sm md:text-lg font-bold uppercase tracking-widest max-w-xl leading-relaxed mb-10">
-                  {trust.description}
+                  Join Ghana's most versatile marketplace. List cars, property, services, and electronics with total escrow safety.
                 </p>
-                <Button className="w-fit h-16 px-12 bg-accent text-secondary hover:bg-white font-black uppercase text-xs tracking-[0.2em] shadow-2xl transition-all">
-                  Explore Security <ArrowRight className="ml-3 h-6 w-6" />
+                <Button 
+                  onClick={() => setShowAuth(true)}
+                  className="w-fit h-16 px-12 bg-accent text-secondary hover:bg-white font-black uppercase text-xs tracking-[0.2em] shadow-2xl transition-all"
+                >
+                  Join the Network <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
              </div>
           </div>
@@ -176,34 +196,34 @@ export default function HomePage() {
           <div className="lg:col-span-4 flex flex-col gap-6">
              <div className="relative h-[238px] bg-[#f68b1e] overflow-hidden border-4 border-white shadow-xl rounded-none">
                 <Image 
-                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/seara-ad-1500x400-px_esp1og.jpg" 
-                  alt="Partner Deal" 
+                  src="https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop" 
+                  alt="Automotive Partner" 
                   fill 
                   sizes="(max-width: 768px) 100vw, 500px"
                   className="object-cover" 
                 />
                 <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl rounded-none">
-                   <span className="text-[10px] font-black text-white uppercase tracking-widest">ESCROW ACTIVE</span>
-                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">GH₵ 4.2M</span>
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">AUTO ESCROW</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">VERIFIED DEALS</span>
                 </div>
              </div>
              <div className="relative h-[238px] bg-white overflow-hidden border-4 border-white shadow-xl group rounded-none">
                 <Image 
-                  src="https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg" 
-                  alt="Partner Selection" 
+                  src="https://images.unsplash.com/photo-1454165833762-0265129b0021?q=80&w=800&auto=format&fit=crop" 
+                  alt="Professional Services" 
                   fill 
                   sizes="(max-width: 768px) 100vw, 500px"
                   className="object-cover opacity-80" 
                 />
                 <div className="absolute bottom-4 right-4 bg-secondary p-4 flex flex-col items-center justify-center border border-white/10 shadow-2xl group-hover:scale-110 transition-transform rounded-none">
                    <div className="h-8 w-8 bg-accent/20 flex items-center justify-center mb-2 rounded-none">
-                      <ShoppingBag className="h-4 w-4 text-accent" />
+                      <Briefcase className="h-4 w-4 text-accent" />
                    </div>
-                   <span className="text-[10px] font-black text-white uppercase tracking-widest">System Live</span>
-                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">Secure Flow</span>
+                   <span className="text-[10px] font-black text-white uppercase tracking-widest">SERVICE NODES</span>
+                   <span className="text-[10px] font-black text-accent uppercase tracking-widest">SECURE PAY</span>
                 </div>
                 <div className="absolute bottom-6 left-6">
-                   <span className="text-secondary font-black uppercase text-xs bg-white px-4 py-1.5 shadow-lg tracking-widest rounded-none">Shop Now</span>
+                   <span className="text-secondary font-black uppercase text-xs bg-white px-4 py-1.5 shadow-lg tracking-widest rounded-none">Hire Pro</span>
                 </div>
              </div>
           </div>
@@ -296,28 +316,38 @@ export default function HomePage() {
             <DialogTrigger asChild>
               <Button className="bg-primary text-white hover:bg-accent hover:text-secondary font-black px-10 h-14 uppercase text-[11px] tracking-widest gap-3 shadow-xl">
                 <Store className="h-5 w-5" />
-                Partner With Us
+                Become a Seller
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-none border-t-4 border-t-accent shadow-2xl">
-              <DialogHeader className="p-10 md:p-14 pb-0">
-                <DialogTitle className="text-4xl font-black tracking-tighter uppercase leading-none">Become a Partner</DialogTitle>
-                <DialogDescription className="text-secondary/60 text-sm font-medium leading-relaxed mt-4">
-                  {trust.description}
-                </DialogDescription>
-              </DialogHeader>
+              <div className="sr-only">
+                <DialogHeader>
+                  <DialogTitle>Apply to Become a Partner</DialogTitle>
+                  <DialogDescription>Submit your business details to join Ghana's safest multi-vendor marketplace.</DialogDescription>
+                </DialogHeader>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="bg-secondary p-10 md:p-14 text-white space-y-10">
                   <div className="space-y-6">
                     <Badge className="bg-accent text-secondary font-black rounded-none uppercase text-[10px] tracking-widest px-4 py-1">Join The System</Badge>
-                    <p className="text-white/60 text-sm font-medium leading-relaxed">Expand your reach through Ghana's most secure escrow-powered registry.</p>
+                    <h3 className="text-3xl font-black uppercase tracking-tighter">Authorize Your Business</h3>
+                    <p className="text-white/60 text-sm font-medium leading-relaxed">Expand your reach through Ghana's most secure multi-category marketplace aggregator.</p>
                   </div>
                 </div>
                 <div className="p-10 md:p-14 bg-white flex flex-col justify-center space-y-8">
                   <div className="space-y-6">
                     <div className="grid gap-3">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-secondary">Business Name</label>
-                      <input className="w-full border-b-2 border-muted focus:border-accent outline-none py-3 text-sm font-bold bg-transparent transition-colors" placeholder="e.g. Melcom Digital Hub" />
+                      <label className="text-[10px] font-black uppercase tracking-widest text-secondary">Business or Individual Name</label>
+                      <input className="w-full border-b-2 border-muted focus:border-accent outline-none py-3 text-sm font-bold bg-transparent transition-colors" placeholder="e.g. AutoTrust Motors" />
+                    </div>
+                    <div className="grid gap-3">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-secondary">Primary Category</label>
+                      <select className="w-full border-b-2 border-muted focus:border-accent outline-none py-3 text-sm font-bold bg-transparent transition-colors">
+                        <option>Electronics</option>
+                        <option>Automotive</option>
+                        <option>Real Estate</option>
+                        <option>Professional Services</option>
+                      </select>
                     </div>
                   </div>
                   <Button className="w-full h-16 bg-primary text-white font-black uppercase tracking-widest text-[11px] hover:bg-accent hover:text-secondary transition-all shadow-xl">
@@ -400,8 +430,12 @@ export default function HomePage() {
                 {cta.primaryButton} <ChevronRight className="h-6 w-6 ml-3" />
               </Button>
             </Link>
-            <Button size="lg" className="bg-primary text-white hover:bg-primary/90 px-14 h-16 font-black transition-all text-xs uppercase tracking-widest shadow-xl border-2 border-primary">
-              {cta.secondaryButton}
+            <Button 
+              onClick={() => setShowAuth(true)}
+              size="lg" 
+              className="bg-primary text-white hover:bg-primary/90 px-14 h-16 font-black transition-all text-xs uppercase tracking-widest shadow-xl border-2 border-primary"
+            >
+              List Your Business
             </Button>
           </div>
         </div>
