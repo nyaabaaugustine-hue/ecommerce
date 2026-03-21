@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -11,13 +12,11 @@ import { cn } from '@/lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 /**
- * @fileOverview High-Fidelity Marketplace Listing Card (Jiji Style)
- * Replicates the specific staggered/masonry visual signature from the provided image.
- * Features: Breadcrumbs, Floating Avatars, Technical Specs, and Detailed Metadata.
- * Updated with specific 7% border-radius protocol.
+ * @fileOverview High-Fidelity Marketplace Listing Card (Masonry Style)
+ * Updated with specific 7% border-radius protocol strictly for listings.
  */
 export function HighFidelityListingCard(props: Listing) {
-  const { id, title, price, location, postedAt, imageUrl, category, subcategory, specs, seller, isNegotiable } = props;
+  const { id, title, price, location, imageUrl, category, subcategory, specs, seller, isNegotiable } = props;
   const { formatPrice } = useCurrency();
 
   return (
@@ -49,23 +48,20 @@ export function HighFidelityListingCard(props: Listing) {
       </Link>
 
       <CardContent className="p-4 flex flex-col flex-1 gap-2">
-        {/* BREADCRUMB METADATA */}
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-tight truncate">
           {category} {subcategory && `> ${subcategory}`}
         </p>
 
-        {/* TITLE */}
         <Link href={`/listings/${id}`} className="block">
-          <h3 className="font-black text-[15px] leading-tight text-secondary group-hover:text-primary transition-colors line-clamp-2">
+          <h3 className="font-black text-[15px] leading-tight text-secondary group-hover:text-primary transition-colors line-clamp-2 uppercase">
             {title}
           </h3>
         </Link>
 
-        {/* TECHNICAL SPECS */}
         {specs && (
           <div className="flex flex-wrap gap-x-2 text-[11px] font-medium text-muted-foreground">
             {specs.map((spec, i) => (
-              <span key={i} className="flex items-center gap-2">
+              <span key={i} className="flex items-center gap-2 uppercase tracking-tighter">
                 {spec}
                 {i < specs.length - 1 && <span className="h-1 w-1 bg-muted-foreground/30 rounded-full" />}
               </span>
@@ -73,13 +69,11 @@ export function HighFidelityListingCard(props: Listing) {
           </div>
         )}
 
-        {/* LOCATION NODE */}
-        <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground font-medium">
+        <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground font-black uppercase">
           <MapPin className="h-3 w-3 text-muted-foreground/60" />
           <span>{location}</span>
         </div>
 
-        {/* PRICE & ACTIONS FOOTER */}
         <div className="mt-auto pt-3 border-t border-dashed flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-lg font-black text-secondary tracking-tighter">

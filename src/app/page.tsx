@@ -22,49 +22,32 @@ import { Input } from '@/components/ui/input';
 
 /**
  * @fileOverview Marketplace Home Hub
- * High-density architecture with zero empty space.
- * Integrated new Newsletter node and saturated listings grid.
+ * High-density architecture with exactly 5 listings per row.
  */
 export function HomePage() {
   const highFidelityLaptops = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 8);
+    return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 5);
   }, []);
 
   const sponsoredAds = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('sp') || l.category === 'Electronics').slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('v_')).slice(0, 5);
   }, []);
 
   const priceDropItems = useMemo(() => {
-    return LISTINGS.filter(l => l.oldPrice).slice(0, 5);
-  }, []);
-
-  const cellPhones = useMemo(() => {
-    return LISTINGS.filter(l => l.subcategory === 'Mobiles').slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('ph')).slice(0, 5);
   }, []);
 
   const airConditioners = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('ac') || l.title.includes('AC')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
   }, []);
 
   const gameBoys = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('gb') || l.category === 'Electronics').slice(5, 10);
-  }, []);
-
-  const vehiclesMostSearched = useMemo(() => {
-    return LISTINGS.filter(l => l.category === 'Vehicles').slice(0, 5);
+    return LISTINGS.filter(l => l.id.startsWith('gb')).slice(0, 5);
   }, []);
 
   const realEstateRegistry = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Property').slice(0, 5);
   }, []);
-
-  const REAL_ESTATE_SPOTLIGHT = [
-    { title: "New properties for sale", imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop" },
-    { title: "Apartments for sale", imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop" },
-    { title: "Apartments for rent", imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" },
-    { title: "Houses for sale", imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" },
-    { title: "Houses for rent", imageUrl: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=800&auto=format&fit=crop" },
-  ];
 
   const AUTOS_SPOTLIGHT = [
     { title: "Cars", imageUrl: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop" },
@@ -108,50 +91,70 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SPONSORED ADS */}
+      {/* SPONSORED ADS (AUTOS ROW) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
-        <div className="mb-6">
-          <h2 className="text-2xl font-medium text-foreground tracking-tight">Sponsored ads</h2>
-          <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest mt-1">Exclusive Highlights</p>
+        <div className="mb-6 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black text-foreground tracking-tighter uppercase italic">Sponsored Autos</h2>
+            <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mt-1">Exclusive Vehicle Registry</p>
+          </div>
+          <Link href="/listings?category=Vehicles" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {sponsoredAds.map((item) => (
             <ListingCard key={item.id} {...item} />
           ))}
         </div>
       </section>
 
-      {/* AUTOS SPOTLIGHT */}
+      {/* AUTOS SPOTLIGHT (4 COLS) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8">
-          <h2 className="text-3xl font-medium text-foreground tracking-tight">Autos</h2>
-          <p className="text-sm text-muted-foreground font-medium mt-1">The best vehicles</p>
+          <h2 className="text-3xl font-black uppercase tracking-tighter italic">Auto Categories</h2>
+          <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.3em] mt-1">Verified Logistics Nodes</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {AUTOS_SPOTLIGHT.map((item) => (
-            <Link key={item.title} href="/listings?category=Vehicles" className="group relative flex flex-col bg-card border rounded-md overflow-hidden hover:shadow-xl transition-all duration-500">
+            <Link key={item.title} href="/listings?category=Vehicles" className="group relative flex flex-col bg-card border rounded-none overflow-hidden hover:shadow-2xl transition-all duration-500">
               <div className="relative aspect-[4/3] w-full">
                 <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
               </div>
-              <div className="p-4 bg-muted/5 group-hover:bg-primary/5 transition-colors">
-                <p className="text-center font-bold text-[13px] text-foreground group-hover:text-primary uppercase tracking-tight">{item.title}</p>
+              <div className="p-4 bg-muted/5 group-hover:bg-primary transition-colors">
+                <p className="text-center font-black text-[13px] text-foreground group-hover:text-secondary uppercase tracking-tight">{item.title}</p>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* PRICE DROPS */}
+      {/* PRICE DROPS (PHONES ROW) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
-        <div className="mb-8"><h2 className="text-2xl font-medium">Prices dropped on <span className="font-bold">Electronics.</span></h2></div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="mb-8">
+          <h2 className="text-2xl font-black uppercase tracking-tighter italic">Price Drops: <span className="text-primary">Mobiles</span></h2>
+          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Global Smartphone Registry</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {priceDropItems.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
       <SpotlightCategories />
 
-      {/* NEWSLETTER NODE (Filling space) */}
+      {/* AIR CONDITIONERS ROW */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Cooling Solutions</h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Inverter AC Registry</p>
+          </div>
+          <Link href="/listings" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {airConditioners.map((item) => <ListingCard key={item.id} {...item} />)}
+        </div>
+      </section>
+
+      {/* NEWSLETTER NODE */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="bg-secondary rounded-none overflow-hidden flex flex-col md:flex-row border-t-4 border-primary">
           <div className="flex-1 p-12 md:p-20 space-y-8 text-white">
@@ -164,7 +167,7 @@ export function HomePage() {
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
                 <Input placeholder="Enter Email Node" className="bg-white/5 border-white/10 h-14 pl-12 rounded-none text-white font-black uppercase text-[10px] tracking-widest" />
               </div>
-              <Button className="h-14 px-10 bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.2em] rounded-none hover:bg-white transition-all shadow-2xl">
+              <Button className="h-14 px-10 bg-primary text-secondary font-black uppercase text-[10px] tracking-[0.2em] rounded-none hover:bg-white transition-all shadow-2xl border-none">
                 Authorize <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -180,24 +183,36 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* REAL ESTATE */}
+      {/* GAME BOYS ROW */}
       <section className="max-w-7xl mx-auto w-full px-4 py-12">
         <div className="mb-8 flex justify-between items-end">
-          <h2 className="text-2xl font-medium">Most searched in <span className="font-bold">Real Estate</span></h2>
-          <Link href="/listings?category=Property" className="text-sm font-bold text-primary hover:underline">View all</Link>
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Retro Gaming</h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Handheld Collector Registry</p>
+          </div>
+          <Link href="/listings" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</Link>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {gameBoys.map((item) => <ListingCard key={item.id} {...item} />)}
+        </div>
+      </section>
+
+      {/* REAL ESTATE ROW */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <div className="mb-8 flex justify-between items-end">
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tighter italic">Premium <span className="text-primary">Properties</span></h2>
+            <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Accra Real Estate Registry</p>
+          </div>
+          <Link href="/listings?category=Property" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View all</Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {realEstateRegistry.map((item) => <ListingCard key={item.id} {...item} />)}
         </div>
       </section>
 
-      {/* BENEFITS */}
       <BenefitsSection />
-
-      {/* TIPS */}
       <TipsSection />
-
-      {/* FOOTER TABS */}
       <FooterTabs />
 
       <PrivacyPopup />

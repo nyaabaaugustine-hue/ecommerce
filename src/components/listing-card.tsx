@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -11,9 +12,7 @@ import { cn } from '@/lib/utils';
 
 /**
  * @fileOverview High-Fidelity Marketplace Listing Card
- * Enhanced for visibility across all themes. Uses dynamic color variables
- * and refined typographic weighting for institutional metadata.
- * Updated with specific 7% border-radius protocol.
+ * Updated with specific 7% border-radius protocol strictly for listings.
  */
 export function ListingCard(props: Listing) {
   const { id, title, price, oldPrice, location, postedAt, imageUrl, isEscrowProtected, isEasyDelivery, isFreeShipping, isEmphasis } = props;
@@ -48,14 +47,12 @@ export function ListingCard(props: Listing) {
       </Link>
 
       <CardContent className="p-5 flex flex-col flex-1 gap-3">
-        {/* TYPOGRAPHIC HIERARCHY */}
         <Link href={`/listings/${id}`} className="block">
           <h3 className="font-bold text-[15px] line-clamp-2 text-foreground/90 tracking-tight leading-tight min-h-[2.6rem] group-hover:text-primary transition-colors uppercase">
             {title}
           </h3>
         </Link>
 
-        {/* STATUS BADGE CLUSTER */}
         <div className="flex flex-wrap gap-2">
           {isFreeShipping && (
             <Badge className="bg-green-100/10 text-green-500 hover:bg-green-100/20 text-[9px] font-black px-2 py-0.5 rounded-none border-none shadow-none flex items-center gap-1.5 uppercase tracking-tighter">
@@ -74,7 +71,6 @@ export function ListingCard(props: Listing) {
           )}
         </div>
 
-        {/* PRICE COMMAND NODE */}
         <div className="space-y-1 mt-auto">
           {oldPrice && (
             <p className="text-[11px] text-muted-foreground/60 line-through font-bold tracking-widest">
@@ -86,7 +82,6 @@ export function ListingCard(props: Listing) {
           </span>
         </div>
 
-        {/* INSTITUTIONAL METADATA FOOTER */}
         <div className="pt-4 flex flex-col text-[10px] text-muted-foreground font-black border-t border-dashed border-border/50 uppercase tracking-[0.1em]">
           <span className="truncate flex items-center gap-2">
             <span className="text-primary/60">{postedAt}</span>

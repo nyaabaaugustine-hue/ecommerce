@@ -57,7 +57,7 @@ export const MOCK_USERS: User[] = [
 ];
 
 export const LISTINGS: Listing[] = [
-  // VEHICLES (RESTORED & EXPANDED)
+  // VEHICLES (5 ITEMS)
   {
     id: 'v_h1',
     title: 'Hyundai HB20X Style 1.6 Flex 16V Aut. 2015',
@@ -112,7 +112,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'v_t1',
-    title: 'Toyota Hilux GR-S 4x4 2024',
+    title: 'Toyota Hilux GR-S 4x4 2024 Premium',
     price: 385000,
     isNegotiable: false,
     category: 'Vehicles',
@@ -128,7 +128,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'v_m1',
-    title: 'Mercedes-Benz C300 AMG 2022',
+    title: 'Mercedes-Benz C300 AMG 2022 Sport',
     price: 450000,
     isNegotiable: true,
     category: 'Vehicles',
@@ -143,7 +143,7 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's1', name: 'AutoTrust Motors', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2021' }
   },
 
-  // LAPTOPS (EXPANDED)
+  // LAPTOPS (5 ITEMS)
   {
     id: 'lp1',
     title: 'HP Spectre x360 Luxury Hub',
@@ -164,7 +164,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'lp2',
-    title: 'MacBook Air M2 Midnight',
+    title: 'MacBook Air M2 Midnight Pro',
     price: 9200,
     isNegotiable: false,
     category: 'Electronics',
@@ -182,7 +182,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'lp3',
-    title: 'Dell XPS 15 InfinityEdge',
+    title: 'Dell XPS 15 InfinityEdge Elite',
     price: 12500,
     isNegotiable: true,
     category: 'Electronics',
@@ -200,7 +200,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'lp4',
-    title: 'Lenovo ThinkPad X1 Carbon',
+    title: 'Lenovo ThinkPad X1 Carbon Gen 11',
     price: 7800,
     isNegotiable: true,
     category: 'Electronics',
@@ -218,7 +218,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'lp5',
-    title: 'Asus ROG Zephyrus G14',
+    title: 'Asus ROG Zephyrus G14 Gaming',
     price: 11000,
     isNegotiable: false,
     category: 'Electronics',
@@ -235,10 +235,10 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's34', name: 'Gaming Hub', type: 'Business Vendor', rating: 4.9, isVerified: true, joinDate: '2020', avatar: 'https://i.pravatar.cc/150?u=lp5' }
   },
 
-  // GAME BOYS (EXPANDED)
+  // GAME BOYS (5 ITEMS)
   {
     id: 'gb1',
-    title: 'Game Boy Advance SP - Cobalt',
+    title: 'Game Boy Advance SP - Cobalt Blue',
     price: 1200,
     isNegotiable: true,
     category: 'Electronics',
@@ -254,7 +254,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'gb2',
-    title: 'Original Game Boy DMG-01',
+    title: 'Original Game Boy DMG-01 Classic',
     price: 850,
     isNegotiable: false,
     category: 'Electronics',
@@ -286,7 +286,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 'gb4',
-    title: 'Game Boy Pocket - Yellow',
+    title: 'Game Boy Pocket - Yellow Edition',
     price: 750,
     isNegotiable: false,
     category: 'Electronics',
@@ -317,7 +317,7 @@ export const LISTINGS: Listing[] = [
     seller: { id: 's50', name: 'Retro Gamer', type: 'Individual', rating: 4.9, isVerified: true, joinDate: '2023' }
   },
 
-  // REAL ESTATE (EXPANDED)
+  // REAL ESTATE (5 ITEMS)
   {
     id: 're1',
     title: 'Apartment-style house in Airport Residential',
@@ -352,7 +352,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 're3',
-    title: 'Want to live in the best? Penthouse Node',
+    title: 'Want to live in the best? Penthouse Accra',
     price: 850000,
     isNegotiable: true,
     category: 'Property',
@@ -369,7 +369,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 're4',
-    title: 'Commercial Space in Ridge',
+    title: 'Commercial Space in Ridge Hub',
     price: 15000,
     isNegotiable: true,
     category: 'Property',
@@ -385,7 +385,7 @@ export const LISTINGS: Listing[] = [
   },
   {
     id: 're5',
-    title: 'Studio Apartment in Osu',
+    title: 'Luxury Studio Apartment in Osu',
     price: 2500,
     isNegotiable: false,
     category: 'Property',
@@ -398,6 +398,175 @@ export const LISTINGS: Listing[] = [
     status: 'Active',
     isEscrowProtected: true,
     seller: { id: 's11', name: 'Prime Estate', type: 'Business Vendor', rating: 5.0, isVerified: true, joinDate: '2020' }
+  },
+
+  // PHONES (5 ITEMS)
+  {
+    id: 'ph1',
+    title: 'iPhone 15 Pro Titanium 256GB',
+    price: 14500,
+    isNegotiable: true,
+    category: 'Electronics',
+    subcategory: 'Mobiles',
+    location: 'Airport Residential',
+    postedAt: 'Today',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1696446701796-da61225697cc?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Brand new factory sealed.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ph2',
+    title: 'Samsung Galaxy S24 Ultra Hub',
+    price: 13800,
+    isNegotiable: false,
+    category: 'Electronics',
+    subcategory: 'Mobiles',
+    location: 'East Legon',
+    postedAt: 'Yesterday',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Titanium Grey, 512GB.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ph3',
+    title: 'Google Pixel 8 Pro Obsidian',
+    price: 9500,
+    isNegotiable: true,
+    category: 'Electronics',
+    subcategory: 'Mobiles',
+    location: 'Ridge',
+    postedAt: 'Today',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1598327105666-5b89351af963?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'US Model, pure android.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ph4',
+    title: 'iPhone 14 Plus Blue 128GB',
+    price: 8500,
+    isNegotiable: false,
+    category: 'Electronics',
+    subcategory: 'Mobiles',
+    location: 'Osu',
+    postedAt: '2 days ago',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Perfect condition, 100% health.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ph5',
+    title: 'OnePlus 12 Global Edition',
+    price: 7800,
+    isNegotiable: true,
+    category: 'Electronics',
+    subcategory: 'Mobiles',
+    location: 'Cantonments',
+    postedAt: 'Today',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Fastest charging smartphone.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+
+  // AIR CONDITIONERS (5 ITEMS)
+  {
+    id: 'ac1',
+    title: 'Samsung 1.5HP Inverter AC',
+    price: 4500,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Greater Accra',
+    postedAt: 'Today',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Energy saving inverter tech.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ac2',
+    title: 'LG Dual Inverter 2.0HP',
+    price: 6800,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Kumasi',
+    postedAt: 'Yesterday',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1591123120675-6f7f1aac447e?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Fast cooling for large rooms.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ac3',
+    title: 'Midea Split Unit 1.0HP Elite',
+    price: 3200,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'Tema',
+    postedAt: 'Today',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Compact and efficient.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ac4',
+    title: 'Panasonic Nanoe-G Inverter',
+    price: 5500,
+    isNegotiable: true,
+    category: 'Electronics',
+    location: 'Airport Residential',
+    postedAt: '3 days ago',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1591123120675-6f7f1aac447e?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Air purifying technology.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
+  },
+  {
+    id: 'ac5',
+    title: 'Hisense 1.5HP Mirror Finish',
+    price: 4800,
+    isNegotiable: false,
+    category: 'Electronics',
+    location: 'East Legon',
+    postedAt: 'Today',
+    postedTimestamp: Date.now(),
+    imageUrl: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=800&auto=format&fit=crop',
+    vendorId: 'v1',
+    description: 'Stylish black mirror design.',
+    status: 'Active',
+    isEscrowProtected: true,
+    seller: { id: 's30', name: 'Melcom Digital', type: 'Verified Dealer', rating: 4.9, isVerified: true, joinDate: '2018' }
   }
 ];
 
