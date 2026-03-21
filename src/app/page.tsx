@@ -17,7 +17,7 @@ import { LISTINGS } from '@/lib/mock-data';
 
 export function HomePage() {
   const eliteComputing = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('lp')).slice(0, 5);
+    return LISTINGS.filter(l => l.subcategory === 'Laptops').slice(0, 5);
   }, []);
 
   const premiumAutos = useMemo(() => {
