@@ -2,13 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ShieldCheck, Star, Plus, Users, Activity } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useCart, useCurrency } from '@/components/providers';
-import { useToast } from '@/hooks/use-toast';
+import { ShieldCheck, MapPin, Clock, Star, CheckCircle2 } from 'lucide-react';
+import { useCurrency } from '@/components/providers';
 import { cn } from '@/lib/utils';
 
 interface ListingProps {
@@ -16,122 +13,83 @@ interface ListingProps {
   title: string;
   category: string;
   price: number;
-  oldPrice?: number;
   location: string;
   imageUrl: string;
   rating: number;
-  vendorId: string;
-  discount?: string;
-  salesCount: number;
-  inventoryStatus?: 'In Stock' | 'Limited Stock' | 'Sold Out';
+  postedAt: string;
+  isNegotiable?: boolean;
+  sellerType: string;
+  sellerName: string;
 }
 
 export function ListingCard(props: ListingProps) {
-  const { id, title, category, price, oldPrice, location, imageUrl, rating, discount, salesCount, inventoryStatus = 'In Stock' } = props;
-  const router = useRouter();
-  const { addItem } = useCart();
+  const { id, title, category, price, location, imageUrl, rating, postedAt, isNegotiable, sellerType, sellerName } = props;
   const { formatPrice } = useCurrency();
-  const { toast } = useToast();
-
-  const handleBuyNow = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    router.push(`/listings/${id}`);
-  };
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    addItem(props as any);
-    toast({
-      title: "Item Secured",
-      description: "Added to your cart for escrow protection.",
-    });
-  };
 
   return (
-    <Card className="group overflow-hidden bg-white border-2 border-border/50 hover:border-accent hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full rounded-none">
-      {/* Top Badges */}
-      <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-        {discount && (
-          <Badge className="bg-primary text-white text-[10px] font-black px-3 py-1 border-none rounded-none shadow-xl">
-            {discount}
-          </Badge>
-        )}
-        <div className="flex items-center gap-1.5 bg-accent/90 text-secondary py-1 px-3 rounded-none shadow-lg backdrop-blur-sm">
-           <ShieldCheck className="h-3.5 w-3.5" />
-           <span className="text-[9px] font-black uppercase tracking-widest">Escrow Verified</span>
-        </div>
+    <Card className="group overflow-hidden bg-white border border-border/60 hover:border-primary hover:shadow-xl transition-all duration-300 relative flex flex-col h-full rounded-none">
+      {/* Escrow Trust Layer */}
+      <div className="absolute top-3 left-3 z-10">
+        <Badge className="bg-primary/95 text-white text-[8px] font-black px-2 py-0.5 rounded-none shadow-lg border-none flex items-center gap-1.5 backdrop-blur-sm">
+           <ShieldCheck className="h-2.5 w-2.5 text-accent" />
+           <span className="uppercase tracking-widest">Escrow Protected</span>
+        </Badge>
       </div>
 
-      <div className="absolute top-4 right-4 z-10">
-         <Badge className={cn(
-           "rounded-none text-[8px] font-black uppercase tracking-widest border-none px-2 py-0.5 shadow-sm",
-           inventoryStatus === 'In Stock' ? "bg-green-100 text-green-700" : 
-           inventoryStatus === 'Limited Stock' ? "bg-orange-100 text-orange-700" : 
-           "bg-red-100 text-red-700"
-         )}>
-           {inventoryStatus}
-         </Badge>
-      </div>
-
-      {/* Image Section with Reveal & Zoom Animation */}
-      <Link href={`/listings/${id}`} className="relative h-56 w-full overflow-hidden block image-reveal bg-background product-card-image-wrap rounded-none">
+      {/* Image Section */}
+      <Link href={`/listings/${id}`} className="relative h-48 w-full overflow-hidden block bg-muted rounded-none">
         <Image 
           src={imageUrl} 
           alt={title} 
           fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-1"
+          sizes="(max-width: 768px) 100vw, 300px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </Link>
 
-      <CardContent className="p-6 flex flex-col flex-1 gap-3">
-        <div className="flex justify-between items-start">
-          <Link href={`/listings?category=${category}`} className="text-[10px] text-primary font-black uppercase tracking-[0.2em] hover:text-accent transition-colors">
-            {category}
-          </Link>
-          <div className="flex items-center gap-1.5">
-            <Star className="h-3.5 w-3.5 fill-gold text-gold" />
-            <span className="text-[11px] font-black text-secondary">{rating}</span>
+      <CardContent className="p-4 flex flex-col flex-1 gap-2">
+        <div className="flex justify-between items-center mb-1">
+          <p className="text-[10px] font-black text-primary uppercase tracking-widest">{category}</p>
+          <div className="flex items-center gap-1">
+            <Clock className="h-3 w-3 text-muted-foreground" />
+            <span className="text-[9px] font-bold text-muted-foreground uppercase">{postedAt}</span>
           </div>
         </div>
         
-        <Link href={`/listings/${id}`} className="block hover:text-primary transition-colors">
-          <h3 className="font-bold text-base line-clamp-2 leading-snug min-h-[3rem] text-secondary tracking-tight uppercase">{title}</h3>
+        <Link href={`/listings/${id}`} className="block">
+          <h3 className="font-bold text-sm line-clamp-2 text-secondary tracking-tight uppercase min-h-[2.5rem]">{title}</h3>
         </Link>
         
         <div className="flex items-center gap-2 mt-1">
-          <div className="bg-background border-2 border-border px-3 py-1 flex items-center gap-2 shadow-sm rounded-none">
-            <Users className="h-4 w-4 text-accent" />
-            <span className="text-[9px] font-black text-secondary uppercase tracking-widest">{salesCount} Buyers</span>
-          </div>
-        </div>
-        
-        <div className="mt-auto pt-4 flex items-baseline gap-3">
           <span className="text-xl font-black text-burgundy tracking-tighter">{formatPrice(price)}</span>
-          {oldPrice && (
-            <span className="text-[11px] text-muted-foreground line-through font-bold">{formatPrice(oldPrice)}</span>
+          {isNegotiable && (
+            <span className="text-[9px] font-bold text-green-600 uppercase bg-green-50 px-1.5 py-0.5 border border-green-100">Negotiable</span>
           )}
         </div>
-      </CardContent>
 
-      <CardFooter className="px-6 py-5 bg-background border-t-2 flex gap-3">
-        <Button 
-          onClick={handleBuyNow}
-          className="flex-1 bg-secondary text-white hover:bg-primary transition-all font-black text-[11px] uppercase tracking-[0.2em] h-12 shadow-lg"
-        >
-          Secure Buy
-        </Button>
-        <Button 
-          onClick={handleAddToCart}
-          variant="outline"
-          size="icon"
-          className="border-2 border-primary/20 text-primary hover:bg-accent hover:border-accent hover:text-secondary h-12 w-12 transition-all shadow-md"
-        >
-          <Plus className="h-6 w-6" />
-        </Button>
-      </CardFooter>
+        <div className="mt-auto pt-3 border-t border-dashed flex flex-col gap-2">
+          <div className="flex items-center gap-1.5 text-muted-foreground">
+            <MapPin className="h-3 w-3 text-primary" />
+            <span className="text-[10px] font-bold uppercase tracking-tight truncate">{location}</span>
+          </div>
+          
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+               <div className="h-5 w-5 bg-secondary flex items-center justify-center text-[8px] font-black text-white">
+                 {sellerName.charAt(0)}
+               </div>
+               <div className="flex flex-col">
+                 <p className="text-[9px] font-black text-secondary leading-none uppercase truncate max-w-[80px]">{sellerName}</p>
+                 <p className="text-[7px] font-bold text-muted-foreground uppercase">{sellerType}</p>
+               </div>
+            </div>
+            <div className="flex items-center gap-1">
+               <Star className="h-2.5 w-2.5 fill-gold text-gold" />
+               <span className="text-[9px] font-black text-secondary">{rating}</span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
     </Card>
   );
 }

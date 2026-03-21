@@ -4,9 +4,9 @@ import './globals.css';
 import { Navbar } from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProviderWrapper, useContent } from '@/components/providers';
-import { CartSheet } from '@/components/cart-sheet';
 import { LiveActivityFeed } from '@/components/live-activity-feed';
 import { WhatsAppButton } from '@/components/whatsapp-button';
+import { PostAdButton } from '@/components/post-ad-button';
 import { ShoppingAssistant } from '@/components/shopping-assistant';
 import { OnboardingTour } from '@/components/onboarding-tour';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       </main>
       
       <WhatsAppButton />
-      <CartSheet />
+      <PostAdButton />
       <LiveActivityFeed />
       <ShoppingAssistant />
       <OnboardingTour />
@@ -47,7 +47,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                     </span>
                   </div>
                   <p className="text-white/50 text-[10px] leading-relaxed max-w-xs font-medium uppercase tracking-widest">
-                    The Gold Standard for secure trade in Ghana. Powered by multi-method escrow systems.
+                    The most trusted multi-vendor marketplace in Accra. Protected by multi-method escrow systems.
                   </p>
                </div>
                <div className="space-y-1">
@@ -59,9 +59,9 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-black text-xs mb-4 uppercase tracking-widest text-primary">Marketplace</h4>
               <ul className="space-y-2 text-white/50 text-[9px] font-bold uppercase tracking-widest">
-                <li className="hover:text-primary transition-colors cursor-pointer">All Products</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">Best Sellers</li>
-                <li className="hover:text-primary transition-colors cursor-pointer">New Arrivals</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Vehicles & Cars</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Property & Land</li>
+                <li className="hover:text-primary transition-colors cursor-pointer">Jobs & Services</li>
               </ul>
             </div>
 

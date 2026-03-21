@@ -39,6 +39,10 @@ export interface Listing {
   salesCount: number;
   inventoryStatus?: 'In Stock' | 'Limited Stock' | 'Sold Out';
   requiresMultisig?: boolean;
+  postedAt: string;
+  isNegotiable?: boolean;
+  sellerType: 'Individual' | 'Dealer' | 'Verified Pro';
+  sellerName: string;
 }
 
 export const VENDORS: Vendor[] = [
@@ -86,217 +90,102 @@ export const VENDORS: Vendor[] = [
     description: 'Premium furniture and interior decor with secure delivery across Ghana.',
     fidelityScore: 99,
     settlementSpeed: '0.8h'
-  },
-  {
-    id: 'v4',
-    name: 'AutoTrust Motors',
-    category: 'Automotive',
-    rating: 4.7,
-    itemsCount: 120,
-    joinedDate: 'Aug 2022',
-    color: 'bg-burgundy',
-    icon: 'A',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
-    bgUrl: 'https://images.unsplash.com/photo-1562141961-b5d1852d7316?q=80&w=800&auto=format&fit=crop',
-    description: 'Verified pre-owned and new vehicle listings with escrow payment protection.',
-    fidelityScore: 96,
-    settlementSpeed: '3.5h'
-  },
-  {
-    id: 'v5',
-    name: 'CyberTech Services',
-    category: 'Professional Services',
-    rating: 4.9,
-    itemsCount: 15,
-    joinedDate: 'Nov 2021',
-    color: 'bg-primary',
-    icon: 'C',
-    logoUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg',
-    bgUrl: 'https://images.unsplash.com/photo-1454165833762-0265129b0021?q=80&w=800&auto=format&fit=crop',
-    description: 'Elite IT consulting and software development nodes for institutional clients.',
-    fidelityScore: 100,
-    settlementSpeed: '0.5h'
   }
 ];
 
 export const LISTINGS: Listing[] = [
   {
     id: '1',
-    title: 'Quantum Precision MacBook Pro M3 Max',
+    title: 'MacBook Pro M3 Max - 16 inch Space Black',
     vendorId: 'v1',
-    category: 'Computing & Laptops',
+    category: 'Electronics',
     price: 8450,
-    oldPrice: 10200,
-    location: 'Accra Mall, Ghana',
+    location: 'Accra Mall',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177984_n39gml.png',
     rating: 4.9,
-    discount: '17% OFF',
     salesCount: 124,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '2',
-    title: 'Sovereign Series LG Inverter Refrigerator',
-    vendorId: 'v1',
-    category: 'Institutional Appliances',
-    price: 12500,
-    oldPrice: 14000,
-    location: 'Melcom Plus, Kaneshie',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/166105_nesnhj.png',
-    rating: 4.8,
-    discount: '10% OFF',
-    salesCount: 86,
-    inventoryStatus: 'Limited Stock'
-  },
-  {
-    id: '5',
-    title: 'Titanium iPhone 15 Pro - Sovereign Edition',
-    vendorId: 'v1',
-    category: 'Mobile Ecosystem',
-    price: 9200,
-    location: 'Airport Residential',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
-    rating: 4.9,
-    salesCount: 412,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '6',
-    title: 'Sovereign 4K OLED Audio/Visual Hub',
-    vendorId: 'v1',
-    category: 'Sovereign Audio/Visual',
-    price: 15400,
-    location: 'Osu, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/167240_prgdit.png',
-    rating: 4.8,
-    salesCount: 32,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '7',
-    title: 'Apex Ridge Commercial Executive Suite',
-    vendorId: 'v2',
-    category: 'Commercial Rentals',
-    price: 45000,
-    location: 'Ridge Financial District',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
-    rating: 4.9,
-    salesCount: 12,
-    inventoryStatus: 'Limited Stock',
-    requiresMultisig: true
-  },
-  {
-    id: '8',
-    title: 'Sovereign 4-Bedroom Heritage Villa',
-    vendorId: 'v2',
-    category: 'Residential Sales',
-    price: 2400000,
-    location: 'East Legon, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
-    rating: 5.0,
-    salesCount: 5,
-    inventoryStatus: 'In Stock',
-    requiresMultisig: true
+    postedAt: '2 hours ago',
+    isNegotiable: true,
+    sellerType: 'Dealer',
+    sellerName: 'Melcom Digital'
   },
   {
     id: '14',
-    title: '2023 Mercedes-Benz GLE 450 AMG',
+    title: '2023 Mercedes-Benz GLE 450 AMG Line',
     vendorId: 'v4',
-    category: 'Automotive',
+    category: 'Vehicles',
     price: 850000,
     location: 'East Legon',
     imageUrl: 'https://images.unsplash.com/photo-1618843479313-40f8af24b4d8?q=80&w=800&auto=format&fit=crop',
     rating: 4.9,
     salesCount: 2,
-    inventoryStatus: 'Limited Stock',
+    postedAt: '45 mins ago',
+    isNegotiable: false,
+    sellerType: 'Dealer',
+    sellerName: 'AutoTrust Motors',
     requiresMultisig: true
   },
   {
+    id: '8',
+    title: 'Modern 4-Bedroom Villa with Pool',
+    vendorId: 'v2',
+    category: 'Property',
+    price: 2400000,
+    location: 'East Legon',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
+    rating: 5.0,
+    salesCount: 5,
+    postedAt: 'Yesterday',
+    isNegotiable: true,
+    sellerType: 'Verified Pro',
+    sellerName: 'PrimeRentals GH',
+    requiresMultisig: true
+  },
+  {
+    id: '5',
+    title: 'iPhone 15 Pro Max - 256GB Titanium',
+    vendorId: 'v1',
+    category: 'Electronics',
+    price: 9200,
+    location: 'Airport Residential',
+    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png',
+    rating: 4.9,
+    salesCount: 412,
+    postedAt: '1 hour ago',
+    isNegotiable: true,
+    sellerType: 'Individual',
+    sellerName: 'Kwame Mensah'
+  },
+  {
     id: '15',
-    title: 'Toyota Land Cruiser 300 V6',
+    title: '2022 Toyota Land Cruiser 300 V6',
     vendorId: 'v4',
-    category: 'Automotive',
+    category: 'Vehicles',
     price: 1200000,
     location: 'Spintex Road',
     imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop',
     rating: 4.8,
     salesCount: 4,
-    inventoryStatus: 'In Stock',
+    postedAt: '3 hours ago',
+    isNegotiable: false,
+    sellerType: 'Dealer',
+    sellerName: 'AutoTrust Motors',
     requiresMultisig: true
   },
   {
-    id: '9',
-    title: 'Institutional Corporate Legal Registry',
-    vendorId: 'v2',
-    category: 'Professional Services',
-    price: 1500,
-    location: 'Cantonments, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
-    rating: 4.9,
-    salesCount: 245,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '11',
-    title: 'Protocol-Grade Professional Audit',
-    vendorId: 'v2',
-    category: 'Professional Services',
-    price: 2500,
-    location: 'Accra Central',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
-    rating: 4.8,
-    salesCount: 178,
-    inventoryStatus: 'In Stock'
-  },
-  {
     id: '3',
-    title: 'Elite Heritage L-Shaped Sectional Sofa',
+    title: 'Premium L-Shaped Fabric Sofa',
     vendorId: 'v3',
-    category: 'Heritage Furniture',
+    category: 'Home & Furniture',
     price: 6800,
-    location: 'Spintex Road, Accra',
+    location: 'Spintex Road',
     imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132066.b_efva72.jpg',
     rating: 5.0,
     salesCount: 45,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '12',
-    title: 'Elite Heritage Living Room Suite',
-    vendorId: 'v3',
-    category: 'Heritage Furniture',
-    price: 12000,
-    location: 'Spintex',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/132075.b_coq5nl.jpg',
-    rating: 4.9,
-    salesCount: 18,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '10',
-    title: 'Royal Orchid Heritage Beauty Protocol',
-    vendorId: 'v3',
-    category: 'Beauty & Personal',
-    price: 850,
-    location: 'Labone, Accra',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg',
-    rating: 4.7,
-    salesCount: 320,
-    inventoryStatus: 'In Stock'
-  },
-  {
-    id: '13',
-    title: 'Makola Select Premium Grocery Registry',
-    vendorId: 'v3',
-    category: 'Supermarket Registry',
-    price: 450,
-    oldPrice: 550,
-    location: 'Tema, Ghana',
-    imageUrl: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999008/161113d_wcatfr.png',
-    rating: 4.7,
-    discount: '18% OFF',
-    salesCount: 540,
-    inventoryStatus: 'In Stock'
+    postedAt: '5 hours ago',
+    isNegotiable: true,
+    sellerType: 'Verified Pro',
+    sellerName: 'HomeLiving GH'
   }
 ];
 
