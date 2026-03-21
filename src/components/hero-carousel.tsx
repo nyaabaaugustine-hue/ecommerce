@@ -7,92 +7,137 @@ import {
   CarouselContent, 
   CarouselItem, 
   CarouselNext, 
-  CarouselPrevious 
+  CarouselPrevious,
+  type CarouselApi
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Timer } from "lucide-react";
 
 const SLIDES = [
   {
-    title: "FESTIVAL DE CARROS",
-    subtitle: "PRA FINANCIAR, COM PARCELAS QUE CABEM NO SEU BOLSO*",
-    highlight: "ATÉ 60X",
+    id: 1,
+    leftBg: "bg-[#6e0ad6]",
+    rightBg: "bg-[#f2eafa]",
+    title: "O maior inventário de autos do Brasil. ",
+    highlight: "Mais de 800 mil opções pra escolher.",
     cta: "Ver ofertas",
-    image: "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?q=80&w=1600&auto=format&fit=crop",
-    color: "bg-burgundy"
+    mainImage: "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?q=80&w=1600&auto=format&fit=crop",
+    sideTitle: "Toyota Corolla GLI",
+    sideDesc: "Ano 2024, 22.300 km e motor 2.0 Flex",
+    accentColor: "text-[#6e0ad6]"
   },
   {
-    title: "SOVEREIGN ELECTRONICS",
-    subtitle: "THE GOLD STANDARD OF TECH DEALS IN ACCRA",
-    highlight: "40% OFF",
+    id: 2,
+    leftBg: "bg-[#d60a91]",
+    rightBg: "bg-[#fbeaf5]",
+    title: "Sovereign Electronics Center. ",
+    highlight: "Os melhores smartphones de GHS-Accra.",
     cta: "Shop now",
-    image: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999268/kerry-gold-widget-1_ny71cb.jpg",
-    color: "bg-secondary"
+    mainImage: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999233/177985_njyykl.png",
+    sideTitle: "iPhone 15 Pro",
+    sideDesc: "Titanium Blue, 256GB. Condição de Vault.",
+    accentColor: "text-[#d60a91]"
   }
 ];
 
 /**
  * @fileOverview High-Fidelity Marketplace Carousel
- * Functional 1:1 structural clone of the OLX hero slider.
+ * Exact structural clone of the 3-pane OLX hero layout.
  */
 export function HeroCarousel() {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) return;
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
   return (
-    <section className="w-full">
-      <Carousel className="w-full" opts={{ loop: true }}>
+    <section className="w-full relative group">
+      <Carousel 
+        setApi={setApi}
+        className="w-full" 
+        opts={{ loop: true }}
+      >
         <CarouselContent>
-          {SLIDES.map((slide, i) => (
-            <CarouselItem key={i}>
-              <div className="relative h-[320px] md:h-[400px] w-full overflow-hidden bg-black rounded-lg">
-                <Image 
-                  src={slide.image} 
-                  alt={slide.title} 
-                  fill 
-                  sizes="100vw" 
-                  className="object-cover opacity-60" 
-                  priority={i === 0} 
-                />
-                
-                <div className="absolute inset-0 flex flex-col justify-center px-10 md:px-20">
-                  <div className="max-w-3xl space-y-4">
-                    <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none italic drop-shadow-2xl">
+          {SLIDES.map((slide) => (
+            <CarouselItem key={slide.id}>
+              <div className="relative h-[280px] md:h-[320px] w-full overflow-hidden rounded-xl flex shadow-sm border border-border/50">
+                {/* LEFT PANE: BRANDING & CTA */}
+                <div className={cn("w-full md:w-[40%] flex flex-col justify-center p-8 md:p-12 z-10 text-white relative", slide.leftBg)}>
+                  <div className="space-y-4">
+                    <h1 className="text-2xl md:text-4xl font-bold leading-tight tracking-tight">
                       {slide.title}
+                      <span className="block font-black">{slide.highlight}</span>
                     </h1>
-                    <div className="flex flex-col md:flex-row md:items-center gap-4">
-                       <span className="text-5xl md:text-8xl font-black text-white tracking-tighter">{slide.highlight}</span>
-                       <p className="text-white/90 text-xs md:text-sm font-bold uppercase tracking-wider max-w-xs leading-tight">
-                         {slide.subtitle}
-                       </p>
+                    <div className="md:hidden">
+                       <Button className="bg-[#90EE90] text-secondary hover:bg-white font-bold rounded-full h-10 px-8 transition-all">
+                        {slide.cta}
+                      </Button>
                     </div>
-                    <Button className="w-fit bg-[#90EE90] text-secondary hover:bg-white font-black uppercase text-[11px] tracking-[0.2em] h-12 px-10 rounded-[2rem] shadow-2xl transition-all">
+                  </div>
+                </div>
+
+                {/* MIDDLE PANE: ASSET IMAGE */}
+                <div className="hidden md:flex flex-1 relative bg-white overflow-hidden items-center justify-center">
+                  <div className="absolute inset-0 z-0">
+                    <Image 
+                      src={slide.mainImage} 
+                      alt="Hero Asset" 
+                      fill 
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                  {/* FLOATING CTA */}
+                  <div className="absolute bottom-12 right-12 z-20">
+                    <Button className="bg-[#90EE90] text-[#1a1a1a] hover:bg-white font-bold text-base rounded-full h-14 px-10 shadow-2xl shadow-green-500/20 transition-all scale-105 hover:scale-110">
                       {slide.cta}
                     </Button>
                   </div>
                 </div>
 
-                {/* Custom Branding Overlay Stubs */}
-                <div className="absolute right-0 top-0 h-full w-1/4 bg-gradient-to-l from-black/20 to-transparent pointer-events-none" />
+                {/* RIGHT PANE: METADATA */}
+                <div className={cn("hidden lg:flex w-[20%] flex-col justify-center p-8 border-l border-white/10", slide.rightBg)}>
+                  <div className="space-y-4">
+                    <div className={cn("h-10 w-10 flex items-center justify-center rounded-full bg-white/50", slide.accentColor)}>
+                      <Timer className="h-6 w-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className={cn("font-black text-sm uppercase tracking-tight", slide.accentColor)}>
+                        {slide.sideTitle}
+                      </h3>
+                      <p className="text-xs font-medium text-foreground/60 leading-relaxed">
+                        {slide.sideDesc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
         
-        <CarouselPrevious className="left-4 h-12 w-12 bg-white/20 border-white/10 text-white rounded-full hover:bg-white hover:text-secondary transition-all" />
-        <CarouselNext className="right-4 h-12 w-12 bg-white/20 border-white/10 text-white rounded-full hover:bg-white hover:text-secondary transition-all" />
+        <CarouselPrevious className="hidden md:flex -left-6 h-12 w-12 bg-white border shadow-xl text-foreground rounded-full hover:bg-muted transition-all z-30" />
+        <CarouselNext className="hidden md:flex -right-6 h-12 w-12 bg-white border shadow-xl text-foreground rounded-full hover:bg-muted transition-all z-30" />
 
-        {/* Dash Indicators Registry */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+        {/* DASH INDICATORS */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-30">
           {SLIDES.map((_, idx) => (
-            <div key={idx} className={cn(
-              "h-1.5 w-12 rounded-full transition-all",
-              idx === 0 ? "bg-primary" : "bg-white/30"
-            )} />
+            <div 
+              key={idx} 
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500",
+                idx === current ? "bg-primary w-10" : "bg-white/40 w-6"
+              )} 
+            />
           ))}
         </div>
       </Carousel>
     </section>
   );
-}
-
-// Minimal helper since it's used in carousel locally
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(' ');
 }

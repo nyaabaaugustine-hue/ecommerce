@@ -28,19 +28,19 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col bg-background min-h-screen pb-20">
-      {/* 1:1 CLONE CATEGORY REGISTRY */}
+      {/* CATEGORY BAR */}
       <CategoryBar />
       
-      {/* 1:1 CLONE HERO NODE */}
-      <div className="max-w-7xl mx-auto w-full px-4 pt-6">
+      {/* HERO CAROUSEL */}
+      <div className="max-w-7xl mx-auto w-full px-4 mb-12">
         <HeroCarousel />
       </div>
 
       {/* CLONE SECTION: Cell Phones Registry */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative">
-        <div className="flex items-center justify-between mb-8">
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most searched in <span className="font-bold">Cell Phones and Smartphones</span>
+            Mais buscados em <span className="font-bold">Celulares e smartphones</span>
           </h2>
         </div>
         
@@ -61,10 +61,10 @@ export default function HomePage() {
       <div className="h-[1px] w-full bg-border max-w-7xl mx-auto opacity-50" />
 
       {/* CLONE SECTION: Home & Furniture Registry */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative">
-        <div className="flex items-center justify-between mb-8">
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Most popular items in <span className="font-bold">Cabinets and Wardrobes</span>
+            Itens mais populares em <span className="font-bold">Armários e guarda-roupas</span>
           </h2>
         </div>
         
@@ -82,13 +82,13 @@ export default function HomePage() {
       </section>
 
       {/* CLONE SECTION: Sovereign Vehicles Registry */}
-      <section className="max-w-7xl mx-auto w-full px-4 py-12 relative">
-        <div className="flex items-center justify-between mb-8">
+      <section className="max-w-7xl mx-auto w-full px-4 py-8 relative">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
-            Elite <span className="font-bold">Sovereign Vehicles</span> in Accra
+            Elite <span className="font-bold">Sovereign Vehicles</span> em Accra
           </h2>
           <Link href="/listings?category=Vehicles" className="text-sm font-bold text-primary hover:underline">
-            View All
+            Ver todos
           </Link>
         </div>
         
