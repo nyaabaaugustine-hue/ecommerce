@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -9,7 +10,7 @@ import React from 'react';
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/23778865192"
+      href="https://wa.me/233541988383"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed right-6 bottom-36 md:right-10 md:bottom-48 z-40 bg-[#25D366] text-white p-4 md:p-5 rounded-none shadow-2xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all group border border-white/20 active:scale-95"

@@ -41,7 +41,7 @@ export const INITIAL_CONTENT = {
         },
         values: {
           title: "INSTITUTIONAL VALUES",
-          description: "Integrity, Transparency, and Security are the pillars of the VaultCommerce registry.",
+          description: "Integrity, Transparency, and Security are the pillars of the Ecommerce registry.",
           imageUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999005/97743a_n2dnv3.jpg"
         }
       }
@@ -59,12 +59,12 @@ export const INITIAL_CONTENT = {
     }
   },
   settings: {
-    siteName: "VaultCommerce",
+    siteName: "Ecommerce",
     siteTagline: "The Gold Standard",
     logoUrl: "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1773999402/file_eognv9.jpg",
-    supportPhone: "+233 24 000 0000",
-    supportEmail: "support@vaultcommerce.gh",
-    footerCopyright: "© 2026 VaultCommerce. All rights reserved by Cyber.",
+    supportPhone: "(+233) 05419 88 383",
+    supportEmail: "Cybertechgh@gmail.com",
+    footerCopyright: "© 2026 Ecommerce. All rights reserved by Cyber.",
     defaultTheme: "sovereign" as const
   }
 };
