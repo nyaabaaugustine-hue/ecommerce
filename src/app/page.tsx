@@ -12,8 +12,9 @@ import { ChevronRight } from 'lucide-react';
 /**
  * @fileOverview VaultCommerce Home Command Node
  * High-density architecture mirroring the OLX marketplace flow.
+ * All sections aligned to max-w-7xl grid.
  */
-export default function HomePage() {
+export function HomePage() {
   const cellPhones = useMemo(() => {
     return LISTINGS.filter(l => l.category === 'Electronics').slice(0, 5);
   }, []);
@@ -102,4 +103,8 @@ export default function HomePage() {
       <PrivacyPopup />
     </div>
   );
+}
+
+export default function Page() {
+  return <HomePage />;
 }

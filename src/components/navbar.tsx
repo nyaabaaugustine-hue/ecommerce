@@ -12,7 +12,8 @@ import {
   Briefcase,
   LayoutGrid,
   ChevronDown,
-  ChevronRight
+  Moon,
+  Sun
 } from 'lucide-react';
 import { useAuth, useContent } from '@/components/providers';
 import { useState } from 'react';
@@ -21,7 +22,7 @@ import { AuthDialog } from '@/components/auth-dialog';
 /**
  * @fileOverview Master Header Command Hub
  * Exact 1:1 structural clone of the OLX header interaction logic.
- * Integrated Dual-Node search, utility icon registry, and Advertise action.
+ * Aligned to the 1280px (max-w-7xl) project grid.
  */
 export function Navbar() {
   const { user } = useAuth();
@@ -33,7 +34,7 @@ export function Navbar() {
     <header className="w-full bg-background border-b sticky top-0 z-50 shadow-sm">
       <AuthDialog open={showAuth} onOpenChange={setShowAuth} />
       
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-4 md:gap-8">
+      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between gap-4 md:gap-8">
         {/* LOGO NODE */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <div className="relative h-10 w-10 overflow-hidden rounded-none border border-primary/30 p-1 bg-white">
@@ -76,7 +77,7 @@ export function Navbar() {
           <div className="hidden xl:flex items-center gap-5">
             <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all group">
               <Briefcase className="h-5 w-5" />
-              <span className="text-[11px] font-bold uppercase tracking-tight">Professional Plan</span>
+              <span className="text-[11px] font-bold uppercase tracking-tight">Professional</span>
             </Link>
             <Link href="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all group">
               <LayoutGrid className="h-5 w-5" />
@@ -88,7 +89,7 @@ export function Navbar() {
             </div>
             <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-all cursor-pointer group">
               <Bell className="h-5 w-5" />
-              <span className="text-[11px] font-bold uppercase tracking-tight">Notifications</span>
+              <span className="text-[11px] font-bold uppercase tracking-tight">Alerts</span>
             </div>
           </div>
 
@@ -114,7 +115,7 @@ export function Navbar() {
                 className="bg-primary text-secondary hover:bg-primary/90 font-black text-[11px] uppercase tracking-[0.1em] h-12 px-8 rounded-[2rem] shadow-lg border-2 border-white/10 flex items-center gap-2"
               >
                 <div className="bg-white/20 p-1 rounded-full"><Search className="h-3 w-3 text-white rotate-45" /></div>
-                Advertise for free
+                Post Ad
               </Button>
             </Link>
           </div>

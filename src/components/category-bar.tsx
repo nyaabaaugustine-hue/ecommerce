@@ -36,11 +36,12 @@ const CATEGORIES = [
 /**
  * @fileOverview Marketplace Category Registry
  * Exact 1:1 structural clone of the OLX horizontal chip bar.
+ * Aligned to the 1280px (max-w-7xl) project grid.
  */
 export function CategoryBar() {
   return (
     <section className="bg-background py-6 overflow-hidden">
-      <div className="container mx-auto px-4 relative flex items-center">
+      <div className="max-w-7xl mx-auto px-4 relative flex items-center">
         <div className="flex items-center gap-3 overflow-x-auto no-scrollbar w-full pb-1">
           {CATEGORIES.map((cat) => (
             <Link 
