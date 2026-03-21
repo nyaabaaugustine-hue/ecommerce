@@ -27,7 +27,7 @@ export function HomePage() {
   }, []);
 
   const airConditioners = useMemo(() => {
-    return LISTINGS.filter(l => l.id.startsWith('ac')).slice(0, 5);
+    return LISTINGS.filter(l => l.id.includes('ac')).slice(0, 5);
   }, []);
 
   const vehicles = useMemo(() => {
@@ -75,7 +75,7 @@ export function HomePage() {
         <div className="h-[1px] w-full bg-border/50" />
       </div>
 
-      {/* CLONE ROW: Cabinets and Wardrobes (Target Section Attached) */}
+      {/* CLONE ROW: Cabinets and Wardrobes */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -106,7 +106,7 @@ export function HomePage() {
         <div className="h-[1px] w-full bg-border/50" />
       </div>
 
-      {/* CLONE ROW: Air Conditioners (Target Section Attached) */}
+      {/* CLONE ROW: Air Conditioners (Force Clone from Screenshot) */}
       <section className="max-w-7xl mx-auto w-full px-4 py-8 relative group">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-foreground tracking-tight">
@@ -130,6 +130,18 @@ export function HomePage() {
             <ChevronRight className="h-6 w-6" />
           </button>
         </div>
+      </section>
+
+      {/* Institutional Separator */}
+      <div className="max-w-7xl mx-auto w-full px-4">
+        <div className="h-[1px] w-full bg-border/50" />
+      </div>
+
+      {/* CLONE ROW: Trending Heading */}
+      <section className="max-w-7xl mx-auto w-full px-4 py-12">
+        <h2 className="text-2xl font-medium text-foreground tracking-tight">
+          Trending on Ecommerce - <span className="font-bold italic">"game boy"</span>
+        </h2>
       </section>
 
       {/* CLONE ROW: Sovereign Vehicles */}
